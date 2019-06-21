@@ -1,0 +1,15 @@
+{
+    "version": 3,
+    "mappings": ";AAAA;;;;EAIE;ACJF;;;;;;EAME;ACNF;;;;;;;;;;;EAWE",
+    "sources": [
+        "../scss/main.scss",
+        "../scss/0-plugins/_plugins-dir.scss",
+        "../scss/1-base/_base-dir.scss",
+        "../scss/2-layout/_layout-dir.scss",
+        "../scss/3-modules/_modules-dir.scss",
+        "../scss/4-states/_states-dir.scss",
+        "../scss/5-custom/_custom-dir.scss"
+    ],
+    "names": [],
+    "file": "main.css"
+}
