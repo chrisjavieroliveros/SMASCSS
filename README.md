@@ -21,7 +21,7 @@ _For example:_
 
 Base styles include setting heading sizes, default link styles, default font styles, and body backgrounds. There should be no need to use !important in a Base style.
 
-#### 2-Layout
+#### Layout
 **2-Layout:** Layout directory contains all major styles for layout and setting up major sections all over the web design/page.
 
 _For example:_
@@ -30,22 +30,21 @@ _For example:_
 - Columns
 - Grids
 
-#### 3-Shared
+#### Shared
 **3-Shared:** Shared directory contains Sass inheritance/extend properties. These are common styles that are reusable to any component.
 
-Note: It is recommended that the styles in this directory should be kept as:
-```@extend``` or ```@include```
+Note: It is HIGHLY recommended that the styles in this directory should be kept as inheritance properties (```@extend```), and/or mixin definitions (```@include```) so it can easily be applied globally and merged together to any other existing styles.
 
 _For example:_
-- @extend
-- 
+- ```%global-input-style```
+- ```@mixin global-input-style```
 
 
-#### 4-Modules
+#### Modules
 
-#### 5-Custom
+#### Custom
 
-#### 6-Animation (_Optional_)
+#### Animation (_Optional_)
 
 ## Styling Rules
 
