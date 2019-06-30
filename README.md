@@ -21,10 +21,25 @@ _For example:_
 
 Base styles include setting heading sizes, default link styles, default font styles, and body backgrounds. There should be no need to use !important in a Base style.
 
-
 #### 2-Layout
+**2-Layout:** Layout directory contains all major styles for layout and setting up major sections all over the web design/page.
+
+_For example:_
+- Containers
+- Wrappers
+- Columns
+- Grids
 
 #### 3-Shared
+**3-Shared:** Shared directory contains Sass inheritance/extend properties. These are common styles that are reusable to any component.
+
+Note: It is recommended that the styles in this directory should be kept as:
+```@extend``` or ```@include```
+
+_For example:_
+- @extend
+- 
+
 
 #### 4-Modules
 
