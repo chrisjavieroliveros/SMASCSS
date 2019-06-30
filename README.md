@@ -7,16 +7,20 @@
 
 ## Folders
 
-### 0-Plugins
-~ The plugins directory contains all and ANY external assets, packages and resources.
+
+#### Plugins
+**0-Plugins:** The plugins directory contains all and ANY external assets, packages and resources.
 
 _For example:_
 - Normalize CSS
 - Font Imports
 - Theme Files
 
-#### 1-Base
-~ 
+#### Base
+**1-Base:** The base directory contains rules applied to an element using an element selector, a descendent selector, or a child selector, along with any pseudo-classes. It doesn’t include any class or ID selectors. It is defining the default styling for how that element should look in all occurrences on the page. 
+
+Base styles include setting heading sizes, default link styles, default font styles, and body backgrounds. There should be no need to use !important in a Base style.
+
 
 #### 2-Layout
 
