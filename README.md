@@ -39,10 +39,11 @@ _For example:_
 - ```%global-input-style```
 - ```@mixin global-input-style```
 
-
 ### Modules
+_**4-Modules**_ Modules directory contains styles specific for reusable components. It is mandatory to use classes on this.
 
 ### Custom
+_**5-Custom**_ Custom styles are mostly overrides from other modules, classes and other (any) styles. We have this directly in cases we also need. It is recommended that we wrap a parent selector when we do the overrides.
 
 ### Animation (_Optional_)
 
