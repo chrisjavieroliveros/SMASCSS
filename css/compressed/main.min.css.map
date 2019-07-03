@@ -5,11 +5,15 @@
         "../../scss/main.scss",
         "../../scss/0-plugins/_plugins-dir.scss",
         "../../scss/0-plugins/_normalize.scss",
-        "../../scss/1-base/_base-dir.scss",
-        "../../scss/2-layout/_layout-dir.scss",
-        "../../scss/3-shared/_shared-dir.scss",
-        "../../scss/4-modules/_modules-dir.scss",
-        "../../scss/5-custom/_custom-dir.scss"
+        "../../scss/1-global/_global-dir.scss",
+        "../../scss/1-global/_colors.scss",
+        "../../scss/1-global/_responsive.scss",
+        "../../scss/2-shared/_shared-dir.scss",
+        "../../scss/3-base/_base-dir.scss",
+        "../../scss/4-layout/_layout-dir.scss",
+        "../../scss/5-modules/_modules-dir.scss",
+        "../../scss/6-custom/_custom-dir.scss",
+        "../../scss/7-animation/_animations-dir.scss"
     ],
     "names": [],
     "file": "main.min.css"

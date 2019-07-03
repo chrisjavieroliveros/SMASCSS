@@ -1,0 +1,21 @@
+h1 {
+
+    // Default;
+
+
+    // Child
+    .span {
+        outline: 1px solid red;
+        @extend %input-styling;
+    }
+
+    // States, Instance;
+    &.crimson {
+        color: getColor( Crimson );
+    }
+
+}
+
+h2 {
+
+}

@@ -347,6 +347,13 @@ template {
   display: none;
 }
 
+/* Global Directory */
+/* 
+    Templates Directory
+   
+    ~ Extended Properties and/or Inheritance
+    
+*/
 /*  Base Directory */
 /* 
     Layout Directory
@@ -354,15 +361,10 @@ template {
     ~ Lorem Ipsum
     
 */
-/* 
-    Templates Directory
-   
-    ~ Extended Properties and/or Inheritance
-    
-*/
 /*  Modules Directory  */
+/* Custom Directory */
 /* 
-    Custom Directory
+    States Directory
    
     ~ 
     

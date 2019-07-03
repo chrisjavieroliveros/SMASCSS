@@ -5,8 +5,10 @@
 */
 
 @import './0-plugins/plugins-dir';
-@import './1-base/base-dir';
-@import './2-layout/layout-dir';
-@import './3-shared/shared-dir';
-@import './4-modules/modules-dir';
-@import './5-custom/custom-dir';
+@import './1-global/global-dir';
+@import './2-shared/shared-dir';
+@import './3-base/base-dir';
+@import './4-layout/layout-dir';
+@import './5-modules/modules-dir';
+@import './6-custom/custom-dir';
+@import './7-animation/animations-dir';
