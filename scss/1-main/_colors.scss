@@ -1,0 +1,20 @@
+
+/* -- Variables / Definition -- */
+$colors: (
+    Light: #ffffff,
+    Coal: #646464,
+    Dark: #222
+);
+
+/* -- Functions -- */
+@function getColor($name) {
+    @return map-get($colors, $name);
+}
+
+@function tint($color, $percentage) {
+    @return mix(white, $color, $percentage);
+}
+
+@function shade($color, $percentage) {
+    @return mix(black, $color, $percentage);
+}

@@ -12,16 +12,15 @@ Pellentesque justo nisl, tristique eu dolor eget, sollicitudin ultricies purus. 
 ## Folders Definitions
 
 ### Plugins
-**0-Plugins:** The plugins directory contains all and ANY external assets, packages and resources.
+**_0-Plugins_** The plugins directory contains all and ANY external assets, packages and resources.
 
 _For example:_
 - Normalize CSS
 - Font Imports
-- Theme Files
+- Theme File(s)
 
-
-### Global
-_**1-Global**_ SCSS variables, functions and mixins that we will use throughout the styles.
+### Main
+_**1-Main**_ Contains SCSS variables, functions and mixins that will be reusable throughout the styles.
 
 _For example:_
 - Color Definitions and Functions
@@ -30,25 +29,23 @@ _For example:_
 ### Shared
 _**2-Shared:**_ Shared directory contains sass inheritance/extend properties. These are common reusable styles.
 
-Note: It is HIGHLY recommended that the styles in this directory should be kept as inheritance properties (```@extend```), and/or mixin definitions (```@include```) so it can easily be applied globally and merged together to any other existing styles.
+Note: The styles in this directory should be kept as inheritance properties (```@extend```), and/or mixin definitions (```@include```) so it can easily be applied globally and merged together to any other existing styles.
 
 _For example:_
 - ```%global-input-style```
 - ```@mixin global-input-style```
 
-
 ### Base
 _**3-Base:**_ The base directory contains rules applied to an element using an element selector. It is defining the default styling for how that element should look in all occurrences on the page. It is the default style of an element.
 
-Base styles include setting heading sizes, default link styles, default font styles, and body backgrounds. There should be no need to use !important in a Base style.
+Base styles include setting heading sizes, default link styles, default font styles, and body backgrounds. In case of adding instances/variations in the element classes, it is best to create a correponding class and write the styles from their and not directly in the base element.
 
 _Boilerplate files in directory:_
-- Default ( `html`, `` )
+- Default ( `html`, `body` )
 - Heading ( `h1`, `h2`, `h3`, `h4`, `h5`,`h6` )
 - List ( `<ul>` `<ol>` )
 - Paragraphs ( `<p>` )
 - Line Heights ( _paragraph_, _span_ )
-
 
 ### Layout
 _**4-Layout:**_ Layout directory contains all major styles for layout and setting up major sections all over the web design/page.
@@ -60,13 +57,12 @@ _For example:_
 - Grids
 
 ### Modules
-_**5-Modules**_ Modules directory contains styles specific for reusable components. It is mandatory to use classes on this to easily replicate the styles.
+_**5-Modules**_ Modules directory contains styles for reusable components. It is mandatory to use classes on this to easily replicate the styles.
 
 ### Custom
-_**6-Custom**_ Custom styles are mostly overrides from other modules, classes and other (any) styles. We have this directly in cases we also need. It is recommended that we wrap a parent selector when we do the overrides.
+_**6-Custom**_ Custom styles are mostly and/or almost always overrides for existing modules, classes and other (any) styles. It is recommended that we wrap a parent selector when we do the overrides.
 
 ### Animation (_Optional_)
-
 
 
 ## Styling Rules
@@ -81,3 +77,4 @@ Basic element styling structure:
     // States;
 }
 ```
+

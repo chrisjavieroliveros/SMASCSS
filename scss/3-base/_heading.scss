@@ -1,21 +1,21 @@
-h1 {
-
-    // Default;
-
-
-    // Child
-    .span {
-        outline: 1px solid red;
-        @extend %input-styling;
-    }
-
-    // States, Instance;
-    &.crimson {
-        color: getColor( Crimson );
-    }
-
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
 }
 
-h2 {
+.h1 {
+    font-size: 36px;
+}
 
+.h2 {
+    font-size: 24px;
+}
+
+.h3 {
+    font-size: 20px;
+}
+
+.h1, .h2, .h3, .h4, .h5, .h6 {
+    &.light {
+        font-weight: 300;
+    }
 }

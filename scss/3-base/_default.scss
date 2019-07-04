@@ -1,3 +1,19 @@
-html, body {
-    
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    @extend %no-margin-padding;
+}
+
+hr {
+    border: 0;
+    border-top: 1px solid #ccc;
+    display: block;
+    padding: 0;
+    margin: 1em 0;
 }

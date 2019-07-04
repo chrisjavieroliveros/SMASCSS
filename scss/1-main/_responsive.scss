@@ -1,0 +1,76 @@
+// Variable Definitions;
+$screen-xs-max: 375px;
+$screen-sm-max: 576px;
+$screen-md-max: 768px;
+$screen-lg-max: 992px;
+$screen-xl-max: 1200px;
+
+// Smallest devices
+@mixin max-xs {
+    @media (max-width: #{$screen-xs-max}) {
+        @content;
+    }
+}
+
+// Small devices
+@mixin max-sm {
+    @media (max-width: #{$screen-sm-max}) {
+        @content;
+    }
+}
+
+// Medium devices
+@mixin max-md {
+    @media (max-width: #{$screen-md-max}) {
+        @content;
+    }
+}
+
+// Large devices
+@mixin max-lg {
+    @media (max-width: #{$screen-lg-max}) {
+        @content;
+    }
+}
+
+// Extra large devices
+@mixin max-xl {
+    @media (max-width: #{$screen-xl-max}) {
+        @content;
+    }
+}
+
+
+@mixin min-xs {
+    @media (min-width: #{$screen-xs-max}) {
+        @content;
+    }
+}
+
+// Small devices
+@mixin min-sm {
+    @media (min-width: #{$screen-sm-max}) {
+        @content;
+    }
+}
+
+// Medium devices
+@mixin min-md {
+    @media (min-width: #{$screen-md-max}) {
+        @content;
+    }
+}
+
+// Large devices
+@mixin min-lg {
+    @media (min-width: #{$screen-lg-max}) {
+        @content;
+    }
+}
+
+// Extra large devices
+@mixin min-xl {
+    @media (min-width: #{$screen-xl-max}) {
+        @content;
+    }
+}
