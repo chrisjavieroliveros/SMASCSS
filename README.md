@@ -3,13 +3,25 @@ _Scalable and Modular Architecture for Sassy CSS_
 
 ## Introduction
 
-### Getting Started
 Nunc condimentum sapien odio, in faucibus lorem gravida at. Curabitur convallis augue eu sem tempus feugiat. Nunc eu ornare massa. Morbi malesuada enim tristique ante pulvinar viverra. Morbi turpis sapien, finibus ut massa at, posuere luctus eros. Duis porta nisl eget dapibus blandit. Phasellus vel libero sit amet sem aliquam volutpat eget eu metus. Suspendisse elit elit, dapibus facilisis ante id, lacinia tincidunt quam. Suspendisse condimentum at elit non volutpat. Nullam fringilla tortor imperdiet, auctor est at, vulputate nisl. Duis et aliquam urna. Maecenas commodo vitae urna vitae vehicula. Morbi pulvinar consectetur nibh ac lobortis. Etiam in ante ac odio efficitur consectetur. Nam non scelerisque dolor.
 
 ### Inpirations
 Pellentesque justo nisl, tristique eu dolor eget, sollicitudin ultricies purus. Aliquam placerat tortor ac purus ullamcorper, nec tincidunt arcu semper. Proin at ante molestie, tempor massa sit amet, luctus ex. Sed eu lacus tellus. In in metus elementum, egestas neque euismod, vulputate lacus. In hac habitasse platea dictumst.
 
 ## Folders
+```
+├── scss
+│  ├── 0-plugins
+│  ├── 1-main
+│  ├── 2-shared
+│  ├── 3-base
+│  ├── 4-layout
+│  ├── 5-modules
+│  ├── 6-custom
+│  ├── 7-animation
+```
+
+<!-- │  │  ├── 0-plugins-dir.scss -->
 
 ### Plugins
 **_0-Plugins_** The plugins directory contains all and ANY external assets, packages and resources.
