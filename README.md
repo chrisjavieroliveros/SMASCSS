@@ -1,5 +1,5 @@
 # SMASC
-~ Scalable and Modular Architecture for Sassy CSS
+_Scalable and Modular Architecture for Sassy CSS_
 
 ## Introduction
 
@@ -9,7 +9,7 @@ Nunc condimentum sapien odio, in faucibus lorem gravida at. Curabitur convallis 
 ### Inpirations
 Pellentesque justo nisl, tristique eu dolor eget, sollicitudin ultricies purus. Aliquam placerat tortor ac purus ullamcorper, nec tincidunt arcu semper. Proin at ante molestie, tempor massa sit amet, luctus ex. Sed eu lacus tellus. In in metus elementum, egestas neque euismod, vulputate lacus. In hac habitasse platea dictumst.
 
-## Folders Definitions
+## Folders
 
 ### Plugins
 **_0-Plugins_** The plugins directory contains all and ANY external assets, packages and resources.
@@ -63,7 +63,7 @@ _**5-Modules**_ Modules directory contains styles for reusable components. It is
 _**6-Custom**_ Custom styles are mostly and/or almost always overrides for existing modules, classes and other (any) styles. It is recommended that we wrap a parent selector when we do the overrides.
 
 ### Animation (_Optional_)
-
+_**7-Animation**_ Library of animations reusable throughout the templates and classes.
 
 ## Styling Rules
 
@@ -77,4 +77,3 @@ Basic element styling structure:
     // States;
 }
 ```
-
