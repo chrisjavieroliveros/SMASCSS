@@ -1,21 +1,25 @@
 # SMASC
 _Scalable and Modular Architecture for Sassy CSS_
 
+> Important:  
+
 ## Introduction
 SMASC (pronounced “s-mask”) is a SCSS styling guide/architecture that attempts to document a consistent, scable and clear approach to any frontend web development process. This is **not** a framework; instead this is technique to keep styling codes (css or scss) more organized and more structured, leading to a development code that is easier to maintain and build.
 
-#### Inpirations
+### Inpirations
 
 Pellentesque justo nisl, tristique eu dolor eget, sollicitudin ultricies purus. Aliquam placerat tortor ac purus ullamcorper, nec tincidunt arcu semper. Proin at ante molestie, tempor massa sit amet, luctus ex. Sed eu lacus tellus. In in metus elementum, egestas neque euismod, vulputate lacus. In hac habitasse platea dictumst.
 
-#### Getting Started
+In trying to learn more about what does and doesn't work in maintaining larger projects, I looked at how others were trying to solve similar problems. Nicole Sullivan's Object Oriented CSS, Jina's presentations on CSS Workflow, Natalie Downe's talk on Practical, maintainable CSS, and, lastly, Jeremy Keith's Pattern Primer were large influences on what was to become SMACSS.
+
+
+### Getting Started
 Pre-requisite knowledge:
 - SCSS
 - Compiling SCSS
 - 
 
-## Categorizing SCSS(CSS) Rules
-`main.css` Is our main scss file where ; it is where we import our directories. It's best to leave this untouched. Unless we plan on adding a new directory to our project.
+## Core
 
 ```
 ├── scss
@@ -28,7 +32,13 @@ Pre-requisite knowledge:
 │  ├── 6-custom
 │  ├── 7-animation
 │  ├── main.scss
+├──
 ```
+
+### Files
+
+### Folders: Categorizing SCSS(CSS) Rules
+`main.css` Is our main scss file where ; it is where we import our directories. It's best to leave this untouched. Unless we plan on adding a new directory to our project.
 
 **Note: Each folder contains its own directory file (_dir suffix).**
 
