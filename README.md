@@ -1,7 +1,7 @@
 # SMASC
 _Scalable and Modular Architecture for Sassy CSS_
 
-> Important:  
+> Important: 
 
 ## Introduction
 SMASC (pronounced “s-mask”) is a SCSS styling guide/architecture that attempts to document a consistent, scable and clear approach to any frontend web development process. This is **not** a framework; instead this is technique to keep styling codes (css or scss) more organized and more structured, leading to a development code that is easier to maintain and build.
@@ -32,15 +32,16 @@ Pre-requisite knowledge:
 │  ├── 6-custom
 │  ├── 7-animation
 │  ├── main.scss
-├──
 ```
 
 ### Files
 
-### Folders: Categorizing SCSS(CSS) Rules
-`main.css` Is our main scss file where ; it is where we import our directories. It's best to leave this untouched. Unless we plan on adding a new directory to our project.
+`main.scss` Is our main scss file where ; it is where we import our directories. It's best to leave this untouched. Unless we plan on adding a new directory to our project.
 
-**Note: Each folder contains its own directory file (_dir suffix).**
+`_dir.scss` Each folder contains its own directory file (_dir suffix).
+
+
+### Folders: Categorizing SCSS(CSS) Rules
 
 #### Plugins [_0-Plugins_]
 The plugins directory contains all and ANY external assets, packages and resources.
