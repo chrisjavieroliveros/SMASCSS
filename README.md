@@ -17,7 +17,6 @@ In trying to learn more about what does and doesn't work in maintaining larger p
 Pre-requisite knowledge:
 - SCSS
 - Compiling SCSS
-- 
 
 ## Core
 
