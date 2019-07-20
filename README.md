@@ -20,10 +20,11 @@ Pre-requisite knowledge:
 
 ## Core
 
+Main Directory:
 ```
 ├── scss
 │  ├── 0-plugins
-│  ├── 1-global
+│  ├── 1-main
 │  ├── 2-inheritance
 │  ├── 3-base
 │  ├── 4-layout
@@ -35,30 +36,30 @@ Pre-requisite knowledge:
 
 ### Files
 
-`main.scss` Is our main scss file where ; it is where we import our directories. It's best to leave this untouched. Unless we plan on adding a new directory to our project.
+`main.scss`- Is our main scss file where; it is where we import our directories. It's best to leave this untouched. Unless we plan on adding a new directory to our project.
 
-`_dir.scss` Each folder contains its own directory file (_dir suffix).
-
+`*_dir.scss` Each folder contains its own directory file (denoted with a __dir_ suffix).
 
 ### Folders: Categorizing SCSS(CSS) Rules
 
-#### Plugins [_0-Plugins_]
-The plugins directory contains all and ANY external assets, packages and resources.
 
-_For example:_
+#### Plugins 
+_0-plugins_ - The plugins directory contains all and ANY external assets, packages and resources.
+
+_Use Cases:_
 - Normalize CSS
 - Font Imports
 - Theme File(s)
 
 #### Main
-_**1-Main**_ Contains SCSS variables, functions and mixins that will be reusable throughout the styles.
+_**1-Main**_ Contains SCSS variables, functions and mixins.
 
-_For example:_
+_Use Cases:_
 - Color Definitions and Functions
 - Responsive Function/Mixins
 
-#### Shared
-_**2-Shared:**_ Shared directory contains sass inheritance/extend properties. These are common reusable styles.
+#### Inteheritance
+_**2-inteheritance:**_ Shared directory that contains sass inheritance/extended properties. These are common reusable styles.
 
 Note: The styles in this directory should be kept as inheritance properties (```@extend```), and/or mixin definitions (```@include```) so it can easily be applied globally and merged together to any other existing styles.
 
