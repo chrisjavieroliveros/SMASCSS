@@ -429,6 +429,28 @@ h3,
 }
 
 /* Layout Directory */
+.wrapper {
+  width: 100%;
+  max-width: 1200px;
+  padding: 2em;
+}
+
+.wrapper.align-center {
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .wrapper {
+    padding: 1.5em;
+  }
+}
+
+@media (max-width: 576px) {
+  .wrapper {
+    padding: 1em;
+  }
+}
+
 /*  Modules Directory  */
 /* Custom Directory */
 /*  Animations Library */
