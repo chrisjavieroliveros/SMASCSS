@@ -1,17 +1,4 @@
-.wrapper {
-    width: 100%;
-    max-width: 1200px;
-    padding: 2em;
-
-    &.align-center {
-        margin: 0 auto;
-    }
-
-    @include max-md {
-        padding: 1.5em;
-    }
-
-    @include max-sm {
-        padding: 1em;
-    }
-}
+/* 
+    Set wrapper properties:
+    e.g. .wrapper, .main-wrapper
+*/

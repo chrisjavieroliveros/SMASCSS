@@ -1,21 +1,4 @@
-* {
-    box-sizing: border-box;
-}
-
-html,
-body {
-    position: relative;
-    height: 100%;
-    width: 100%;
-    font-family: 'Roboto', sans-serif;
-    font-size: 14px;
-    @extend %no-margin-padding;
-}
-
-hr {
-    border: 0;
-    border-top: 1px solid #ccc;
-    display: block;
-    padding: 0;
-    margin: 1em 0;
-}
+/* 
+    Set default global styles the entire page:
+    *, html, body,  
+*/
