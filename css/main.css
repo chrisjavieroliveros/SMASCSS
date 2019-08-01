@@ -215,24 +215,40 @@ template {
     .display-1, .display-2, .display-3, .display-4
 */
 /* 
+    Set default style for footer:
+    e.g. <footer></footer>, .footer
+*/
+/* 
+    Set default global styles for form elements:
+    e.g. textarea, radio, checkbox, label
+*/
+/* 
     Set default global styles for heading elements:
     h1, h2, h3, h4, h5, h6
 */
 /* 
     Set default global styles for inputs elements:
-    e.g. input[type="text"], input[type="email"], input[type="number"]
+    e.g. select, input[type="text"], input[type="email"], input[type="number"]
 */
 /* 
     Set default global styles for link elements:
     <a></a> 
 */
 /* 
+    Set default global styles for list elements:
+    e.g. ul, ol, li
+*/
+/* 
     Set default global styles for: 
-    Images, Videos, Figures 
+    Images, Videos, iFrame, SVG assets, Figures 
 */
 /* 
     Set default global styles for paragraph elements:
     e.g. p, .lead
+*/
+/* 
+    Set default global style for table element:
+    e.g. <table></table>, .table
 */
 /* Layout Directory */
 /* 
