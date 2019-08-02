@@ -6,35 +6,35 @@ $screen-lg-max: 992px;
 $screen-xl-max: 1200px;
 
 // Smallest devices
-@mixin max-xs {
+@mixin xs {
     @media (max-width: #{$screen-xs-max}) {
         @content;
     }
 }
 
 // Small devices
-@mixin max-sm {
+@mixin sm {
     @media (max-width: #{$screen-sm-max}) {
         @content;
     }
 }
 
 // Medium devices
-@mixin max-md {
+@mixin md {
     @media (max-width: #{$screen-md-max}) {
         @content;
     }
 }
 
 // Large devices
-@mixin max-lg {
+@mixin lg {
     @media (max-width: #{$screen-lg-max}) {
         @content;
     }
 }
 
 // Extra large devices
-@mixin max-xl {
+@mixin xl {
     @media (max-width: #{$screen-xl-max}) {
         @content;
     }
