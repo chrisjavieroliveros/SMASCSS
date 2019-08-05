@@ -1,3 +1,28 @@
 /* 
     Set Margin Classes
 */
+
+@for $i from 0 through 10 {
+    $size: 8 * $i;
+
+    .margin-#{$i} {
+        margin: $size+px;
+    }
+    
+    .margin-top-#{$i} {
+        margin-top: $size+px;
+    }
+
+    .margin-right-#{$i} {
+        margin-right: $size+px;
+    }
+
+    .margin-bottom-#{$i} {
+        margin-bottom: $size+px;
+    }
+
+    .margin-left-#{$i} {
+        margin-left: $size+px;
+    }
+
+}

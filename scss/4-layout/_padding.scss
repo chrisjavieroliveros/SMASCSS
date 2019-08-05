@@ -1,3 +1,28 @@
 /* 
     Set Padding Classes
 */
+
+@for $i from 1 through 10 {
+    $size: 8 * $i;
+
+    .padding-#{$i} {
+        padding: $size+px;
+    }
+
+    .padding-top-#{$i} {
+        padding-top: $size+px;
+    }
+
+    .padding-right-#{$i} {
+        padding-right: $size+px;
+    }
+
+    .padding-bottom-#{$i} {
+        padding-bottom: $size+px;
+    }
+
+    .padding-left-#{$i} {
+        padding-left: $size+px;
+    }
+
+}
