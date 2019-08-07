@@ -22,123 +22,154 @@
         margin-left: $size+px;
     }
 
+}
 
-    // xl devices;
-    @include xl {
+// xl devices;
+@include xl {
+
+    @for $i from 0 through 10 {
+        $size: 8 * $i;
+
         .padding-#{$i}-xl {
             margin: $size+px;
         }
-    
+
         .padding-top-#{$i}-xl {
             margin-top: $size+px;
         }
-    
+
         .padding-right-#{$i}-xl {
             margin-right: $size+px;
         }
-    
+
         .padding-bottom-#{$i}-xl {
             margin-bottom: $size+px;
         }
-    
+
         .padding-left-#{$i}-xl {
             margin-left: $size+px;
         }
-    
+
         .padding-0-xl {
             margin: 0px;
         }
+
     }
-    
-    // lg devices;
-    @include lg {
+
+}
+
+// lg devices;
+@include lg {
+
+    @for $i from 0 through 10 {
+        $size: 8 * $i;
+
         .padding-#{$i}-lg {
             margin: $size+px;
         }
-    
+
         .padding-top-#{$i}-lg {
             margin-top: $size+px;
         }
-    
+
         .padding-right-#{$i}-lg {
             margin-right: $size+px;
         }
-    
+
         .padding-bottom-#{$i}-lg {
             margin-bottom: $size+px;
         }
-    
+
         .padding-left-#{$i}-lg {
             margin-left: $size+px;
         }
     }
-    
-    // md devices;
-    @include md {
+
+}
+
+// md devices;
+@include md {
+
+    @for $i from 0 through 10 {
+        $size: 8 * $i;
+
         .padding-#{$i}-md {
             margin: $size+px;
         }
-    
+
         .padding-top-#{$i}-md {
             margin-top: $size+px;
         }
-    
+
         .padding-right-#{$i}-md {
             margin-right: $size+px;
         }
-    
+
         .padding-bottom-#{$i}-md {
             margin-bottom: $size+px;
         }
-    
+
         .padding-left-#{$i}-md {
             margin-left: $size+px;
         }
     }
-    
-    // sm devices;
-    @include sm {
+
+}
+
+// sm devices;
+@include sm {
+
+    @for $i from 0 through 10 {
+        $size: 8 * $i;
+
         .padding-#{$i}-sm {
             margin: $size+px;
         }
-    
+
         .padding-top-#{$i}-sm {
             margin-top: $size+px;
         }
-    
+
         .padding-right-#{$i}-sm {
             margin-right: $size+px;
         }
-    
+
         .padding-bottom-#{$i}-sm {
             margin-bottom: $size+px;
         }
-    
+
         .padding-left-#{$i}-sm {
             margin-left: $size+px;
         }
     }
-    
-    // xs devices;
-    @include xs {
+
+}
+
+// xs devices;
+@include xs {
+
+    @for $i from 0 through 10 {
+        $size: 8 * $i;
+
         .padding-#{$i}-xs {
             margin: $size+px;
         }
-    
+
         .padding-top-#{$i}-xs {
             margin-top: $size+px;
         }
-    
+
         .padding-right-#{$i}-xs {
             margin-right: $size+px;
         }
-    
+
         .padding-bottom-#{$i}-xs {
             margin-bottom: $size+px;
         }
-    
+
         .padding-left-#{$i}-xs {
             margin-left: $size+px;
         }
     }
+    
 }
