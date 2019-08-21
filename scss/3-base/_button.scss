@@ -2,3 +2,7 @@
     Set default global styles for button elements:
     <button></button>, input[type="submit"], btn btn-submit
 */
+
+button {
+    background-color: var(--primary-color-1);
+}
