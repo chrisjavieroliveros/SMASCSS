@@ -3,23 +3,23 @@
     $size: 8 * $i;
 
     .padding-#{$i} {
-        margin: $size+px;
+        padding: $size+px;
     }
 
     .padding-top-#{$i} {
-        margin-top: $size+px;
+        padding-top: $size+px;
     }
 
     .padding-right-#{$i} {
-        margin-right: $size+px;
+        padding-right: $size+px;
     }
 
     .padding-bottom-#{$i} {
-        margin-bottom: $size+px;
+        padding-bottom: $size+px;
     }
 
     .padding-left-#{$i} {
-        margin-left: $size+px;
+        padding-left: $size+px;
     }
 
 }
@@ -31,27 +31,27 @@
         $size: 8 * $i;
 
         .padding-#{$i}-xl {
-            margin: $size+px;
+            padding: $size+px;
         }
 
         .padding-top-#{$i}-xl {
-            margin-top: $size+px;
+            padding-top: $size+px;
         }
 
         .padding-right-#{$i}-xl {
-            margin-right: $size+px;
+            padding-right: $size+px;
         }
 
         .padding-bottom-#{$i}-xl {
-            margin-bottom: $size+px;
+            padding-bottom: $size+px;
         }
 
         .padding-left-#{$i}-xl {
-            margin-left: $size+px;
+            padding-left: $size+px;
         }
 
         .padding-0-xl {
-            margin: 0px;
+            padding: 0px;
         }
 
     }
@@ -65,23 +65,23 @@
         $size: 8 * $i;
 
         .padding-#{$i}-lg {
-            margin: $size+px;
+            padding: $size+px;
         }
 
         .padding-top-#{$i}-lg {
-            margin-top: $size+px;
+            padding-top: $size+px;
         }
 
         .padding-right-#{$i}-lg {
-            margin-right: $size+px;
+            padding-right: $size+px;
         }
 
         .padding-bottom-#{$i}-lg {
-            margin-bottom: $size+px;
+            padding-bottom: $size+px;
         }
 
         .padding-left-#{$i}-lg {
-            margin-left: $size+px;
+            padding-left: $size+px;
         }
     }
 
@@ -94,23 +94,23 @@
         $size: 8 * $i;
 
         .padding-#{$i}-md {
-            margin: $size+px;
+            padding: $size+px;
         }
 
         .padding-top-#{$i}-md {
-            margin-top: $size+px;
+            padding-top: $size+px;
         }
 
         .padding-right-#{$i}-md {
-            margin-right: $size+px;
+            padding-right: $size+px;
         }
 
         .padding-bottom-#{$i}-md {
-            margin-bottom: $size+px;
+            padding-bottom: $size+px;
         }
 
         .padding-left-#{$i}-md {
-            margin-left: $size+px;
+            padding-left: $size+px;
         }
     }
 
@@ -123,23 +123,23 @@
         $size: 8 * $i;
 
         .padding-#{$i}-sm {
-            margin: $size+px;
+            padding: $size+px;
         }
 
         .padding-top-#{$i}-sm {
-            margin-top: $size+px;
+            padding-top: $size+px;
         }
 
         .padding-right-#{$i}-sm {
-            margin-right: $size+px;
+            padding-right: $size+px;
         }
 
         .padding-bottom-#{$i}-sm {
-            margin-bottom: $size+px;
+            padding-bottom: $size+px;
         }
 
         .padding-left-#{$i}-sm {
-            margin-left: $size+px;
+            padding-left: $size+px;
         }
     }
 
@@ -152,23 +152,23 @@
         $size: 8 * $i;
 
         .padding-#{$i}-xs {
-            margin: $size+px;
+            padding: $size+px;
         }
 
         .padding-top-#{$i}-xs {
-            margin-top: $size+px;
+            padding-top: $size+px;
         }
 
         .padding-right-#{$i}-xs {
-            margin-right: $size+px;
+            padding-right: $size+px;
         }
 
         .padding-bottom-#{$i}-xs {
-            margin-bottom: $size+px;
+            padding-bottom: $size+px;
         }
 
         .padding-left-#{$i}-xs {
-            margin-left: $size+px;
+            padding-left: $size+px;
         }
     }
     
