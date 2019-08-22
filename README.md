@@ -8,15 +8,13 @@ SMASC (pronounced “s-mask”) is a SCSS styling guide/architecture that attemp
 
 ### Inpirations
 
-Pellentesque justo nisl, tristique eu dolor eget, sollicitudin ultricies purus. Aliquam placerat tortor ac purus ullamcorper, nec tincidunt arcu semper. Proin at ante molestie, tempor massa sit amet, luctus ex. Sed eu lacus tellus. In in metus elementum, egestas neque euismod, vulputate lacus. In hac habitasse platea dictumst.
-
 In trying to learn more about what does and doesn't work in maintaining larger projects, I looked at how others were trying to solve similar problems. Nicole Sullivan's Object Oriented CSS, Jina's presentations on CSS Workflow, Natalie Downe's talk on Practical, maintainable CSS, and, lastly, Jeremy Keith's Pattern Primer were large influences on what was to become SMACSS.
-
 
 ### Getting Started
 Pre-requisite knowledge:
 - SCSS
 - Compiling SCSS
+- NPM/Yarn (esp when using Bootstrap)
 
 ## Core
 
@@ -31,6 +29,7 @@ Main Directory:
 │  ├── 5-modules
 │  ├── 6-custom
 │  ├── 7-animation
+│  ├── 8-theme
 │  ├── main.scss
 ```
 
@@ -41,7 +40,6 @@ Main Directory:
 `*_dir.scss` Each folder contains its own directory file (denoted with a __dir_ suffix).
 
 ### Folders: Categorizing SCSS(CSS) Rules
-
 
 #### Plugins 
 _0-plugins_ - The plugins directory contains all and ANY external assets, packages and resources.
