@@ -1,4 +1,9 @@
 /* Overrides Bootstrap Column Paddings to 8-point Grid */
+.row {
+    margin-right: -16px;
+    margin-left: -16px;
+}
+
 .col,
 [class*='col-'] {
     padding-left: $size-2;
