@@ -1,12 +1,3 @@
-body {
-    --primary-color-1: getColor(Berry);
-    --primary-color-2: getColor(Proxima);
-    --secondary-color-1: getColor(Lemon);
-    --secondary-color-2: getColor(Olive);
-    --neutral-while: getColor(White);
-    --neutral-black: getColor( Black);
-}
-
 /* -- Variables / Definition -- */
 $colors: (
     Berry: #E54B4B,
@@ -15,7 +6,7 @@ $colors: (
     Olive: #8CB369,
     White: #ffffff,
     Coal: #646464,
-    Black: #222
+    Black: #222222
 );
 
 /* -- Functions -- */

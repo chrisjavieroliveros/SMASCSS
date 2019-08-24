@@ -1,0 +1,30 @@
+/* -- Color Definitions -- */
+$default: (
+    Primary: (#e54c4c, #808000),
+    Secondary: (#31c5ff, #eac435),
+    Neutral: (#ffffff, #202020),
+    Input: (
+        (Success: Green),
+        (Warning: Orange),
+        (Danger: Red)
+    )
+);
+
+body, [theme='default'] {
+
+    @each $colorGroupTitle,
+    $colorsArray in $default {
+        @each $colorHex in $colorsArray {
+            @if ($colorGroupTitle=='Input') {
+                @each $inputName, $inputColorHex in $colorHex {
+                    --#{$inputName}: #{$inputColorHex};
+                }
+            }
+            @else {
+                $i: index($colorsArray, $colorHex);
+                --#{$colorGroupTitle}-#{$i}: #{$colorHex};
+            }
+        }
+    }
+
+}
