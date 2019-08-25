@@ -1,3 +1,36 @@
+@function getColor($var) {
+    @return var(--#{$var});
+}
+
+@mixin getTheme($themeArray) {
+
+    @each $colorGroupTitle,
+    $colorsArray in $themeArray {
+        @each $colorHex in $colorsArray {
+
+            // If color is for Inputs;
+            @if ($colorGroupTitle=='Input') {
+                @each $inputName,
+                $inputColorHex in $colorHex {
+                    --#{$inputName}: #{$inputColorHex};
+                }
+            }
+
+            // Default Color Array;
+            @else {
+                $i: index($colorsArray, $colorHex);
+                --#{$colorGroupTitle}-#{$i}: #{$colorHex};
+            }
+
+        }
+    }
+
+    // Add standard Black and White Colors;
+    --White: #FFFFFF;
+    --Black: #000000;
+
+}
+
 $default: (
     Primary: (#e54c4c, #808000),
     Secondary: (#31c5ff, #eac435),
@@ -9,23 +42,8 @@ $default: (
     )
 );
 
-@function getColor($var) {
-    @return var(--#{$var});
+
+body {
+    @include getTheme($default);
 }
 
-body, [theme='default'] {
-    @each $colorGroupTitle,
-    $colorsArray in $default {
-        @each $colorHex in $colorsArray {
-            @if ($colorGroupTitle=='Input') {
-                @each $inputName, $inputColorHex in $colorHex {
-                    --#{$inputName}: #{$inputColorHex};
-                }
-            }
-            @else {
-                $i: index($colorsArray, $colorHex);
-                --#{$colorGroupTitle}-#{$i}: #{$colorHex};
-            }
-        }
-    }
-}

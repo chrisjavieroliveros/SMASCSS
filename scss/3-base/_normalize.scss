@@ -7,6 +7,7 @@
     box-sizing: border-box;
 }
 
+
 html,
 body {
     position: relative;
@@ -14,9 +15,11 @@ body {
     width: 100%;
     min-width: 320px;
     line-height: 1.2;
-    -webkit-text-size-adjust: 100%;
     margin: 0;
     padding: 0;
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 main {
