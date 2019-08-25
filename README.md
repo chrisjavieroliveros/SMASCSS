@@ -57,7 +57,7 @@ _Use Cases:_
 - Responsive Function/Mixins
 
 #### Inheritance
-_**2-inteheritance:**_ Shared directory that contains sass inheritance/extended properties. These are common reusable styles.
+_**2-inheritance:**_ Shared directory that contains sass inheritance/extended properties. These are common reusable styles.
 
 Note: The styles in this directory should be kept as inheritance properties (```@extend```), and/or mixin definitions (```@include```) so it can easily be applied globally and merged together to any other existing styles.
 
