@@ -1,6 +1,11 @@
-/* Global Directory */
+/* Main Directory */
 
-@import './colors';
-// @import './theming'; 
 @import './responsive';
 @import './sizes';
+
+/* Colors */
+// @import './colors';
+
+// Use this when theming;
+@import './theming-functions';
+@import './theming-variables';
