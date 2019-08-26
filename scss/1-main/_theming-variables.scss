@@ -1,0 +1,15 @@
+$default: (
+    Primary: (#e54c4c, #808000),
+    Secondary: (#31c5ff, #eac435),
+    Neutral: (#ffffff, #202020), //Do not include Black and White;
+    Input: (
+        (Success: Green),
+        (Warning: Orange),
+        (Danger: Red)
+    )
+);
+
+body {
+    @include generateColors($default);
+}
+
