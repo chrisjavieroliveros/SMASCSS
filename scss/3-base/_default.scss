@@ -3,10 +3,11 @@
     *, html, body,  
 */
 
+
+
 * {
     box-sizing: border-box;
 }
-
 
 html,
 body {
@@ -20,6 +21,10 @@ body {
     -webkit-text-size-adjust: 100%;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+    @include generateColors($default);
 }
 
 main {
