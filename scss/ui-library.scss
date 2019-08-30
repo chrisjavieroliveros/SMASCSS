@@ -1,0 +1,26 @@
+
+// Import SCSS Dependencies;
+@import './1-main/sizes';
+@import './1-main/theming';
+
+#ui-library {
+
+    .masthead {
+        position: relative;
+        padding: $size-4;
+        background-color: getColor( Neutral-1 );
+
+        .heading-group {
+            
+        }
+
+        .preview-wrapper {
+
+        }
+
+    }
+
+
+
+}
+
