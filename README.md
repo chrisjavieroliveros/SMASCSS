@@ -1,8 +1,6 @@
 # SMASC
 _Scalable and Modular Architecture for Sassy CSS_
 
-> Important: 
-
 ## Introduction
 SMASC (pronounced “s-mask”) is a SCSS styling guide/architecture that attempts to document a consistent, scable and clear approach to any frontend web development process. This is **not** a framework; instead this is technique to keep styling codes (css or scss) more organized and more structured, leading to a development code that is easier to maintain and build.
 
@@ -107,3 +105,9 @@ Basic element styling structure:
     // States;
 }
 ```
+
+#### Theme (_Optional_)
+_**8-Theme**_ 
+
+
+
