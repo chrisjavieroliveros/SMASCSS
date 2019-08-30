@@ -2,3 +2,23 @@
     Set wrapper properties:
     e.g. .wrapper, .main-wrapper
 */
+
+.global-wrapper {
+    width: 100%;
+    margin: 0 auto;
+    max-width: 1200px;
+    padding: 0 $size-4;
+
+    @include lg {
+        padding: 0 $size-3;
+    }
+
+    @include md {
+        padding: 0 $size-3;
+    }
+
+    @include sm {
+        padding: 0 $size-2;
+    }
+
+}
