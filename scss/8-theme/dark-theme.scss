@@ -1,0 +1,24 @@
+@import '../1-main/theming-functions';
+
+$dark-theme: (
+    
+    /* Primary and Secondary Colors */
+    Primary: (#290000),
+    Secondary: (#015475, #584501),
+
+    /* Do not include Black and White here;
+    as they are already packaged by default */
+    Neutral: (#f8f8f8, #202020),
+    
+    /* Default Input Colors */
+    Input: (
+        (Success: #007400),
+        (Warning: #6e4800),
+        (Danger: #440000)
+    )
+    
+);
+
+body {
+    @include generateColors($dark-theme);
+}
