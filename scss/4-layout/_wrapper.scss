@@ -21,4 +21,35 @@
         padding: 0 $size-2;
     }
 
+    &.--section-padding {
+        padding-top: $size-8;
+        padding-bottom: $size-8;
+        
+        @include xl {
+            padding-top: $size-7;
+            padding-bottom: $size-7;
+        }
+
+        @include lg {
+            padding-top: $size-6;
+            padding-bottom: $size-6;
+        }
+        
+        @include md {
+            padding-top: $size-5;
+            padding-bottom: $size-5;
+        }
+        
+        @include sm {
+            padding-top: $size-4;
+            padding-bottom: $size-4;
+        }
+
+        @include xs {
+            padding-top: $size-3;
+            padding-bottom: $size-3;
+        }
+
+    }
+
 }

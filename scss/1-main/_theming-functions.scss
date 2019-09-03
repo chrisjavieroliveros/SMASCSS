@@ -2,17 +2,11 @@
     @return var(--#{$var});
 }
 
-@function opacityColor() {
+@function opacityColor() {}
 
-}
+@function tintColor() {}
 
-@function tintColor() {
-
-}
-
-@function shadeColor() {
-
-}
+@function shadeColor() {}
 
 @mixin generateColors($themeArray) {
 
@@ -22,6 +16,7 @@
 
             // If color is for Inputs;
             @if ($colorGroupTitle=='Input') {
+
                 @each $inputName,
                 $inputColorHex in $colorHex {
                     --#{$inputName}: #{$inputColorHex};
