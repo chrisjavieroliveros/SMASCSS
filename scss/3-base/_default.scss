@@ -23,10 +23,6 @@ body {
     -moz-osx-font-smoothing: grayscale;
 }
 
-body {
-    @include generateColors($default);
-}
-
 main {
     display: block;
 }
