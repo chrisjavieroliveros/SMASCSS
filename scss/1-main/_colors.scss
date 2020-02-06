@@ -1,28 +1,41 @@
 /* -- Variables / Definition -- */
 $colors: (
-    Berry: #E54B4B,
-    Proxima: #345995,
-    Lemon: #EAC435,
-    Olive: #8CB369,
-    White: #ffffff,
-    Coal: #646464,
-    Black: #222222
+  berry: #e54b4b,
+  proxima: #345995,
+  lemon: #eac435,
+  olive: #8cb369,
+  white: #ffffff,
+  coal: #646464,
+  black: #222222
 );
 
 /* -- Functions -- */
 @function getColor($name) {
-    @return map-get($colors, $name);
+  @return map-get($colors, $name);
 }
 
 @function colorOpacity($color, $percentage) {
-    $opacity: $percentage / 100;
-    @return rgba( $color, $opacity );
+  $opacity: $percentage / 100;
+  @return rgba($color, $opacity);
 }
 
 @function tint($color, $percentage) {
-    @return mix(white, $color, $percentage);
+  @return mix(white, $color, $percentage);
 }
 
 @function shade($color, $percentage) {
-    @return mix(black, $color, $percentage);
+  @return mix(black, $color, $percentage);
+}
+
+/* Color Classes Generated from Color Functions */
+@each $color, $value in $colors {
+
+  .bg-#{$color} {
+    background-color: #{$value};
+  }
+
+  .text-#{$color} {
+    color: #{$value};
+  }
+
 }
