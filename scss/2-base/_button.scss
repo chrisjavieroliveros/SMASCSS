@@ -2,11 +2,17 @@
     Set default global styles for button elements:
     <button></button>, input[type="submit"], btn btn-submit
 */
+
 %button-default {
-    cursor: pointer;
+  cursor: pointer;
+
+  &:disabled,
+  &.disabled {
+    pointer-events: none;
+  }
 }
 
 .button,
 button {
-    @extend %button-default;
+  @extend %button-default;
 }
