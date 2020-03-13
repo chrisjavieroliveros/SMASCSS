@@ -1,0 +1,16 @@
+@function getColor($name) {
+  @return map-get($colors, $name);
+}
+
+@function colorOpacity($color, $percentage) {
+  $opacity: $percentage / 100;
+  @return rgba($color, $opacity);
+}
+
+@function tint($color, $percentage) {
+  @return mix(white, $color, $percentage);
+}
+
+@function shade($color, $percentage) {
+  @return mix(black, $color, $percentage);
+}

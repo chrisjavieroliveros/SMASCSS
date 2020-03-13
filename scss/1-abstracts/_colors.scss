@@ -1,0 +1,47 @@
+$colors: (
+  'primary': #3880ff,
+  'secondary': #0cd1e8,
+  'tertiary': #7044ff
+);
+
+@each $color, $value in $colors {
+  .bg-#{$color} {
+    background-color: #{$value};
+  }
+
+  $tintValue: 500;
+  @for $x from 1 through 4 {
+    $tintValue: $tintValue - 100;
+    .bg-#{$color}-#{$tintValue} {
+      background-color: tint(getColor($color), 20 * $x);
+    }
+  }
+
+  $shadeValue: 500;
+  @for $x from 1 through 4 {
+    $shadeValue: $shadeValue + 100;
+    .bg-#{$color}-#{$shadeValue} {
+      background-color: shade(getColor($color), 20 * $x);
+    }
+  }
+
+  .text-#{$color} {
+    color: #{$value};
+  }
+
+  $tintValue: 500;
+  @for $x from 1 through 4 {
+    $tintValue: $tintValue - 100;
+    .text-#{$color}-#{$tintValue} {
+      color: tint(getColor($color), 20 * $x);
+    }
+  }
+
+  $shadeValue: 500;
+  @for $x from 1 through 4 {
+    $shadeValue: $shadeValue + 100;
+    .text-#{$color}-#{$shadeValue} {
+      color: shade(getColor($color), 20 * $x);
+    }
+  }
+}
