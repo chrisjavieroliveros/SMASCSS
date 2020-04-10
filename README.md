@@ -1,4 +1,4 @@
-# SMASC
+<!-- # SMASCSS 3.0
 _Scalable and Modular Architecture for Sassy CSS_
 
 ## Introduction
@@ -16,7 +16,7 @@ Pre-requisite knowledge:
 
 ## Core
 
-Main Directory:
+Scaffolding
 ```
 ├── scss
 │  ├── 0-plugins
@@ -110,4 +110,4 @@ Basic element styling structure:
 _**8-Theme**_ 
 
 
-
+ -->
