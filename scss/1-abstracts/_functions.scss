@@ -2,6 +2,10 @@
   @return map-get($colors, $name);
 }
 
+@function getGradient($deg, $name) {
+  @return linear-gradient( $deg, map-get($gradients, $name) );
+}
+
 @function colorOpacity($color, $percentage) {
   $opacity: $percentage / 100;
   @return rgba($color, $opacity);

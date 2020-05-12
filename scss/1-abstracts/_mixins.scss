@@ -11,3 +11,11 @@
   align-items: center;
   justify-content: center;
 }
+
+%no-focus-outline {
+
+  &:focus,
+  &:active {
+    outline: none;
+  }
+}
