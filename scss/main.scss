@@ -1,31 +1,29 @@
 /*
-    SMASCSS v3.0.0
-    Custom Scalable and Modular Architecture for Sassy CSS
-    by Chris Javier Oliveros
+    SMASCSS v3.0.1
+    Scalable and Modular Architecture for Sassy CSS
 */
 
 @charset 'utf-8';
 
 // Import Vendors;
-@import '0-vendor/_vendor-dir';
+@import 'vendors/_vendors-dir';
 
 // Import Abstracts;
-@import '1-abstracts/_abstracts-dir';
+@import 'abstracts/_abstracts-dir';
 
 // Import Base;
-@import '2-base/_base-dir';
+@import 'base/_base-dir';
 
 // Import Layout;
-@import '3-layout/_layout-dir';
+@import 'layouts/_layouts-dir';
 
 // Import Components;
-@import '4-components/_components-dir';
-
-// Import Pages;
-@import '5-pages/_pages-dir';
-
-// Import States Library;
-@import './6-states/_states-dir';
+@import 'components/_components-dir';
 
 // Import Overrides;
-@import './7-overrides/_overrides-dir';
+@import 'overrides/_overrides-dir';
+
+
+// Import Custom;
+
+// I
