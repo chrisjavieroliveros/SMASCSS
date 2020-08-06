@@ -38,7 +38,7 @@ Note: Although these files do not appear to be in this order inside; it is howev
 
 ## General Information
 
-#### The Basics
+### The Basics
 
 `main.scss`- Is our main scss file. This is the file that gets compiled. Rename this file as you see fit. This is also the place where we set the file version to keep track of everything. (Or at least that's what I do.)
 
@@ -50,7 +50,7 @@ While _main.scss_ is pulling these directory files; the main function of a direc
 
 Doing this makes all styling logic localized and modularized. It helps us manage and maintain all our styling code efficiently as each component will have its own file. It reduces alot of the clutter during development (if it doesn't eliminate it).
 
-#### The Main Folders
+### The Main Folders
 
 Getting to know the folders is the most critical thing to understand to be able to make sense of SMASCSS and what we are trying to do. Read through each folder description very carefully. The great thing about this is that it's straightforward and very easy to understand. You will only need to read this once.
 
@@ -109,7 +109,7 @@ Sample scenario of when to you use the overrides folder:
     2. add a unique _#id_ to this new navigation element
     3. Override the base styles it using the unique id thus, any code we add to this id, only affects this navigation.
 
-#### Optional Folders (Docs Coming Soon)
+### Optional Folders (Docs Coming Soon)
 Important Note: Optional folders **should never** be imported to the main.scss as these optional folders are intentionally created to generate their own separate css files.
 
 `/custom` - Optimization reasons. 
