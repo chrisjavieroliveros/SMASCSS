@@ -1,14 +1,36 @@
 $colors: (
-  Primary: #e54c4c,
-  Secondary: #31c5ff,
-  Tertiary: #eac435,
+    
+  Primary: #3880ff,
+  Primary-100: tint( #3880ff, 70),
+  Primary-300: tint( #3880ff, 30),
+  Primary-700: shade( #3880ff, 30),
+  Primary-900: shade( #3880ff, 70),
 
+  Secondary: #0cd1e8,
+  Secondary-100: tint( #0cd1e8, 70),
+  Secondary-300: tint( #0cd1e8, 30),
+  Secondary-700: shade( #0cd1e8, 30),
+  Secondary-900: shade( #0cd1e8, 70),
+
+  Tertiary: #7044ff,
+  Tertiary-100: tint( #7044ff, 70),
+  Tertiary-300: tint( #7044ff, 30),
+  Tertiary-700: shade( #7044ff, 30),
+  Tertiary-900: shade( #7044ff, 70),
+
+  White: #EEEEEE,
   Light: #f8f8f8,
+  Medium: #92949c,
   Dark: #2c2c2c,
+  Black: #000000,
 
   Success: #2fd12f,
   Warning: #eca622,
-  Danger: #da1d1d);
+  Danger: #da1d1d,
+  Info: #0cd1e8
+
+);
+
 
 :root {
   @each $colors,
