@@ -1,6 +1,6 @@
 $colors: (
     
-  Primary: #3880ff,
+  "Primary": #3880ff,
   Primary-100: tint( #3880ff, 70),
   Primary-300: tint( #3880ff, 30),
   Primary-700: shade( #3880ff, 30),
@@ -18,16 +18,18 @@ $colors: (
   Tertiary-700: shade( #7044ff, 30),
   Tertiary-900: shade( #7044ff, 70),
 
-  White: #EEEEEE,
   Light: #f8f8f8,
   Medium: #92949c,
   Dark: #2c2c2c,
-  Black: #000000,
 
   Success: #2fd12f,
   Warning: #eca622,
   Danger: #da1d1d,
-  Info: #0cd1e8
+  Info: #0cd1e8,
+
+  "White": #EEEEEE,
+  "Black": #000000,
+  
 
 );
 
