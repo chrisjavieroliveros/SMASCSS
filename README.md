@@ -1,4 +1,4 @@
-# SMASCSS 3.1
+<!-- # SMASCSS 3.1
 
 _Scalable and Modular Architecture for Sassy CSS_
 
@@ -44,9 +44,9 @@ Note: Although these files do not appear to be in this order inside; it is howev
 
 The _main.scss_ file is where we import our directories. It's best to leave the imports untouched - unless you plan on adding a new directory to your project.
 
-`*_dir.scss` - Each folder contains its own directory file (denoted with a \__dir_ suffix). 
+`*_dir.scss` - Each folder contains its own directory file (denoted with a \__dir_ suffix).
 
-While _main.scss_ is pulling these directory files; the main function of a directory file is to pull its own local files. This then merge them altogether into one file when scss is compiled. 
+While _main.scss_ is pulling these directory files; the main function of a directory file is to pull its own local files. This then merge them altogether into one file when scss is compiled.
 
 Doing this makes all styling logic localized and modularized. It helps us manage and maintain all our styling code efficiently as each component will have its own file. It reduces alot of the clutter during development (if it doesn't eliminate it).
 
@@ -112,7 +112,7 @@ Sample scenario of when to you use the overrides folder:
 ### Optional Folders (Docs Coming Soon)
 Important Note: Optional folders **should never** be imported to the main.scss as these optional folders are intentionally created to generate their own separate css files.
 
-`/custom` - Optimization reasons. 
+`/custom` - Optimization reasons.
 
 `/themes` - Mostly contains color overrides for CSS variables.
 
@@ -123,4 +123,4 @@ Important Note: Optional folders **should never** be imported to the main.scss a
 
 
 ## FAQs
-
+ -->

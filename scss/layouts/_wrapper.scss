@@ -7,47 +7,47 @@
   width: 100%;
   margin: 0 auto;
   max-width: 1200px;
-  padding: 0 $size-4;
+  padding: 0 32px;
 
   @include lg {
-    padding: 0 $size-3;
+    padding: 0 24px;
   }
 
   @include md {
-    padding: 0 $size-3;
+    padding: 0 24px;
   }
 
   @include sm {
-    padding: 0 $size-2;
+    padding: 0 16px;
   }
 
   &.section-padding {
-    padding-top: $size-8;
-    padding-bottom: $size-8;
+    padding-top: 64px;
+    padding-bottom: 64px;
 
     @include xl {
-      padding-top: $size-7;
-      padding-bottom: $size-7;
+      padding-top: 56px;
+      padding-bottom: 56px;
     }
 
     @include lg {
-      padding-top: $size-6;
-      padding-bottom: $size-6;
+      padding-top: 48px;
+      padding-bottom: 48px;
     }
 
     @include md {
-      padding-top: $size-5;
-      padding-bottom: $size-5;
+      padding-top: 40px;
+      padding-bottom: 40px;
     }
 
     @include sm {
-      padding-top: $size-4;
-      padding-bottom: $size-4;
+      padding-top: 32px;
+      padding-bottom: 32px;
     }
 
     @include xs {
-      padding-top: $size-3;
-      padding-bottom: $size-3;
+      padding-top: 24px;
+      padding-bottom: 24px;
     }
 
   }

@@ -5,25 +5,17 @@
 
 @charset 'utf-8';
 
-// Import Vendors;
-@import 'vendors/_vendors-dir';
+// Import Vendors / Plugins;
+@import './vendors/_vendors-dir';
 
-// Import Abstracts;
-@import 'abstracts/_abstracts-dir';
+// Import Core;
+@import './core/_core-dir';
 
-// Import Base;
-@import 'base/_base-dir';
+// Import Base Styles;
+@import './base/_base-dir';
 
 // Import Layout;
 @import 'layouts/_layouts-dir';
 
 // Import Components;
 @import 'components/_components-dir';
-
-// Import Overrides;
-@import 'overrides/_overrides-dir';
-
-
-// Import Custom;
-
-// I
