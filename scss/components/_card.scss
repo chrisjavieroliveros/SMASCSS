@@ -4,14 +4,11 @@
 }
 
 .card {
-  //   flex-basis: 30%;
-  width: 508px;
+  // width: 508px;
   padding: 48px 40px;
   margin: 12px 0;
   border: 1px solid tint(getColor(black), 92);
-
-  a {
-  }
+  border-radius: 3px;
 
   &:not(:last-child) {
     margin-right: 24px;
