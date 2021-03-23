@@ -15,4 +15,24 @@
 .button,
 button {
   @extend %button-default;
+
+  font-size: 1em;
+  padding: 12px 16px;
+  border-radius: 3px;
+  display: inline-flex;
+
+  &.crimson {
+    background-color: getColor(primary);
+    color: getColor(white);
+
+    &:hover {
+      background-color: shade(getColor(primary), 10);
+    }
+  }
+
+  .icon-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-left: 16px;
+  }
 }

@@ -1,0 +1,15 @@
+#hero {
+  height: 520px;
+  display: flex;
+  align-items: center;
+
+  .global-wrapper {
+    .logo {
+      margin-bottom: 80px;
+    }
+
+    .heading {
+      max-width: 820px;
+    }
+  }
+}
