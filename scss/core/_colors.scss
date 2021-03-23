@@ -1,7 +1,11 @@
-$colors: ( // Colors
+$colors: (
+  // Colors
   primary: #3880ff,
   secondary: #0cd1e8,
-  tertiary: #7044ff);
+  tertiary: #7044ff,
+  black: #fff,
+  white: #eee
+);
 
 // @each $color,
 // $value in $colors {
