@@ -1,0 +1,46 @@
+.left-nav {
+  width: 320px;
+  padding: 42px 32px;
+  border-radius: 3px;
+  border: 1px solid tint(getColor(black), 90);
+
+  .nav-link {
+    margin-bottom: 24px;
+
+    .nav-link-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: tint(getColor(black), 60);
+      transition-duration: 300ms;
+      margin-bottom: 16px;
+
+      &:hover {
+        color: tint(getColor(black), 15);
+      }
+    }
+
+    .nav-link-list {
+      display: flex;
+      flex-direction: column;
+      border-left: 1px solid tint(getColor(black), 90);
+
+      .nav-link-item {
+        color: tint(getColor(black), 60);
+        padding: 8px 16px;
+        transition-duration: 300ms;
+
+        &.active,
+        &:hover {
+          font-weight: 700;
+          color: tint(getColor(black), 15);
+        }
+      }
+    }
+
+    &.active {
+      .nav-link-title {
+        color: tint(getColor(black), 15);
+      }
+    }
+  }
+}
