@@ -18,294 +18,6 @@ textarea {
   margin: 0;
 }
 
-.bg-primary {
-  background-color: #c33329;
-}
-
-.bg-primary-400 {
-  background-color: #cf5c54;
-}
-
-.bg-primary-300 {
-  background-color: #db857f;
-}
-
-.bg-primary-200 {
-  background-color: #e7ada9;
-}
-
-.bg-primary-100 {
-  background-color: #f3d6d4;
-}
-
-.bg-primary-600 {
-  background-color: #9c2921;
-}
-
-.bg-primary-700 {
-  background-color: #751f19;
-}
-
-.bg-primary-800 {
-  background-color: #4e1410;
-}
-
-.bg-primary-900 {
-  background-color: #270a08;
-}
-
-.text-primary {
-  color: #c33329;
-}
-
-.text-primary-400 {
-  color: #cf5c54;
-}
-
-.text-primary-300 {
-  color: #db857f;
-}
-
-.text-primary-200 {
-  color: #e7ada9;
-}
-
-.text-primary-100 {
-  color: #f3d6d4;
-}
-
-.text-primary-600 {
-  color: #9c2921;
-}
-
-.text-primary-700 {
-  color: #751f19;
-}
-
-.text-primary-800 {
-  color: #4e1410;
-}
-
-.text-primary-900 {
-  color: #270a08;
-}
-
-.bg-light {
-  background-color: #fafafa;
-}
-
-.bg-light-400 {
-  background-color: #fbfbfb;
-}
-
-.bg-light-300 {
-  background-color: #fcfcfc;
-}
-
-.bg-light-200 {
-  background-color: #fdfdfd;
-}
-
-.bg-light-100 {
-  background-color: #fefefe;
-}
-
-.bg-light-600 {
-  background-color: #c8c8c8;
-}
-
-.bg-light-700 {
-  background-color: #969696;
-}
-
-.bg-light-800 {
-  background-color: #646464;
-}
-
-.bg-light-900 {
-  background-color: #323232;
-}
-
-.text-light {
-  color: #fafafa;
-}
-
-.text-light-400 {
-  color: #fbfbfb;
-}
-
-.text-light-300 {
-  color: #fcfcfc;
-}
-
-.text-light-200 {
-  color: #fdfdfd;
-}
-
-.text-light-100 {
-  color: #fefefe;
-}
-
-.text-light-600 {
-  color: #c8c8c8;
-}
-
-.text-light-700 {
-  color: #969696;
-}
-
-.text-light-800 {
-  color: #646464;
-}
-
-.text-light-900 {
-  color: #323232;
-}
-
-.bg-black {
-  background-color: #272727;
-}
-
-.bg-black-400 {
-  background-color: #525252;
-}
-
-.bg-black-300 {
-  background-color: #7d7d7d;
-}
-
-.bg-black-200 {
-  background-color: darkgray;
-}
-
-.bg-black-100 {
-  background-color: #d4d4d4;
-}
-
-.bg-black-600 {
-  background-color: #1f1f1f;
-}
-
-.bg-black-700 {
-  background-color: #171717;
-}
-
-.bg-black-800 {
-  background-color: #101010;
-}
-
-.bg-black-900 {
-  background-color: #080808;
-}
-
-.text-black {
-  color: #272727;
-}
-
-.text-black-400 {
-  color: #525252;
-}
-
-.text-black-300 {
-  color: #7d7d7d;
-}
-
-.text-black-200 {
-  color: darkgray;
-}
-
-.text-black-100 {
-  color: #d4d4d4;
-}
-
-.text-black-600 {
-  color: #1f1f1f;
-}
-
-.text-black-700 {
-  color: #171717;
-}
-
-.text-black-800 {
-  color: #101010;
-}
-
-.text-black-900 {
-  color: #080808;
-}
-
-.bg-white {
-  background-color: #ffffff;
-}
-
-.bg-white-400 {
-  background-color: white;
-}
-
-.bg-white-300 {
-  background-color: white;
-}
-
-.bg-white-200 {
-  background-color: white;
-}
-
-.bg-white-100 {
-  background-color: white;
-}
-
-.bg-white-600 {
-  background-color: #cccccc;
-}
-
-.bg-white-700 {
-  background-color: #999999;
-}
-
-.bg-white-800 {
-  background-color: #666666;
-}
-
-.bg-white-900 {
-  background-color: #333333;
-}
-
-.text-white {
-  color: #ffffff;
-}
-
-.text-white-400 {
-  color: white;
-}
-
-.text-white-300 {
-  color: white;
-}
-
-.text-white-200 {
-  color: white;
-}
-
-.text-white-100 {
-  color: white;
-}
-
-.text-white-600 {
-  color: #cccccc;
-}
-
-.text-white-700 {
-  color: #999999;
-}
-
-.text-white-800 {
-  color: #666666;
-}
-
-.text-white-900 {
-  color: #333333;
-}
-
 /* Base Element Resets */
 /*  Global Resets */
 * {
@@ -453,28 +165,11 @@ template {
 html,
 body {
   font-size: 16px;
-  line-height: 1.5;
-  font-family: 'Roboto', sans-serif;
-  color: #272727;
+  line-height: 1.2;
 }
 
 p {
-  font-size: 16px;
-  font-weight: 300;
-}
-
-p.lead {
-  font-size: 18px;
-}
-
-a {
-  display: inline-block;
-  text-decoration: none;
-  color: #272727;
-}
-
-a:hover {
-  color: #c33329;
+  font-size: 1em;
 }
 
 /* Headings */
@@ -497,11 +192,11 @@ h6.light {
 }
 
 h1 {
-  font-size: 4em;
+  font-size: 2.25em;
 }
 
 h2 {
-  font-size: 2.25em;
+  font-size: 2em;
 }
 
 h3 {
@@ -547,17 +242,6 @@ button {
   display: inline-flex;
 }
 
-.button.crimson,
-button.crimson {
-  background-color: #c33329;
-  color: #ffffff;
-}
-
-.button.crimson:hover,
-button.crimson:hover {
-  background-color: #b02e25;
-}
-
 .button .icon-wrapper,
 button .icon-wrapper {
   display: flex;
@@ -569,17 +253,6 @@ button .icon-wrapper {
     Set default style for footer:
     e.g. <footer></footer>, .footer
 */
-footer {
-  margin-top: 40px;
-  padding: 32px 0;
-}
-
-footer p {
-  margin: 0;
-  font-size: 16px;
-  text-align: center;
-}
-
 /* 
     Set default global styles for inputs elements:
     e.g. select, input[type="text"], input[type="email"], input[type="number"]
@@ -614,7 +287,7 @@ ol {
 .global-wrapper {
   width: 100%;
   margin: 0 auto;
-  max-width: 1680px;
+  max-width: 1200px;
   padding: 0 32px;
 }
 
@@ -684,76 +357,3 @@ ol {
     Set default global styles for: 
     Navigation <nav></nav>
 */
-#hero {
-  height: 520px;
-  display: flex;
-  align-items: center;
-}
-
-#hero .global-wrapper .logo {
-  margin-bottom: 80px;
-}
-
-#hero .global-wrapper .heading {
-  max-width: 820px;
-}
-
-.card-list {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.card {
-  padding: 48px 40px;
-  margin: 12px 0;
-  border: 1px solid #eeeeee;
-  border-radius: 3px;
-}
-
-.card:not(:last-child) {
-  margin-right: 24px;
-}
-
-.left-nav {
-  width: 320px;
-  padding: 42px 32px;
-  border-radius: 3px;
-  border: 1px solid #e9e9e9;
-}
-
-.left-nav .nav-link {
-  margin-bottom: 24px;
-}
-
-.left-nav .nav-link .nav-link-title {
-  font-size: 18px;
-  font-weight: 700;
-  color: darkgray;
-  transition-duration: 300ms;
-  margin-bottom: 16px;
-}
-
-.left-nav .nav-link .nav-link-title:hover {
-  color: #474747;
-}
-
-.left-nav .nav-link .nav-link-list {
-  display: flex;
-  flex-direction: column;
-  border-left: 1px solid #e9e9e9;
-}
-
-.left-nav .nav-link .nav-link-list .nav-link-item {
-  color: darkgray;
-  padding: 8px 16px;
-  transition-duration: 300ms;
-}
-
-.left-nav .nav-link .nav-link-list .nav-link-item.active, .left-nav .nav-link .nav-link-list .nav-link-item:hover {
-  font-weight: 700;
-  color: #474747;
-}
-
-.left-nav .nav-link.active .nav-link-title {
-  color: #474747;
-}

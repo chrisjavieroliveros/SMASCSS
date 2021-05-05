@@ -21,15 +21,6 @@ button {
   border-radius: 3px;
   display: inline-flex;
 
-  &.crimson {
-    background-color: getColor(primary);
-    color: getColor(white);
-
-    &:hover {
-      background-color: shade(getColor(primary), 10);
-    }
-  }
-
   .icon-wrapper {
     display: flex;
     justify-content: center;

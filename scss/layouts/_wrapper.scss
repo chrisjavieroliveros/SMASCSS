@@ -6,7 +6,7 @@
 .global-wrapper {
   width: 100%;
   margin: 0 auto;
-  max-width: 1680px;
+  max-width: 1200px;
   padding: 0 32px;
 
   @include lg {
@@ -49,5 +49,6 @@
       padding-top: 24px;
       padding-bottom: 24px;
     }
+
   }
 }
