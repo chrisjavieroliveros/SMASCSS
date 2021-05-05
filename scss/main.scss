@@ -6,16 +6,19 @@
 @charset 'utf-8';
 
 // Import Vendors / Plugins;
-@import './vendors/_vendors-dir';
+@import "./vendors/_vendors-dir";
 
 // Import Core;
-@import './core/_core-dir';
+@import "./core/_core-dir";
 
 // Import Base Styles;
-@import './base/_base-dir';
+@import "./base/_base-dir";
 
 // Import Layout;
-@import './layouts/_layouts-dir';
+@import "./layouts/_layouts-dir";
 
 // Import Components;
-@import './components/_components-dir';
+@import "./components/_components-dir";
+
+// Import Pages;
+@import "./pages/_pages-dir";
