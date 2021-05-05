@@ -1,9 +1,8 @@
 $colors: (
   // Colors
-  primary: #c33329,
-  light: #fafafa,
-  black: #272727,
-  white: #ffffff
+  primary: #3880ff,
+  secondary: #0cd1e8,
+  tertiary: #7044ff
 );
 
 @each $color, $value in $colors {
