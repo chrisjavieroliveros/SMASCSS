@@ -10,6 +10,11 @@
   &.disabled {
     cursor: not-allowed;
   }
+
+  &:active,
+  &:focus {
+    outline: none;
+  }
 }
 
 .button,
