@@ -8,7 +8,7 @@
   align-items: center;
   padding: 64px;
   padding-bottom: 0 !important;
-  background-color: var(--Primary);
+  background-color:getColor(Primary);
   overflow: hidden;
 
   .heading-group {
@@ -16,7 +16,7 @@
     padding-right: 16px;
     flex-grow: 1;
     z-index: 2;
-    color: var(--Primary-100);
+    color: getColor(Primary);
 
     h1 {
       margin-bottom: 8px;
@@ -24,6 +24,7 @@
   }
 
   .preview-wrapper {
+
     position: relative;
     padding-left: 8px;
     height: 320px;
