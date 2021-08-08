@@ -1,4 +1,4 @@
-@import '../../node_modules/bootstrap/scss/bootstrap.scss';
+@import '../../node_modules/bootstrap/scss/bootstrap.css';
 @import '../core/_core-dir';
 @import '../base/_base-dir';
 
@@ -8,7 +8,7 @@
   align-items: center;
   padding: 64px;
   padding-bottom: 0 !important;
-  background-color:getColor(Primary);
+  background-color: getColor(Primary);
   overflow: hidden;
 
   .heading-group {
