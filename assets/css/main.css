@@ -18,6 +18,294 @@ textarea {
   margin: 0;
 }
 
+.bg-Primary {
+  background-color: #3880ff;
+}
+
+.bg-Primary-400 {
+  background-color: #6099ff;
+}
+
+.bg-Primary-300 {
+  background-color: #88b3ff;
+}
+
+.bg-Primary-200 {
+  background-color: #afccff;
+}
+
+.bg-Primary-100 {
+  background-color: #d7e6ff;
+}
+
+.bg-Primary-600 {
+  background-color: #2d66cc;
+}
+
+.bg-Primary-700 {
+  background-color: #224d99;
+}
+
+.bg-Primary-800 {
+  background-color: #163366;
+}
+
+.bg-Primary-900 {
+  background-color: #0b1a33;
+}
+
+.text-Primary {
+  color: #3880ff;
+}
+
+.text-Primary-400 {
+  color: #6099ff;
+}
+
+.text-Primary-300 {
+  color: #88b3ff;
+}
+
+.text-Primary-200 {
+  color: #afccff;
+}
+
+.text-Primary-100 {
+  color: #d7e6ff;
+}
+
+.text-Primary-600 {
+  color: #2d66cc;
+}
+
+.text-Primary-700 {
+  color: #224d99;
+}
+
+.text-Primary-800 {
+  color: #163366;
+}
+
+.text-Primary-900 {
+  color: #0b1a33;
+}
+
+.bg-Secondary {
+  background-color: #0cd1e8;
+}
+
+.bg-Secondary-400 {
+  background-color: #3ddaed;
+}
+
+.bg-Secondary-300 {
+  background-color: #6de3f1;
+}
+
+.bg-Secondary-200 {
+  background-color: #9eedf6;
+}
+
+.bg-Secondary-100 {
+  background-color: #cef6fa;
+}
+
+.bg-Secondary-600 {
+  background-color: #0aa7ba;
+}
+
+.bg-Secondary-700 {
+  background-color: #077d8b;
+}
+
+.bg-Secondary-800 {
+  background-color: #05545d;
+}
+
+.bg-Secondary-900 {
+  background-color: #022a2e;
+}
+
+.text-Secondary {
+  color: #0cd1e8;
+}
+
+.text-Secondary-400 {
+  color: #3ddaed;
+}
+
+.text-Secondary-300 {
+  color: #6de3f1;
+}
+
+.text-Secondary-200 {
+  color: #9eedf6;
+}
+
+.text-Secondary-100 {
+  color: #cef6fa;
+}
+
+.text-Secondary-600 {
+  color: #0aa7ba;
+}
+
+.text-Secondary-700 {
+  color: #077d8b;
+}
+
+.text-Secondary-800 {
+  color: #05545d;
+}
+
+.text-Secondary-900 {
+  color: #022a2e;
+}
+
+.bg-Tertiary {
+  background-color: #7044ff;
+}
+
+.bg-Tertiary-400 {
+  background-color: #8d69ff;
+}
+
+.bg-Tertiary-300 {
+  background-color: #a98fff;
+}
+
+.bg-Tertiary-200 {
+  background-color: #c6b4ff;
+}
+
+.bg-Tertiary-100 {
+  background-color: #e2daff;
+}
+
+.bg-Tertiary-600 {
+  background-color: #5a36cc;
+}
+
+.bg-Tertiary-700 {
+  background-color: #432999;
+}
+
+.bg-Tertiary-800 {
+  background-color: #2d1b66;
+}
+
+.bg-Tertiary-900 {
+  background-color: #160e33;
+}
+
+.text-Tertiary {
+  color: #7044ff;
+}
+
+.text-Tertiary-400 {
+  color: #8d69ff;
+}
+
+.text-Tertiary-300 {
+  color: #a98fff;
+}
+
+.text-Tertiary-200 {
+  color: #c6b4ff;
+}
+
+.text-Tertiary-100 {
+  color: #e2daff;
+}
+
+.text-Tertiary-600 {
+  color: #5a36cc;
+}
+
+.text-Tertiary-700 {
+  color: #432999;
+}
+
+.text-Tertiary-800 {
+  color: #2d1b66;
+}
+
+.text-Tertiary-900 {
+  color: #160e33;
+}
+
+.bg-Ash {
+  background-color: #f5f5f5;
+}
+
+.bg-Ash-400 {
+  background-color: #f7f7f7;
+}
+
+.bg-Ash-300 {
+  background-color: #f9f9f9;
+}
+
+.bg-Ash-200 {
+  background-color: #fbfbfb;
+}
+
+.bg-Ash-100 {
+  background-color: #fdfdfd;
+}
+
+.bg-Ash-600 {
+  background-color: #c4c4c4;
+}
+
+.bg-Ash-700 {
+  background-color: #939393;
+}
+
+.bg-Ash-800 {
+  background-color: #626262;
+}
+
+.bg-Ash-900 {
+  background-color: #313131;
+}
+
+.text-Ash {
+  color: #f5f5f5;
+}
+
+.text-Ash-400 {
+  color: #f7f7f7;
+}
+
+.text-Ash-300 {
+  color: #f9f9f9;
+}
+
+.text-Ash-200 {
+  color: #fbfbfb;
+}
+
+.text-Ash-100 {
+  color: #fdfdfd;
+}
+
+.text-Ash-600 {
+  color: #c4c4c4;
+}
+
+.text-Ash-700 {
+  color: #939393;
+}
+
+.text-Ash-800 {
+  color: #626262;
+}
+
+.text-Ash-900 {
+  color: #313131;
+}
+
 /* Base Element Resets */
 /*  Global Resets */
 * {
@@ -231,7 +519,13 @@ button {
 .button:disabled,
 button:disabled, .disabled.button,
 button.disabled {
-  pointer-events: none;
+  cursor: not-allowed;
+}
+
+.button:active,
+button:active, .button:focus,
+button:focus {
+  outline: none;
 }
 
 .button,
@@ -239,14 +533,6 @@ button {
   font-size: 1em;
   padding: 12px 16px;
   border-radius: 3px;
-  display: inline-flex;
-}
-
-.button .icon-wrapper,
-button .icon-wrapper {
-  display: flex;
-  justify-content: center;
-  margin-left: 16px;
 }
 
 /* 
