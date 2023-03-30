@@ -1,6 +1,6 @@
 // getColor() function with optional opacity and case-insensitive color name
 @function getColor($color-name, $opacity: null) {
-  $normalized-color-name: to-lower-case($color-name);
+  $normalized-color-name: to-lower-case(unquote($color-name));
 
   @if map-has-key($colors, $normalized-color-name) {
     $color-value: map-get($colors, $normalized-color-name);
