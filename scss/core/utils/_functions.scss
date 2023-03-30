@@ -1,15 +1,30 @@
 // Define the getColor function
+// Usage: getColor('Primary', 0.5)
 @function getColor($colorName, $opacity: 100%) {
   $color: map-get($colors, $colorName);
   @return rgba($color, $opacity);
 }
 
 // Define the tint function
+// Usage: tint(getColor('Primary'), 0.5);
 @function tint($color, $amount) {
   @return mix(white, $color, $amount);
 }
 
 // Define the shade function
+// Usage: shade(getColor('Primary'), 0.5);
 @function shade($color, $amount) {
   @return mix(black, $color, $amount);
+}
+
+// Define the mixColors function
+// Usage: mixColors(getColor('Primary'), getColor('Secondary'), 0.5);
+@function mixColors($color1, $color2, $amount) {
+  @return mix($color1, $color2, $amount);
+}
+
+// Define the adjustHue function
+// Usage: adjustHue(getColor('Primary'), 45deg);
+@function adjustHue($color, $degrees) {
+  @return adjust-hue($color, $degrees);
 }

@@ -1,3 +1,3 @@
 #ui-library {
-  background-color: getColor("Primary");
+  background-color: mixColors(getColor("Primary"), getColor("Secondary"), 80);
 }
