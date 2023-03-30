@@ -1,9 +1,9 @@
-// Utilities;
+// Utilities
 @import "./utils/variables";
-@import "./utils/mixins";
 @import "./utils/functions";
+@import "./utils/mixins";
 
-// Base styles;
+// Base styles
 @import "./base/reset";
 @import "./base/typography";
 @import "./base/button";
@@ -14,6 +14,6 @@
 @import "./base/media";
 @import "./base/table";
 
-// Layout;
+// Layout
 @import "./layout/wrapper";
 @import "./layout/column";
