@@ -3,6 +3,10 @@
     Scalable and Modular Architecture for Sassy CSS
     by Chris Javier Oliveros
 */
+input:focus, input:active {
+  outline: none;
+}
+
 /* 
     Set default global styles for button elements:
     <button></button>, input[type="submit"], btn btn-submit
@@ -55,4 +59,14 @@ ol {
 /* 
     Set default global style for table element:
     e.g. <table></table>, .table
+*/
+.global-wrapper {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* 
+    Set default global styles for: 
+    Navigation <nav></nav>
 */
