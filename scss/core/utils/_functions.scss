@@ -1,0 +1,22 @@
+// getColor() function with optional opacity and case-insensitive color name
+@function getColor($color-name, $opacity: null) {
+  $normalized-color-name: to-lower-case($color-name);
+
+  @if map-has-key($colors, $normalized-color-name) {
+    $color-value: map-get($colors, $normalized-color-name);
+
+    @if $opacity != null {
+      @if type-of($opacity) == number and $opacity >= 0 and $opacity <= 100 {
+        $alpha: $opacity / 100;
+        $color-value: rgba($color-value, $alpha);
+      } @else {
+        @warn "Invalid opacity value `#{$opacity}`. Opacity must be a number between 0 and 100.";
+      }
+    }
+
+    @return $color-value;
+  }
+
+  @warn "Color `#{$color-name}` is not defined in the $colors map.";
+  @return null;
+}

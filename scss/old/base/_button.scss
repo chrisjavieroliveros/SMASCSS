@@ -1,0 +1,27 @@
+/* 
+    Set default global styles for button elements:
+    <button></button>, input[type="submit"], btn btn-submit
+*/
+
+%button-default {
+  cursor: pointer;
+
+  &:disabled,
+  &.disabled {
+    cursor: not-allowed;
+  }
+
+  &:active,
+  &:focus {
+    outline: none;
+  }
+}
+
+.button,
+button {
+  @extend %button-default;
+
+  font-size: 1em;
+  padding: 12px 16px;
+  border-radius: 3px;
+}

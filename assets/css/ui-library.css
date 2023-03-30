@@ -299,8 +299,7 @@ textarea {
   color: #313131;
 }
 
-/* Base Element Resets */
-/*  Global Resets */
+/* Base Element Resets */ /*  Global Resets */
 * {
   box-sizing: border-box;
 }
@@ -409,7 +408,7 @@ input {
   text-transform: none;
 }
 
-input[type='search'] {
+input[type=search] {
   appearance: textfield;
   outline-offset: -2px;
 }
@@ -462,7 +461,6 @@ h5.uppercase,
 h6.uppercase {
   text-transform: uppercase;
 }
-
 h1.light,
 h2.light,
 h3.light,
@@ -508,13 +506,11 @@ h6 {
 button {
   cursor: pointer;
 }
-
 .button:disabled,
 button:disabled, .disabled.button,
 button.disabled {
   cursor: not-allowed;
 }
-
 .button:active,
 button:active, .button:focus,
 button:focus {
@@ -564,7 +560,6 @@ ol {
   background-color: #3880ff;
   overflow: hidden;
 }
-
 .masthead .heading-group {
   position: relative;
   padding-right: 16px;
@@ -572,11 +567,9 @@ ol {
   z-index: 2;
   color: #3880ff;
 }
-
 .masthead .heading-group h1 {
   margin-bottom: 8px;
 }
-
 .masthead .preview-wrapper {
   position: relative;
   padding-left: 8px;
@@ -585,20 +578,17 @@ ol {
   flex-shrink: 0;
   z-index: 1;
 }
-
-.masthead .preview-wrapper [class*='preview-'] {
+.masthead .preview-wrapper [class*=preview-] {
   position: absolute;
   border: 8px solid var(--Light);
   box-shadow: 0 0 15px rgba(104, 104, 104, 0.2);
 }
-
-.masthead .preview-wrapper [class*='preview-'] img {
+.masthead .preview-wrapper [class*=preview-] img {
   width: 100%;
   height: auto;
   object-fit: contain;
   object-position: top center;
 }
-
 .masthead .preview-wrapper .preview-1 {
   top: 0;
   right: 0;
@@ -606,7 +596,6 @@ ol {
   height: 100%;
   width: 100%;
 }
-
 .masthead .preview-wrapper .preview-2 {
   left: -180px;
   bottom: 0;
@@ -614,7 +603,6 @@ ol {
   height: 260px;
   z-index: 1;
 }
-
 @media (max-width: 1200px) {
   .masthead {
     padding: 56px;
@@ -626,7 +614,6 @@ ol {
     left: -130px;
   }
 }
-
 @media (max-width: 992px) {
   .masthead {
     padding: 48px;
@@ -638,7 +625,6 @@ ol {
     display: none;
   }
 }
-
 @media (max-width: 768px) {
   .masthead {
     height: 300px;
@@ -651,7 +637,6 @@ ol {
     display: none;
   }
 }
-
 @media (max-width: 576px) {
   .masthead {
     padding: 32px;
