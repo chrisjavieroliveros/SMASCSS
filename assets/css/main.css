@@ -324,3 +324,6 @@ ol {
     Set default global styles for: 
     Navigation <nav></nav>
 */
+#ui-library {
+  background-color: #3498db;
+}
