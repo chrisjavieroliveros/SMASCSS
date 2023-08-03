@@ -602,14 +602,23 @@ ol {
     Set default global style for table element:
     e.g. <table></table>, .table
 */
+/* 
+    Set default global styles for: 
+    Navigation <nav></nav>
+*/
 .global-wrapper {
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 32px;
 }
-
-/* 
-    Set default global styles for: 
-    Navigation <nav></nav>
-*/
+@media (max-width: 992px) {
+  .global-wrapper {
+    padding: 0 24px;
+  }
+}
+@media (max-width: 768px) {
+  .global-wrapper {
+    padding: 0 16px;
+  }
+}

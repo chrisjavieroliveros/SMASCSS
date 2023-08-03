@@ -3,6 +3,7 @@
 @import "./utils/mixins";
 @import "./utils/colors";
 @import "./utils/functions";
+@import "./utils/responsive";
 
 // Base styles
 @import "./base/reset";
@@ -14,7 +15,3 @@
 @import "./base/list";
 @import "./base/media";
 @import "./base/table";
-
-// Layout
-@import "./layout/wrapper";
-@import "./layout/column";
