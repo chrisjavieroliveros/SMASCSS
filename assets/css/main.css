@@ -7,6 +7,294 @@ input:focus, input:active {
   outline: none;
 }
 
+.bg-Primary {
+  background-color: #c2171c;
+}
+
+.bg-Primary-400 {
+  background-color: tint(getColor(Primary), 20);
+}
+
+.bg-Primary-300 {
+  background-color: tint(getColor(Primary), 40);
+}
+
+.bg-Primary-200 {
+  background-color: tint(getColor(Primary), 60);
+}
+
+.bg-Primary-100 {
+  background-color: tint(getColor(Primary), 80);
+}
+
+.bg-Primary-600 {
+  background-color: shade(getColor(Primary), 20);
+}
+
+.bg-Primary-700 {
+  background-color: shade(getColor(Primary), 40);
+}
+
+.bg-Primary-800 {
+  background-color: shade(getColor(Primary), 60);
+}
+
+.bg-Primary-900 {
+  background-color: shade(getColor(Primary), 80);
+}
+
+.text-Primary {
+  color: #c2171c;
+}
+
+.text-Primary-400 {
+  color: tint(getColor(Primary), 20);
+}
+
+.text-Primary-300 {
+  color: tint(getColor(Primary), 40);
+}
+
+.text-Primary-200 {
+  color: tint(getColor(Primary), 60);
+}
+
+.text-Primary-100 {
+  color: tint(getColor(Primary), 80);
+}
+
+.text-Primary-600 {
+  color: shade(getColor(Primary), 20);
+}
+
+.text-Primary-700 {
+  color: shade(getColor(Primary), 40);
+}
+
+.text-Primary-800 {
+  color: shade(getColor(Primary), 60);
+}
+
+.text-Primary-900 {
+  color: shade(getColor(Primary), 80);
+}
+
+.bg-Secondary {
+  background-color: #2ba731;
+}
+
+.bg-Secondary-400 {
+  background-color: tint(getColor(Secondary), 20);
+}
+
+.bg-Secondary-300 {
+  background-color: tint(getColor(Secondary), 40);
+}
+
+.bg-Secondary-200 {
+  background-color: tint(getColor(Secondary), 60);
+}
+
+.bg-Secondary-100 {
+  background-color: tint(getColor(Secondary), 80);
+}
+
+.bg-Secondary-600 {
+  background-color: shade(getColor(Secondary), 20);
+}
+
+.bg-Secondary-700 {
+  background-color: shade(getColor(Secondary), 40);
+}
+
+.bg-Secondary-800 {
+  background-color: shade(getColor(Secondary), 60);
+}
+
+.bg-Secondary-900 {
+  background-color: shade(getColor(Secondary), 80);
+}
+
+.text-Secondary {
+  color: #2ba731;
+}
+
+.text-Secondary-400 {
+  color: tint(getColor(Secondary), 20);
+}
+
+.text-Secondary-300 {
+  color: tint(getColor(Secondary), 40);
+}
+
+.text-Secondary-200 {
+  color: tint(getColor(Secondary), 60);
+}
+
+.text-Secondary-100 {
+  color: tint(getColor(Secondary), 80);
+}
+
+.text-Secondary-600 {
+  color: shade(getColor(Secondary), 20);
+}
+
+.text-Secondary-700 {
+  color: shade(getColor(Secondary), 40);
+}
+
+.text-Secondary-800 {
+  color: shade(getColor(Secondary), 60);
+}
+
+.text-Secondary-900 {
+  color: shade(getColor(Secondary), 80);
+}
+
+.bg-Black {
+  background-color: #272727;
+}
+
+.bg-Black-400 {
+  background-color: tint(getColor(Black), 20);
+}
+
+.bg-Black-300 {
+  background-color: tint(getColor(Black), 40);
+}
+
+.bg-Black-200 {
+  background-color: tint(getColor(Black), 60);
+}
+
+.bg-Black-100 {
+  background-color: tint(getColor(Black), 80);
+}
+
+.bg-Black-600 {
+  background-color: shade(getColor(Black), 20);
+}
+
+.bg-Black-700 {
+  background-color: shade(getColor(Black), 40);
+}
+
+.bg-Black-800 {
+  background-color: shade(getColor(Black), 60);
+}
+
+.bg-Black-900 {
+  background-color: shade(getColor(Black), 80);
+}
+
+.text-Black {
+  color: #272727;
+}
+
+.text-Black-400 {
+  color: tint(getColor(Black), 20);
+}
+
+.text-Black-300 {
+  color: tint(getColor(Black), 40);
+}
+
+.text-Black-200 {
+  color: tint(getColor(Black), 60);
+}
+
+.text-Black-100 {
+  color: tint(getColor(Black), 80);
+}
+
+.text-Black-600 {
+  color: shade(getColor(Black), 20);
+}
+
+.text-Black-700 {
+  color: shade(getColor(Black), 40);
+}
+
+.text-Black-800 {
+  color: shade(getColor(Black), 60);
+}
+
+.text-Black-900 {
+  color: shade(getColor(Black), 80);
+}
+
+.bg-White {
+  background-color: #ffffff;
+}
+
+.bg-White-400 {
+  background-color: tint(getColor(White), 20);
+}
+
+.bg-White-300 {
+  background-color: tint(getColor(White), 40);
+}
+
+.bg-White-200 {
+  background-color: tint(getColor(White), 60);
+}
+
+.bg-White-100 {
+  background-color: tint(getColor(White), 80);
+}
+
+.bg-White-600 {
+  background-color: shade(getColor(White), 20);
+}
+
+.bg-White-700 {
+  background-color: shade(getColor(White), 40);
+}
+
+.bg-White-800 {
+  background-color: shade(getColor(White), 60);
+}
+
+.bg-White-900 {
+  background-color: shade(getColor(White), 80);
+}
+
+.text-White {
+  color: #ffffff;
+}
+
+.text-White-400 {
+  color: tint(getColor(White), 20);
+}
+
+.text-White-300 {
+  color: tint(getColor(White), 40);
+}
+
+.text-White-200 {
+  color: tint(getColor(White), 60);
+}
+
+.text-White-100 {
+  color: tint(getColor(White), 80);
+}
+
+.text-White-600 {
+  color: shade(getColor(White), 20);
+}
+
+.text-White-700 {
+  color: shade(getColor(White), 40);
+}
+
+.text-White-800 {
+  color: shade(getColor(White), 60);
+}
+
+.text-White-900 {
+  color: shade(getColor(White), 80);
+}
+
 *,
 *::before,
 *::after {
@@ -318,6 +606,7 @@ ol {
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
+  padding: 0 32px;
 }
 
 /* 
