@@ -12,35 +12,35 @@ input:focus, input:active {
 }
 
 .bg-Primary-400 {
-  background-color: tint(getColor(Primary), 20);
+  background-color: #ce4549;
 }
 
 .bg-Primary-300 {
-  background-color: tint(getColor(Primary), 40);
+  background-color: #da7477;
 }
 
 .bg-Primary-200 {
-  background-color: tint(getColor(Primary), 60);
+  background-color: #e7a2a4;
 }
 
 .bg-Primary-100 {
-  background-color: tint(getColor(Primary), 80);
+  background-color: #f3d1d2;
 }
 
 .bg-Primary-600 {
-  background-color: shade(getColor(Primary), 20);
+  background-color: #9b1216;
 }
 
 .bg-Primary-700 {
-  background-color: shade(getColor(Primary), 40);
+  background-color: #740e11;
 }
 
 .bg-Primary-800 {
-  background-color: shade(getColor(Primary), 60);
+  background-color: #4e090b;
 }
 
 .bg-Primary-900 {
-  background-color: shade(getColor(Primary), 80);
+  background-color: #270506;
 }
 
 .text-Primary {
@@ -48,35 +48,35 @@ input:focus, input:active {
 }
 
 .text-Primary-400 {
-  color: tint(getColor(Primary), 20);
+  color: #ce4549;
 }
 
 .text-Primary-300 {
-  color: tint(getColor(Primary), 40);
+  color: #da7477;
 }
 
 .text-Primary-200 {
-  color: tint(getColor(Primary), 60);
+  color: #e7a2a4;
 }
 
 .text-Primary-100 {
-  color: tint(getColor(Primary), 80);
+  color: #f3d1d2;
 }
 
 .text-Primary-600 {
-  color: shade(getColor(Primary), 20);
+  color: #9b1216;
 }
 
 .text-Primary-700 {
-  color: shade(getColor(Primary), 40);
+  color: #740e11;
 }
 
 .text-Primary-800 {
-  color: shade(getColor(Primary), 60);
+  color: #4e090b;
 }
 
 .text-Primary-900 {
-  color: shade(getColor(Primary), 80);
+  color: #270506;
 }
 
 .bg-Secondary {
@@ -84,35 +84,35 @@ input:focus, input:active {
 }
 
 .bg-Secondary-400 {
-  background-color: tint(getColor(Secondary), 20);
+  background-color: #55b95a;
 }
 
 .bg-Secondary-300 {
-  background-color: tint(getColor(Secondary), 40);
+  background-color: #80ca83;
 }
 
 .bg-Secondary-200 {
-  background-color: tint(getColor(Secondary), 60);
+  background-color: #aadcad;
 }
 
 .bg-Secondary-100 {
-  background-color: tint(getColor(Secondary), 80);
+  background-color: #d5edd6;
 }
 
 .bg-Secondary-600 {
-  background-color: shade(getColor(Secondary), 20);
+  background-color: #228627;
 }
 
 .bg-Secondary-700 {
-  background-color: shade(getColor(Secondary), 40);
+  background-color: #1a641d;
 }
 
 .bg-Secondary-800 {
-  background-color: shade(getColor(Secondary), 60);
+  background-color: #114314;
 }
 
 .bg-Secondary-900 {
-  background-color: shade(getColor(Secondary), 80);
+  background-color: #09210a;
 }
 
 .text-Secondary {
@@ -120,35 +120,35 @@ input:focus, input:active {
 }
 
 .text-Secondary-400 {
-  color: tint(getColor(Secondary), 20);
+  color: #55b95a;
 }
 
 .text-Secondary-300 {
-  color: tint(getColor(Secondary), 40);
+  color: #80ca83;
 }
 
 .text-Secondary-200 {
-  color: tint(getColor(Secondary), 60);
+  color: #aadcad;
 }
 
 .text-Secondary-100 {
-  color: tint(getColor(Secondary), 80);
+  color: #d5edd6;
 }
 
 .text-Secondary-600 {
-  color: shade(getColor(Secondary), 20);
+  color: #228627;
 }
 
 .text-Secondary-700 {
-  color: shade(getColor(Secondary), 40);
+  color: #1a641d;
 }
 
 .text-Secondary-800 {
-  color: shade(getColor(Secondary), 60);
+  color: #114314;
 }
 
 .text-Secondary-900 {
-  color: shade(getColor(Secondary), 80);
+  color: #09210a;
 }
 
 .bg-Black {
@@ -156,35 +156,35 @@ input:focus, input:active {
 }
 
 .bg-Black-400 {
-  background-color: tint(getColor(Black), 20);
+  background-color: #525252;
 }
 
 .bg-Black-300 {
-  background-color: tint(getColor(Black), 40);
+  background-color: #7d7d7d;
 }
 
 .bg-Black-200 {
-  background-color: tint(getColor(Black), 60);
+  background-color: darkgray;
 }
 
 .bg-Black-100 {
-  background-color: tint(getColor(Black), 80);
+  background-color: #d4d4d4;
 }
 
 .bg-Black-600 {
-  background-color: shade(getColor(Black), 20);
+  background-color: #1f1f1f;
 }
 
 .bg-Black-700 {
-  background-color: shade(getColor(Black), 40);
+  background-color: #171717;
 }
 
 .bg-Black-800 {
-  background-color: shade(getColor(Black), 60);
+  background-color: #101010;
 }
 
 .bg-Black-900 {
-  background-color: shade(getColor(Black), 80);
+  background-color: #080808;
 }
 
 .text-Black {
@@ -192,35 +192,35 @@ input:focus, input:active {
 }
 
 .text-Black-400 {
-  color: tint(getColor(Black), 20);
+  color: #525252;
 }
 
 .text-Black-300 {
-  color: tint(getColor(Black), 40);
+  color: #7d7d7d;
 }
 
 .text-Black-200 {
-  color: tint(getColor(Black), 60);
+  color: darkgray;
 }
 
 .text-Black-100 {
-  color: tint(getColor(Black), 80);
+  color: #d4d4d4;
 }
 
 .text-Black-600 {
-  color: shade(getColor(Black), 20);
+  color: #1f1f1f;
 }
 
 .text-Black-700 {
-  color: shade(getColor(Black), 40);
+  color: #171717;
 }
 
 .text-Black-800 {
-  color: shade(getColor(Black), 60);
+  color: #101010;
 }
 
 .text-Black-900 {
-  color: shade(getColor(Black), 80);
+  color: #080808;
 }
 
 .bg-White {
@@ -228,35 +228,35 @@ input:focus, input:active {
 }
 
 .bg-White-400 {
-  background-color: tint(getColor(White), 20);
+  background-color: white;
 }
 
 .bg-White-300 {
-  background-color: tint(getColor(White), 40);
+  background-color: white;
 }
 
 .bg-White-200 {
-  background-color: tint(getColor(White), 60);
+  background-color: white;
 }
 
 .bg-White-100 {
-  background-color: tint(getColor(White), 80);
+  background-color: white;
 }
 
 .bg-White-600 {
-  background-color: shade(getColor(White), 20);
+  background-color: #cccccc;
 }
 
 .bg-White-700 {
-  background-color: shade(getColor(White), 40);
+  background-color: #999999;
 }
 
 .bg-White-800 {
-  background-color: shade(getColor(White), 60);
+  background-color: #666666;
 }
 
 .bg-White-900 {
-  background-color: shade(getColor(White), 80);
+  background-color: #333333;
 }
 
 .text-White {
@@ -264,35 +264,35 @@ input:focus, input:active {
 }
 
 .text-White-400 {
-  color: tint(getColor(White), 20);
+  color: white;
 }
 
 .text-White-300 {
-  color: tint(getColor(White), 40);
+  color: white;
 }
 
 .text-White-200 {
-  color: tint(getColor(White), 60);
+  color: white;
 }
 
 .text-White-100 {
-  color: tint(getColor(White), 80);
+  color: white;
 }
 
 .text-White-600 {
-  color: shade(getColor(White), 20);
+  color: #cccccc;
 }
 
 .text-White-700 {
-  color: shade(getColor(White), 40);
+  color: #999999;
 }
 
 .text-White-800 {
-  color: shade(getColor(White), 60);
+  color: #666666;
 }
 
 .text-White-900 {
-  color: shade(getColor(White), 80);
+  color: #333333;
 }
 
 *,
