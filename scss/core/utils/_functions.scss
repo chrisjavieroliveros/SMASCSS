@@ -6,15 +6,15 @@
 }
 
 // Define the tint function
-// Usage: tint(getColor('Primary'), 50%);
+// Usage: tint(getColor('Primary'), 50);
 @function tint($color, $amount) {
-  @return mix(white, $color, $amount);
+  @return mix(white, $color, $amount * 1%);
 }
 
-// Define the shade function
-// Usage: shade(getColor('Primary'), 50%);
+// // Define the shade function
+// // Usage: shade(getColor('Primary'), 50);
 @function shade($color, $amount) {
-  @return mix(black, $color, $amount);
+  @return mix(black, $color, $amount * 1%);
 }
 
 // Define the mixColors function
