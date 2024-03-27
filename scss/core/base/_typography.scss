@@ -7,6 +7,12 @@ body {
 
 p {
   font-size: 1em;
+  margin-top: 1em;
+  margin-bottom: 1em;
+
+  &.lead {
+    font-size: 1.25em;
+  }
 }
 
 /* Headings */
@@ -16,6 +22,8 @@ h3,
 h4,
 h5,
 h6 {
+  color: getColor(Primary);
+
   &.uppercase {
     text-transform: uppercase;
   }

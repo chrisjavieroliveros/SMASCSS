@@ -2,45 +2,45 @@ $colors: (
   // Colors;
   Primary: #c2171c,
   Secondary: #2ba731,
+  Tertiary: #f7f7f7,
+  Quaternary: #f0f0f0,
+
+  // Status;
+  Danger: #ff0000,
+  Warning: #ffcc00,
+  Success: #00cc00,
+  Info: #0099ff,
 
   // Neutrals;
   Black: #272727,
-  White: #ffffff
+  White: #ffffff,
+
+  // Light;
+  Light-100: #fafafa,
+  Light-200: #f5f5f5,
+  Light-300: #ebebeb,
+  Light-400: #e0e0e0,
+  Light-500: #d6d6d6,
+  Light-600: #cccccc,
+  Light-700: #c2c2c2,
+  Light-800: #b8b8b8,
+  Light-900: #adadad,
+
+  // Dark;
+  Dark-100: #a1a1a1,
+  Dark-200: #8e8e8e,
+  Dark-300: #7c7c7c,
+  Dark-400: #6a6a6a,
+  Dark-500: #585858,
+  Dark-600: #464646,
+  Dark-700: #343434,
+  Dark-800: #222222,
+  Dark-900: #101010
 );
 
-@each $color, $value in $colors {
-  .bg-#{"" + $color} {
-    background-color: #{$value};
-  }
-  $tintValue: 500;
-  @for $x from 1 through 4 {
-    $tintValue: $tintValue - 100;
-    .bg-#{"" + $color}-#{$tintValue} {
-      background-color: tint(getColor($color), 20 * $x);
-    }
-  }
-  $shadeValue: 500;
-  @for $x from 1 through 4 {
-    $shadeValue: $shadeValue + 100;
-    .bg-#{"" + $color}-#{$shadeValue} {
-      background-color: shade(getColor($color), 20 * $x);
-    }
-  }
-  .text-#{"" + $color} {
-    color: #{$value};
-  }
-  $tintValue: 500;
-  @for $x from 1 through 4 {
-    $tintValue: $tintValue - 100;
-    .text-#{"" + $color}-#{$tintValue} {
-      color: tint(getColor($color), 20 * $x);
-    }
-  }
-  $shadeValue: 500;
-  @for $x from 1 through 4 {
-    $shadeValue: $shadeValue + 100;
-    .text-#{"" + $color}-#{$shadeValue} {
-      color: shade(getColor($color), 20 * $x);
-    }
+// Generate CSS Variables based on the colors map;
+:root {
+  @each $colorName, $color in $colors {
+    --color-#{$colorName}: #{$color};
   }
 }

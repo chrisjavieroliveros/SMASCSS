@@ -1,8 +1,11 @@
-// Define the getColor function
-// Usage: getColor('Primary', 0.5)
 @function getColor($colorName, $opacity: 100%) {
-  $color: map-get($colors, $colorName);
-  @return rgba($color, $opacity);
+  // Return as CSS Variable with opacity;
+  @if $opacity == 100% {
+    @return var(--color-#{$colorName});
+  } @else {
+    $color: map-get($colors, $colorName);
+    @return rgba($color, $opacity);
+  }
 }
 
 // Define the tint function
