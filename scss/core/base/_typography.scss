@@ -3,6 +3,7 @@ html,
 body {
   font-size: 16px;
   line-height: 1.2;
+  color: getColor(Black);
 }
 
 p {
@@ -22,8 +23,6 @@ h3,
 h4,
 h5,
 h6 {
-  color: getColor(Primary);
-
   &.uppercase {
     text-transform: uppercase;
   }

@@ -1,33 +1,27 @@
-@function getColor($colorName, $opacity: 100%) {
-  // Return as CSS Variable with opacity;
-  @if $opacity == 100% {
-    @return var(--color-#{$colorName});
-  } @else {
-    $color: map-get($colors, $colorName);
-    @return rgba($color, $opacity);
-  }
+@function getColor($colorName) {
+  @return var(--color-#{$colorName});
 }
 
-// Define the tint function
-// Usage: tint(getColor('Primary'), 50);
-@function tint($color, $amount) {
-  @return mix(white, $color, $amount * 1%);
-}
+// // Define the tint function
+// // Usage: tint(getColor('Primary'), 50);
+// @function tint($color, $amount) {
+//   @return mix(white, $color, $amount * 1%);
+// }
 
-// // Define the shade function
-// // Usage: shade(getColor('Primary'), 50);
-@function shade($color, $amount) {
-  @return mix(black, $color, $amount * 1%);
-}
+// // // Define the shade function
+// // // Usage: shade(getColor('Primary'), 50);
+// @function shade($color, $amount) {
+//   @return mix(black, $color, $amount * 1%);
+// }
 
-// Define the mixColors function
-// Usage: mixColors(getColor('Primary'), getColor('Secondary'), 50%);
-@function mixColors($color1, $color2, $amount) {
-  @return mix($color1, $color2, $amount);
-}
+// // Define the mixColors function
+// // Usage: mixColors(getColor('Primary'), getColor('Secondary'), 50%);
+// @function mixColors($color1, $color2, $amount) {
+//   @return mix($color1, $color2, $amount);
+// }
 
-// Define the adjustHue function
-// Usage: adjustHue(getColor('Primary'), 45deg);
-@function adjustHue($color, $degrees) {
-  @return adjust-hue($color, $degrees);
-}
+// // Define the adjustHue function
+// // Usage: adjustHue(getColor('Primary'), 45deg);
+// @function adjustHue($color, $degrees) {
+//   @return adjust-hue($color, $degrees);
+// }

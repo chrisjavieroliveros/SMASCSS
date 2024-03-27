@@ -240,6 +240,7 @@ html,
 body {
   font-size: 16px;
   line-height: 1.2;
+  color: var(--color-Black);
 }
 
 p {
@@ -252,14 +253,6 @@ p.lead {
 }
 
 /* Headings */
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  color: var(--color-Primary);
-}
 h1.uppercase,
 h2.uppercase,
 h3.uppercase,
