@@ -4,14 +4,7 @@
   box-sizing: border-box;
 }
 
-html {
-  font-size: 100%;
-  line-height: 1.5;
-  -webkit-text-size-adjust: 100%;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
+html,
 body {
   position: relative;
   height: 100%;
@@ -19,6 +12,20 @@ body {
   min-width: 320px;
   margin: 0;
   padding: 0;
+}
+
+html {
+  font-size: 100%;
+  line-height: 1.5;
+  -webkit-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow: hidden;
+}
+
+body {
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 h1,
