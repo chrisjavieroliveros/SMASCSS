@@ -3,10 +3,6 @@
     Scalable and Modular Architecture for Sassy CSS
     by Chris Javier Oliveros
 */
-input:focus, input:active {
-  outline: none;
-}
-
 :root {
   --color-Primary: #c2171c;
   --color-Secondary: #2ba731;
@@ -38,10 +34,24 @@ input:focus, input:active {
   --color-Dark-900: #101010;
 }
 
+input:focus, input:active {
+  outline: none;
+}
+
 *,
 *::before,
 *::after {
   box-sizing: border-box;
+}
+
+html,
+body {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  min-width: 320px;
+  margin: 0;
+  padding: 0;
 }
 
 html {
@@ -50,15 +60,12 @@ html {
   -webkit-text-size-adjust: 100%;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow: hidden;
 }
 
 body {
-  position: relative;
-  height: 100%;
-  width: 100%;
-  min-width: 320px;
-  margin: 0;
-  padding: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 h1,
