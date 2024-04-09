@@ -46,3 +46,12 @@ $screen-xl-max: 1200px;
     @content;
   }
 }
+
+@mixin container($width) {
+  & {
+    container-type: inline-size;
+    @container (max-width: #{$width}px) {
+      @content;
+    }
+  }
+}

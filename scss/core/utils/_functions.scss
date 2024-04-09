@@ -1,35 +1,69 @@
+// Define the getColor function
 @function getColor($colorName, $opacity: 100%) {
-  // if opacity is 100%, return the color value
-  @if $opacity == 100% {
-    @return var(--color-#{$colorName});
-  } @else {
-    $color: map-get($colors, $colorName);
-    @return rgba($color, $opacity);
+  @if not map-has-key($colors, $colorName) {
+    @warn "Unknown color `#{$colorName}`. Please check your color map.";
+    @return null;
   }
+  // Return the hex value instead of rgba
+  @return map-get($colors, $colorName);
+}
+
+@function getVarColor($colorName) {
+  @return var(--color-#{$colorName});
 }
 
 // Define the tint function
-// Usage: tint(getColor('Primary'), 50);
 @function tint($color, $amount) {
-  @return mix(white, $color, $amount * 1%);
+  // getColor might return a hex color or rgba
+  @if type-of($color) == color {
+    // If it's a hex value, proceed as before
+    @return mix(white, $color, $amount * 1%);
+  } @else if type-of($color) == string {
+    // If it's rgba(...) convert to color type first
+    $rgbaValues: "";
+    @for $i from 1 through 4 {
+      $rgbaValues: append($rgbaValues, nth(str-split($color, ","), $i), ",");
+    }
+
+    $rgbaValues: trim($rgbaValues, ", "); // Remove extra comma at the end
+
+    @return mix(white, color($rgbaValues), $amount * 1%);
+  } @else {
+    @warn "Invalid color format passed to tint.";
+    @return null;
+  }
 }
 
-// // Define the shade function
-// // Usage: shade(getColor('Primary'), 50);
+// Define the shade function with adjustments
 @function shade($color, $amount) {
-  // get color value from the map using $color;
-  $hex: map-get($colors, $color);
-  @return mix(black, $hex, $amount * 1%);
+  // getColor might return a hex color or rgba
+  @if type-of($color) == color {
+    // If it's a hex value, proceed as before
+    @return mix(black, $color, $amount * 1%);
+  } @else if type-of($color) == string {
+    // If it's rgba(...) convert to color type first
+    $rgbaValues: "";
+    @for $i from 1 through 4 {
+      $rgbaValues: append($rgbaValues, nth(str-split($color, ","), $i), ",");
+    }
+
+    $rgbaValues: trim($rgbaValues, ", "); // Remove extra comma at the end
+
+    @return mix(black, color($rgbaValues), $amount * 1%);
+  } @else {
+    @warn "Invalid color format passed to shade.";
+    @return null;
+  }
 }
 
-// Define the mixColors function
-// Usage: mixColors(getColor('Primary'), getColor('Secondary'), 50%);
-@function mixColors($color1, $color2, $amount) {
-  @return mix($color1, $color2, $amount);
-}
+// // Define the mixColors function
+// // Usage: mixColors(getColor('Primary'), getColor('Secondary'), 50%);
+// @function mixColors($color1, $color2, $amount) {
+//   @return mix($color1, $color2, $amount);
+// }
 
-// Define the adjustHue function
-// Usage: adjustHue(getColor('Primary'), 45deg);
-@function adjustHue($color, $degrees) {
-  @return adjust-hue($color, $degrees);
-}
+// // Define the adjustHue function
+// // Usage: adjustHue(getColor('Primary'), 45deg);
+// @function adjustHue($color, $degrees) {
+//   @return adjust-hue($color, $degrees);
+// }

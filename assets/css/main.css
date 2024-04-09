@@ -247,7 +247,7 @@ html,
 body {
   font-size: 16px;
   line-height: 1.2;
-  color: var(--color-Black);
+  color: #272727;
 }
 
 p {
