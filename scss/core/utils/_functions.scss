@@ -55,15 +55,3 @@
     @return null;
   }
 }
-
-// // Define the mixColors function
-// // Usage: mixColors(getColor('Primary'), getColor('Secondary'), 50%);
-// @function mixColors($color1, $color2, $amount) {
-//   @return mix($color1, $color2, $amount);
-// }
-
-// // Define the adjustHue function
-// // Usage: adjustHue(getColor('Primary'), 45deg);
-// @function adjustHue($color, $degrees) {
-//   @return adjust-hue($color, $degrees);
-// }
