@@ -46,7 +46,16 @@ $screen-xl-max: 1200px;
     @content;
   }
 }
-
+/* 
+* How to use:
+*
+* @include container(1200) {
+*   width: 100%;
+*   max-width: 1200px;
+*   margin: 0 auto;
+* }
+*
+*/
 @mixin container($width) {
   & {
     container-type: inline-size;
