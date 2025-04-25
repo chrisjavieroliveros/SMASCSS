@@ -1,0 +1,118 @@
+// Font families
+$font-family-base: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
+  Roboto, "Helvetica Neue", Arial, sans-serif !default;
+$font-family-heading: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
+  Roboto, "Helvetica Neue", Arial, sans-serif !default;
+$font-family-mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier,
+  monospace !default;
+
+// Font weights
+$font-weight-light: 300 !default;
+$font-weight-normal: 400 !default;
+$font-weight-medium: 500 !default;
+$font-weight-semibold: 600 !default;
+$font-weight-bold: 700 !default;
+
+// Font sizes - major third scale (1.25)
+$font-size-base: 1rem !default; // 16px
+$font-size-xs: 0.75rem !default; // 12px
+$font-size-sm: 0.875rem !default; // 14px
+$font-size-md: $font-size-base !default; // 16px
+$font-size-lg: 1.25rem !default; // 20px
+$font-size-xl: 1.5625rem !default; // 25px
+$font-size-2xl: 1.953125rem !default; // 31.25px
+$font-size-3xl: 2.44140625rem !default; // 39.06px
+$font-size-4xl: 3.05175781rem !default; // 48.83px
+
+// Line heights
+$line-height-tight: 1.1 !default;
+$line-height-snug: 1.25 !default;
+$line-height-base: 1.5 !default;
+$line-height-relaxed: 1.75 !default;
+$line-height-loose: 2 !default;
+
+// Letter spacing
+$letter-spacing-tight: -0.025em !default;
+$letter-spacing-normal: 0 !default;
+$letter-spacing-wide: 0.025em !default;
+$letter-spacing-wider: 0.05em !default;
+$letter-spacing-widest: 0.1em !default;
+
+// Heading specific settings
+$heading-line-height: $line-height-tight !default;
+$heading-letter-spacing: $letter-spacing-tight !default;
+$heading-font-weight: $font-weight-semibold !default;
+
+// Responsive typography scales
+$font-size-responsive-ratio: 1.125 !default;
+
+// Font size maps for responsive scaling
+$heading-sizes: (
+  "h1": (
+    "base": $font-size-3xl,
+    "md": $font-size-3xl * $font-size-responsive-ratio,
+    "lg": $font-size-4xl,
+  ),
+  "h2": (
+    "base": $font-size-2xl,
+    "md": $font-size-2xl * $font-size-responsive-ratio,
+    "lg": $font-size-3xl,
+  ),
+  "h3": (
+    "base": $font-size-xl,
+    "md": $font-size-xl * $font-size-responsive-ratio,
+    "lg": $font-size-2xl,
+  ),
+  "h4": (
+    "base": $font-size-lg,
+    "md": $font-size-lg * $font-size-responsive-ratio,
+    "lg": $font-size-xl,
+  ),
+  "h5": (
+    "base": $font-size-md,
+    "md": $font-size-md * $font-size-responsive-ratio,
+    "lg": $font-size-lg,
+  ),
+  "h6": (
+    "base": $font-size-sm,
+    "md": $font-size-md,
+    "lg": $font-size-md,
+  ),
+) !default;
+
+// Text truncation mixin
+@mixin text-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// Responsive font size mixin
+@mixin responsive-font-size(
+  $size,
+  $min-vw: 320px,
+  $max-vw: 1200px,
+  $min-font-size: $size,
+  $max-font-size: $size * 1.5
+) {
+  font-size: $min-font-size;
+
+  @media screen and (min-width: $min-vw) {
+    font-size: calc(
+      #{$min-font-size} + #{strip-unit($max-font-size - $min-font-size)} *
+        ((100vw - #{$min-vw}) / #{strip-unit($max-vw - $min-vw)})
+    );
+  }
+
+  @media screen and (min-width: $max-vw) {
+    font-size: $max-font-size;
+  }
+}
+
+// Strip unit helper function (for calc operations)
+@function strip-unit($number) {
+  @if type-of($number) == "number" and not unitless($number) {
+    @return $number / ($number * 0 + 1);
+  }
+  @return $number;
+}

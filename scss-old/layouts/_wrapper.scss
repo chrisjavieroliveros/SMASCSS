@@ -1,0 +1,14 @@
+.global-wrapper {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 32px;
+
+  @include lg {
+    padding: 0 24px;
+  }
+
+  @include md {
+    padding: 0 16px;
+  }
+}

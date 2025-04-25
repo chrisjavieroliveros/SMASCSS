@@ -1,0 +1,237 @@
+@use "../abstracts/fonts" as fonts;
+@use "../abstracts/responsive" as responsive;
+
+/* Base Typography Styles
+-------------------------------------------------- */
+html {
+  font-family: fonts.$font-family-base;
+  font-size: 100%; // 16px
+  line-height: fonts.$line-height-base;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  font-family: fonts.$font-family-base;
+  font-weight: fonts.$font-weight-normal;
+  color: var(--text-primary);
+}
+
+/* Headings
+-------------------------------------------------- */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: fonts.$font-family-heading;
+  font-weight: fonts.$heading-font-weight;
+  line-height: fonts.$heading-line-height;
+  letter-spacing: fonts.$heading-letter-spacing;
+  margin-top: 0;
+  margin-bottom: 0.5em;
+  color: var(--heading-color, var(--text-primary));
+}
+
+h1 {
+  font-size: map-get(map-get(fonts.$heading-sizes, "h1"), "base");
+
+  @include responsive.breakpoint("md") {
+    font-size: map-get(map-get(fonts.$heading-sizes, "h1"), "md");
+  }
+
+  @include responsive.breakpoint("lg") {
+    font-size: map-get(map-get(fonts.$heading-sizes, "h1"), "lg");
+  }
+}
+
+h2 {
+  font-size: map-get(map-get(fonts.$heading-sizes, "h2"), "base");
+
+  @include responsive.breakpoint("md") {
+    font-size: map-get(map-get(fonts.$heading-sizes, "h2"), "md");
+  }
+
+  @include responsive.breakpoint("lg") {
+    font-size: map-get(map-get(fonts.$heading-sizes, "h2"), "lg");
+  }
+}
+
+h3 {
+  font-size: map-get(map-get(fonts.$heading-sizes, "h3"), "base");
+
+  @include responsive.breakpoint("md") {
+    font-size: map-get(map-get(fonts.$heading-sizes, "h3"), "md");
+  }
+
+  @include responsive.breakpoint("lg") {
+    font-size: map-get(map-get(fonts.$heading-sizes, "h3"), "lg");
+  }
+}
+
+h4 {
+  font-size: map-get(map-get(fonts.$heading-sizes, "h4"), "base");
+
+  @include responsive.breakpoint("md") {
+    font-size: map-get(map-get(fonts.$heading-sizes, "h4"), "md");
+  }
+
+  @include responsive.breakpoint("lg") {
+    font-size: map-get(map-get(fonts.$heading-sizes, "h4"), "lg");
+  }
+}
+
+h5 {
+  font-size: map-get(map-get(fonts.$heading-sizes, "h5"), "base");
+
+  @include responsive.breakpoint("md") {
+    font-size: map-get(map-get(fonts.$heading-sizes, "h5"), "md");
+  }
+
+  @include responsive.breakpoint("lg") {
+    font-size: map-get(map-get(fonts.$heading-sizes, "h5"), "lg");
+  }
+}
+
+h6 {
+  font-size: map-get(map-get(fonts.$heading-sizes, "h6"), "base");
+
+  @include responsive.breakpoint("md") {
+    font-size: map-get(map-get(fonts.$heading-sizes, "h6"), "md");
+  }
+
+  @include responsive.breakpoint("lg") {
+    font-size: map-get(map-get(fonts.$heading-sizes, "h6"), "lg");
+  }
+}
+
+/* Paragraphs and Text Elements
+-------------------------------------------------- */
+p {
+  margin-top: 0;
+  margin-bottom: 1em;
+  max-width: 70ch; // Optimal reading length
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.lead {
+  font-size: fonts.$font-size-lg;
+  line-height: fonts.$line-height-snug;
+
+  @include responsive.breakpoint("md") {
+    font-size: fonts.$font-size-xl;
+  }
+}
+
+small,
+.text-small {
+  font-size: fonts.$font-size-sm;
+}
+
+.text-xs {
+  font-size: fonts.$font-size-xs;
+}
+
+/* Links
+-------------------------------------------------- */
+a {
+  color: var(--link-color);
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+  transition: color 0.2s ease, text-decoration-color 0.2s ease;
+
+  &:hover {
+    color: var(--link-hover-color);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--focus-ring-color);
+    outline-offset: 2px;
+  }
+}
+
+/* Blockquotes
+-------------------------------------------------- */
+blockquote {
+  margin: 1.5em 0;
+  padding: 0.5em 0 0.5em 1.5em;
+  border-left: 4px solid var(--blockquote-border-color, #e2e8f0);
+  font-style: italic;
+  color: var(--blockquote-text-color, inherit);
+
+  p {
+    margin-bottom: 0.5em;
+  }
+
+  cite {
+    display: block;
+    font-size: fonts.$font-size-sm;
+    font-style: normal;
+    opacity: 0.8;
+    margin-top: 0.5em;
+  }
+}
+
+/* Code
+-------------------------------------------------- */
+code,
+pre,
+kbd,
+samp {
+  font-family: fonts.$font-family-mono;
+  font-size: 0.9em;
+}
+
+code {
+  padding: 0.2em 0.4em;
+  background-color: var(--code-bg, rgba(0, 0, 0, 0.05));
+  border-radius: 3px;
+}
+
+pre {
+  padding: 1em;
+  overflow: auto;
+  background-color: var(--pre-bg, rgba(0, 0, 0, 0.05));
+  border-radius: 4px;
+
+  code {
+    padding: 0;
+    background-color: transparent;
+  }
+}
+
+/* Text Utilities
+-------------------------------------------------- */
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-uppercase {
+  text-transform: uppercase;
+  letter-spacing: fonts.$letter-spacing-wide;
+}
+
+.text-truncated {
+  @include fonts.text-truncate;
+}
+
+.text-bold {
+  font-weight: fonts.$font-weight-bold;
+}
+
+.text-medium {
+  font-weight: fonts.$font-weight-medium;
+}
+
+.text-nowrap {
+  white-space: nowrap;
+}

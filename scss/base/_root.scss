@@ -1,0 +1,21 @@
+@use "../abstracts/colors" as colors;
+
+:root {
+  // Generate all color variables
+  @include colors.generate-color-variables();
+
+  // Apply light theme variables
+  @include colors.theme-variables("light");
+}
+
+// Dark mode support
+@media (prefers-color-scheme: dark) {
+  :root {
+    @include colors.theme-variables("dark");
+  }
+}
+
+// Class-based dark theme
+.dark-theme {
+  @include colors.theme-variables("dark");
+}

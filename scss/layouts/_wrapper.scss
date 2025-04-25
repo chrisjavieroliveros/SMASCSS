@@ -1,14 +1,32 @@
+@use "../abstracts/responsive" as responsive;
+@use "../abstracts/spacing" as spacing;
+
 .global-wrapper {
   width: 100%;
-  max-width: 1200px;
+  max-width: 1280px; // Default max width
   margin: 0 auto;
-  padding: 0 32px;
+  padding: 0 spacing.$container-padding-sm;
 
-  @include lg {
-    padding: 0 24px;
+  @include responsive.breakpoint("md") {
+    padding: 0 spacing.$container-padding-md;
   }
 
-  @include md {
-    padding: 0 16px;
+  @include responsive.breakpoint("lg") {
+    padding: 0 spacing.$container-padding-lg;
+  }
+
+  // Variant for narrow content
+  &--narrow {
+    max-width: 800px;
+  }
+
+  // Variant for wide content
+  &--wide {
+    max-width: 1600px;
+  }
+
+  // Full width variant (only applies horizontal padding)
+  &--full {
+    max-width: 100%;
   }
 }

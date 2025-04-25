@@ -1,0 +1,203 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  min-width: 320px;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 100%;
+  line-height: 1.5;
+  -webkit-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow: hidden;
+}
+
+body {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul,
+ol,
+dl,
+figure,
+blockquote,
+hr {
+  margin: 0;
+  padding: 0;
+}
+
+ul,
+ol {
+  list-style-type: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  background-color: transparent;
+}
+
+button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-transform: none;
+  appearance: button;
+  padding: 0;
+}
+
+button,
+input,
+select,
+textarea,
+optgroup {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+  height: auto;
+  border-style: none;
+}
+
+iframe {
+  border: none;
+}
+
+figure {
+  margin: 0;
+}
+
+figcaption {
+  font-size: 0.875em;
+}
+
+blockquote {
+  font-size: 1.25em;
+  font-style: italic;
+  margin: 1.5em 0;
+  padding: 0 1.5em;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid;
+  margin: 1.5em 0;
+}
+
+abbr[title] {
+  text-decoration: none;
+  border-bottom: 1px dotted;
+  cursor: help;
+}
+
+pre {
+  font-family: monospace, monospace;
+  font-size: 1em;
+}
+
+code,
+kbd,
+samp {
+  font-family: monospace, monospace;
+  font-size: 1em;
+}
+
+small {
+  font-size: 80%;
+}
+
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+sub {
+  bottom: -0.25em;
+}
+
+sup {
+  top: -0.5em;
+}
+
+progress {
+  vertical-align: baseline;
+}
+
+fieldset {
+  padding: 0;
+}
+
+legend {
+  color: inherit;
+  display: table;
+  max-width: 100%;
+  padding: 0;
+  white-space: normal;
+}
+
+select,
+input {
+  text-transform: none;
+}
+
+input[type="search"] {
+  -webkit-appearance: textfield;
+  -moz-appearance: textfield;
+  appearance: textfield;
+  outline-offset: -2px;
+}
+
+textarea {
+  overflow: auto;
+}
+
+details {
+  display: block;
+}
+
+summary {
+  display: list-item;
+}
+
+template {
+  display: none;
+}
+
+::-webkit-file-upload-button {
+  -webkit-appearance: button;
+  font: inherit;
+}
+
+[hidden] {
+  display: none;
+}
