@@ -1,234 +1,163 @@
-# SMASCSS - Scalable and Modular Architecture for Sassy CSS
+# SMASCSS - Scalable and Modular Architecture for SCSS
 
-## Overview
+SMASCSS is a thoughtful SCSS architecture designed to create maintainable, scalable, and organized stylesheets. It combines principles from SMACSS (Scalable and Modular Architecture for CSS) with the power of SCSS to deliver a robust system for styling modern web applications.
 
-SMASCSS (Scalable and Modular Architecture for Sassy CSS) is a lightweight, flexible SCSS architecture designed to organize stylesheets in a scalable, maintainable way. It's inspired by methodologies like SMACSS, BEM, and ITCSS, but optimized for modern development workflows.
+## Table of Contents
 
-## Directory Structure
+- [Core Principles](#core-principles)
+- [Folder Structure](#folder-structure)
+- [Usage Guide](#usage-guide)
+- [Abstracts Layer](#abstracts-layer)
+- [Base Layer](#base-layer)
+- [Layout Layer](#layout-layer)
+- [Components Layer](#components-layer)
+- [Pages Layer](#pages-layer)
+- [Best Practices](#best-practices)
+
+## Core Principles
+
+SMASCSS is built on several foundational principles:
+
+1. **Modularity** - Each style block serves a single purpose and can be reused throughout the project
+2. **Scalability** - The architecture scales from small projects to enterprise applications
+3. **Maintainability** - Code is organized in a way that makes future changes straightforward
+4. **Readability** - Naming conventions and organization make the codebase easy to understand
+5. **Performance** - The structure encourages efficient CSS output
+
+## Folder Structure
 
 ```
 scss/
-├── abstracts/          # Variables, functions, mixins, etc.
-│   ├── _colors.scss    # Color definitions and functions
-│   ├── _fonts.scss     # Typography settings
-│   ├── _responsive.scss # Breakpoints and media queries
-│   ├── _spacing.scss   # Spacing system
-│   ├── _mixins.scss    # Reusable mixins
-│   ├── _functions.scss # Helper functions
-│   └── __index.scss    # Forwards all abstract resources
+├── abstracts/           # Utilities with no direct output
+│   ├── __index.scss     # Forwards all abstract modules
+│   ├── _colors.scss     # Color variables and functions
+│   ├── _fonts.scss      # Typography variables and mixins
+│   ├── _functions.scss  # SCSS functions
+│   ├── _mixins.scss     # SCSS mixins
+│   ├── _responsive.scss # Breakpoint handling
+│   └── _spacing.scss    # Spacing system
 │
-├── base/               # Base styles (reset, typography, etc.)
-│   ├── _reset.scss     # CSS reset/normalize
-│   ├── _root.scss      # :root CSS variables
-│   ├── _typography.scss # Base typography styles
-│   ├── _forms.scss     # Form elements styling
-│   ├── _lists.scss     # List styling
-│   ├── _buttons.scss   # Button styles
-│   └── __index.scss    # Forwards all base styles
+├── base/                # Base styles and resets
+│   ├── __index.scss     # Forwards all base styles
+│   ├── _reset.scss      # Element reset styles
+│   ├── _root.scss       # :root variables (CSS custom properties)
+│   ├── _typography.scss # Text styling fundamentals
+│   ├── _lists.scss      # List styling
+│   ├── _buttons.scss    # Button element styling
+│   └── _forms.scss      # Form element styling
 │
-├── layouts/            # Layout components
-│   ├── _grid.scss      # Grid system
-│   ├── _wrapper.scss   # Container wrappers
-│   └── __index.scss    # Forwards all layout styles
+├── components/          # Reusable UI components
+│   └── __index.scss     # Forwards all component modules
 │
-├── components/         # Reusable UI components
-│   └── __index.scss    # Forwards all components
+├── layouts/             # Layout and structure components
+│   ├── __index.scss     # Forwards all layout modules
+│   ├── _grid.scss       # Grid system
+│   └── _wrapper.scss    # Container wrappers
 │
-├── pages/              # Page-specific styles
-│   └── __index.scss    # Forwards all page styles
+├── pages/               # Page-specific styles
+│   └── __index.scss     # Forwards all page-specific styles
 │
-└── main.scss           # Main file that imports all partials
+└── main.scss            # Main file that imports all partials
 ```
 
-## Getting Started
+## Usage Guide
 
-### Installation
+The architecture follows a methodology where styles are imported in a specific order to ensure proper cascading:
 
-1. Clone this repository or download the source files
-2. Include the scss directory in your project
-3. Import `main.scss` in your build process
+1. **Abstracts** - Imported first, but don't generate CSS on their own
+2. **Base** - Fundamental styles applied to HTML elements
+3. **Layouts** - Major layout components defining the structure
+4. **Components** - Reusable UI components
+5. **Pages** - Page-specific overrides when necessary
+
+Import the main stylesheet in your project to get access to all styles:
 
 ```scss
-@import "path/to/scss/main";
+@use "path/to/scss/main";
 ```
 
-## Using the Abstracts Layer
+## Abstracts Layer
 
-The Abstracts layer forms the foundation of the SMASCSS architecture. It contains no actual CSS output, but rather holds variables, functions, and mixins that are used throughout the rest of the codebase.
+The abstracts layer contains tools and helpers used across the project with no direct CSS output:
 
-### Colors (`_colors.scss`)
+- **Colors** - A comprehensive color system with semantic naming and helper functions
+- **Spacing** - A consistent spacing scale for margins, paddings, and gaps
+- **Responsive** - Breakpoint definitions and media query mixins
+- **Fonts** - Typography settings including font families, sizes, and weights
+- **Functions** - Utility functions for various calculations
+- **Mixins** - Reusable style patterns
 
-The colors system provides a centralized palette and utility functions for consistent color usage throughout your project.
+Example usage:
 
 ```scss
-// Access colors using the getColor function
-.example {
+.element {
   color: getColor(Primary);
-  background-color: getColor(Light-100);
-  border-color: getColor(Secondary);
-}
+  margin-bottom: spacing(4);
 
-// Use with opacity
-.transparent-element {
-  background-color: getColorWithOpacity(Primary, 0.5);
-}
-```
-
-Key features:
-
-- Centralized color definitions in a Sass map
-- CSS variables automatically generated for all colors
-- Helper functions for accessing colors consistently
-- Support for opacity adjustments
-
-### Typography (`_fonts.scss`)
-
-Typography settings provide consistent font styles and responsive scaling.
-
-```scss
-// Using font variables
-.custom-element {
-  font-family: $font-family-heading;
-  font-weight: $font-weight-bold;
-  font-size: $font-size-lg;
-  line-height: $line-height-snug;
-}
-
-// Text truncation mixin
-.truncated-text {
-  @include text-truncate;
-}
-
-// Responsive font sizing
-.responsive-heading {
-  @include responsive-font-size($font-size-2xl, 320px, 1200px);
-}
-```
-
-Key features:
-
-- Font family definitions
-- Consistent font weight scale
-- Modular type scale for font sizes
-- Line height and letter spacing presets
-- Responsive typography helpers
-
-### Responsive (`_responsive.scss`)
-
-Breakpoint and media query utilities for consistent responsive design.
-
-```scss
-.responsive-component {
-  // Base styles for mobile
-
-  @include breakpoint("md") {
-    // Styles for medium screens and up
-  }
-
-  @include breakpoint("lg") {
-    // Styles for large screens and up
-  }
-
-  @include breakpoint-between("sm", "lg") {
-    // Only apply between small and large breakpoints
-  }
-
-  @include breakpoint-down("sm") {
-    // Only apply below the small breakpoint
+  @include responsive.breakpoint("md") {
+    margin-bottom: spacing(6);
   }
 }
 ```
 
-Key features:
+## Base Layer
 
-- Predefined breakpoint map (`xs`, `sm`, `md`, `lg`, `xl`, `xxl`)
-- Support for custom breakpoint values
-- Direction-specific media queries (up, down, between)
+The base layer defines the foundation styles that are applied directly to HTML elements:
 
-### Spacing (`_spacing.scss`)
+- **Reset** - Normalizes browser inconsistencies
+- **Root** - Sets up CSS custom properties (variables)
+- **Typography** - Basic text styling and heading hierarchies
+- **Lists** - Default styling for list elements
+- **Buttons** - Core button styling
+- **Forms** - Basic form element styling
 
-A consistent spacing system for margins, paddings, and layout.
+These styles act as a foundation and can be extended or overridden by more specific styles.
 
-```scss
-.spaced-component {
-  padding: spacing("4"); // 1rem
-  margin-bottom: spacing("6"); // 2rem
-  gap: $gap-md; // 1rem
+## Layout Layer
 
-  // Container paddings
-  padding-left: $container-padding-sm;
-  padding-right: $container-padding-sm;
+The layout layer contains major structural components:
 
-  @include breakpoint("md") {
-    padding: spacing("5"); // 1.5rem
-  }
-}
+- **Grid** - A flexible grid system with responsive classes
+- **Wrapper** - Container components for content width control
+
+Example usage:
+
+```html
+<div class="global-wrapper">
+  <div class="grid grid--md-2 grid--lg-4">
+    <div>Content block 1</div>
+    <div>Content block 2</div>
+    <div>Content block 3</div>
+    <div>Content block 4</div>
+  </div>
+</div>
 ```
 
-Key features:
+## Components Layer
 
-- Consistent spacing scale based on a base unit (0.25rem)
-- Named spacing variables for semantic usage
-- Container-specific padding values
-- Section and component spacing presets
-- Gap values for grid and flex layouts
+The components layer contains reusable UI components that make up the interface:
+
+- Individual components like cards, alerts, modals, etc.
+- Each component is independent and can be used anywhere
+
+## Pages Layer
+
+The pages layer contains page-specific styles that are unique to individual pages:
+
+- Should be used sparingly, as most styles should be abstracted to components
+- Contains exceptions and specific overrides needed for unique page layouts
 
 ## Best Practices
 
-### Importing Abstracts
+1. **Follow the naming convention** - Use consistent BEM-style naming: `.block__element--modifier`
+2. **Keep selectors flat** - Avoid deep nesting to improve CSS specificity management
+3. **Create new components** - When a pattern repeats, abstract it to a component
+4. **Use the abstracts tools** - Leverage the provided functions and mixins for consistency
+5. **Comment your code** - Add comments for any complex logic or non-obvious styling
+6. **Mobile-first approach** - Start with mobile styles and use breakpoint mixins to scale up
+7. **Maintain the structure** - Place new files in their appropriate folders
+8. **Use forward patterns** - Make sure to update the `__index.scss` files when adding new partials
 
-When working with a file that needs access to abstract resources, import only what you need:
+---
 
-```scss
-@use "../abstracts/colors" as colors;
-@use "../abstracts/spacing" as spacing;
-@use "../abstracts/responsive" as responsive;
-
-.component {
-  color: colors.getColor(Primary);
-  padding: spacing.spacing("4");
-
-  @include responsive.breakpoint("md") {
-    padding: spacing.spacing("6");
-  }
-}
-```
-
-### Using CSS Variables
-
-The system automatically generates CSS variables from the color definitions. Use them in your CSS when appropriate:
-
-```css
-.component {
-  color: var(--color-Primary);
-  background-color: var(--color-Light-100);
-}
-```
-
-### Avoiding Abstracts in Component Files
-
-Keep your component files focused on their specific styling concerns:
-
-```scss
-// Good
-@use "../abstracts/colors" as colors;
-
-.card {
-  color: colors.getColor(Dark-600);
-}
-
-// Avoid
-.card {
-  // Don't put color definitions here
-  $card-color: #333;
-  color: $card-color;
-}
-```
-
-## Contributing
-
-Please read the contribution guidelines before submitting pull requests.
-
-## License
-
-[Add your license information here]
+This architecture is designed to grow with your project. Feel free to extend it with additional components, layouts, or abstract utilities as needed.
