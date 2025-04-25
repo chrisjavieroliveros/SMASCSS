@@ -1,5 +1,6 @@
 @use "../abstracts/fonts" as fonts;
 @use "../abstracts/responsive" as responsive;
+@use "../abstracts/colors" as colors;
 
 /* Base Typography Styles
 -------------------------------------------------- */
@@ -15,7 +16,7 @@ html {
 body {
   font-family: fonts.$font-family-base;
   font-weight: fonts.$font-weight-normal;
-  color: var(--text-primary);
+  color: colors.getColor(Black);
 }
 
 /* Headings
@@ -32,7 +33,7 @@ h6 {
   letter-spacing: fonts.$heading-letter-spacing;
   margin-top: 0;
   margin-bottom: 0.5em;
-  color: var(--heading-color, var(--text-primary));
+  color: colors.getColor(Black);
 }
 
 h1 {
@@ -140,17 +141,17 @@ small,
 /* Links
 -------------------------------------------------- */
 a {
-  color: var(--link-color);
+  color: colors.getColor(Primary);
   text-decoration: underline;
   text-underline-offset: 0.15em;
   transition: color 0.2s ease, text-decoration-color 0.2s ease;
 
   &:hover {
-    color: var(--link-hover-color);
+    color: colors.getColorWithOpacity(Primary, 0.8);
   }
 
   &:focus-visible {
-    outline: 2px solid var(--focus-ring-color);
+    outline: 2px solid colors.getColor(Primary);
     outline-offset: 2px;
   }
 }
@@ -160,9 +161,9 @@ a {
 blockquote {
   margin: 1.5em 0;
   padding: 0.5em 0 0.5em 1.5em;
-  border-left: 4px solid var(--blockquote-border-color, #e2e8f0);
+  border-left: 4px solid colors.getColor(Light-400);
   font-style: italic;
-  color: var(--blockquote-text-color, inherit);
+  color: colors.getColor(Dark-600);
 
   p {
     margin-bottom: 0.5em;
@@ -172,7 +173,7 @@ blockquote {
     display: block;
     font-size: fonts.$font-size-sm;
     font-style: normal;
-    opacity: 0.8;
+    color: colors.getColor(Dark-400);
     margin-top: 0.5em;
   }
 }
@@ -189,14 +190,14 @@ samp {
 
 code {
   padding: 0.2em 0.4em;
-  background-color: var(--code-bg, rgba(0, 0, 0, 0.05));
+  background-color: colors.getColor(Light-200);
   border-radius: 3px;
 }
 
 pre {
   padding: 1em;
   overflow: auto;
-  background-color: var(--pre-bg, rgba(0, 0, 0, 0.05));
+  background-color: colors.getColor(Light-200);
   border-radius: 4px;
 
   code {
@@ -234,4 +235,28 @@ pre {
 
 .text-nowrap {
   white-space: nowrap;
+}
+
+.text-muted {
+  color: colors.getColor(Dark-400);
+}
+
+.text-black {
+  color: colors.getColor(Primary);
+}
+
+.text-success {
+  color: colors.getColor(Success);
+}
+
+.text-danger {
+  color: colors.getColor(Danger);
+}
+
+.text-warning {
+  color: colors.getColor(Warning);
+}
+
+.text-info {
+  color: colors.getColor(Info);
 }

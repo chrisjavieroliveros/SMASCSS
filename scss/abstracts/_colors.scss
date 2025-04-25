@@ -1,10 +1,20 @@
 // Color palette map
 $colors: (
-  // Colors
-  Primary: #c2171c,
-  Secondary: #2ba731,
-  Tertiary: #f7f7f7,
-  Quaternary: #f0f0f0,
+  // Primary, Secondary, Tertiary
+  Primary: #2563eb,
+  Primary-Tint: #dbeafe,
+  Primary-Shade: #1e40af,
+  Primary-Contrast: #ffffff,
+
+  Secondary: #0d9488,
+  Secondary-Tint: #ccfbf1,
+  Secondary-Shade: #0f766e,
+  Secondary-Contrast: #ffffff,
+
+  Tertiary: #8b5cf6,
+  Tertiary-Tint: #ede9fe,
+  Tertiary-Shade: #6d28d9,
+  Tertiary-Contrast: #ffffff,
 
   // Status
   Danger: #f43f5e,
@@ -12,31 +22,35 @@ $colors: (
   Success: #10b981,
   Info: #3b82f6,
 
-  // Neutrals
+  // Base
   Black: #272727,
   White: #ffffff,
 
   // Light
+  Light-50: #fdfdfd,
   Light-100: #fafafa,
   Light-200: #f5f5f5,
   Light-300: #ebebeb,
   Light-400: #e0e0e0,
   Light-500: #d6d6d6,
-  Light-600: #cccccc,
-  Light-700: #c2c2c2,
-  Light-800: #b8b8b8,
-  Light-900: #adadad,
+  Light-600: #c2c2c2,
+  Light-700: #b0b0b0,
+  Light-800: #a0a0a0,
+  Light-900: #8f8f8f,
+  Light-950: #858585,
 
   // Dark
-  Dark-100: #a1a1a1,
-  Dark-200: #8e8e8e,
-  Dark-300: #7c7c7c,
-  Dark-400: #6a6a6a,
-  Dark-500: #585858,
-  Dark-600: #464646,
-  Dark-700: #343434,
-  Dark-800: #222222,
-  Dark-900: #101010
+  Dark-50: #7a7a7a,
+  Dark-100: #6f6f6f,
+  Dark-200: #606060,
+  Dark-300: #555555,
+  Dark-400: #494949,
+  Dark-500: #3d3d3d,
+  Dark-600: #323232,
+  Dark-700: #292929,
+  Dark-800: #1f1f1f,
+  Dark-900: #141414,
+  Dark-950: #0a0a0a // Darkest dark
 ) !default;
 
 // Function to get color from the map
@@ -59,40 +73,5 @@ $colors: (
 @mixin generate-color-variables() {
   @each $colorName, $color in $colors {
     --color-#{'' + $colorName}: #{$color};
-  }
-}
-
-// Root color variables for light/dark themes
-@mixin theme-variables($theme: "light") {
-  @if $theme == "light" {
-    // Light theme variables
-    --background-primary: #{getColor(White)}; // Remove quotes
-    --background-secondary: #{getColor(Light-100)};
-    --background-tertiary: #{getColor(Light-200)};
-
-    --text-primary: #{getColor(Black)};
-    --text-secondary: #{getColor(Dark-600)};
-    --text-muted: #{getColor(Dark-400)};
-
-    --border-color: #{getColor(Light-400)};
-    --border-color-focus: #{getColor(Primary)};
-
-    --link-color: #{getColor(Primary)};
-    --link-hover-color: #{getColorWithOpacity(Primary, 0.8)};
-  } @else {
-    // Dark theme variables
-    --background-primary: #{getColor(Dark-800)};
-    --background-secondary: #{getColor(Dark-700)};
-    --background-tertiary: #{getColor(Dark-600)};
-
-    --text-primary: #{getColor(Light-100)};
-    --text-secondary: #{getColor(Light-300)};
-    --text-muted: #{getColor(Light-500)};
-
-    --border-color: #{getColor(Dark-500)};
-    --border-color-focus: #{getColor(Primary)};
-
-    --link-color: #{getColorWithOpacity(Primary, 0.9)};
-    --link-hover-color: #{getColor(Primary)};
   }
 }

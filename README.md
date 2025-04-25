@@ -89,7 +89,7 @@ Colors are defined in `abstracts/_colors.scss` and exposed as CSS variables for 
 ```scss
 // Access colors through CSS variables
 .my-element {
-  color: var(--text-primary);
+  color: var(--text-black);
   background-color: var(--background-secondary);
   border: 1px solid var(--border-color);
 }
