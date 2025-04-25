@@ -1,20 +1,22 @@
+@use "sass:map";
+
 // Color palette map
 $colors: (
   // Primary, Secondary, Tertiary
-  Primary: #2563eb,
-  Primary-Tint: #dbeafe,
-  Primary-Shade: #1e40af,
+  Primary: #314459,
+  Primary-Tint: #e6eaef,
+  Primary-Shade: #253445,
   Primary-Contrast: #ffffff,
 
-  Secondary: #0d9488,
-  Secondary-Tint: #ccfbf1,
-  Secondary-Shade: #0f766e,
+  Secondary: #2a8de9,
+  Secondary-Tint: #e1f0fc,
+  Secondary-Shade: #2170ba,
   Secondary-Contrast: #ffffff,
 
-  Tertiary: #8b5cf6,
-  Tertiary-Tint: #ede9fe,
-  Tertiary-Shade: #6d28d9,
-  Tertiary-Contrast: #ffffff,
+  Tertiary: #ffc209,
+  Tertiary-Tint: #fff6dc,
+  Tertiary-Shade: #cc9b07,
+  Tertiary-Contrast: #000000,
 
   // Status
   Danger: #f43f5e,
@@ -39,10 +41,8 @@ $colors: (
   Light-900: #8f8f8f,
   Light-950: #858585,
 
-  // Darkest light
   // Dark
   Dark-50: #7a7a7a,
-  // Lightest dark
   Dark-100: #6f6f6f,
   Dark-200: #606060,
   Dark-300: #555555,
@@ -57,8 +57,8 @@ $colors: (
 
 // Function to get color from the map
 @function getColor($color-name) {
-  @if map-has-key($colors, $color-name) {
-    @return map-get($colors, $color-name);
+  @if map.has-key($colors, $color-name) {
+    @return map.get($colors, $color-name);
   } @else {
     @error "Color '#{$color-name}' not found in the colors map.";
     @return null;

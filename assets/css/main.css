@@ -1,3 +1,92 @@
+/* 
+Usage example:
+
+// Basic usage with the spacing function
+.element {
+  margin: spacing(4);               // 1rem
+  padding: spacing('md');           // 1rem (semantic naming)
+  gap: spacing('lg');               // 2rem
+}
+
+// Directional spacing
+.card {
+  margin-top: spacing(5);           // 1.5rem
+  margin-bottom: spacing('md');     // 1rem
+  padding-left: spacing('sm');      // 0.5rem
+  padding-right: spacing('sm');     // 0.5rem
+}
+
+// Responsive container padding
+.container {
+  padding: $container-padding-sm;   // 1rem on small screens
+
+  @media (min-width: 768px) {
+    padding: $container-padding-md; // 1.5rem on medium screens
+  }
+
+  @media (min-width: 1024px) {
+    padding: $container-padding-lg; // 2rem on large screens
+  }
+}
+
+// Section spacing
+.section {
+  margin-bottom: $section-spacing-sm; // 2rem default
+
+  @media (min-width: 768px) {
+    margin-bottom: $section-spacing-md; // 4rem on medium screens
+  }
+
+  @media (min-width: 1024px) {
+    margin-bottom: $section-spacing-lg; // 8rem on large screens
+  }
+}
+
+// Grid system with gaps
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: $gap-md;                     // 1rem gap
+
+  @media (min-width: 768px) {
+    gap: $gap-lg;                   // 2rem gap on larger screens
+  }
+}
+
+// Flexbox with spacing
+.flex-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap-sm;                     // 0.75rem gap
+
+  > * {
+    margin-bottom: spacing(4);      // 1rem bottom margin on children
+    padding: spacing(3);            // 0.75rem padding on children
+  }
+}
+
+// Using multiple spacing values together
+.complex-element {
+  padding: spacing(3) spacing(5);   // 0.75rem vertical, 1.5rem horizontal
+  margin: spacing(4) auto;          // 1rem vertical, auto horizontal
+  gap: spacing(2);                  // 0.5rem gap
+}
+
+// Component spacing examples
+.card {
+  padding: $component-padding-sm;   // 0.75rem padding
+  margin-bottom: spacing(4);        // 1rem bottom margin
+
+  .card-header {
+    padding-bottom: spacing('xs');  // 0.25rem bottom padding
+    margin-bottom: spacing('sm');   // 0.5rem bottom margin
+  }
+
+  .card-body {
+    padding: spacing('md') 0;       // 1rem vertical padding
+  }
+}
+*/
 *,
 *::before,
 *::after {
@@ -12,6 +101,7 @@ body {
   min-width: 320px;
   margin: 0;
   padding: 0;
+  background-color: #ffffff;
 }
 
 html {
@@ -248,18 +338,18 @@ template {
 }
 
 :root {
-  --color-Primary: #2563eb;
-  --color-Primary-Tint: #dbeafe;
-  --color-Primary-Shade: #1e40af;
+  --color-Primary: #314459;
+  --color-Primary-Tint: #e6eaef;
+  --color-Primary-Shade: #253445;
   --color-Primary-Contrast: #ffffff;
-  --color-Secondary: #0d9488;
-  --color-Secondary-Tint: #ccfbf1;
-  --color-Secondary-Shade: #0f766e;
+  --color-Secondary: #2a8de9;
+  --color-Secondary-Tint: #e1f0fc;
+  --color-Secondary-Shade: #2170ba;
   --color-Secondary-Contrast: #ffffff;
-  --color-Tertiary: #8b5cf6;
-  --color-Tertiary-Tint: #ede9fe;
-  --color-Tertiary-Shade: #6d28d9;
-  --color-Tertiary-Contrast: #ffffff;
+  --color-Tertiary: #ffc209;
+  --color-Tertiary-Tint: #fff6dc;
+  --color-Tertiary-Shade: #cc9b07;
+  --color-Tertiary-Contrast: #000000;
   --color-Danger: #f43f5e;
   --color-Warning: #f59e0b;
   --color-Success: #10b981;
@@ -441,16 +531,16 @@ small,
 /* Links
 -------------------------------------------------- */
 a {
-  color: #2563eb;
+  color: #314459;
   text-decoration: underline;
   text-underline-offset: 0.15em;
   transition: color 0.2s ease, text-decoration-color 0.2s ease;
 }
 a:hover {
-  color: rgba(37, 99, 235, 0.8);
+  color: rgba(49, 68, 89, 0.8);
 }
 a:focus-visible {
-  outline: 2px solid #2563eb;
+  outline: 2px solid #314459;
   outline-offset: 2px;
 }
 
@@ -539,7 +629,7 @@ pre code {
 }
 
 .text-black {
-  color: #2563eb;
+  color: #314459;
 }
 
 .text-success {
@@ -597,7 +687,7 @@ ol li:last-child {
   white-space: nowrap;
 }
 .btn:focus-visible {
-  outline: 2px solid #2563eb;
+  outline: 2px solid #314459;
   outline-offset: 2px;
 }
 .btn .icon {
@@ -626,42 +716,42 @@ ol li:last-child {
 /* Button Color Variants
 -------------------------------------------------- */
 .btn--primary {
-  background-color: #2563eb;
+  background-color: #314459;
   color: #ffffff;
-  border-color: #2563eb;
+  border-color: #314459;
 }
 .btn--primary:hover {
-  background-color: #1e40af;
-  border-color: #1e40af;
+  background-color: #253445;
+  border-color: #253445;
 }
 .btn--primary:active {
-  background-color: #1a3899;
+  background-color: #1c2734;
 }
 
 .btn--secondary {
-  background-color: #0d9488;
+  background-color: #2a8de9;
   color: #ffffff;
-  border-color: #0d9488;
+  border-color: #2a8de9;
 }
 .btn--secondary:hover {
-  background-color: #0f766e;
-  border-color: #0f766e;
+  background-color: #2170ba;
+  border-color: #2170ba;
 }
 .btn--secondary:active {
-  background-color: #0c5f59;
+  background-color: #1d63a4;
 }
 
 .btn--tertiary {
-  background-color: #8b5cf6;
-  color: #ffffff;
-  border-color: #8b5cf6;
+  background-color: #ffc209;
+  color: #000000;
+  border-color: #ffc209;
 }
 .btn--tertiary:hover {
-  background-color: #6d28d9;
-  border-color: #6d28d9;
+  background-color: #cc9b07;
+  border-color: #cc9b07;
 }
 .btn--tertiary:active {
-  background-color: #6223c5;
+  background-color: #b38806;
 }
 
 /* Status Button Variants
@@ -722,32 +812,32 @@ ol li:last-child {
 -------------------------------------------------- */
 .btn--outline-primary {
   background-color: transparent;
-  color: #2563eb;
-  border-color: #2563eb;
+  color: #314459;
+  border-color: #314459;
 }
 .btn--outline-primary:hover {
-  background-color: #2563eb;
+  background-color: #314459;
   color: #ffffff;
 }
 
 .btn--outline-secondary {
   background-color: transparent;
-  color: #0d9488;
-  border-color: #0d9488;
+  color: #2a8de9;
+  border-color: #2a8de9;
 }
 .btn--outline-secondary:hover {
-  background-color: #0d9488;
+  background-color: #2a8de9;
   color: #ffffff;
 }
 
 .btn--outline-tertiary {
   background-color: transparent;
-  color: #8b5cf6;
-  border-color: #8b5cf6;
+  color: #ffc209;
+  border-color: #ffc209;
 }
 .btn--outline-tertiary:hover {
-  background-color: #8b5cf6;
-  color: #ffffff;
+  background-color: #ffc209;
+  color: #000000;
 }
 
 .btn--outline-success {

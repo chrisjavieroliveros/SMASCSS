@@ -1,3 +1,5 @@
+@use "sass:map";
+
 // Breakpoint size map
 $breakpoints: (
   "xs": 0,
@@ -11,8 +13,8 @@ $breakpoints: (
 // Media query mixin
 @mixin breakpoint($size) {
   // If the size exists in the map
-  @if map-has-key($breakpoints, $size) {
-    $value: map-get($breakpoints, $size);
+  @if map.has-key($breakpoints, $size) {
+    $value: map.get($breakpoints, $size);
 
     // Write the media query
     @media (min-width: $value) {
@@ -33,13 +35,13 @@ $breakpoints: (
 // Breakpoint between mixin
 @mixin breakpoint-between($min, $max) {
   $min-value: if(
-    map-has-key($breakpoints, $min),
-    map-get($breakpoints, $min),
+    map.has-key($breakpoints, $min),
+    map.get($breakpoints, $min),
     $min
   );
   $max-value: if(
-    map-has-key($breakpoints, $max),
-    map-get($breakpoints, $max),
+    map.has-key($breakpoints, $max),
+    map.get($breakpoints, $max),
     $max
   );
 
@@ -51,8 +53,8 @@ $breakpoints: (
 // Max-width breakpoint mixin (down)
 @mixin breakpoint-down($size) {
   $value: if(
-    map-has-key($breakpoints, $size),
-    map-get($breakpoints, $size),
+    map.has-key($breakpoints, $size),
+    map.get($breakpoints, $size),
     $size
   );
 

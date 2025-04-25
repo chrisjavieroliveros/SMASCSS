@@ -1,3 +1,4 @@
+@use "sass:map";
 @use "../abstracts/fonts" as fonts;
 @use "../abstracts/responsive" as responsive;
 @use "../abstracts/colors" as colors;
@@ -37,74 +38,74 @@ h6 {
 }
 
 h1 {
-  font-size: map-get(map-get(fonts.$heading-sizes, "h1"), "base");
+  font-size: map.get(map.get(fonts.$heading-sizes, "h1"), "base");
 
   @include responsive.breakpoint("md") {
-    font-size: map-get(map-get(fonts.$heading-sizes, "h1"), "md");
+    font-size: map.get(map.get(fonts.$heading-sizes, "h1"), "md");
   }
 
   @include responsive.breakpoint("lg") {
-    font-size: map-get(map-get(fonts.$heading-sizes, "h1"), "lg");
+    font-size: map.get(map.get(fonts.$heading-sizes, "h1"), "lg");
   }
 }
 
 h2 {
-  font-size: map-get(map-get(fonts.$heading-sizes, "h2"), "base");
+  font-size: map.get(map.get(fonts.$heading-sizes, "h2"), "base");
 
   @include responsive.breakpoint("md") {
-    font-size: map-get(map-get(fonts.$heading-sizes, "h2"), "md");
+    font-size: map.get(map.get(fonts.$heading-sizes, "h2"), "md");
   }
 
   @include responsive.breakpoint("lg") {
-    font-size: map-get(map-get(fonts.$heading-sizes, "h2"), "lg");
+    font-size: map.get(map.get(fonts.$heading-sizes, "h2"), "lg");
   }
 }
 
 h3 {
-  font-size: map-get(map-get(fonts.$heading-sizes, "h3"), "base");
+  font-size: map.get(map.get(fonts.$heading-sizes, "h3"), "base");
 
   @include responsive.breakpoint("md") {
-    font-size: map-get(map-get(fonts.$heading-sizes, "h3"), "md");
+    font-size: map.get(map.get(fonts.$heading-sizes, "h3"), "md");
   }
 
   @include responsive.breakpoint("lg") {
-    font-size: map-get(map-get(fonts.$heading-sizes, "h3"), "lg");
+    font-size: map.get(map.get(fonts.$heading-sizes, "h3"), "lg");
   }
 }
 
 h4 {
-  font-size: map-get(map-get(fonts.$heading-sizes, "h4"), "base");
+  font-size: map.get(map.get(fonts.$heading-sizes, "h4"), "base");
 
   @include responsive.breakpoint("md") {
-    font-size: map-get(map-get(fonts.$heading-sizes, "h4"), "md");
+    font-size: map.get(map.get(fonts.$heading-sizes, "h4"), "md");
   }
 
   @include responsive.breakpoint("lg") {
-    font-size: map-get(map-get(fonts.$heading-sizes, "h4"), "lg");
+    font-size: map.get(map.get(fonts.$heading-sizes, "h4"), "lg");
   }
 }
 
 h5 {
-  font-size: map-get(map-get(fonts.$heading-sizes, "h5"), "base");
+  font-size: map.get(map.get(fonts.$heading-sizes, "h5"), "base");
 
   @include responsive.breakpoint("md") {
-    font-size: map-get(map-get(fonts.$heading-sizes, "h5"), "md");
+    font-size: map.get(map.get(fonts.$heading-sizes, "h5"), "md");
   }
 
   @include responsive.breakpoint("lg") {
-    font-size: map-get(map-get(fonts.$heading-sizes, "h5"), "lg");
+    font-size: map.get(map.get(fonts.$heading-sizes, "h5"), "lg");
   }
 }
 
 h6 {
-  font-size: map-get(map-get(fonts.$heading-sizes, "h6"), "base");
+  font-size: map.get(map.get(fonts.$heading-sizes, "h6"), "base");
 
   @include responsive.breakpoint("md") {
-    font-size: map-get(map-get(fonts.$heading-sizes, "h6"), "md");
+    font-size: map.get(map.get(fonts.$heading-sizes, "h6"), "md");
   }
 
   @include responsive.breakpoint("lg") {
-    font-size: map-get(map-get(fonts.$heading-sizes, "h6"), "lg");
+    font-size: map.get(map.get(fonts.$heading-sizes, "h6"), "lg");
   }
 }
 

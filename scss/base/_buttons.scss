@@ -2,6 +2,7 @@
 @use "../abstracts/spacing" as spacing;
 @use "../abstracts/fonts" as fonts;
 @use "../abstracts/responsive" as responsive;
+@use "sass:color";
 
 /* Button Base Styles
 -------------------------------------------------- */
@@ -72,7 +73,10 @@
   }
 
   &:active {
-    background-color: darken(colors.getColor(Primary-Shade), 5%);
+    background-color: color.adjust(
+      colors.getColor(Primary-Shade),
+      $lightness: -5%
+    );
   }
 }
 
@@ -88,7 +92,10 @@
   }
 
   &:active {
-    background-color: darken(colors.getColor(Secondary-Shade), 5%);
+    background-color: color.adjust(
+      colors.getColor(Secondary-Shade),
+      $lightness: -5%
+    );
   }
 }
 
@@ -104,7 +111,10 @@
   }
 
   &:active {
-    background-color: darken(colors.getColor(Tertiary-Shade), 5%);
+    background-color: color.adjust(
+      colors.getColor(Tertiary-Shade),
+      $lightness: -5%
+    );
   }
 }
 
@@ -118,12 +128,12 @@
   border-color: colors.getColor(Success);
 
   &:hover {
-    background-color: darken(colors.getColor(Success), 7%);
-    border-color: darken(colors.getColor(Success), 7%);
+    background-color: color.adjust(colors.getColor(Success), $lightness: -7%);
+    border-color: color.adjust(colors.getColor(Success), $lightness: -7%);
   }
 
   &:active {
-    background-color: darken(colors.getColor(Success), 10%);
+    background-color: color.adjust(colors.getColor(Success), $lightness: -10%);
   }
 }
 
@@ -134,12 +144,12 @@
   border-color: colors.getColor(Danger);
 
   &:hover {
-    background-color: darken(colors.getColor(Danger), 7%);
-    border-color: darken(colors.getColor(Danger), 7%);
+    background-color: color.adjust(colors.getColor(Danger), $lightness: -7%);
+    border-color: color.adjust(colors.getColor(Danger), $lightness: -7%);
   }
 
   &:active {
-    background-color: darken(colors.getColor(Danger), 10%);
+    background-color: color.adjust(colors.getColor(Danger), $lightness: -10%);
   }
 }
 
@@ -150,12 +160,12 @@
   border-color: colors.getColor(Warning);
 
   &:hover {
-    background-color: darken(colors.getColor(Warning), 7%);
-    border-color: darken(colors.getColor(Warning), 7%);
+    background-color: color.adjust(colors.getColor(Warning), $lightness: -7%);
+    border-color: color.adjust(colors.getColor(Warning), $lightness: -7%);
   }
 
   &:active {
-    background-color: darken(colors.getColor(Warning), 10%);
+    background-color: color.adjust(colors.getColor(Warning), $lightness: -10%);
   }
 }
 
@@ -166,12 +176,12 @@
   border-color: colors.getColor(Info);
 
   &:hover {
-    background-color: darken(colors.getColor(Info), 7%);
-    border-color: darken(colors.getColor(Info), 7%);
+    background-color: color.adjust(colors.getColor(Info), $lightness: -7%);
+    border-color: color.adjust(colors.getColor(Info), $lightness: -7%);
   }
 
   &:active {
-    background-color: darken(colors.getColor(Info), 10%);
+    background-color: color.adjust(colors.getColor(Info), $lightness: -10%);
   }
 }
 
