@@ -1,4 +1,5 @@
-@use "../config/_index" as config;
+@use "../config/typography" as typography;
+@use "../config/colors" as colors;
 
 *,
 *::before,
@@ -15,11 +16,11 @@ html {
 
 body {
   margin: 0;
-  font-family: config.font-family("base");
-  font-size: config.font-size("base");
-  line-height: config.line-height("normal");
-  color: config.color("black");
-  background-color: config.color("white");
+  font-family: typography.font-family("base");
+  font-size: typography.font-size("base");
+  line-height: typography.line-height("normal");
+  color: colors.color("black");
+  background-color: colors.color("white");
 }
 
 // Remove default margin
@@ -53,7 +54,7 @@ img {
 
 // Links
 a {
-  color: config.color("secondary"); // Updated to use "secondary"
+  color: colors.color("secondary"); // Updated to use "secondary"
   text-decoration: none;
 }
 
@@ -68,6 +69,6 @@ button {
 
 // Focus styles
 :focus-visible {
-  outline: 2px solid config.color("secondary"); // Updated to use "secondary"
+  outline: 2px solid colors.color("secondary"); // Updated to use "secondary"
   outline-offset: 2px;
 }

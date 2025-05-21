@@ -1,4 +1,6 @@
-@use "../config/_index" as config;
+@use "../config/typography" as typography;
+@use "../config/colors" as colors;
+@use "../config/spacing" as spacing;
 
 h1,
 h2,
@@ -6,38 +8,38 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: config.font-family("heading");
-  font-weight: config.font-weight("bold");
-  line-height: config.line-height("tight");
-  margin-bottom: config.spacing("4");
+  font-family: typography.font-family("heading");
+  font-weight: typography.font-weight("bold");
+  line-height: typography.line-height("tight");
+  margin-bottom: spacing.spacing("4");
 }
 
 h1 {
-  font-size: config.font-size("4xl");
+  font-size: typography.font-size("4xl");
 }
 
 h2 {
-  font-size: config.font-size("3xl");
+  font-size: typography.font-size("3xl");
 }
 
 h3 {
-  font-size: config.font-size("2xl");
+  font-size: typography.font-size("2xl");
 }
 
 h4 {
-  font-size: config.font-size("xl");
+  font-size: typography.font-size("xl");
 }
 
 h5 {
-  font-size: config.font-size("lg");
+  font-size: typography.font-size("lg");
 }
 
 h6 {
-  font-size: config.font-size("base");
+  font-size: typography.font-size("base");
 }
 
 p {
-  margin-bottom: config.spacing("4");
+  margin-bottom: spacing.spacing("4");
 
   &:last-child {
     margin-bottom: 0;
@@ -45,20 +47,20 @@ p {
 }
 
 .lead {
-  font-size: config.font-size("xl");
-  line-height: config.line-height("snug");
+  font-size: typography.font-size("xl");
+  line-height: typography.line-height("snug");
 }
 
 a {
-  color: config.color("primary");
+  color: colors.color("primary");
   text-decoration: underline;
   transition: color 0.2s;
 
   &:hover {
-    color: config.color("primary-400");
+    color: colors.color("primary-400");
   }
 }
 
 .text-small {
-  font-size: config.font-size("sm");
+  font-size: typography.font-size("sm");
 }
