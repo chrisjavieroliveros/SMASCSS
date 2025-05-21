@@ -1,11 +1,22 @@
-// Import base styles (which use abstracts)
-@use "base/__index" as base;
+/**
+ * Main SCSS file
+ * Simple and modular SCSS architecture
+ */
+
+// Import configuration
+@use "config" as config;
+
+// Import base styles
+@use "base";
 
 // Import layouts
-@use "layouts/__index" as layouts;
+@use "layouts";
 
-// Import UI components
-@use "components/__index" as components;
+// Import components
+@use "components";
 
-// Import utilities (applied last for override capability)
-@use "pages/__index" as pages;
+// Import utilities
+@use "utilities";
+
+// Import page-specific styles
+@use "pages";

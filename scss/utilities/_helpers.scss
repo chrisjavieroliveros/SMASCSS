@@ -1,0 +1,71 @@
+@use "../config" as config;
+
+// Display utilities
+.d-none {
+  display: none !important;
+}
+
+.d-block {
+  display: block !important;
+}
+
+.d-flex {
+  display: flex !important;
+}
+
+// Flex utilities
+.flex-row {
+  flex-direction: row !important;
+}
+
+.flex-column {
+  flex-direction: column !important;
+}
+
+.justify-center {
+  justify-content: center !important;
+}
+
+.align-center {
+  align-items: center !important;
+}
+
+// Text utilities
+.text-center {
+  text-align: center !important;
+}
+
+.text-left {
+  text-align: left !important;
+}
+
+.text-right {
+  text-align: right !important;
+}
+
+// Generate spacing utilities
+@each $name, $value in config.$spacing {
+  .m-#{$name} {
+    margin: #{$value} !important;
+  }
+
+  .mt-#{$name} {
+    margin-top: #{$value} !important;
+  }
+
+  .mb-#{$name} {
+    margin-bottom: #{$value} !important;
+  }
+
+  .p-#{$name} {
+    padding: #{$value} !important;
+  }
+
+  .pt-#{$name} {
+    padding-top: #{$value} !important;
+  }
+
+  .pb-#{$name} {
+    padding-bottom: #{$value} !important;
+  }
+}

@@ -1,0 +1,32 @@
+@use "../config" as config;
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--container-padding-sm);
+  padding-right: var(--container-padding-sm);
+
+  @include config.breakpoint("md") {
+    padding-left: var(--container-padding-md);
+    padding-right: var(--container-padding-md);
+  }
+
+  @include config.breakpoint("lg") {
+    padding-left: var(--container-padding-lg);
+    padding-right: var(--container-padding-lg);
+  }
+
+  &--narrow {
+    max-width: 800px;
+  }
+
+  &--wide {
+    max-width: 1600px;
+  }
+
+  &--fluid {
+    max-width: 100%;
+  }
+}

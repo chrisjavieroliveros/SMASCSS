@@ -1,9 +1,5 @@
-// Components - Contains all reusable UI components
-// Each component should be self-contained and independent
+// Forward all component files
+@forward "buttons";
 
-// For example:
-// @forward "card";
-// @forward "alert";
-// @forward "modal";
-// @forward "tabs";
-// @forward "pagination";
+// When creating new components, add them here:
+// @forward "component-name";

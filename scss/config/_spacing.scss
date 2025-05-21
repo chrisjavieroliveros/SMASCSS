@@ -1,0 +1,82 @@
+/**
+ * Spacing Configuration
+ */
+
+// Base unit for spacing
+$spacing-unit: 0.25rem; // 4px at default browser size
+
+// Spacing scale
+$spacing: (
+  "0": 0,
+  "1": $spacing-unit,
+  // 0.25rem / 4px
+  "2": $spacing-unit * 2,
+  // 0.5rem / 8px
+  "3": $spacing-unit * 3,
+  // 0.75rem / 12px
+  "4": $spacing-unit * 4,
+  // 1rem / 16px
+  "5": $spacing-unit * 6,
+  // 1.5rem / 24px
+  "6": $spacing-unit * 8,
+  // 2rem / 32px
+  "8": $spacing-unit * 12,
+  // 3rem / 48px
+  "10": $spacing-unit * 16,
+  // 4rem / 64px
+  "12": $spacing-unit * 24,
+  // 6rem / 96px
+  "16": $spacing-unit * 32,
+  // 8rem / 128px
+);
+
+// Named aliases for common spacing
+$spacing-aliases: (
+  "xs": "2",
+  // 0.5rem / 8px
+  "sm": "4",
+  // 1rem / 16px
+  "md": "6",
+  // 1.5rem / 24px
+  "lg": "8",
+  // 2rem / 32px
+  "xl": "12",
+  // 3rem / 48px
+  "2xl": "16",
+  // 4rem / 64px
+);
+
+// Container padding at different breakpoints
+$container-padding: (
+  "sm": "4",
+  // 1rem / 16px
+  "md": "6",
+  // 1.5rem / 24px
+  "lg": "8",
+  // 2rem / 32px
+);
+
+// Function to get spacing value
+@function spacing($key) {
+  @if map-has-key($spacing, $key) {
+    @return map-get($spacing, $key);
+  } @else if map-has-key($spacing-aliases, $key) {
+    $alias-key: map-get($spacing-aliases, $key);
+    @return map-get($spacing, $alias-key);
+  }
+  @error "Spacing '#{$key}' not found in spacing map or aliases.";
+  @return null;
+}
+
+// Generate CSS spacing variables
+@mixin generate-spacing-variables() {
+  :root {
+    @each $name, $value in $spacing {
+      --space-#{$name}: #{$value};
+    }
+
+    @each $name, $value in $container-padding {
+      --container-padding-#{$name}: var(--space-#{$value});
+    }
+  }
+}

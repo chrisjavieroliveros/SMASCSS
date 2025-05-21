@@ -1,0 +1,16 @@
+/**
+ * Config Index
+ * Forwards all configuration files
+ */
+
+// Core configurations
+@forward "colors";
+@forward "typography";
+@forward "spacing";
+@forward "breakpoints";
+
+// Component configurations
+@forward "buttons";
+
+// Function/utility configurations
+@forward "functions";

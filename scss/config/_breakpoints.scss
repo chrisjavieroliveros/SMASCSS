@@ -1,0 +1,42 @@
+/**
+ * Breakpoints Configuration
+ */
+
+// Breakpoint definitions
+$breakpoints: (
+  "xs": 375px,
+  "sm": 576px,
+  "md": 768px,
+  "lg": 992px,
+  "xl": 1200px,
+  "xxl": 1400px,
+);
+
+// Function to get breakpoint value
+@function breakpoint($name) {
+  @if map-has-key($breakpoints, $name) {
+    @return map-get($breakpoints, $name);
+  }
+  @error "Breakpoint '#{$name}' not found in breakpoints map.";
+  @return null;
+}
+
+// Breakpoint mixin
+@mixin breakpoint($size) {
+  @if map-has-key($breakpoints, $size) {
+    @media (min-width: breakpoint($size)) {
+      @content;
+    }
+  } @else {
+    @error "Breakpoint '#{$size}' not found in breakpoints map.";
+  }
+}
+
+// Generate CSS breakpoint variables
+@mixin generate-breakpoint-variables() {
+  :root {
+    @each $name, $value in $breakpoints {
+      --breakpoint-#{$name}: #{$value};
+    }
+  }
+}

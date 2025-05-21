@@ -1,6 +1,0 @@
-@use "../abstracts/colors" as colors;
-
-:root {
-  // Generate all color variables
-  @include colors.generate-color-variables();
-}

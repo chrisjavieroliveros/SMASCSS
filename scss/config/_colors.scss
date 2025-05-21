@@ -1,0 +1,66 @@
+/**
+ * Color System Configuration
+ */
+
+// Color palette
+$colors: (
+  // Brand colors
+  "primary": #314459,
+  "primary-light": #4a637f,
+  "primary-dark": #1f2c3a,
+
+  "secondary": #2a8de9,
+  "secondary-light": #5eabef,
+  "secondary-dark": #1971c2,
+
+  "accent": #ffc209,
+  "accent-light": #ffd24c,
+  "accent-dark": #cc9b07,
+
+  // Status colors
+  "danger": #f43f5e,
+  "warning": #f59e0b,
+  "success": #10b981,
+  "info": #3b82f6,
+
+  // Neutral colors
+  "white": #ffffff,
+  "black": #000000,
+  "dark": #272727,
+  "light": #f5f5f5,
+
+  // Gray scale
+  "gray-100": #f3f4f6,
+  "gray-200": #e5e7eb,
+  "gray-300": #d1d5db,
+  "gray-400": #9ca3af,
+  "gray-500": #6b7280,
+  "gray-600": #4b5563,
+  "gray-700": #374151,
+  "gray-800": #1f2937,
+  "gray-900": #111827
+);
+
+// Function to get color
+@function color($name) {
+  @if map-has-key($colors, $name) {
+    @return map-get($colors, $name);
+  }
+  @error "Color '#{$name}' not found in color map.";
+  @return null;
+}
+
+// Function to get color with opacity
+@function color-alpha($name, $alpha) {
+  $color: color($name);
+  @return rgba($color, $alpha);
+}
+
+// Generate CSS variables
+@mixin generate-color-variables() {
+  :root {
+    @each $name, $value in $colors {
+      --color-#{$name}: #{$value};
+    }
+  }
+}

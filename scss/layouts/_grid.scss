@@ -1,260 +1,53 @@
-@use "../abstracts/responsive" as responsive;
-@use "../abstracts/spacing" as spacing;
+@use "../config" as config;
 
-// Grid system variables
-$grid-columns: 12 !default;
-$grid-gutter: spacing.$gap-md !default;
-
-// Base grid container
 .grid {
   display: grid;
-  gap: $grid-gutter;
+  gap: config.spacing("4");
 
-  // Grid with custom gap sizes
-  &--gap-xs {
-    gap: spacing.$gap-xs;
-  }
+  // Gap variants
   &--gap-sm {
-    gap: spacing.$gap-sm;
+    gap: config.spacing("2");
   }
+
   &--gap-lg {
-    gap: spacing.$gap-lg;
-  }
-  &--gap-xl {
-    gap: spacing.$gap-xl;
-  }
-  &--gap-none {
-    gap: 0;
+    gap: config.spacing("8");
   }
 
-  // Column-only gap
-  &--column-gap {
-    row-gap: 0;
+  // Responsive grid templates
+  &--2-col {
+    grid-template-columns: 1fr;
+
+    @include config.breakpoint("md") {
+      grid-template-columns: repeat(2, 1fr);
+    }
   }
 
-  // Row-only gap
-  &--row-gap {
-    column-gap: 0;
+  &--3-col {
+    grid-template-columns: 1fr;
+
+    @include config.breakpoint("md") {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include config.breakpoint("lg") {
+      grid-template-columns: repeat(3, 1fr);
+    }
   }
 
-  // Basic 12-column grid system
-  &--columns {
-    grid-template-columns: repeat($grid-columns, 1fr);
+  &--4-col {
+    grid-template-columns: 1fr;
+
+    @include config.breakpoint("md") {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include config.breakpoint("lg") {
+      grid-template-columns: repeat(4, 1fr);
+    }
   }
 
-  // Auto-fit responsive grid (minimum width columns)
+  // Auto-fit grid for cards
   &--auto-fit {
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
-
-    &-sm {
-      grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
-    }
-
-    &-lg {
-      grid-template-columns: repeat(auto-fit, minmax(min(100%, 25rem), 1fr));
-    }
-  }
-
-  // Responsive column variants
-  @include responsive.breakpoint("sm") {
-    &--sm-1 {
-      grid-template-columns: repeat(1, 1fr);
-    }
-    &--sm-2 {
-      grid-template-columns: repeat(2, 1fr);
-    }
-    &--sm-3 {
-      grid-template-columns: repeat(3, 1fr);
-    }
-    &--sm-4 {
-      grid-template-columns: repeat(4, 1fr);
-    }
-  }
-
-  @include responsive.breakpoint("md") {
-    &--md-1 {
-      grid-template-columns: repeat(1, 1fr);
-    }
-    &--md-2 {
-      grid-template-columns: repeat(2, 1fr);
-    }
-    &--md-3 {
-      grid-template-columns: repeat(3, 1fr);
-    }
-    &--md-4 {
-      grid-template-columns: repeat(4, 1fr);
-    }
-    &--md-5 {
-      grid-template-columns: repeat(5, 1fr);
-    }
-    &--md-6 {
-      grid-template-columns: repeat(6, 1fr);
-    }
-  }
-
-  @include responsive.breakpoint("lg") {
-    &--lg-1 {
-      grid-template-columns: repeat(1, 1fr);
-    }
-    &--lg-2 {
-      grid-template-columns: repeat(2, 1fr);
-    }
-    &--lg-3 {
-      grid-template-columns: repeat(3, 1fr);
-    }
-    &--lg-4 {
-      grid-template-columns: repeat(4, 1fr);
-    }
-    &--lg-5 {
-      grid-template-columns: repeat(5, 1fr);
-    }
-    &--lg-6 {
-      grid-template-columns: repeat(6, 1fr);
-    }
-    &--lg-12 {
-      grid-template-columns: repeat(12, 1fr);
-    }
-  }
-
-  // Common grid layouts
-  &--sidebar-right {
-    grid-template-columns: 1fr;
-
-    @include responsive.breakpoint("lg") {
-      grid-template-columns: 1fr 300px;
-    }
-  }
-
-  &--sidebar-left {
-    grid-template-columns: 1fr;
-
-    @include responsive.breakpoint("lg") {
-      grid-template-columns: 300px 1fr;
-    }
-  }
-
-  // Content alignment
-  &--center {
-    align-items: center;
-  }
-
-  &--start {
-    align-items: start;
-  }
-
-  &--end {
-    align-items: end;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
   }
 }
-
-// Grid item classes
-.grid-item {
-  min-width: 0; // Prevent overflow issues
-
-  // Column span classes
-  @for $i from 1 through $grid-columns {
-    &--span-#{$i} {
-      grid-column: span $i;
-    }
-
-    // Responsive variants
-    @include responsive.breakpoint("sm") {
-      &--sm-span-#{$i} {
-        grid-column: span $i;
-      }
-    }
-
-    @include responsive.breakpoint("md") {
-      &--md-span-#{$i} {
-        grid-column: span $i;
-      }
-    }
-
-    @include responsive.breakpoint("lg") {
-      &--lg-span-#{$i} {
-        grid-column: span $i;
-      }
-    }
-  }
-
-  // Row span classes
-  @for $i from 1 through 6 {
-    &--row-span-#{$i} {
-      grid-row: span $i;
-    }
-  }
-
-  // Column start/end positioning
-  &--col-start-1 {
-    grid-column-start: 1;
-  }
-  &--col-start-2 {
-    grid-column-start: 2;
-  }
-  &--col-start-3 {
-    grid-column-start: 3;
-  }
-  &--col-start-4 {
-    grid-column-start: 4;
-  }
-
-  &--col-end-13 {
-    grid-column-end: 13;
-  } // Full width in 12-column grid
-  &--col-end-4 {
-    grid-column-end: 4;
-  }
-  &--col-end-7 {
-    grid-column-end: 7;
-  }
-  &--col-end-10 {
-    grid-column-end: 10;
-  }
-}
-
-// Additional helpers for complex layouts
-.auto-flow {
-  &--row {
-    grid-auto-flow: row;
-  }
-
-  &--column {
-    grid-auto-flow: column;
-  }
-
-  &--dense {
-    grid-auto-flow: dense;
-  }
-}
-
-/* 
-Sample Usage:
-
-<div class="grid grid--md-2 grid--lg-4">
-  <div>Item 1</div>
-  <div>Item 2</div>
-  <div>Item 3</div>
-  <div>Item 4</div>
-</div>
-
-<div class="grid grid--auto-fit">
-  <div>Card 1</div>
-  <div>Card 2</div>
-  <div>Card 3</div>
-  <!-- Cards will wrap automatically -->
-</div>
-
-<div class="grid grid--sidebar-right">
-  <main>Main content</main>
-  <aside>Sidebar content</aside>
-</div>
-
-<div class="grid grid--lg-12">
-  <header class="grid-item grid-item--span-12">Header</header>
-  <nav class="grid-item grid-item--span-3">Navigation</nav>
-  <main class="grid-item grid-item--span-6">Main content</main>
-  <aside class="grid-item grid-item--span-3">Sidebar</aside>
-  <footer class="grid-item grid-item--span-12">Footer</footer>
-</div>
-
-*/

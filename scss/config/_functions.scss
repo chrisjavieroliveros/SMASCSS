@@ -1,0 +1,25 @@
+/**
+ * Global Utility Functions
+ */
+
+// Strip units from a value
+@function strip-unit($value) {
+  @if type-of($value) == "number" and not unitless($value) {
+    @return $value / ($value * 0 + 1);
+  }
+  @return $value;
+}
+
+// Convert px to rem
+@function px-to-rem($px, $base-font-size: 16px) {
+  $px: strip-unit($px);
+  $base: strip-unit($base-font-size);
+  @return #{$px / $base}rem;
+}
+
+// Convert rem to px
+@function rem-to-px($rem, $base-font-size: 16px) {
+  $rem: strip-unit($rem);
+  $base: strip-unit($base-font-size);
+  @return #{$rem * $base}px;
+}
