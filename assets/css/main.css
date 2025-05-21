@@ -538,6 +538,9 @@ a:hover {
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
 }
 
+.hero {
+  background-color: #314459;
+}
 /**
  * Project: SMACSS SCSS Architecture
  * Description: This project implements a scalable and modular architecture for CSS (SMACSS) 

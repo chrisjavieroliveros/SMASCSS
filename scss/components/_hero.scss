@@ -1,0 +1,10 @@
+@use "../config/colors" as *;
+@use "../config/breakpoints" as *;
+
+.hero {
+  background-color: color("primary");
+  .container {
+    .wrapper {
+    }
+  }
+}
