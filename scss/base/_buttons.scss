@@ -1,0 +1,112 @@
+@use "../config/_index" as config;
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--button-default-padding-y) var(--button-default-padding-x);
+  border-radius: var(--button-default-border-radius);
+  font-family: config.font-family("base");
+  font-weight: var(--button-default-font-weight);
+  font-size: var(--button-default-font-size);
+  text-align: center;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: var(--button-default-transition);
+
+  // Focus styles
+  &:focus-visible {
+    outline: 2px solid config.color("primary");
+    outline-offset: 2px;
+  }
+
+  // Sizes
+  &--sm {
+    padding: var(--button-sm-padding-y) var(--button-sm-padding-x);
+    font-size: var(--button-sm-font-size);
+  }
+
+  &--lg {
+    padding: var(--button-lg-padding-y) var(--button-lg-padding-x);
+    font-size: var(--button-lg-font-size);
+  }
+
+  // Full width
+  &--block {
+    display: block;
+    width: 100%;
+  }
+
+  // Variants (Primary, Secondary, Danger, etc.)
+  &--primary {
+    background-color: config.color("primary");
+    color: config.color("primary-contrast");
+    border-color: config.color("primary");
+
+    &:hover {
+      background-color: config.color("primary-tint");
+      color: config.color("primary-contrast");
+      border-color: config.color("primary-tint");
+    }
+  }
+
+  &--secondary {
+    background-color: config.color("secondary");
+    color: config.color("secondary-contrast");
+    border-color: config.color("secondary");
+
+    &:hover {
+      background-color: config.color("secondary-tint");
+      color: config.color("secondary-contrast");
+      border-color: config.color("secondary-tint");
+    }
+  }
+
+  &--danger {
+    background-color: config.color("danger");
+    color: config.color("danger-contrast");
+    border-color: config.color("danger");
+
+    &:hover {
+      background-color: config.color("danger-tint");
+      color: config.color("danger-contrast");
+      border-color: config.color("danger-tint");
+    }
+  }
+
+  &--warning {
+    background-color: config.color("warning");
+    color: config.color("warning-contrast");
+    border-color: config.color("warning");
+
+    &:hover {
+      background-color: config.color("warning-tint");
+      color: config.color("warning-contrast");
+      border-color: config.color("warning-tint");
+    }
+  }
+
+  &--success {
+    background-color: config.color("success");
+    color: config.color("success-contrast");
+    border-color: config.color("success");
+
+    &:hover {
+      background-color: config.color("success-tint");
+      color: config.color("success-contrast");
+      border-color: config.color("success-tint");
+    }
+  }
+
+  &--info {
+    background-color: config.color("info");
+    color: config.color("info-contrast");
+    border-color: config.color("info");
+
+    &:hover {
+      background-color: config.color("info-tint");
+      color: config.color("info-contrast");
+      border-color: config.color("info-tint");
+    }
+  }
+}

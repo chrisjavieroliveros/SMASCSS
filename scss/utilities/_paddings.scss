@@ -1,0 +1,15 @@
+@use "../config/_index" as config;
+
+@each $name, $value in config.$spacing {
+  .p-#{$name} {
+    padding: #{$value} !important;
+  }
+
+  .pt-#{$name} {
+    padding-top: #{$value} !important;
+  }
+
+  .pb-#{$name} {
+    padding-bottom: #{$value} !important;
+  }
+}

@@ -1,0 +1,15 @@
+@use "../config/_index" as config;
+
+@each $name, $value in config.$spacing {
+  .m-#{$name} {
+    margin: #{$value} !important;
+  }
+
+  .mt-#{$name} {
+    margin-top: #{$value} !important;
+  }
+
+  .mb-#{$name} {
+    margin-bottom: #{$value} !important;
+  }
+}

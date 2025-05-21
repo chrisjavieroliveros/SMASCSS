@@ -1,7 +1,13 @@
 /**
  * Base Styles
  */
-@use "../config" as config;
+
+// Forward base files
+@forward "reset";
+@forward "typography";
+@forward "buttons";
+
+@use "../config/_index" as config;
 
 // Generate CSS variables
 @include config.generate-color-variables();
@@ -9,7 +15,3 @@
 @include config.generate-spacing-variables();
 @include config.generate-breakpoint-variables();
 @include config.generate-button-variables();
-
-// Forward base files
-@forward "reset";
-@forward "typography";
