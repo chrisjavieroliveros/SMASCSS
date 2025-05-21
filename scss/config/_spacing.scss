@@ -1,13 +1,29 @@
 /**
- * Spacing Configuration
+ * SPACING CONFIGURATION
+ * ---------------------
+ * 
+ * USAGE:
+ * 1. Import this file: @import 'config/spacing';
+ * 
+ * 2. Generate CSS variables in your root file:
+ *    @include generate-spacing-variables();
+ * 
+ * 3. Use spacing in your SCSS:
+ *    - Function: margin: spacing(4);      // Returns 1rem
+ *    - Function: padding: spacing('md');  // Returns 2rem using alias
+ *    - Variable: gap: var(--spacing-6);   // Use CSS variable
+ * 
+ * 4. For container padding:
+ *    padding: var(--container-padding-md); // Responsive padding
  */
 
-// Base unit for spacing
-$spacing-unit: 0.25rem; // 4px at default browser size
+// Base unit for spacing (4px at default browser font size)
+$spacing-unit: 0.25rem;
 
 // Spacing scale
 $spacing: (
   "0": 0,
+  // 0
   "1": $spacing-unit,
   // 0.25rem / 4px
   "2": $spacing-unit * 2,
@@ -30,20 +46,20 @@ $spacing: (
   // 8rem / 128px
 );
 
-// Named aliases for common spacing
+// Named aliases for common spacing values
 $spacing-aliases: (
   "xs": "2",
   // 0.5rem / 8px
   "sm": "4",
   // 1rem / 16px
   "md": "6",
-  // 1.5rem / 24px
-  "lg": "8",
   // 2rem / 32px
-  "xl": "12",
+  "lg": "8",
   // 3rem / 48px
+  "xl": "12",
+  // 6rem / 96px
   "2xl": "16",
-  // 4rem / 64px
+  // 8rem / 128px
 );
 
 // Container padding at different breakpoints
@@ -51,32 +67,55 @@ $container-padding: (
   "sm": "4",
   // 1rem / 16px
   "md": "6",
-  // 1.5rem / 24px
-  "lg": "8",
   // 2rem / 32px
+  "lg": "8",
+  // 3rem / 48px
 );
 
-// Function to get spacing value
+/**
+ * Function to get spacing value
+ * @param {String|Number} $key - The spacing key or alias
+ * @return {Number} The spacing value in rem
+ * @example padding: spacing(4);      // Returns 1rem
+ * @example margin: spacing('sm');    // Returns 1rem via alias
+ */
 @function spacing($key) {
-  @if map-has-key($spacing, $key) {
-    @return map-get($spacing, $key);
-  } @else if map-has-key($spacing-aliases, $key) {
-    $alias-key: map-get($spacing-aliases, $key);
-    @return map-get($spacing, $alias-key);
+  // Convert number to string if needed
+  $lookup-key: if(type-of($key) == number, "#{$key}", $key);
+
+  // Direct lookup in spacing map
+  @if map-has-key($spacing, $lookup-key) {
+    @return map-get($spacing, $lookup-key);
   }
+
+  // Lookup via alias
+  @else if map-has-key($spacing-aliases, $lookup-key) {
+    $alias-key: map-get($spacing-aliases, $lookup-key);
+    @if map-has-key($spacing, $alias-key) {
+      @return map-get($spacing, $alias-key);
+    }
+    @error "Invalid spacing alias mapping: '#{$lookup-key}' points to '#{$alias-key}' which is not in the spacing map.";
+  }
+
   @error "Spacing '#{$key}' not found in spacing map or aliases.";
-  @return null;
+  @return 0; // Fallback to avoid breaking layouts
 }
 
-// Generate CSS spacing variables
+/**
+ * Generate CSS spacing variables
+ * Creates: --spacing-X and --container-padding-X variables
+ * @example @include generate-spacing-variables();
+ */
 @mixin generate-spacing-variables() {
   :root {
+    // Generate spacing variables
     @each $name, $value in $spacing {
-      --space-#{$name}: #{$value};
+      --spacing-#{$name}: #{$value};
     }
 
+    // Generate container padding variables
     @each $name, $value in $container-padding {
-      --container-padding-#{$name}: var(--space-#{$value});
+      --container-padding-#{$name}: var(--spacing-#{$value});
     }
   }
 }

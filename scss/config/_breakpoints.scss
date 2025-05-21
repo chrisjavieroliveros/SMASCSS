@@ -1,5 +1,25 @@
 /**
- * Breakpoints Configuration
+ * BREAKPOINTS CONFIGURATION
+ * ------------------------
+ * 
+ * USAGE:
+ * 1. Import this file: @import 'config/breakpoints';
+ * 
+ * 2. Generate CSS variables in your root file:
+ *    @include generate-breakpoint-variables();
+ * 
+ * 3. Use breakpoints in your SCSS:
+ *    - Mixin:    @include breakpoint(md) { ... }     // Applies styles at 768px and above
+ *    - Function: width: breakpoint(lg);              // Returns 992px
+ *    - Variable: @media (min-width: var(--breakpoint-xl)) { ... }  // Use CSS variable
+ * 
+ * 4. Available breakpoint sizes:
+ *    - xs: 375px
+ *    - sm: 576px
+ *    - md: 768px
+ *    - lg: 992px
+ *    - xl: 1200px
+ *    - xxl: 1400px
  */
 
 // Breakpoint definitions

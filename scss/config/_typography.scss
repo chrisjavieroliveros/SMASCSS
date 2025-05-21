@@ -1,4 +1,31 @@
 /**
+ * TYPOGRAPHY CONFIGURATION
+ * -----------------------
+ * 
+ * USAGE:
+ * 1. Import this file: @import 'config/typography';
+ * 
+ * 2. Generate CSS variables in your root file:
+ *    @include generate-typography-variables();
+ * 
+ * 3. Use typography in your SCSS:
+ *    - Font family: font-family: font-family('heading');  // Returns 'Inter', -apple-system, etc.
+ *    - Font weight: font-weight: font-weight('bold');     // Returns 700
+ *    - Font size: font-size: font-size('lg');            // Returns 1.125rem
+ *    - Line height: line-height: line-height('tight');   // Returns 1.25
+ *    - Letter spacing: letter-spacing: letter-spacing('wide');  // Returns 0.025em
+ *    - Variable: font-size: var(--font-size-xl);         // Use CSS variable
+ * 
+ * 4. For component patterns:
+ *    .heading-1 { 
+ *      font-family: font-family('heading');
+ *      font-size: font-size('5xl');
+ *      font-weight: font-weight('bold');
+ *      line-height: line-height('tight');
+ *    }
+ */
+
+/**
  * Typography Configuration
  */
 
@@ -84,7 +111,12 @@ $letter-spacing: (
   "widest": 0.1em,
 );
 
-// Functions to access typography values
+/**
+ * Function to get font family
+ * @param {String} $name - The font family name from the $font-families map
+ * @return {List} The list of font family values
+ * @example font-family: font-family('heading'); // Returns 'Inter', -apple-system, etc.
+ */
 @function font-family($name: "base") {
   @if map-has-key($font-families, $name) {
     @return map-get($font-families, $name);
@@ -93,6 +125,12 @@ $letter-spacing: (
   @return null;
 }
 
+/**
+ * Function to get font weight
+ * @param {String} $name - The font weight name from the $font-weights map
+ * @return {Number} The font weight value
+ * @example font-weight: font-weight('bold'); // Returns 700
+ */
 @function font-weight($name: "regular") {
   @if map-has-key($font-weights, $name) {
     @return map-get($font-weights, $name);
@@ -101,6 +139,12 @@ $letter-spacing: (
   @return null;
 }
 
+/**
+ * Function to get font size
+ * @param {String} $name - The font size name from the $font-sizes map
+ * @return {Length} The font size value in rem
+ * @example font-size: font-size('lg'); // Returns 1.125rem
+ */
 @function font-size($name: "base") {
   @if map-has-key($font-sizes, $name) {
     @return map-get($font-sizes, $name);
@@ -109,6 +153,12 @@ $letter-spacing: (
   @return null;
 }
 
+/**
+ * Function to get line height
+ * @param {String} $name - The line height name from the $line-heights map
+ * @return {Number} The line height value
+ * @example line-height: line-height('tight'); // Returns 1.25
+ */
 @function line-height($name: "normal") {
   @if map-has-key($line-heights, $name) {
     @return map-get($line-heights, $name);
@@ -117,6 +167,12 @@ $letter-spacing: (
   @return null;
 }
 
+/**
+ * Function to get letter spacing
+ * @param {String} $name - The letter spacing name from the $letter-spacing map
+ * @return {Length} The letter spacing value in em
+ * @example letter-spacing: letter-spacing('wide'); // Returns 0.025em
+ */
 @function letter-spacing($name: "normal") {
   @if map-has-key($letter-spacing, $name) {
     @return map-get($letter-spacing, $name);
@@ -125,7 +181,11 @@ $letter-spacing: (
   @return null;
 }
 
-// Generate CSS typography variables
+/**
+ * Generate CSS typography variables
+ * Creates: --font-size-X, --line-height-X, --letter-spacing-X, and --font-weight-X variables
+ * @example @include generate-typography-variables();
+ */
 @mixin generate-typography-variables() {
   :root {
     @each $name, $value in $font-sizes {

@@ -14,16 +14,158 @@
  * Forwards all configuration files
  */
 /**
- * Color System Configuration
+ * COLOR CONFIGURATION
+ * ------------------
+ * 
+ * USAGE:
+ * 1. Import this file: @import 'config/colors';
+ * 
+ * 2. Generate CSS variables in your root file:
+ *    @include generate-color-variables();
+ * 
+ * 3. Use colors in your SCSS:
+ *    - Function: color: color('primary');      // Returns #314459
+ *    - Function: border: 1px solid color('primary-300');  // Uses shade variant
+ *    - Variable: background: var(--color-primary);  // Use CSS variable
+ *    - Opacity: background: color-alpha('primary', 0.5);  // 50% opacity
+ * 
+ * 4. For theme variations:
+ *    .dark-theme { background: var(--color-dark-800); }
+ */
+/**
+ * Function to get color value
+ * @param {String} $name - The color name from the $colors map
+ * @return {Color} The color value
+ * @example color: color('primary');      // Returns #314459
+ */
+/**
+ * Function to get color with opacity
+ * @param {String} $name - The color name from the $colors map
+ * @param {Number} $alpha - Opacity value between 0 and 1
+ * @return {Color} The rgba color value with opacity
+ * @example background: color-alpha('primary', 0.5); // Returns rgba(49, 68, 89, 0.5)
+ */
+/**
+ * Generate CSS color variables
+ * Creates: --color-X variables
+ * @example @include generate-color-variables();
+ */
+/**
+ * TYPOGRAPHY CONFIGURATION
+ * -----------------------
+ * 
+ * USAGE:
+ * 1. Import this file: @import 'config/typography';
+ * 
+ * 2. Generate CSS variables in your root file:
+ *    @include generate-typography-variables();
+ * 
+ * 3. Use typography in your SCSS:
+ *    - Font family: font-family: font-family('heading');  // Returns 'Inter', -apple-system, etc.
+ *    - Font weight: font-weight: font-weight('bold');     // Returns 700
+ *    - Font size: font-size: font-size('lg');            // Returns 1.125rem
+ *    - Line height: line-height: line-height('tight');   // Returns 1.25
+ *    - Letter spacing: letter-spacing: letter-spacing('wide');  // Returns 0.025em
+ *    - Variable: font-size: var(--font-size-xl);         // Use CSS variable
+ * 
+ * 4. For component patterns:
+ *    .heading-1 { 
+ *      font-family: font-family('heading');
+ *      font-size: font-size('5xl');
+ *      font-weight: font-weight('bold');
+ *      line-height: line-height('tight');
+ *    }
  */
 /**
  * Typography Configuration
  */
 /**
- * Spacing Configuration
+ * Function to get font family
+ * @param {String} $name - The font family name from the $font-families map
+ * @return {List} The list of font family values
+ * @example font-family: font-family('heading'); // Returns 'Inter', -apple-system, etc.
  */
 /**
- * Breakpoints Configuration
+ * Function to get font weight
+ * @param {String} $name - The font weight name from the $font-weights map
+ * @return {Number} The font weight value
+ * @example font-weight: font-weight('bold'); // Returns 700
+ */
+/**
+ * Function to get font size
+ * @param {String} $name - The font size name from the $font-sizes map
+ * @return {Length} The font size value in rem
+ * @example font-size: font-size('lg'); // Returns 1.125rem
+ */
+/**
+ * Function to get line height
+ * @param {String} $name - The line height name from the $line-heights map
+ * @return {Number} The line height value
+ * @example line-height: line-height('tight'); // Returns 1.25
+ */
+/**
+ * Function to get letter spacing
+ * @param {String} $name - The letter spacing name from the $letter-spacing map
+ * @return {Length} The letter spacing value in em
+ * @example letter-spacing: letter-spacing('wide'); // Returns 0.025em
+ */
+/**
+ * Generate CSS typography variables
+ * Creates: --font-size-X, --line-height-X, --letter-spacing-X, and --font-weight-X variables
+ * @example @include generate-typography-variables();
+ */
+/**
+ * SPACING CONFIGURATION
+ * ---------------------
+ * 
+ * USAGE:
+ * 1. Import this file: @import 'config/spacing';
+ * 
+ * 2. Generate CSS variables in your root file:
+ *    @include generate-spacing-variables();
+ * 
+ * 3. Use spacing in your SCSS:
+ *    - Function: margin: spacing(4);      // Returns 1rem
+ *    - Function: padding: spacing('md');  // Returns 2rem using alias
+ *    - Variable: gap: var(--spacing-6);   // Use CSS variable
+ * 
+ * 4. For container padding:
+ *    padding: var(--container-padding-md); // Responsive padding
+ */
+/**
+ * Function to get spacing value
+ * @param {String|Number} $key - The spacing key or alias
+ * @return {Number} The spacing value in rem
+ * @example padding: spacing(4);      // Returns 1rem
+ * @example margin: spacing('sm');    // Returns 1rem via alias
+ */
+/**
+ * Generate CSS spacing variables
+ * Creates: --spacing-X and --container-padding-X variables
+ * @example @include generate-spacing-variables();
+ */
+/**
+ * BREAKPOINTS CONFIGURATION
+ * ------------------------
+ * 
+ * USAGE:
+ * 1. Import this file: @import 'config/breakpoints';
+ * 
+ * 2. Generate CSS variables in your root file:
+ *    @include generate-breakpoint-variables();
+ * 
+ * 3. Use breakpoints in your SCSS:
+ *    - Mixin:    @include breakpoint(md) { ... }     // Applies styles at 768px and above
+ *    - Function: width: breakpoint(lg);              // Returns 992px
+ *    - Variable: @media (min-width: var(--breakpoint-xl)) { ... }  // Use CSS variable
+ * 
+ * 4. Available breakpoint sizes:
+ *    - xs: 375px
+ *    - sm: 576px
+ *    - md: 768px
+ *    - lg: 992px
+ *    - xl: 1200px
+ *    - xxl: 1400px
  */
 /**
  * Button Configuration
@@ -398,20 +540,20 @@ a:hover {
 }
 
 :root {
-  --space-0: 0;
-  --space-1: 0.25rem;
-  --space-2: 0.5rem;
-  --space-3: 0.75rem;
-  --space-4: 1rem;
-  --space-5: 1.5rem;
-  --space-6: 2rem;
-  --space-8: 3rem;
-  --space-10: 4rem;
-  --space-12: 6rem;
-  --space-16: 8rem;
-  --container-padding-sm: var(--space-4);
-  --container-padding-md: var(--space-6);
-  --container-padding-lg: var(--space-8);
+  --spacing-0: 0;
+  --spacing-1: 0.25rem;
+  --spacing-2: 0.5rem;
+  --spacing-3: 0.75rem;
+  --spacing-4: 1rem;
+  --spacing-5: 1.5rem;
+  --spacing-6: 2rem;
+  --spacing-8: 3rem;
+  --spacing-10: 4rem;
+  --spacing-12: 6rem;
+  --spacing-16: 8rem;
+  --container-padding-sm: var(--spacing-4);
+  --container-padding-md: var(--spacing-6);
+  --container-padding-lg: var(--spacing-8);
 }
 
 :root {
@@ -540,7 +682,113 @@ a:hover {
 
 .hero {
   background-color: #314459;
+  color: #ffffff;
 }
+
+.card {
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(26, 26, 26, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 2rem;
+}
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(26, 26, 26, 0.12);
+}
+.card__image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+@media (min-width: 768px) {
+  .card__image {
+    height: 220px;
+  }
+}
+.card__content {
+  padding: 2rem;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+.card__title {
+  margin: 0 0 1rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+.card__description {
+  margin: 0 0 2rem;
+  color: #4d4d4d;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  flex-grow: 1;
+}
+.card__footer {
+  padding: 1rem 2rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid #f0f0f0;
+}
+.card__meta {
+  font-size: 0.875rem;
+  color: #666666;
+}
+.card--featured {
+  border-left: 4px solid #314459;
+}
+.card--primary {
+  border-top: 3px solid #314459;
+}
+.card--secondary {
+  border-top: 3px solid #2a8de9;
+}
+.card--success {
+  border-top: 3px solid #2a9d8f;
+}
+.card--info {
+  border-top: 3px solid #219ebc;
+}
+.card--warning {
+  border-top: 3px solid #ffb703;
+}
+.card--danger {
+  border-top: 3px solid #e63946;
+}
+@media (min-width: 768px) {
+  .card--horizontal {
+    flex-direction: row;
+  }
+  .card--horizontal .card__image {
+    width: 35%;
+    height: auto;
+  }
+  .card--horizontal .card__content {
+    width: 65%;
+  }
+}
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2rem;
+}
+@media (min-width: 768px) {
+  .card-grid {
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  }
+}
+@media (min-width: 992px) {
+  .card-grid {
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  }
+}
+
 /**
  * Project: SMACSS SCSS Architecture
  * Description: This project implements a scalable and modular architecture for CSS (SMACSS) 
