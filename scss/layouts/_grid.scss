@@ -1,3 +1,34 @@
+/**
+ * GRID LAYOUT CONFIGURATION
+ * -----------------------
+ * 
+ * USAGE:
+ * 1. Apply the grid class to create a responsive grid layout:
+ *    <div class="grid">
+ *      <div>Item 1</div>
+ *      <div>Item 2</div>
+ *    </div>
+ * 
+ * 2. Column variations (responsive):
+ *    - Two columns: <div class="grid grid--2-col">...</div>
+ *      Mobile: 1 column, Tablet/Desktop: 2 columns
+ *    
+ *    - Three columns: <div class="grid grid--3-col">...</div>
+ *      Mobile: 1 column, Tablet: 2 columns, Desktop: 3 columns
+ *    
+ *    - Four columns: <div class="grid grid--4-col">...</div>
+ *      Mobile: 1 column, Tablet: 2 columns, Desktop: 4 columns
+ * 
+ * 3. Gap variations:
+ *    - Default: <div class="grid">...</div> (gap: spacing("4"))
+ *    - Small: <div class="grid grid--gap-sm">...</div> (gap: spacing("2"))
+ *    - Large: <div class="grid grid--gap-lg">...</div> (gap: spacing("8"))
+ * 
+ * 4. Auto-fit grid (for card layouts):
+ *    <div class="grid grid--auto-fit">...</div>
+ *    Creates a responsive grid that automatically fits columns based on available space
+ */
+
 @use "../config/_index" as config;
 
 .grid {

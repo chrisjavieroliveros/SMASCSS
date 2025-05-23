@@ -1,3 +1,23 @@
+/**
+ * CONTAINER CONFIGURATION
+ * ----------------------
+ * 
+ * USAGE:
+ * 1. Apply the container class to create a responsive, centered wrapper:
+ *    <div class="container">Content goes here</div>
+ * 
+ * 2. Container variations:
+ *    - Default: <div class="container">...</div> (max-width: 1200px)
+ *    - Narrow: <div class="container container--narrow">...</div> (max-width: 800px)
+ *    - Wide: <div class="container container--wide">...</div> (max-width: 1600px)
+ *    - Fluid: <div class="container container--fluid">...</div> (max-width: 100%)
+ * 
+ * 3. Container padding is responsive and handled by CSS variables:
+ *    - Large screens: var(--container-padding-lg)
+ *    - Medium screens: var(--container-padding-md)
+ *    - Small screens: var(--container-padding-sm)
+ */
+
 @use "../config/_index" as config;
 
 .container {
@@ -5,17 +25,17 @@
   max-width: 1200px;
   margin-left: auto;
   margin-right: auto;
-  padding-left: var(--container-padding-sm);
-  padding-right: var(--container-padding-sm);
+  padding-left: var(--container-padding-lg);
+  padding-right: var(--container-padding-lg);
 
-  @include config.breakpoint("md") {
+  @include config.breakpoint-down("lg") {
     padding-left: var(--container-padding-md);
     padding-right: var(--container-padding-md);
   }
 
-  @include config.breakpoint("lg") {
-    padding-left: var(--container-padding-lg);
-    padding-right: var(--container-padding-lg);
+  @include config.breakpoint-down("md") {
+    padding-left: var(--container-padding-sm);
+    padding-right: var(--container-padding-sm);
   }
 
   &--narrow {
