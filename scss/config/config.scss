@@ -18,20 +18,11 @@
 // CONFIGURATION IMPORTS
 // =============================================================================
 
-@use "config/colors" as colors;
-@use "config/typography" as typography;
-@use "config/spacing" as spacing;
-@use "config/breakpoints" as breakpoints;
-@use "config/buttons" as buttons;
-@use "config/functions" as functions;
-
-// Forward all configuration modules for external use
-@forward "config/colors";
-@forward "config/typography";
-@forward "config/spacing";
-@forward "config/breakpoints";
-@forward "config/buttons";
-@forward "config/functions";
+@use "colors" as colors;
+@use "typography" as typography;
+@use "spacing" as spacing;
+@use "breakpoints" as breakpoints;
+@use "buttons" as buttons;
 
 // =============================================================================
 // CSS VARIABLES GENERATION

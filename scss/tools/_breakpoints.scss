@@ -19,23 +19,7 @@
  */
 @mixin breakpoint($size) {
   @if map-has-key(breakpoints.$breakpoints, $size) {
-    @media (min-width: breakpoints.breakpoint($size)) {
-      @content;
-    }
-  } @else {
-    @error "Breakpoint '#{$size}' not found in breakpoints map.";
-  }
-}
-
-/**
- * Responsive breakpoint down mixin (max-width)
- * @param {String} $size - Breakpoint size name
- * @example @include breakpoint-down("md") { display: block; }
- */
-@mixin breakpoint-down($size) {
-  @if map-has-key(breakpoints.$breakpoints, $size) {
-    $breakpoint-value: breakpoints.breakpoint($size) - 1px;
-    @media (max-width: #{$breakpoint-value}) {
+    @media (max-width: breakpoints.breakpoint($size)) {
       @content;
     }
   } @else {

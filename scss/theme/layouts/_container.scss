@@ -28,12 +28,12 @@
   padding-left: var(--container-padding-lg);
   padding-right: var(--container-padding-lg);
 
-  @include tools.breakpoint-down("lg") {
+  @include tools.breakpoint("lg") {
     padding-left: var(--container-padding-md);
     padding-right: var(--container-padding-md);
   }
 
-  @include tools.breakpoint-down("md") {
+  @include tools.breakpoint("md") {
     padding-left: var(--container-padding-sm);
     padding-right: var(--container-padding-sm);
   }

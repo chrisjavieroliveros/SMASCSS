@@ -126,7 +126,7 @@
  * 
  * 3. Use spacing in your SCSS:
  *    - Function: margin: spacing(4);      // Returns 1rem
- *    - Function: padding: spacing('md');  // Returns 2rem using alias
+ *    - Function: padding: spacing('sm');  // Returns 1rem using alias
  *    - Variable: gap: var(--spacing-6);   // Use CSS variable
  * 
  * 4. For container padding:
@@ -179,28 +179,6 @@
  * Generate CSS button variables
  * Creates CSS custom properties for all button configurations
  * @example @include generate-button-variables();
- */
-/**
- * Global Utility Functions
- * 
- * Note: All utility functions have been moved to scss/tools/_functions.scss
- * Use @use "../tools/functions" as functions; and call functions like:
- * $rem-value: functions.px-to-rem(16px);
- */
-/**
- * CONFIG
- * ======
- * 
- * This file imports all configuration modules and generates CSS variables
- * for the SCSS system. This is your main configuration entry point that 
- * can be easily swapped between different websites/projects.
- * 
- * USAGE:
- * - Import this file to get all configuration variables and CSS custom properties
- * - Modify the individual config files (_colors.scss, _typography.scss, etc.)
- *   to customize the appearance for each website
- * 
- * Author: Chris Javier Oliveros
  */
 :root {
   --color-primary: #314459;
