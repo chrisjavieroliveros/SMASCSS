@@ -1,163 +1,526 @@
 # SMASCSS - Scalable and Modular Architecture for SCSS
 
-SMASCSS is a thoughtful SCSS architecture designed to create maintainable, scalable, and organized stylesheets. It combines principles from SMACSS (Scalable and Modular Architecture for CSS) with the power of SCSS to deliver a robust system for styling modern web applications.
+A comprehensive SCSS architecture designed for maintainable, scalable, and organized stylesheets. SMASCSS combines SMACSS (Scalable and Modular Architecture for CSS) principles with modern SCSS features to deliver a robust styling system for web applications.
 
 ## Table of Contents
 
-- [Core Principles](#core-principles)
+- [Overview](#overview)
+- [Architecture Principles](#architecture-principles)
 - [Folder Structure](#folder-structure)
-- [Usage Guide](#usage-guide)
-- [Abstracts Layer](#abstracts-layer)
-- [Base Layer](#base-layer)
-- [Layout Layer](#layout-layer)
-- [Components Layer](#components-layer)
-- [Pages Layer](#pages-layer)
+- [Quick Start](#quick-start)
+- [Configuration System](#configuration-system)
+- [Tools & Utilities](#tools--utilities)
+- [Theme System](#theme-system)
+- [Component Development](#component-development)
+- [Layout System](#layout-system)
 - [Best Practices](#best-practices)
+- [Examples](#examples)
 
-## Core Principles
+## Overview
 
-SMASCSS is built on several foundational principles:
+SMASCSS provides a complete SCSS framework with:
 
-1. **Modularity** - Each style block serves a single purpose and can be reused throughout the project
-2. **Scalability** - The architecture scales from small projects to enterprise applications
-3. **Maintainability** - Code is organized in a way that makes future changes straightforward
-4. **Readability** - Naming conventions and organization make the codebase easy to understand
-5. **Performance** - The structure encourages efficient CSS output
+- **Configuration-driven design** - Centralized configuration for colors, typography, spacing, and breakpoints
+- **Modular tools system** - Utilities for unit conversion, layout, accessibility, and responsive design
+- **Flexible theme system** - Base styles, layouts, components, and utilities
+- **CSS custom properties generation** - Automatic CSS variable creation for runtime theming
+
+## Architecture Principles
+
+1. **Separation of Concerns** - Clear distinction between configuration, tools, and theme
+2. **Modularity** - Each file serves a single purpose and can be imported independently
+3. **Scalability** - Architecture scales from small projects to enterprise applications
+4. **Maintainability** - Organized structure makes updates and debugging straightforward
+5. **Performance** - Efficient CSS output with minimal redundancy
+6. **Accessibility** - Built-in accessibility utilities and best practices
 
 ## Folder Structure
 
 ```
 scss/
-├── abstracts/           # Utilities with no direct output
-│   ├── __index.scss     # Forwards all abstract modules
-│   ├── _colors.scss     # Color variables and functions
-│   ├── _fonts.scss      # Typography variables and mixins
-│   ├── _functions.scss  # SCSS functions
-│   ├── _mixins.scss     # SCSS mixins
-│   ├── _responsive.scss # Breakpoint handling
-│   └── _spacing.scss    # Spacing system
+├── config/                    # Configuration layer
+│   ├── config.scss           # Main config file (generates CSS variables)
+│   ├── _colors.scss          # Color system configuration
+│   ├── _typography.scss      # Typography configuration
+│   ├── _spacing.scss         # Spacing system configuration
+│   ├── _breakpoints.scss     # Responsive breakpoints
+│   └── _buttons.scss         # Button configuration
 │
-├── base/                # Base styles and resets
-│   ├── __index.scss     # Forwards all base styles
-│   ├── _reset.scss      # Element reset styles
-│   ├── _root.scss       # :root variables (CSS custom properties)
-│   ├── _typography.scss # Text styling fundamentals
-│   ├── _lists.scss      # List styling
-│   ├── _buttons.scss    # Button element styling
-│   └── _forms.scss      # Form element styling
+├── tools/                     # Utilities & functions (no CSS output)
+│   ├── __index.scss          # Tools entry point
+│   ├── _unit-conversion.scss # Unit conversion functions
+│   ├── _layout.scss          # Layout utilities & functions
+│   ├── _breakpoints.scss     # Responsive mixins
+│   ├── _accessibility.scss   # A11y mixins
+│   └── _text.scss            # Text manipulation utilities
 │
-├── components/          # Reusable UI components
-│   └── __index.scss     # Forwards all component modules
+├── theme/                     # Theme implementation
+│   ├── base/                 # Base styles
+│   │   ├── __index.scss      # Base entry point
+│   │   ├── _reset.scss       # CSS reset
+│   │   ├── _typography.scss  # Typography styles
+│   │   └── _buttons.scss     # Button styles
+│   │
+│   ├── layouts/              # Layout components
+│   │   ├── __index.scss      # Layouts entry point
+│   │   ├── _container.scss   # Container system
+│   │   └── _grid.scss        # Grid system
+│   │
+│   ├── components/           # UI components
+│   │   ├── __index.scss      # Components entry point
+│   │   └── _card.scss        # Example component
+│   │
+│   ├── utilities/            # Utility classes
+│   │   ├── __index.scss      # Utilities entry point
+│   │   ├── _helpers.scss     # Layout helpers
+│   │   ├── _display.scss     # Display utilities
+│   │   ├── _text-align.scss  # Text alignment
+│   │   ├── _margins.scss     # Margin utilities
+│   │   └── _paddings.scss    # Padding utilities
+│   │
+│   └── pages/                # Page-specific styles
+│       └── __index.scss      # Pages entry point
 │
-├── layouts/             # Layout and structure components
-│   ├── __index.scss     # Forwards all layout modules
-│   ├── _grid.scss       # Grid system
-│   └── _wrapper.scss    # Container wrappers
-│
-├── pages/               # Page-specific styles
-│   └── __index.scss     # Forwards all page-specific styles
-│
-└── main.scss            # Main file that imports all partials
+└── main.scss                 # Main entry point
 ```
 
-## Usage Guide
+## Quick Start
 
-The architecture follows a methodology where styles are imported in a specific order to ensure proper cascading:
-
-1. **Abstracts** - Imported first, but don't generate CSS on their own
-2. **Base** - Fundamental styles applied to HTML elements
-3. **Layouts** - Major layout components defining the structure
-4. **Components** - Reusable UI components
-5. **Pages** - Page-specific overrides when necessary
-
-Import the main stylesheet in your project to get access to all styles:
+### 1. Import the Main Stylesheet
 
 ```scss
+// In your main SCSS file
 @use "path/to/scss/main";
 ```
 
-## Abstracts Layer
+### 2. Generate CSS Variables
 
-The abstracts layer contains tools and helpers used across the project with no direct CSS output:
-
-- **Colors** - A comprehensive color system with semantic naming and helper functions
-- **Spacing** - A consistent spacing scale for margins, paddings, and gaps
-- **Responsive** - Breakpoint definitions and media query mixins
-- **Fonts** - Typography settings including font families, sizes, and weights
-- **Functions** - Utility functions for various calculations
-- **Mixins** - Reusable style patterns
-
-Example usage:
+The configuration system automatically generates CSS custom properties. Import the config to enable them:
 
 ```scss
-.element {
-  color: getColor(Primary);
-  margin-bottom: spacing(4);
+// This is already included in main.scss
+@use "config/config";
+```
 
-  @include responsive.breakpoint("md") {
-    margin-bottom: spacing(6);
+### 3. Use the Tools
+
+```scss
+// Import tools for development
+@use "tools" as tools;
+
+.my-component {
+  padding: tools.spacing(4);
+
+  @include tools.breakpoint("md") {
+    padding: tools.spacing(6);
   }
 }
 ```
 
-## Base Layer
+## Configuration System
 
-The base layer defines the foundation styles that are applied directly to HTML elements:
+### Colors
 
-- **Reset** - Normalizes browser inconsistencies
-- **Root** - Sets up CSS custom properties (variables)
-- **Typography** - Basic text styling and heading hierarchies
-- **Lists** - Default styling for list elements
-- **Buttons** - Core button styling
-- **Forms** - Basic form element styling
+Configure your color palette in `config/_colors.scss`:
 
-These styles act as a foundation and can be extended or overridden by more specific styles.
+```scss
+// Using color functions
+.element {
+  color: color("primary");
+  background: color-alpha("primary", 0.1);
+  border: 1px solid color("primary-300");
+}
 
-## Layout Layer
+// Using CSS variables (runtime)
+.element {
+  color: var(--color-primary);
+  background: var(--color-primary-50);
+}
+```
 
-The layout layer contains major structural components:
+### Typography
 
-- **Grid** - A flexible grid system with responsive classes
-- **Wrapper** - Container components for content width control
+Configure fonts, sizes, and weights in `config/_typography.scss`:
 
-Example usage:
+```scss
+// Using typography functions
+.heading {
+  font-family: font-family("heading");
+  font-size: font-size("2xl");
+  font-weight: font-weight("bold");
+  line-height: line-height("tight");
+}
+
+// Using CSS variables
+.heading {
+  font-family: var(--font-family-heading);
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+}
+```
+
+### Spacing
+
+Configure spacing scale in `config/_spacing.scss`:
+
+```scss
+// Using spacing function
+.component {
+  margin: spacing(4); // Returns 1rem
+  padding: spacing("lg"); // Using alias
+}
+
+// Using CSS variables
+.component {
+  margin: var(--spacing-4);
+  padding: var(--spacing-8);
+}
+```
+
+### Breakpoints
+
+Configure responsive breakpoints in `config/_breakpoints.scss`:
+
+```scss
+// Using breakpoint mixin
+.responsive-element {
+  width: 100%;
+
+  @include tools.breakpoint("md") {
+    width: 50%;
+  }
+
+  @include tools.breakpoint("lg") {
+    width: 33.333%;
+  }
+}
+```
+
+## Tools & Utilities
+
+### Unit Conversion
+
+```scss
+@use "tools" as tools;
+
+.element {
+  font-size: tools.px-to-rem(18px); // Convert 18px to rem
+  width: tools.rem-to-px(2rem); // Convert 2rem to px
+}
+```
+
+### Layout Utilities
+
+```scss
+// Fluid spacing between breakpoints
+.hero {
+  padding: tools.fluid-space(1rem, 3rem, 320px, 1200px);
+}
+
+// Aspect ratio
+.video-container {
+  @include tools.aspect-ratio(16/9);
+}
+
+// Clearfix
+.float-container {
+  @include tools.clearfix;
+}
+```
+
+### Accessibility
+
+```scss
+// Visually hidden (for screen readers)
+.sr-only {
+  @include tools.visually-hidden;
+}
+
+// Focus ring
+.interactive-element {
+  @include tools.focus-ring;
+}
+```
+
+### Text Utilities
+
+```scss
+// Truncate text
+.truncated {
+  @include tools.truncate-text;
+}
+
+// Multiple line truncation
+.excerpt {
+  @include tools.truncate-text(3); // 3 lines
+}
+```
+
+## Theme System
+
+### Base Styles
+
+Base styles are applied to HTML elements and provide sensible defaults:
+
+- **Reset**: Normalizes browser differences
+- **Typography**: Heading hierarchy and text styles
+- **Buttons**: Default button styling
+
+### Layout System
+
+#### Container System
 
 ```html
-<div class="global-wrapper">
-  <div class="grid grid--md-2 grid--lg-4">
-    <div>Content block 1</div>
-    <div>Content block 2</div>
-    <div>Content block 3</div>
-    <div>Content block 4</div>
+<!-- Default container (max-width: 1200px) -->
+<div class="container">Content</div>
+
+<!-- Container variations -->
+<div class="container container--narrow">Narrow content</div>
+<div class="container container--wide">Wide content</div>
+<div class="container container--fluid">Full width</div>
+```
+
+#### Grid System
+
+```html
+<!-- Basic grid -->
+<div class="grid">
+  <div>Item 1</div>
+  <div>Item 2</div>
+</div>
+
+<!-- Responsive columns -->
+<div class="grid grid--2-col">2 columns on tablet+</div>
+<div class="grid grid--3-col">3 columns on desktop</div>
+<div class="grid grid--4-col">4 columns on desktop</div>
+
+<!-- Gap variations -->
+<div class="grid grid--gap-sm">Small gap</div>
+<div class="grid grid--gap-lg">Large gap</div>
+
+<!-- Auto-fit for cards -->
+<div class="grid grid--auto-fit">
+  <div class="card">Card 1</div>
+  <div class="card">Card 2</div>
+  <div class="card">Card 3</div>
+</div>
+```
+
+### Utility Classes
+
+#### Spacing Utilities
+
+```html
+<!-- Margin utilities -->
+<div class="m-4">All margins</div>
+<div class="mt-2 mb-4">Top and bottom margins</div>
+<div class="mx-6">Horizontal margins</div>
+
+<!-- Padding utilities -->
+<div class="p-8">All padding</div>
+<div class="px-4 py-2">Horizontal and vertical padding</div>
+```
+
+#### Display & Flexbox
+
+```html
+<div class="flex-row justify-center align-center">Centered flex content</div>
+```
+
+## Component Development
+
+### Creating a New Component
+
+1. Create the component file in `theme/components/`:
+
+```scss
+// theme/components/_alert.scss
+@use "../../tools" as tools;
+@use "../../config/colors" as colors;
+
+.alert {
+  padding: var(--spacing-4);
+  border-radius: var(--border-radius-md);
+  border: 1px solid transparent;
+
+  &--success {
+    background-color: var(--color-success-50);
+    border-color: var(--color-success-200);
+    color: var(--color-success-800);
+  }
+
+  &--danger {
+    background-color: var(--color-danger-50);
+    border-color: var(--color-danger-200);
+    color: var(--color-danger-800);
+  }
+}
+```
+
+2. Add to the components index:
+
+```scss
+// theme/components/__index.scss
+@forward "alert";
+// ...existing forwards...
+```
+
+### Component Best Practices
+
+- Use BEM methodology for naming: `.block__element--modifier`
+- Leverage CSS custom properties for theming
+- Include responsive behavior when needed
+- Document usage in comments
+
+## Best Practices
+
+### 1. Naming Conventions
+
+- **Files**: Use descriptive names with underscores: `_button-group.scss`
+- **Classes**: Use BEM methodology: `.card__header--highlighted`
+- **Variables**: Use semantic names: `$color-primary` not `$blue`
+
+### 2. Architecture Guidelines
+
+- **Import order**: Always follow the established import order in `main.scss`
+- **Modularity**: Keep components independent and reusable
+- **Specificity**: Avoid deep nesting; keep selectors flat
+- **Documentation**: Comment complex logic and usage examples
+
+### 3. Responsive Design
+
+- **Mobile-first**: Start with mobile styles, enhance with breakpoints
+- **Consistent breakpoints**: Use the predefined breakpoint system
+- **Fluid design**: Leverage fluid spacing for smooth scaling
+
+### 4. Performance
+
+- **Selective imports**: Only import what you need
+- **CSS variables**: Use CSS custom properties for runtime theming
+- **Efficient selectors**: Avoid overly complex selectors
+
+## Examples
+
+### Complete Component Example
+
+```scss
+// theme/components/_pricing-card.scss
+@use "../../tools" as tools;
+
+.pricing-card {
+  background: var(--color-white);
+  border: 1px solid var(--color-light-300);
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-6);
+  text-align: center;
+  transition: transform 0.2s, box-shadow 0.2s;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  }
+
+  @include tools.breakpoint("md") {
+    padding: var(--spacing-8);
+  }
+
+  &__title {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-bold);
+    margin-bottom: var(--spacing-2);
+  }
+
+  &__price {
+    font-size: var(--font-size-4xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-4);
+  }
+
+  &__features {
+    list-style: none;
+    padding: 0;
+    margin-bottom: var(--spacing-6);
+
+    li {
+      padding: var(--spacing-2) 0;
+      border-bottom: 1px solid var(--color-light-200);
+
+      &:last-child {
+        border-bottom: none;
+      }
+    }
+  }
+
+  &--featured {
+    border-color: var(--color-primary);
+    position: relative;
+
+    &::before {
+      content: "Most Popular";
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: var(--color-primary);
+      color: var(--color-white);
+      padding: var(--spacing-1) var(--spacing-3);
+      border-radius: var(--border-radius-full);
+      font-size: var(--font-size-sm);
+      font-weight: var(--font-weight-medium);
+    }
+  }
+}
+```
+
+### Usage in HTML
+
+```html
+<div class="grid grid--3-col grid--gap-lg">
+  <div class="pricing-card">
+    <h3 class="pricing-card__title">Basic</h3>
+    <div class="pricing-card__price">$9</div>
+    <ul class="pricing-card__features">
+      <li>Feature 1</li>
+      <li>Feature 2</li>
+    </ul>
+    <button class="btn btn--primary">Choose Plan</button>
+  </div>
+
+  <div class="pricing-card pricing-card--featured">
+    <h3 class="pricing-card__title">Pro</h3>
+    <div class="pricing-card__price">$19</div>
+    <ul class="pricing-card__features">
+      <li>Everything in Basic</li>
+      <li>Feature 3</li>
+      <li>Feature 4</li>
+    </ul>
+    <button class="btn btn--primary">Choose Plan</button>
+  </div>
+
+  <div class="pricing-card">
+    <h3 class="pricing-card__title">Enterprise</h3>
+    <div class="pricing-card__price">$39</div>
+    <ul class="pricing-card__features">
+      <li>Everything in Pro</li>
+      <li>Feature 5</li>
+      <li>Priority Support</li>
+    </ul>
+    <button class="btn btn--primary">Choose Plan</button>
   </div>
 </div>
 ```
 
-## Components Layer
-
-The components layer contains reusable UI components that make up the interface:
-
-- Individual components like cards, alerts, modals, etc.
-- Each component is independent and can be used anywhere
-
-## Pages Layer
-
-The pages layer contains page-specific styles that are unique to individual pages:
-
-- Should be used sparingly, as most styles should be abstracted to components
-- Contains exceptions and specific overrides needed for unique page layouts
-
-## Best Practices
-
-1. **Follow the naming convention** - Use consistent BEM-style naming: `.block__element--modifier`
-2. **Keep selectors flat** - Avoid deep nesting to improve CSS specificity management
-3. **Create new components** - When a pattern repeats, abstract it to a component
-4. **Use the abstracts tools** - Leverage the provided functions and mixins for consistency
-5. **Comment your code** - Add comments for any complex logic or non-obvious styling
-6. **Mobile-first approach** - Start with mobile styles and use breakpoint mixins to scale up
-7. **Maintain the structure** - Place new files in their appropriate folders
-8. **Use forward patterns** - Make sure to update the `__index.scss` files when adding new partials
-
 ---
 
-This architecture is designed to grow with your project. Feel free to extend it with additional components, layouts, or abstract utilities as needed.
+## Contributing
+
+When extending this architecture:
+
+1. Follow the established folder structure
+2. Update the appropriate `__index.scss` files
+3. Document new utilities and components
+4. Test responsive behavior across breakpoints
+5. Ensure accessibility compliance
+
+This architecture is designed to grow with your project while maintaining organization and performance.

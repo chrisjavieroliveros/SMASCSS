@@ -11,11 +11,20 @@
  * 3. Use colors in your SCSS:
  *    - Function: color: color('primary');      // Returns #314459
  *    - Function: border: 1px solid color('primary-300');  // Uses shade variant
+ *    - Function: background: color('primary-alpha-50');  // 50% opacity primary
  *    - Variable: background: var(--color-primary);  // Use CSS variable
+ *    - Variable: background: var(--color-primary-alpha-30);  // 30% opacity CSS variable
  *    - Opacity: background: color-alpha('primary', 0.5);  // 50% opacity
  * 
  * 4. For theme variations:
  *    .dark-theme { background: var(--color-dark-800); }
+ * 
+ * 5. Alpha variants are automatically generated for main semantic colors only:
+ *    - Main colors (primary, secondary, tertiary, danger, warning, success, info, black, white)
+ *    - Get alpha variants from 10% to 90% opacity (10%, 20%, 30%, 40%, 50%, 60%, 70%, 80%, 90%)
+ *    - Usage: color('primary-alpha-30') for 30% opacity primary
+ *    - CSS Variables: var(--color-primary-alpha-50) for 50% opacity
+ *    - Variant colors (like primary-300, primary-tint) do NOT get alpha variants
  */
 
 // Color palette
@@ -57,6 +66,25 @@ $colors: (
   "secondary-800": #155fae,
   "secondary-900": #104b8a,
   "secondary-950": #0a2f5c,
+
+  // Tertiary Color Semantic
+  "tertiary": #8b5cf6,
+  "tertiary-tint": #a78bfa,
+  "tertiary-shade": #7c3aed,
+  "tertiary-contrast": #ffffff,
+
+  // Tertiary Color Variants
+  "tertiary-50": #f5f3ff,
+  "tertiary-100": #ede9fe,
+  "tertiary-200": #ddd6fe,
+  "tertiary-300": #c4b5fd,
+  "tertiary-400": #a78bfa,
+  "tertiary-500": #8b5cf6,
+  "tertiary-600": #7c3aed,
+  "tertiary-700": #6d28d9,
+  "tertiary-800": #5b21b6,
+  "tertiary-900": #4c1d95,
+  "tertiary-950": #3b0764,
 
   // State Color: Danger Semantic
   "danger": #e63946,
@@ -111,6 +139,48 @@ $colors: (
   "black": #272727,
   "white": #ffffff
 );
+
+// Alpha channel variants (10%, 20%, 30%, 40%, 50%, 60%, 70%, 80%, 90%)
+$alpha-levels: (10, 20, 30, 40, 50, 60, 70, 80, 90);
+
+// Main semantic colors that should get alpha variants
+$main-colors: (
+  "primary",
+  "secondary",
+  "tertiary",
+  "danger",
+  "warning",
+  "success",
+  "info",
+  "black",
+  "white"
+);
+
+// Generate alpha variants only for main semantic colors
+@function generate-alpha-colors($base-colors) {
+  $alpha-colors: ();
+
+  @each $color-name, $color-value in $base-colors {
+    // Only generate alpha variants for main semantic colors
+    @if index($main-colors, $color-name) {
+      @each $alpha in $alpha-levels {
+        $alpha-decimal: $alpha / 100;
+        $alpha-color-name: "#{$color-name}-alpha-#{$alpha}";
+        $alpha-colors: map-merge(
+          $alpha-colors,
+          (
+            $alpha-color-name: rgba($color-value, $alpha-decimal),
+          )
+        );
+      }
+    }
+  }
+
+  @return $alpha-colors;
+}
+
+// Merge base colors with alpha variants
+$colors: map-merge($colors, generate-alpha-colors($colors));
 
 /**
  * Function to get color value

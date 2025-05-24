@@ -26,11 +26,20 @@
  * 3. Use colors in your SCSS:
  *    - Function: color: color('primary');      // Returns #314459
  *    - Function: border: 1px solid color('primary-300');  // Uses shade variant
+ *    - Function: background: color('primary-alpha-50');  // 50% opacity primary
  *    - Variable: background: var(--color-primary);  // Use CSS variable
+ *    - Variable: background: var(--color-primary-alpha-30);  // 30% opacity CSS variable
  *    - Opacity: background: color-alpha('primary', 0.5);  // 50% opacity
  * 
  * 4. For theme variations:
  *    .dark-theme { background: var(--color-dark-800); }
+ * 
+ * 5. Alpha variants are automatically generated for main semantic colors only:
+ *    - Main colors (primary, secondary, tertiary, danger, warning, success, info, black, white)
+ *    - Get alpha variants from 10% to 90% opacity (10%, 20%, 30%, 40%, 50%, 60%, 70%, 80%, 90%)
+ *    - Usage: color('primary-alpha-30') for 30% opacity primary
+ *    - CSS Variables: var(--color-primary-alpha-50) for 50% opacity
+ *    - Variant colors (like primary-300, primary-tint) do NOT get alpha variants
  */
 /**
  * Function to get color value
@@ -211,6 +220,21 @@
   --color-secondary-800: #155fae;
   --color-secondary-900: #104b8a;
   --color-secondary-950: #0a2f5c;
+  --color-tertiary: #8b5cf6;
+  --color-tertiary-tint: #a78bfa;
+  --color-tertiary-shade: #7c3aed;
+  --color-tertiary-contrast: #ffffff;
+  --color-tertiary-50: #f5f3ff;
+  --color-tertiary-100: #ede9fe;
+  --color-tertiary-200: #ddd6fe;
+  --color-tertiary-300: #c4b5fd;
+  --color-tertiary-400: #a78bfa;
+  --color-tertiary-500: #8b5cf6;
+  --color-tertiary-600: #7c3aed;
+  --color-tertiary-700: #6d28d9;
+  --color-tertiary-800: #5b21b6;
+  --color-tertiary-900: #4c1d95;
+  --color-tertiary-950: #3b0764;
   --color-danger: #e63946;
   --color-danger-tint: #f06a75;
   --color-danger-shade: #a52833;
@@ -251,6 +275,87 @@
   --color-dark-950: #050505;
   --color-black: #272727;
   --color-white: #ffffff;
+  --color-primary-alpha-10: rgba(49, 68, 89, 0.1);
+  --color-primary-alpha-20: rgba(49, 68, 89, 0.2);
+  --color-primary-alpha-30: rgba(49, 68, 89, 0.3);
+  --color-primary-alpha-40: rgba(49, 68, 89, 0.4);
+  --color-primary-alpha-50: rgba(49, 68, 89, 0.5);
+  --color-primary-alpha-60: rgba(49, 68, 89, 0.6);
+  --color-primary-alpha-70: rgba(49, 68, 89, 0.7);
+  --color-primary-alpha-80: rgba(49, 68, 89, 0.8);
+  --color-primary-alpha-90: rgba(49, 68, 89, 0.9);
+  --color-secondary-alpha-10: rgba(42, 141, 233, 0.1);
+  --color-secondary-alpha-20: rgba(42, 141, 233, 0.2);
+  --color-secondary-alpha-30: rgba(42, 141, 233, 0.3);
+  --color-secondary-alpha-40: rgba(42, 141, 233, 0.4);
+  --color-secondary-alpha-50: rgba(42, 141, 233, 0.5);
+  --color-secondary-alpha-60: rgba(42, 141, 233, 0.6);
+  --color-secondary-alpha-70: rgba(42, 141, 233, 0.7);
+  --color-secondary-alpha-80: rgba(42, 141, 233, 0.8);
+  --color-secondary-alpha-90: rgba(42, 141, 233, 0.9);
+  --color-tertiary-alpha-10: rgba(139, 92, 246, 0.1);
+  --color-tertiary-alpha-20: rgba(139, 92, 246, 0.2);
+  --color-tertiary-alpha-30: rgba(139, 92, 246, 0.3);
+  --color-tertiary-alpha-40: rgba(139, 92, 246, 0.4);
+  --color-tertiary-alpha-50: rgba(139, 92, 246, 0.5);
+  --color-tertiary-alpha-60: rgba(139, 92, 246, 0.6);
+  --color-tertiary-alpha-70: rgba(139, 92, 246, 0.7);
+  --color-tertiary-alpha-80: rgba(139, 92, 246, 0.8);
+  --color-tertiary-alpha-90: rgba(139, 92, 246, 0.9);
+  --color-danger-alpha-10: rgba(230, 57, 70, 0.1);
+  --color-danger-alpha-20: rgba(230, 57, 70, 0.2);
+  --color-danger-alpha-30: rgba(230, 57, 70, 0.3);
+  --color-danger-alpha-40: rgba(230, 57, 70, 0.4);
+  --color-danger-alpha-50: rgba(230, 57, 70, 0.5);
+  --color-danger-alpha-60: rgba(230, 57, 70, 0.6);
+  --color-danger-alpha-70: rgba(230, 57, 70, 0.7);
+  --color-danger-alpha-80: rgba(230, 57, 70, 0.8);
+  --color-danger-alpha-90: rgba(230, 57, 70, 0.9);
+  --color-warning-alpha-10: rgba(255, 183, 3, 0.1);
+  --color-warning-alpha-20: rgba(255, 183, 3, 0.2);
+  --color-warning-alpha-30: rgba(255, 183, 3, 0.3);
+  --color-warning-alpha-40: rgba(255, 183, 3, 0.4);
+  --color-warning-alpha-50: rgba(255, 183, 3, 0.5);
+  --color-warning-alpha-60: rgba(255, 183, 3, 0.6);
+  --color-warning-alpha-70: rgba(255, 183, 3, 0.7);
+  --color-warning-alpha-80: rgba(255, 183, 3, 0.8);
+  --color-warning-alpha-90: rgba(255, 183, 3, 0.9);
+  --color-success-alpha-10: rgba(42, 157, 143, 0.1);
+  --color-success-alpha-20: rgba(42, 157, 143, 0.2);
+  --color-success-alpha-30: rgba(42, 157, 143, 0.3);
+  --color-success-alpha-40: rgba(42, 157, 143, 0.4);
+  --color-success-alpha-50: rgba(42, 157, 143, 0.5);
+  --color-success-alpha-60: rgba(42, 157, 143, 0.6);
+  --color-success-alpha-70: rgba(42, 157, 143, 0.7);
+  --color-success-alpha-80: rgba(42, 157, 143, 0.8);
+  --color-success-alpha-90: rgba(42, 157, 143, 0.9);
+  --color-info-alpha-10: rgba(33, 158, 188, 0.1);
+  --color-info-alpha-20: rgba(33, 158, 188, 0.2);
+  --color-info-alpha-30: rgba(33, 158, 188, 0.3);
+  --color-info-alpha-40: rgba(33, 158, 188, 0.4);
+  --color-info-alpha-50: rgba(33, 158, 188, 0.5);
+  --color-info-alpha-60: rgba(33, 158, 188, 0.6);
+  --color-info-alpha-70: rgba(33, 158, 188, 0.7);
+  --color-info-alpha-80: rgba(33, 158, 188, 0.8);
+  --color-info-alpha-90: rgba(33, 158, 188, 0.9);
+  --color-black-alpha-10: rgba(39, 39, 39, 0.1);
+  --color-black-alpha-20: rgba(39, 39, 39, 0.2);
+  --color-black-alpha-30: rgba(39, 39, 39, 0.3);
+  --color-black-alpha-40: rgba(39, 39, 39, 0.4);
+  --color-black-alpha-50: rgba(39, 39, 39, 0.5);
+  --color-black-alpha-60: rgba(39, 39, 39, 0.6);
+  --color-black-alpha-70: rgba(39, 39, 39, 0.7);
+  --color-black-alpha-80: rgba(39, 39, 39, 0.8);
+  --color-black-alpha-90: rgba(39, 39, 39, 0.9);
+  --color-white-alpha-10: rgba(255, 255, 255, 0.1);
+  --color-white-alpha-20: rgba(255, 255, 255, 0.2);
+  --color-white-alpha-30: rgba(255, 255, 255, 0.3);
+  --color-white-alpha-40: rgba(255, 255, 255, 0.4);
+  --color-white-alpha-50: rgba(255, 255, 255, 0.5);
+  --color-white-alpha-60: rgba(255, 255, 255, 0.6);
+  --color-white-alpha-70: rgba(255, 255, 255, 0.7);
+  --color-white-alpha-80: rgba(255, 255, 255, 0.8);
+  --color-white-alpha-90: rgba(255, 255, 255, 0.9);
 }
 
 :root {
