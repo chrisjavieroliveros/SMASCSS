@@ -1,0 +1,41 @@
+/**
+ * TOOLS INDEX
+ * -----------
+ * 
+ * This directory contains SCSS utilities, functions, and mixins
+ * organized into logical groupings for better maintainability.
+ * 
+ * The tools directory includes:
+ * - Unit Conversion: Functions for converting between CSS units
+ * - Layout: Layout-related functions and mixins
+ * - Breakpoints: Responsive media query mixins
+ * - Accessibility: A11y-focused mixins
+ * - Text: Text manipulation utilities
+ * 
+ * Note: CSS variable generation has been moved to config files
+ * 
+ * USAGE:
+ * @use "../tools" as tools;
+ * 
+ * // Unit conversion
+ * $rem-value: tools.px-to-rem(16px);
+ * 
+ * // Breakpoints
+ * @include tools.breakpoint("md") { ... }
+ * 
+ * // Layout utilities
+ * @include tools.aspect-ratio(16/9);
+ * 
+ * // Accessibility
+ * @include tools.visually-hidden;
+ * 
+ * // Text utilities
+ * @include tools.truncate-text;
+ */
+
+// Forward all specialized tool modules
+@forward "unit-conversion";
+@forward "layout";
+@forward "breakpoints";
+@forward "accessibility";
+@forward "text";

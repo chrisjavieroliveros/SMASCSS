@@ -35,7 +35,11 @@ $button-sizes: (
   @return null;
 }
 
-// Generate CSS button variables
+/**
+ * Generate CSS button variables
+ * Creates CSS custom properties for all button configurations
+ * @example @include generate-button-variables();
+ */
 @mixin generate-button-variables() {
   :root {
     // Sizes
@@ -43,8 +47,10 @@ $button-sizes: (
       @each $property, $value in $properties {
         @if $property == "font-size" {
           --button-#{$size}-#{$property}: var(--font-size-#{$value});
+        } @else if $property == "padding-y" or $property == "padding-x" {
+          --button-#{$size}-#{$property}: var(--spacing-#{$value});
         } @else {
-          --button-#{$size}-#{$property}: var(--space-#{$value});
+          --button-#{$size}-#{$property}: #{$value};
         }
       }
     }

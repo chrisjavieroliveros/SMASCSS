@@ -1,0 +1,33 @@
+@use "../../config" as config;
+
+@each $name, $value in config.$spacing {
+  .m-#{$name} {
+    margin: var(--spacing-#{$name}) !important;
+  }
+
+  .mt-#{$name} {
+    margin-top: var(--spacing-#{$name}) !important;
+  }
+
+  .mb-#{$name} {
+    margin-bottom: var(--spacing-#{$name}) !important;
+  }
+
+  .ml-#{$name} {
+    margin-left: var(--spacing-#{$name}) !important;
+  }
+
+  .mr-#{$name} {
+    margin-right: var(--spacing-#{$name}) !important;
+  }
+
+  .mx-#{$name} {
+    margin-left: var(--spacing-#{$name}) !important;
+    margin-right: var(--spacing-#{$name}) !important;
+  }
+
+  .my-#{$name} {
+    margin-top: var(--spacing-#{$name}) !important;
+    margin-bottom: var(--spacing-#{$name}) !important;
+  }
+}

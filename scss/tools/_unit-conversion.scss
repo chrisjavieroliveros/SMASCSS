@@ -1,0 +1,51 @@
+/**
+ * UNIT CONVERSION FUNCTIONS
+ * -------------------------
+ * 
+ * Utility functions for converting between different CSS units
+ * 
+ * USAGE:
+ * @use "../tools/unit-conversion" as units;
+ * $rem-value: units.px-to-rem(16px);
+ * $px-value: units.rem-to-px(1.5rem);
+ * $unitless: units.strip-unit(16px);
+ */
+
+/**
+ * Strip units from a value
+ * @param {Number} $value - Value with units
+ * @return {Number} - Value without units
+ * @example $unitless: strip-unit(16px); // Returns 16
+ */
+@function strip-unit($value) {
+  @if type-of($value) == "number" and not unitless($value) {
+    @return $value / ($value * 0 + 1);
+  }
+  @return $value;
+}
+
+/**
+ * Convert px to rem
+ * @param {Number} $px - Pixel value to convert
+ * @param {Number} $base-font-size - Base font size (default: 16px)
+ * @return {Number} - Value in rem units
+ * @example $rem: px-to-rem(24px); // Returns 1.5rem
+ */
+@function px-to-rem($px, $base-font-size: 16px) {
+  $px: strip-unit($px);
+  $base: strip-unit($base-font-size);
+  @return #{$px / $base}rem;
+}
+
+/**
+ * Convert rem to px
+ * @param {Number} $rem - Rem value to convert
+ * @param {Number} $base-font-size - Base font size (default: 16px)
+ * @return {Number} - Value in px units
+ * @example $px: rem-to-px(1.5rem); // Returns 24px
+ */
+@function rem-to-px($rem, $base-font-size: 16px) {
+  $rem: strip-unit($rem);
+  $base: strip-unit($base-font-size);
+  @return #{$rem * $base}px;
+}

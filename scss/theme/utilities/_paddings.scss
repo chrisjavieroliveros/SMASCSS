@@ -1,0 +1,33 @@
+@use "../../config" as config;
+
+@each $name, $value in config.$spacing {
+  .p-#{$name} {
+    padding: var(--spacing-#{$name}) !important;
+  }
+
+  .pt-#{$name} {
+    padding-top: var(--spacing-#{$name}) !important;
+  }
+
+  .pb-#{$name} {
+    padding-bottom: var(--spacing-#{$name}) !important;
+  }
+
+  .pl-#{$name} {
+    padding-left: var(--spacing-#{$name}) !important;
+  }
+
+  .pr-#{$name} {
+    padding-right: var(--spacing-#{$name}) !important;
+  }
+
+  .px-#{$name} {
+    padding-left: var(--spacing-#{$name}) !important;
+    padding-right: var(--spacing-#{$name}) !important;
+  }
+
+  .py-#{$name} {
+    padding-top: var(--spacing-#{$name}) !important;
+    padding-bottom: var(--spacing-#{$name}) !important;
+  }
+}

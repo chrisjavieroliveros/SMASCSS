@@ -1,3 +1,5 @@
+@use "../../tools/_index" as tools;
+
 /**
  * GRID LAYOUT CONFIGURATION
  * -----------------------
@@ -29,26 +31,26 @@
  *    Creates a responsive grid that automatically fits columns based on available space
  */
 
-@use "../config/_index" as config;
-
 .grid {
   display: grid;
-  gap: config.spacing("4");
+  gap: var(--spacing-4);
 
   // Gap variants
   &--gap-sm {
-    gap: config.spacing("2");
+    gap: var(--spacing-2);
   }
 
   &--gap-lg {
-    gap: config.spacing("8");
+    gap: var(--spacing-8);
   }
+
+  // ...existing code...
 
   // Responsive grid templates
   &--2-col {
     grid-template-columns: 1fr;
 
-    @include config.breakpoint("md") {
+    @include tools.breakpoint("md") {
       grid-template-columns: repeat(2, 1fr);
     }
   }
@@ -56,11 +58,11 @@
   &--3-col {
     grid-template-columns: 1fr;
 
-    @include config.breakpoint("md") {
+    @include tools.breakpoint("md") {
       grid-template-columns: repeat(2, 1fr);
     }
 
-    @include config.breakpoint("lg") {
+    @include tools.breakpoint("lg") {
       grid-template-columns: repeat(3, 1fr);
     }
   }
@@ -68,11 +70,11 @@
   &--4-col {
     grid-template-columns: 1fr;
 
-    @include config.breakpoint("md") {
+    @include tools.breakpoint("md") {
       grid-template-columns: repeat(2, 1fr);
     }
 
-    @include config.breakpoint("lg") {
+    @include tools.breakpoint("lg") {
       grid-template-columns: repeat(4, 1fr);
     }
   }

@@ -103,7 +103,7 @@ $container-padding: (
 
 /**
  * Generate CSS spacing variables
- * Creates: --spacing-X and --container-padding-X variables
+ * Creates CSS custom properties for all spacing values
  * @example @include generate-spacing-variables();
  */
 @mixin generate-spacing-variables() {

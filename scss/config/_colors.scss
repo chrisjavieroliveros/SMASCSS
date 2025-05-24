@@ -140,7 +140,7 @@ $colors: (
 
 /**
  * Generate CSS color variables
- * Creates: --color-X variables
+ * Creates CSS custom properties for all colors in the $colors map
  * @example @include generate-color-variables();
  */
 @mixin generate-color-variables() {

@@ -1,0 +1,33 @@
+/**
+ * TEXT UTILITY MIXINS
+ * -------------------
+ * 
+ * Mixins for text manipulation and display utilities
+ * 
+ * USAGE:
+ * @use "../tools/text" as text;
+ * @include text.truncate-text;
+ * @include text.truncate-multiline(3);
+ */
+
+/**
+ * Truncate text with ellipsis
+ * @example @include truncate-text;
+ */
+@mixin truncate-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/**
+ * Multi-line text truncation
+ * @param {Number} $lines - Number of lines to show
+ * @example @include truncate-multiline(3);
+ */
+@mixin truncate-multiline($lines: 2) {
+  display: -webkit-box;
+  -webkit-line-clamp: $lines;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}

@@ -1,3 +1,5 @@
+@use "../../tools/_index" as tools;
+
 /**
  * CONTAINER CONFIGURATION
  * ----------------------
@@ -18,8 +20,6 @@
  *    - Small screens: var(--container-padding-sm)
  */
 
-@use "../config/_index" as config;
-
 .container {
   width: 100%;
   max-width: 1200px;
@@ -28,12 +28,12 @@
   padding-left: var(--container-padding-lg);
   padding-right: var(--container-padding-lg);
 
-  @include config.breakpoint-down("lg") {
+  @include tools.breakpoint-down("lg") {
     padding-left: var(--container-padding-md);
     padding-right: var(--container-padding-md);
   }
 
-  @include config.breakpoint-down("md") {
+  @include tools.breakpoint-down("md") {
     padding-left: var(--container-padding-sm);
     padding-right: var(--container-padding-sm);
   }

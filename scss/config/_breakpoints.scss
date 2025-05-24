@@ -41,18 +41,11 @@ $breakpoints: (
   @return null;
 }
 
-// Breakpoint mixin
-@mixin breakpoint($size) {
-  @if map-has-key($breakpoints, $size) {
-    @media (min-width: breakpoint($size)) {
-      @content;
-    }
-  } @else {
-    @error "Breakpoint '#{$size}' not found in breakpoints map.";
-  }
-}
-
-// Generate CSS breakpoint variables
+/**
+ * Generate CSS breakpoint variables
+ * Creates CSS custom properties for all breakpoint values
+ * @example @include generate-breakpoint-variables();
+ */
 @mixin generate-breakpoint-variables() {
   :root {
     @each $name, $value in $breakpoints {

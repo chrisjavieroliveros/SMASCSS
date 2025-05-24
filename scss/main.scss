@@ -3,35 +3,30 @@
  * Description: This project implements a scalable and modular architecture for CSS (SMACSS) 
  *              using SCSS to ensure maintainable and reusable styles.
  * Author: Chris Javier Oliveros
- * Version: 1.0.1
+ * Version: 2.0.0
  * License: MIT
  * 
  * This file serves as the entry point for the SCSS architecture. It organizes and imports 
  * all styles based on the SMACSS methodology.
  */
 
-// Import configuration
-@use "config/_index" as config;
-// Purpose: Centralized design tokens and global configuration
-// (e.g., colors, typography, spacing, breakpoints, and utility functions).
-
 // Import base styles
-@use "base/_index" as base;
-// Purpose: Base styles that apply globally, such as resets, typography defaults, and CSS variables initialization.
+@use "theme/base/_index" as base;
+// Purpose: Base styles that apply globally, such as resets, typography defaults, and element styles.
 
 // Import layouts
-@use "layouts/_index" as layouts;
+@use "theme/layouts/_index" as layouts;
 // Purpose: Styles for structural layout components, such as containers, grids, and other layout-specific rules.
 
 // Import components
-@use "components/_index" as components;
+@use "theme/components/_index" as components;
 // Purpose: Reusable UI components, such as buttons, cards, and other modular elements.
 
 // Import utilities
-@use "utilities/_index" as utilities;
+@use "theme/utilities/_index" as utilities;
 // Purpose: Utility classes and helper styles for quick and specific adjustments
 // (e.g., margin helpers, text alignment).
 
 // Import page-specific styles
-@use "pages/_index" as pages;
+@use "theme/pages/_index" as pages;
 // Purpose: Styles specific to individual pages or views, allowing for customization without affecting global or reusable styles.

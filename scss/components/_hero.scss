@@ -1,7 +1,0 @@
-@use "../config/colors" as *;
-@use "../config/breakpoints" as *;
-
-.hero {
-  background-color: color("primary");
-  color: color("primary-contrast");
-}

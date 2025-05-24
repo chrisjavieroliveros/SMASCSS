@@ -1,0 +1,45 @@
+/**
+ * CONFIG
+ * ======
+ * 
+ * This file imports all configuration modules and generates CSS variables
+ * for the SCSS system. This is your main configuration entry point that 
+ * can be easily swapped between different websites/projects.
+ * 
+ * USAGE:
+ * - Import this file to get all configuration variables and CSS custom properties
+ * - Modify the individual config files (_colors.scss, _typography.scss, etc.)
+ *   to customize the appearance for each website
+ * 
+ * Author: Chris Javier Oliveros
+ */
+
+// =============================================================================
+// CONFIGURATION IMPORTS
+// =============================================================================
+
+@use "config/colors" as colors;
+@use "config/typography" as typography;
+@use "config/spacing" as spacing;
+@use "config/breakpoints" as breakpoints;
+@use "config/buttons" as buttons;
+@use "config/functions" as functions;
+
+// Forward all configuration modules for external use
+@forward "config/colors";
+@forward "config/typography";
+@forward "config/spacing";
+@forward "config/breakpoints";
+@forward "config/buttons";
+@forward "config/functions";
+
+// =============================================================================
+// CSS VARIABLES GENERATION
+// =============================================================================
+
+// Generate all CSS custom properties
+@include colors.generate-color-variables();
+@include typography.generate-typography-variables();
+@include spacing.generate-spacing-variables();
+@include breakpoints.generate-breakpoint-variables();
+@include buttons.generate-button-variables();

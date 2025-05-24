@@ -1,0 +1,44 @@
+/**
+ * BREAKPOINT MIXINS
+ * -----------------
+ * 
+ * Responsive breakpoint utilities for media queries
+ * 
+ * USAGE:
+ * @use "../tools/breakpoints" as bp;
+ * @include bp.breakpoint("md") { display: flex; }
+ * @include bp.breakpoint-down("lg") { display: block; }
+ */
+
+@use "../config/breakpoints" as breakpoints;
+
+/**
+ * Responsive breakpoint mixin
+ * @param {String} $size - Breakpoint size name
+ * @example @include breakpoint("md") { display: flex; }
+ */
+@mixin breakpoint($size) {
+  @if map-has-key(breakpoints.$breakpoints, $size) {
+    @media (min-width: breakpoints.breakpoint($size)) {
+      @content;
+    }
+  } @else {
+    @error "Breakpoint '#{$size}' not found in breakpoints map.";
+  }
+}
+
+/**
+ * Responsive breakpoint down mixin (max-width)
+ * @param {String} $size - Breakpoint size name
+ * @example @include breakpoint-down("md") { display: block; }
+ */
+@mixin breakpoint-down($size) {
+  @if map-has-key(breakpoints.$breakpoints, $size) {
+    $breakpoint-value: breakpoints.breakpoint($size) - 1px;
+    @media (max-width: #{$breakpoint-value}) {
+      @content;
+    }
+  } @else {
+    @error "Breakpoint '#{$size}' not found in breakpoints map.";
+  }
+}

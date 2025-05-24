@@ -183,11 +183,15 @@ $letter-spacing: (
 
 /**
  * Generate CSS typography variables
- * Creates: --font-size-X, --line-height-X, --letter-spacing-X, and --font-weight-X variables
+ * Creates CSS custom properties for all typography settings
  * @example @include generate-typography-variables();
  */
 @mixin generate-typography-variables() {
   :root {
+    @each $name, $value in $font-families {
+      --font-family-#{$name}: #{$value};
+    }
+
     @each $name, $value in $font-sizes {
       --font-size-#{$name}: #{$value};
     }
