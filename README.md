@@ -2,6 +2,9 @@
 
 A comprehensive SCSS architecture designed for maintainable, scalable, and organized stylesheets. SMASCSS combines SMACSS (Scalable and Modular Architecture for CSS) principles with modern SCSS features to deliver a robust styling system for web applications.
 
+**Version:** 2.0.0
+**License:** MIT
+
 ## Table of Contents
 
 - [Overview](#overview)
@@ -68,7 +71,8 @@ scss/
 │   │
 │   ├── components/           # UI components
 │   │   ├── __index.scss      # Components entry point
-│   │   └── _card.scss        # Example component
+│   │   ├── _card.scss        # Card component
+│   │   └── _hero.scss        # Hero section component
 │   │
 │   ├── utilities/            # Utility classes
 │   │   ├── __index.scss      # Utilities entry point
@@ -93,14 +97,21 @@ scss/
 @use "path/to/scss/main";
 ```
 
-### 2. Generate CSS Variables
+### 2. Configuration System
 
-The configuration system automatically generates CSS custom properties. Import the config to enable them:
+The configuration system automatically generates CSS custom properties from your configuration files. Import the config to enable them:
 
 ```scss
 // This is already included in main.scss
-@use "config/config";
+@use "config/config" as config;
 ```
+
+The configuration system includes:
+- Color system with CSS variable generation
+- Typography system with font variables
+- Spacing scale with CSS custom properties
+- Breakpoint system with responsive variables
+- Button configuration with theme variables
 
 ### 3. Use the Tools
 
@@ -116,6 +127,16 @@ The configuration system automatically generates CSS custom properties. Import t
   }
 }
 ```
+
+### 4. Import Order
+
+The main.scss file follows this specific import order:
+1. Tools (utilities and functions)
+2. Base styles (resets and defaults)
+3. Layouts (structural components)
+4. Components (reusable UI elements)
+5. Utilities (helper classes)
+6. Page-specific styles
 
 ## Configuration System
 
