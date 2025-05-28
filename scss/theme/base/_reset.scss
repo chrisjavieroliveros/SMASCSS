@@ -1,26 +1,36 @@
+/**
+ * MODERN CSS RESET
+ * ================
+ * 
+ * A comprehensive CSS reset based on modern best practices including:
+ * - Josh Comeau's CSS Reset
+ * - Andy Bell's Modern CSS Reset
+ * - Normalize.css principles
+ * - Accessibility improvements
+ * 
+ * Updated: 2024
+ */
+
+/* Box sizing rules */
 *,
 *::before,
 *::after {
   box-sizing: border-box;
 }
 
+/* Prevent font size inflation */
 html {
+  -moz-text-size-adjust: none;
+  -webkit-text-size-adjust: none;
+  text-size-adjust: none;
   font-size: 100%;
-  -webkit-text-size-adjust: 100%;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeSpeed;
 }
 
-body {
-  margin: 0;
-  font-family: var(--font-family-base);
-  font-size: var(--font-size-base);
-  line-height: var(--line-height-normal);
-  color: var(--color-black);
-  background-color: var(--color-white);
-}
-
-// Remove default margin
+/* Remove default margin in favour of better control in authored CSS */
+body,
 h1,
 h2,
 h3,
@@ -28,44 +38,228 @@ h4,
 h5,
 h6,
 p,
-ul,
-ol,
+figure,
+blockquote,
 dl,
-figure {
+dd {
   margin: 0;
 }
 
-// Remove default padding and list styling
+/* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
+ul[role='list'],
+ol[role='list'] {
+  list-style: none;
+}
+
+/* Remove default list styles */
 ul,
 ol {
+  margin: 0;
   padding: 0;
   list-style: none;
 }
 
-// Images
-img {
+/* Set core body defaults */
+body {
+  min-height: 100vh;
+  line-height: var(--line-height-normal, 1.5);
+  font-family: var(--font-family-base, system-ui, sans-serif);
+  font-size: var(--font-size-base, 1rem);
+  color: var(--color-black, #000);
+  background-color: var(--color-white, #fff);
+  margin: 0;
+  padding: 0;
+}
+
+/* Set shorter line heights on headings and interactive elements */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+button,
+input,
+label {
+  line-height: 1.1;
+}
+
+/* Balance text wrapping on headings */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  text-wrap: balance;
+}
+
+/* A elements that don't have a class get default styles */
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+  color: currentColor;
+}
+
+/* Make images easier to work with */
+img,
+picture,
+video,
+canvas,
+svg {
   max-width: 100%;
   height: auto;
   display: block;
 }
 
-// Links
-a {
-  color: var(--color-secondary);
-  text-decoration: none;
+/* Inherit fonts for inputs and buttons */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
 }
 
-// Buttons
+/* Remove default button styles */
 button {
   background: none;
   border: none;
   padding: 0;
-  font: inherit;
   cursor: pointer;
 }
 
-// Focus styles
+/* Make sure textareas without a rows attribute are not tiny */
+textarea:not([rows]) {
+  min-height: 10em;
+}
+
+/* Anything that has been anchored to should have extra scroll margin */
+:target {
+  scroll-margin-block: 5ex;
+}
+
+/* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Focus styles */
 :focus-visible {
-  outline: 2px solid var(--color-secondary);
+  outline: 2px solid var(--color-secondary, #2a8de9);
   outline-offset: 2px;
+}
+
+/* Remove focus outline for mouse users */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Improve table styling */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* Form elements */
+fieldset {
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+legend {
+  padding: 0;
+}
+
+/* Remove default styling from form elements */
+input[type="search"] {
+  -webkit-appearance: textfield;
+  outline-offset: -2px;
+}
+
+input[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+/* Fix webkit button styling */
+::-webkit-file-upload-button {
+  -webkit-appearance: button;
+  font: inherit;
+}
+
+/* Improve consistency of default fonts */
+code,
+kbd,
+samp,
+pre {
+  font-family: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, 'DejaVu Sans Mono', monospace;
+  font-size: 1em;
+}
+
+/* Add the correct font size in all browsers */
+small {
+  font-size: 80%;
+}
+
+/* Prevent sub and sup elements from affecting the line height */
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+sub {
+  bottom: -0.25em;
+}
+
+sup {
+  top: -0.5em;
+}
+
+/* Remove the border on images inside links in IE 10 */
+img {
+  border-style: none;
+}
+
+/* Hide the overflow in IE */
+svg:not(:root) {
+  overflow: hidden;
+}
+
+/* Correct the inheritance and scaling of font size in all browsers */
+pre {
+  font-family: monospace, monospace;
+  font-size: 1em;
+  overflow: auto;
+}
+
+/* Add the correct display in IE 10 */
+[hidden] {
+  display: none;
+}
+
+/* Accessibility improvements */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }

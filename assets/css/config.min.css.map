@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAkBA,QAAQ,CAAR,QAAQ,CACR,QAAQ,CAAR,YAAQ,CACR,QAAQ,CAAR,SAAQ,CACR,QAAQ,CAAR,aAAQ,CACR,QAAQ,CAAR,SAAQ",
+    "sources": [
+        "../../scss/config/config.scss"
+    ],
+    "names": [],
+    "file": "config.min.css"
+}

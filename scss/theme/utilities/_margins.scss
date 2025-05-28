@@ -2,32 +2,32 @@
 
 @each $name, $value in spacing.$spacing {
   .m-#{$name} {
-    margin: var(--spacing-#{$name}) !important;
+    margin: var(--spacing-#{$name});
   }
 
   .mt-#{$name} {
-    margin-top: var(--spacing-#{$name}) !important;
+    margin-top: var(--spacing-#{$name});
   }
 
   .mb-#{$name} {
-    margin-bottom: var(--spacing-#{$name}) !important;
+    margin-bottom: var(--spacing-#{$name});
   }
 
   .ml-#{$name} {
-    margin-left: var(--spacing-#{$name}) !important;
+    margin-left: var(--spacing-#{$name});
   }
 
   .mr-#{$name} {
-    margin-right: var(--spacing-#{$name}) !important;
+    margin-right: var(--spacing-#{$name});
   }
 
   .mx-#{$name} {
-    margin-left: var(--spacing-#{$name}) !important;
-    margin-right: var(--spacing-#{$name}) !important;
+    margin-left: var(--spacing-#{$name});
+    margin-right: var(--spacing-#{$name});
   }
 
   .my-#{$name} {
-    margin-top: var(--spacing-#{$name}) !important;
-    margin-bottom: var(--spacing-#{$name}) !important;
+    margin-top: var(--spacing-#{$name});
+    margin-bottom: var(--spacing-#{$name});
   }
 }
