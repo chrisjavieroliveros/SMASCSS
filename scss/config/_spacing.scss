@@ -77,9 +77,11 @@ $container-padding: (
  * @example margin: spacing('sm');    // Returns 1rem via alias
  */
 @function spacing($key) {
+
   // Check if it's an alias first
   @if map-has-key($spacing-aliases, $key) {
     $alias-key: map-get($spacing-aliases, $key);
+
     @if map-has-key($spacing, $alias-key) {
       @return map-get($spacing, $alias-key);
     }
@@ -110,3 +112,6 @@ $container-padding: (
     }
   }
 }
+
+// Generate CSS variables
+@include generate-spacing-variables();

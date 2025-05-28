@@ -1,3 +1,28 @@
+@use "../../tools/_index" as tools;
+
+/**
+ * DISPLAY UTILITIES
+ * ----------------
+ * 
+ * Mobile-first responsive display utilities
+ * 
+ * USAGE:
+ * Base classes:
+ * - .d-none: Hide element
+ * - .d-block: Display as block
+ * - .d-flex: Display as flex
+ * - .d-inline: Display as inline
+ * - .d-inline-block: Display as inline-block
+ * - .d-grid: Display as grid
+ * 
+ * Responsive variants (mobile-first):
+ * - .d-sm-block: Display as block from small screens up
+ * - .d-md-flex: Display as flex from medium screens up
+ * - .d-lg-none: Hide from large screens up
+ * etc.
+ */
+
+// Base display utilities
 .d-none {
   display: none !important;
 }
@@ -8,4 +33,45 @@
 
 .d-flex {
   display: flex !important;
+}
+
+.d-inline {
+  display: inline !important;
+}
+
+.d-inline-block {
+  display: inline-block !important;
+}
+
+.d-grid {
+  display: grid !important;
+}
+
+// Mobile-first responsive display utilities
+@each $breakpoint in ("sm", "md", "lg", "xl", "xxl") {
+  @include tools.breakpoint-up($breakpoint) {
+    .d-#{$breakpoint}-none {
+      display: none !important;
+    }
+
+    .d-#{$breakpoint}-block {
+      display: block !important;
+    }
+
+    .d-#{$breakpoint}-flex {
+      display: flex !important;
+    }
+
+    .d-#{$breakpoint}-inline {
+      display: inline !important;
+    }
+
+    .d-#{$breakpoint}-inline-block {
+      display: inline-block !important;
+    }
+
+    .d-#{$breakpoint}-grid {
+      display: grid !important;
+    }
+  }
 }

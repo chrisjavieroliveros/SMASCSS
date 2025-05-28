@@ -1,3 +1,5 @@
+@use "sass:math";
+
 /**
  * COLOR CONFIGURATION
  * ------------------
@@ -136,12 +138,23 @@ $colors: (
   "dark-900": #101010,
   "dark-950": #050505,
 
+  // Base Colors;
   "black": #272727,
   "white": #ffffff
 );
 
 // Alpha channel variants (10%, 20%, 30%, 40%, 50%, 60%, 70%, 80%, 90%)
-$alpha-levels: (10, 20, 30, 40, 50, 60, 70, 80, 90);
+$alpha-levels: (
+  10,
+  20,
+  30,
+  40,
+  50,
+  60,
+  70,
+  80,
+  90
+);
 
 // Main semantic colors that should get alpha variants
 $main-colors: (
@@ -158,25 +171,24 @@ $main-colors: (
 
 // Generate alpha variants only for main semantic colors
 @function generate-alpha-colors($base-colors) {
-  $alpha-colors: ();
+  $alpha-colors: (
+  );
 
-  @each $color-name, $color-value in $base-colors {
-    // Only generate alpha variants for main semantic colors
-    @if index($main-colors, $color-name) {
-      @each $alpha in $alpha-levels {
-        $alpha-decimal: $alpha / 100;
-        $alpha-color-name: "#{$color-name}-alpha-#{$alpha}";
-        $alpha-colors: map-merge(
-          $alpha-colors,
-          (
-            $alpha-color-name: rgba($color-value, $alpha-decimal),
-          )
-        );
-      }
+@each $color-name, $color-value in $base-colors {
+
+  // Only generate alpha variants for main semantic colors
+  @if index($main-colors, $color-name) {
+    @each $alpha in $alpha-levels {
+      $alpha-decimal: math.div($alpha, 100);
+      $alpha-color-name: "#{$color-name}-alpha-#{$alpha}";
+      $alpha-colors: map-merge($alpha-colors,
+          ($alpha-color-name: rgba($color-value, $alpha-decimal),
+          ));
     }
   }
+}
 
-  @return $alpha-colors;
+@return $alpha-colors;
 }
 
 // Merge base colors with alpha variants
@@ -192,6 +204,7 @@ $colors: map-merge($colors, generate-alpha-colors($colors));
   @if map-has-key($colors, $name) {
     @return map-get($colors, $name);
   }
+
   @error "Color '#{$name}' not found in color map.";
   @return null;
 }
@@ -220,3 +233,6 @@ $colors: map-merge($colors, generate-alpha-colors($colors));
     }
   }
 }
+
+// Generate CSS variables
+@include generate-color-variables();

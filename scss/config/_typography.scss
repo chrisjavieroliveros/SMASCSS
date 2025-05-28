@@ -31,8 +31,7 @@
 
 // Font families
 $font-families: (
-  "base": (
-    "Inter",
+  "base": ("Inter",
     -apple-system,
     BlinkMacSystemFont,
     "Segoe UI",
@@ -41,8 +40,7 @@ $font-families: (
     Arial,
     sans-serif,
   ),
-  "heading": (
-    "Inter",
+  "heading": ("Inter",
     -apple-system,
     BlinkMacSystemFont,
     "Segoe UI",
@@ -51,8 +49,7 @@ $font-families: (
     Arial,
     sans-serif,
   ),
-  "mono": (
-    "SFMono-Regular",
+  "mono": ("SFMono-Regular",
     Consolas,
     "Liberation Mono",
     Menlo,
@@ -121,6 +118,7 @@ $letter-spacing: (
   @if map-has-key($font-families, $name) {
     @return map-get($font-families, $name);
   }
+
   @error "Font family '#{$name}' not found.";
   @return null;
 }
@@ -135,6 +133,7 @@ $letter-spacing: (
   @if map-has-key($font-weights, $name) {
     @return map-get($font-weights, $name);
   }
+
   @error "Font weight '#{$name}' not found.";
   @return null;
 }
@@ -149,6 +148,7 @@ $letter-spacing: (
   @if map-has-key($font-sizes, $name) {
     @return map-get($font-sizes, $name);
   }
+
   @error "Font size '#{$name}' not found.";
   @return null;
 }
@@ -163,6 +163,7 @@ $letter-spacing: (
   @if map-has-key($line-heights, $name) {
     @return map-get($line-heights, $name);
   }
+
   @error "Line height '#{$name}' not found.";
   @return null;
 }
@@ -177,6 +178,7 @@ $letter-spacing: (
   @if map-has-key($letter-spacing, $name) {
     @return map-get($letter-spacing, $name);
   }
+
   @error "Letter spacing '#{$name}' not found.";
   @return null;
 }
@@ -209,3 +211,6 @@ $letter-spacing: (
     }
   }
 }
+
+// Generate CSS variables
+@include generate-typography-variables();

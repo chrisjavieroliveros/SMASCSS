@@ -24,13 +24,4 @@
 @use "breakpoints" as breakpoints;
 @use "buttons" as buttons;
 
-// =============================================================================
-// CSS VARIABLES GENERATION
-// =============================================================================
-
-// Generate all CSS custom properties
-@include colors.generate-color-variables();
-@include typography.generate-typography-variables();
-@include spacing.generate-spacing-variables();
-@include breakpoints.generate-breakpoint-variables();
-@include buttons.generate-button-variables();
+// Note: CSS variables are now generated in their respective files

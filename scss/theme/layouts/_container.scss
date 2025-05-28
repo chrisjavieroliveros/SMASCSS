@@ -4,6 +4,8 @@
  * CONTAINER CONFIGURATION
  * ----------------------
  * 
+ * Mobile-first responsive container implementation
+ * 
  * USAGE:
  * 1. Apply the container class to create a responsive, centered wrapper:
  *    <div class="container">Content goes here</div>
@@ -15,9 +17,9 @@
  *    - Fluid: <div class="container container--fluid">...</div> (max-width: 100%)
  * 
  * 3. Container padding is responsive and handled by CSS variables:
- *    - Large screens: var(--container-padding-lg)
- *    - Medium screens: var(--container-padding-md)
- *    - Small screens: var(--container-padding-sm)
+ *    - Mobile: var(--container-padding-sm)
+ *    - Tablet: var(--container-padding-md)
+ *    - Desktop: var(--container-padding-lg)
  */
 
 .container {
@@ -25,17 +27,20 @@
   max-width: 1200px;
   margin-left: auto;
   margin-right: auto;
-  padding-left: var(--container-padding-lg);
-  padding-right: var(--container-padding-lg);
+  // Mobile-first: Start with small padding
+  padding-left: var(--container-padding-sm);
+  padding-right: var(--container-padding-sm);
 
-  @include tools.breakpoint("lg") {
+  // Tablet and up: Medium padding
+  @include tools.breakpoint-up("md") {
     padding-left: var(--container-padding-md);
     padding-right: var(--container-padding-md);
   }
 
-  @include tools.breakpoint("md") {
-    padding-left: var(--container-padding-sm);
-    padding-right: var(--container-padding-sm);
+  // Desktop and up: Large padding
+  @include tools.breakpoint-up("lg") {
+    padding-left: var(--container-padding-lg);
+    padding-right: var(--container-padding-lg);
   }
 
   &--narrow {

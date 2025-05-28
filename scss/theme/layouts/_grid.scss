@@ -4,6 +4,8 @@
  * GRID LAYOUT CONFIGURATION
  * -----------------------
  * 
+ * Mobile-first responsive grid layout implementation
+ * 
  * USAGE:
  * 1. Apply the grid class to create a responsive grid layout:
  *    <div class="grid">
@@ -11,7 +13,7 @@
  *      <div>Item 2</div>
  *    </div>
  * 
- * 2. Column variations (responsive):
+ * 2. Column variations (mobile-first responsive):
  *    - Two columns: <div class="grid grid--2-col">...</div>
  *      Mobile: 1 column, Tablet/Desktop: 2 columns
  *    
@@ -44,43 +46,55 @@
     gap: var(--spacing-8);
   }
 
-  // ...existing code...
-
-  // Responsive grid templates
+  // Mobile-first responsive grid templates
   &--2-col {
+    // Mobile: 1 column (default)
     grid-template-columns: 1fr;
 
-    @include tools.breakpoint("md") {
+    // Tablet and up: 2 columns
+    @include tools.breakpoint-up("md") {
       grid-template-columns: repeat(2, 1fr);
     }
   }
 
   &--3-col {
+    // Mobile: 1 column (default)
     grid-template-columns: 1fr;
 
-    @include tools.breakpoint("md") {
+    // Tablet: 2 columns
+    @include tools.breakpoint-up("md") {
       grid-template-columns: repeat(2, 1fr);
     }
 
-    @include tools.breakpoint("lg") {
+    // Desktop and up: 3 columns
+    @include tools.breakpoint-up("lg") {
       grid-template-columns: repeat(3, 1fr);
     }
   }
 
   &--4-col {
+    // Mobile: 1 column (default)
     grid-template-columns: 1fr;
 
-    @include tools.breakpoint("md") {
+    // Small tablet: 2 columns
+    @include tools.breakpoint-up("sm") {
       grid-template-columns: repeat(2, 1fr);
     }
 
-    @include tools.breakpoint("lg") {
+    // Desktop and up: 4 columns
+    @include tools.breakpoint-up("lg") {
       grid-template-columns: repeat(4, 1fr);
     }
   }
 
-  // Auto-fit grid for cards
+  // Auto-fit grid for cards (mobile-first)
   &--auto-fit {
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+    // Mobile: Single column with minimum width
+    grid-template-columns: 1fr;
+
+    // Small screens and up: Auto-fit with minimum card width
+    @include tools.breakpoint-up("sm") {
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+    }
   }
 }

@@ -2,18 +2,589 @@
  * CONFIG
  * ======
  * 
- * This file forwards all configuration modules for easy importing.
- * The CSS variables are now generated in main.scss to avoid compilation issues.
+ * This file imports all configuration modules and generates CSS variables
+ * for the SCSS system. This is your main configuration entry point that 
+ * can be easily swapped between different websites/projects.
  * 
  * USAGE:
- * - Import individual config modules as needed
- * - CSS variables are generated in main.scss
+ * - Import this file to get all configuration variables and CSS custom properties
+ * - Modify the individual config files (_colors.scss, _typography.scss, etc.)
+ *   to customize the appearance for each website
  * 
  * Author: Chris Javier Oliveros
  */
-@forward "colors";
-@forward "typography";
-@forward "spacing";
-@forward "breakpoints";
-@forward "buttons";
-/*# sourceMappingURL=config.css.map */
+/**
+ * COLOR CONFIGURATION
+ * ------------------
+ * 
+ * USAGE:
+ * 1. Import this file: @import 'config/colors';
+ * 
+ * 2. Generate CSS variables in your root file:
+ *    @include generate-color-variables();
+ * 
+ * 3. Use colors in your SCSS:
+ *    - Function: color: color('primary');      // Returns #314459
+ *    - Function: border: 1px solid color('primary-300');  // Uses shade variant
+ *    - Function: background: color('primary-alpha-50');  // 50% opacity primary
+ *    - Variable: background: var(--color-primary);  // Use CSS variable
+ *    - Variable: background: var(--color-primary-alpha-30);  // 30% opacity CSS variable
+ *    - Opacity: background: color-alpha('primary', 0.5);  // 50% opacity
+ * 
+ * 4. For theme variations:
+ *    .dark-theme { background: var(--color-dark-800); }
+ * 
+ * 5. Alpha variants are automatically generated for main semantic colors only:
+ *    - Main colors (primary, secondary, tertiary, danger, warning, success, info, black, white)
+ *    - Get alpha variants from 10% to 90% opacity (10%, 20%, 30%, 40%, 50%, 60%, 70%, 80%, 90%)
+ *    - Usage: color('primary-alpha-30') for 30% opacity primary
+ *    - CSS Variables: var(--color-primary-alpha-50) for 50% opacity
+ *    - Variant colors (like primary-300, primary-tint) do NOT get alpha variants
+ */
+/**
+ * Function to get color value
+ * @param {String} $name - The color name from the $colors map
+ * @return {Color} The color value
+ * @example color: color('primary');      // Returns #314459
+ */
+/**
+ * Function to get color with opacity
+ * @param {String} $name - The color name from the $colors map
+ * @param {Number} $alpha - Opacity value between 0 and 1
+ * @return {Color} The rgba color value with opacity
+ * @example background: color-alpha('primary', 0.5); // Returns rgba(49, 68, 89, 0.5)
+ */
+/**
+ * Generate CSS color variables
+ * Creates CSS custom properties for all colors in the $colors map
+ * @example @include generate-color-variables();
+ */
+:root {
+  --color-primary: #314459;
+  --color-primary-tint: #4a637f;
+  --color-primary-shade: #1f2c3a;
+  --color-primary-contrast: #ffffff;
+  --color-primary-50: #e6ebf1;
+  --color-primary-100: #cdd7e3;
+  --color-primary-200: #9fb3c8;
+  --color-primary-300: #718fac;
+  --color-primary-400: #4a637f;
+  --color-primary-500: #314459;
+  --color-primary-600: #28394b;
+  --color-primary-700: #1f2c3a;
+  --color-primary-800: #16202a;
+  --color-primary-900: #0d141a;
+  --color-primary-950: #070c10;
+  --color-secondary: #2a8de9;
+  --color-secondary-tint: #5eabef;
+  --color-secondary-shade: #1971c2;
+  --color-secondary-contrast: #ffffff;
+  --color-secondary-50: #e3f2fd;
+  --color-secondary-100: #bbdefb;
+  --color-secondary-200: #90caf9;
+  --color-secondary-300: #64b5f6;
+  --color-secondary-400: #42a5f5;
+  --color-secondary-500: #2a8de9;
+  --color-secondary-600: #1e7bd6;
+  --color-secondary-700: #1971c2;
+  --color-secondary-800: #155fae;
+  --color-secondary-900: #104b8a;
+  --color-secondary-950: #0a2f5c;
+  --color-tertiary: #8b5cf6;
+  --color-tertiary-tint: #a78bfa;
+  --color-tertiary-shade: #7c3aed;
+  --color-tertiary-contrast: #ffffff;
+  --color-tertiary-50: #f5f3ff;
+  --color-tertiary-100: #ede9fe;
+  --color-tertiary-200: #ddd6fe;
+  --color-tertiary-300: #c4b5fd;
+  --color-tertiary-400: #a78bfa;
+  --color-tertiary-500: #8b5cf6;
+  --color-tertiary-600: #7c3aed;
+  --color-tertiary-700: #6d28d9;
+  --color-tertiary-800: #5b21b6;
+  --color-tertiary-900: #4c1d95;
+  --color-tertiary-950: #3b0764;
+  --color-danger: #e63946;
+  --color-danger-tint: #f06a75;
+  --color-danger-shade: #a52833;
+  --color-danger-contrast: #ffffff;
+  --color-warning: #ffb703;
+  --color-warning-tint: #ffc733;
+  --color-warning-shade: #cc9202;
+  --color-warning-contrast: #000000;
+  --color-success: #2a9d8f;
+  --color-success-tint: #56b3a7;
+  --color-success-shade: #1f7468;
+  --color-success-contrast: #ffffff;
+  --color-info: #219ebc;
+  --color-info-tint: #4fb3d1;
+  --color-info-shade: #197a91;
+  --color-info-contrast: #ffffff;
+  --color-light-50: #fefefe;
+  --color-light-100: #fafafa;
+  --color-light-200: #f5f5f5;
+  --color-light-300: #ebebeb;
+  --color-light-400: #e0e0e0;
+  --color-light-500: #d6d6d6;
+  --color-light-600: #cccccc;
+  --color-light-700: #c2c2c2;
+  --color-light-800: #b8b8b8;
+  --color-light-900: #adadad;
+  --color-light-950: #a3a3a3;
+  --color-dark-50: #ababab;
+  --color-dark-100: #a1a1a1;
+  --color-dark-200: #8e8e8e;
+  --color-dark-300: #7c7c7c;
+  --color-dark-400: #6a6a6a;
+  --color-dark-500: #585858;
+  --color-dark-600: #464646;
+  --color-dark-700: #343434;
+  --color-dark-800: #222222;
+  --color-dark-900: #101010;
+  --color-dark-950: #050505;
+  --color-black: #272727;
+  --color-white: #ffffff;
+  --color-primary-alpha-10: rgba(49, 68, 89, 0.1);
+  --color-primary-alpha-20: rgba(49, 68, 89, 0.2);
+  --color-primary-alpha-30: rgba(49, 68, 89, 0.3);
+  --color-primary-alpha-40: rgba(49, 68, 89, 0.4);
+  --color-primary-alpha-50: rgba(49, 68, 89, 0.5);
+  --color-primary-alpha-60: rgba(49, 68, 89, 0.6);
+  --color-primary-alpha-70: rgba(49, 68, 89, 0.7);
+  --color-primary-alpha-80: rgba(49, 68, 89, 0.8);
+  --color-primary-alpha-90: rgba(49, 68, 89, 0.9);
+  --color-secondary-alpha-10: rgba(42, 141, 233, 0.1);
+  --color-secondary-alpha-20: rgba(42, 141, 233, 0.2);
+  --color-secondary-alpha-30: rgba(42, 141, 233, 0.3);
+  --color-secondary-alpha-40: rgba(42, 141, 233, 0.4);
+  --color-secondary-alpha-50: rgba(42, 141, 233, 0.5);
+  --color-secondary-alpha-60: rgba(42, 141, 233, 0.6);
+  --color-secondary-alpha-70: rgba(42, 141, 233, 0.7);
+  --color-secondary-alpha-80: rgba(42, 141, 233, 0.8);
+  --color-secondary-alpha-90: rgba(42, 141, 233, 0.9);
+  --color-tertiary-alpha-10: rgba(139, 92, 246, 0.1);
+  --color-tertiary-alpha-20: rgba(139, 92, 246, 0.2);
+  --color-tertiary-alpha-30: rgba(139, 92, 246, 0.3);
+  --color-tertiary-alpha-40: rgba(139, 92, 246, 0.4);
+  --color-tertiary-alpha-50: rgba(139, 92, 246, 0.5);
+  --color-tertiary-alpha-60: rgba(139, 92, 246, 0.6);
+  --color-tertiary-alpha-70: rgba(139, 92, 246, 0.7);
+  --color-tertiary-alpha-80: rgba(139, 92, 246, 0.8);
+  --color-tertiary-alpha-90: rgba(139, 92, 246, 0.9);
+  --color-danger-alpha-10: rgba(230, 57, 70, 0.1);
+  --color-danger-alpha-20: rgba(230, 57, 70, 0.2);
+  --color-danger-alpha-30: rgba(230, 57, 70, 0.3);
+  --color-danger-alpha-40: rgba(230, 57, 70, 0.4);
+  --color-danger-alpha-50: rgba(230, 57, 70, 0.5);
+  --color-danger-alpha-60: rgba(230, 57, 70, 0.6);
+  --color-danger-alpha-70: rgba(230, 57, 70, 0.7);
+  --color-danger-alpha-80: rgba(230, 57, 70, 0.8);
+  --color-danger-alpha-90: rgba(230, 57, 70, 0.9);
+  --color-warning-alpha-10: rgba(255, 183, 3, 0.1);
+  --color-warning-alpha-20: rgba(255, 183, 3, 0.2);
+  --color-warning-alpha-30: rgba(255, 183, 3, 0.3);
+  --color-warning-alpha-40: rgba(255, 183, 3, 0.4);
+  --color-warning-alpha-50: rgba(255, 183, 3, 0.5);
+  --color-warning-alpha-60: rgba(255, 183, 3, 0.6);
+  --color-warning-alpha-70: rgba(255, 183, 3, 0.7);
+  --color-warning-alpha-80: rgba(255, 183, 3, 0.8);
+  --color-warning-alpha-90: rgba(255, 183, 3, 0.9);
+  --color-success-alpha-10: rgba(42, 157, 143, 0.1);
+  --color-success-alpha-20: rgba(42, 157, 143, 0.2);
+  --color-success-alpha-30: rgba(42, 157, 143, 0.3);
+  --color-success-alpha-40: rgba(42, 157, 143, 0.4);
+  --color-success-alpha-50: rgba(42, 157, 143, 0.5);
+  --color-success-alpha-60: rgba(42, 157, 143, 0.6);
+  --color-success-alpha-70: rgba(42, 157, 143, 0.7);
+  --color-success-alpha-80: rgba(42, 157, 143, 0.8);
+  --color-success-alpha-90: rgba(42, 157, 143, 0.9);
+  --color-info-alpha-10: rgba(33, 158, 188, 0.1);
+  --color-info-alpha-20: rgba(33, 158, 188, 0.2);
+  --color-info-alpha-30: rgba(33, 158, 188, 0.3);
+  --color-info-alpha-40: rgba(33, 158, 188, 0.4);
+  --color-info-alpha-50: rgba(33, 158, 188, 0.5);
+  --color-info-alpha-60: rgba(33, 158, 188, 0.6);
+  --color-info-alpha-70: rgba(33, 158, 188, 0.7);
+  --color-info-alpha-80: rgba(33, 158, 188, 0.8);
+  --color-info-alpha-90: rgba(33, 158, 188, 0.9);
+  --color-black-alpha-10: rgba(39, 39, 39, 0.1);
+  --color-black-alpha-20: rgba(39, 39, 39, 0.2);
+  --color-black-alpha-30: rgba(39, 39, 39, 0.3);
+  --color-black-alpha-40: rgba(39, 39, 39, 0.4);
+  --color-black-alpha-50: rgba(39, 39, 39, 0.5);
+  --color-black-alpha-60: rgba(39, 39, 39, 0.6);
+  --color-black-alpha-70: rgba(39, 39, 39, 0.7);
+  --color-black-alpha-80: rgba(39, 39, 39, 0.8);
+  --color-black-alpha-90: rgba(39, 39, 39, 0.9);
+  --color-white-alpha-10: rgba(255, 255, 255, 0.1);
+  --color-white-alpha-20: rgba(255, 255, 255, 0.2);
+  --color-white-alpha-30: rgba(255, 255, 255, 0.3);
+  --color-white-alpha-40: rgba(255, 255, 255, 0.4);
+  --color-white-alpha-50: rgba(255, 255, 255, 0.5);
+  --color-white-alpha-60: rgba(255, 255, 255, 0.6);
+  --color-white-alpha-70: rgba(255, 255, 255, 0.7);
+  --color-white-alpha-80: rgba(255, 255, 255, 0.8);
+  --color-white-alpha-90: rgba(255, 255, 255, 0.9);
+}
+
+/**
+ * TYPOGRAPHY CONFIGURATION
+ * -----------------------
+ * 
+ * USAGE:
+ * 1. Import this file: @import 'config/typography';
+ * 
+ * 2. Generate CSS variables in your root file:
+ *    @include generate-typography-variables();
+ * 
+ * 3. Use typography in your SCSS:
+ *    - Font family: font-family: font-family('heading');  // Returns 'Inter', -apple-system, etc.
+ *    - Font weight: font-weight: font-weight('bold');     // Returns 700
+ *    - Font size: font-size: font-size('lg');            // Returns 1.125rem
+ *    - Line height: line-height: line-height('tight');   // Returns 1.25
+ *    - Letter spacing: letter-spacing: letter-spacing('wide');  // Returns 0.025em
+ *    - Variable: font-size: var(--font-size-xl);         // Use CSS variable
+ * 
+ * 4. For component patterns:
+ *    .heading-1 { 
+ *      font-family: font-family('heading');
+ *      font-size: font-size('5xl');
+ *      font-weight: font-weight('bold');
+ *      line-height: line-height('tight');
+ *    }
+ */
+/**
+ * Typography Configuration
+ */
+/**
+ * Function to get font family
+ * @param {String} $name - The font family name from the $font-families map
+ * @return {List} The list of font family values
+ * @example font-family: font-family('heading'); // Returns 'Inter', -apple-system, etc.
+ */
+/**
+ * Function to get font weight
+ * @param {String} $name - The font weight name from the $font-weights map
+ * @return {Number} The font weight value
+ * @example font-weight: font-weight('bold'); // Returns 700
+ */
+/**
+ * Function to get font size
+ * @param {String} $name - The font size name from the $font-sizes map
+ * @return {Length} The font size value in rem
+ * @example font-size: font-size('lg'); // Returns 1.125rem
+ */
+/**
+ * Function to get line height
+ * @param {String} $name - The line height name from the $line-heights map
+ * @return {Number} The line height value
+ * @example line-height: line-height('tight'); // Returns 1.25
+ */
+/**
+ * Function to get letter spacing
+ * @param {String} $name - The letter spacing name from the $letter-spacing map
+ * @return {Length} The letter spacing value in em
+ * @example letter-spacing: letter-spacing('wide'); // Returns 0.025em
+ */
+/**
+ * Generate CSS typography variables
+ * Creates CSS custom properties for all typography settings
+ * @example @include generate-typography-variables();
+ */
+:root {
+  --font-family-base: Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;
+  --font-family-heading: Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;
+  --font-family-mono: SFMono-Regular, Consolas, Liberation Mono, Menlo, Monaco, monospace;
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
+  --font-size-2xl: 1.5rem;
+  --font-size-3xl: 1.875rem;
+  --font-size-4xl: 2.25rem;
+  --font-size-5xl: 3rem;
+  --line-height-none: 1;
+  --line-height-tight: 1.25;
+  --line-height-snug: 1.375;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.625;
+  --line-height-loose: 2;
+  --letter-spacing-tight: -0.025em;
+  --letter-spacing-normal: 0;
+  --letter-spacing-wide: 0.025em;
+  --letter-spacing-wider: 0.05em;
+  --letter-spacing-widest: 0.1em;
+  --font-weight-light: 300;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+}
+
+/**
+ * SPACING CONFIGURATION
+ * ---------------------
+ * 
+ * USAGE:
+ * 1. Import this file: @import 'config/spacing';
+ * 
+ * 2. Generate CSS variables in your root file:
+ *    @include generate-spacing-variables();
+ * 
+ * 3. Use spacing in your SCSS:
+ *    - Function: margin: spacing(4);      // Returns 1rem
+ *    - Function: padding: spacing('sm');  // Returns 1rem using alias
+ *    - Variable: gap: var(--spacing-6);   // Use CSS variable
+ * 
+ * 4. For container padding:
+ *    padding: var(--container-padding-md); // Responsive padding
+ */
+/**
+ * Function to get spacing value
+ * @param {String|Number} $key - The spacing key or alias
+ * @return {Number} The spacing value in rem
+ * @example padding: spacing(4);      // Returns 1rem
+ * @example margin: spacing('sm');    // Returns 1rem via alias
+ */
+/**
+ * Generate CSS spacing variables
+ * Creates CSS custom properties for all spacing values
+ * @example @include generate-spacing-variables();
+ */
+:root {
+  --spacing-0: 0;
+  --spacing-1: 0.25rem;
+  --spacing-2: 0.5rem;
+  --spacing-3: 0.75rem;
+  --spacing-4: 1rem;
+  --spacing-5: 1.5rem;
+  --spacing-6: 2rem;
+  --spacing-8: 3rem;
+  --spacing-10: 4rem;
+  --spacing-12: 6rem;
+  --spacing-16: 8rem;
+  --container-padding-sm: var(--spacing-4);
+  --container-padding-md: var(--spacing-6);
+  --container-padding-lg: var(--spacing-8);
+}
+
+/**
+ * BREAKPOINTS CONFIGURATION
+ * ------------------------
+ * 
+ * A comprehensive breakpoint system for responsive design using a mobile-first approach.
+ * This system provides a set of predefined breakpoints and utilities for creating
+ * responsive layouts that start from mobile and scale up to larger screens.
+ * 
+ * USAGE:
+ * 1. Import the breakpoint tools:
+ *    @use "tools/breakpoints" as breakpoints;
+ * 
+ * 2. Generate CSS variables in your root file:
+ *    @include generate-breakpoint-variables();
+ * 
+ * 3. Mobile-First Approach Examples:
+ *    a) Basic Responsive Element:
+ *       .element {
+ *         // Mobile styles (default)
+ *         width: 100%;
+ *         padding: 1rem;
+ *         
+ *         // Tablet and up (md)
+ *         @include bp.breakpoint-up("md") {
+ *           width: 50%;
+ *           padding: 2rem;
+ *         }
+ *         
+ *         // Desktop and up (lg)
+ *         @include bp.breakpoint-up("lg") {
+ *           width: 33.333%;
+ *           padding: 3rem;
+ *         }
+ *       }
+ * 
+ *    b) Responsive Grid System:
+ *       .grid {
+ *         // Mobile: Single column
+ *         display: grid;
+ *         gap: 1rem;
+ *         grid-template-columns: 1fr;
+ *         
+ *         // Tablet: Two columns
+ *         @include bp.breakpoint-up("md") {
+ *           grid-template-columns: repeat(2, 1fr);
+ *         }
+ *         
+ *         // Desktop: Three columns
+ *         @include bp.breakpoint-up("lg") {
+ *           grid-template-columns: repeat(3, 1fr);
+ *         }
+ *         
+ *         // Large Desktop: Four columns
+ *         @include bp.breakpoint-up("xl") {
+ *           grid-template-columns: repeat(4, 1fr);
+ *         }
+ *       }
+ * 
+ *    c) Responsive Navigation:
+ *       .nav {
+ *         // Mobile: Stacked menu
+ *         display: flex;
+ *         flex-direction: column;
+ *         gap: 0.5rem;
+ *         
+ *         // Tablet and up: Horizontal menu
+ *         @include bp.breakpoint-up("md") {
+ *           flex-direction: row;
+ *           gap: 1rem;
+ *         }
+ *       }
+ * 
+ *    d) Responsive Typography:
+ *       .heading {
+ *         // Mobile: Base size
+ *         font-size: 1.5rem;
+ *         line-height: 1.2;
+ *         
+ *         // Tablet: Medium size
+ *         @include bp.breakpoint-up("md") {
+ *           font-size: 2rem;
+ *           line-height: 1.3;
+ *         }
+ *         
+ *         // Desktop: Large size
+ *         @include bp.breakpoint-up("lg") {
+ *           font-size: 2.5rem;
+ *           line-height: 1.4;
+ *         }
+ *       }
+ * 
+ * 4. Available Breakpoint Sizes (Mobile-First):
+ *    - xs: 375px  (Extra small devices - Mobile)
+ *    - sm: 576px  (Small devices - Large Mobile)
+ *    - md: 768px  (Medium devices - Tablet)
+ *    - lg: 992px  (Large devices - Desktop)
+ *    - xl: 1200px (Extra large devices - Large Desktop)
+ *    - xxl: 1400px (2X Extra large devices - Extra Large Desktop)
+ * 
+ * 5. Breakpoint Mixins:
+ *    a) breakpoint-up($size) - Mobile-first (min-width)
+ *       @include bp.breakpoint-up("md") { ... }
+ * 
+ *    b) breakpoint-down($size) - Desktop-first (max-width)
+ *       @include bp.breakpoint-down("lg") { ... }
+ * 
+ *    c) breakpoint-only($size) - Specific breakpoint only
+ *       @include bp.breakpoint-only("md") { ... }
+ * 
+ *    d) breakpoint-between($min, $max) - Between two breakpoints
+ *       @include bp.breakpoint-between("sm", "lg") { ... }
+ * 
+ * 6. Best Practices:
+ *    - Always start with mobile styles as the default
+ *    - Use breakpoint-up() for progressive enhancement
+ *    - Keep mobile styles outside of media queries
+ *    - Use breakpoint-only() for specific device targeting
+ *    - Use breakpoint-between() for custom ranges
+ *    - Avoid using breakpoint-down() unless necessary
+ * 
+ * 7. Common Patterns:
+ *    a) Mobile-First Container:
+ *       .container {
+ *         // Mobile: Full width with padding
+ *         width: 100%;
+ *         padding: 1rem;
+ *         margin: 0 auto;
+ *         
+ *         // Tablet: Max width with larger padding
+ *         @include bp.breakpoint-up("md") {
+ *           max-width: 720px;
+ *           padding: 2rem;
+ *         }
+ *         
+ *         // Desktop: Larger max width
+ *         @include bp.breakpoint-up("lg") {
+ *           max-width: 960px;
+ *         }
+ *         
+ *         // Large Desktop: Even larger max width
+ *         @include bp.breakpoint-up("xl") {
+ *           max-width: 1140px;
+ *         }
+ *       }
+ * 
+ *    b) Responsive Images:
+ *       .responsive-image {
+ *         // Mobile: Full width
+ *         width: 100%;
+ *         height: auto;
+ *         
+ *         // Tablet: Fixed height
+ *         @include bp.breakpoint-up("md") {
+ *           height: 300px;
+ *           object-fit: cover;
+ *         }
+ *         
+ *         // Desktop: Larger height
+ *         @include bp.breakpoint-up("lg") {
+ *           height: 400px;
+ *         }
+ *       }
+ * 
+ *    c) Responsive Spacing:
+ *       .section {
+ *         // Mobile: Compact spacing
+ *         padding: 2rem 1rem;
+ *         margin-bottom: 2rem;
+ *         
+ *         // Tablet: Medium spacing
+ *         @include bp.breakpoint-up("md") {
+ *           padding: 3rem 2rem;
+ *           margin-bottom: 3rem;
+ *         }
+ *         
+ *         // Desktop: Large spacing
+ *         @include bp.breakpoint-up("lg") {
+ *           padding: 4rem 3rem;
+ *           margin-bottom: 4rem;
+ *         }
+ *       }
+ */
+/**
+ * Generate CSS breakpoint variables
+ * Creates CSS custom properties for all breakpoint values
+ * @example @include generate-breakpoint-variables();
+ */
+:root {
+  --breakpoint-xs: 375px;
+  --breakpoint-sm: 576px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 992px;
+  --breakpoint-xl: 1200px;
+  --breakpoint-xxl: 1400px;
+}
+
+/**
+ * Button Configuration
+ */
+/**
+ * Generate CSS button variables
+ * Creates CSS custom properties for all button configurations
+ * @example @include generate-button-variables();
+ */
+:root {
+  --button-default-padding-y: var(--spacing-2);
+  --button-default-padding-x: var(--spacing-4);
+  --button-default-border-radius: 0.375rem;
+  --button-default-font-weight: medium;
+  --button-default-font-size: var(--font-size-base);
+  --button-default-transition: all 0.2s ease-in-out;
+  --button-sm-padding-y: var(--spacing-1);
+  --button-sm-padding-x: var(--spacing-3);
+  --button-sm-font-size: var(--font-size-sm);
+  --button-lg-padding-y: var(--spacing-3);
+  --button-lg-padding-x: var(--spacing-6);
+  --button-lg-font-size: var(--font-size-lg);
+}

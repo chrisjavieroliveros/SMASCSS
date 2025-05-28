@@ -1,0 +1,2103 @@
+/**
+ * Project: SMACSS SCSS Architecture
+ * Description: This project implements a scalable and modular architecture for CSS (SMACSS) 
+ *              using SCSS to ensure maintainable and reusable styles.
+ * Author: Chris Javier Oliveros
+ * Version: 2.0.0
+ * License: MIT
+ * 
+ * This file serves as the entry point for the SCSS architecture. It organizes and imports 
+ * all styles based on the SMACSS methodology.
+ */
+/**
+ * TOOLS INDEX
+ * -----------
+ * 
+ * This directory contains SCSS utilities, functions, and mixins
+ * organized into logical groupings for better maintainability.
+ * 
+ * The tools directory includes:
+ * - Unit Conversion: Functions for converting between CSS units
+ * - Layout: Layout-related functions and mixins
+ * - Breakpoints: Responsive media query mixins
+ * - Accessibility: A11y-focused mixins
+ * - Text: Text manipulation utilities
+ * 
+ * Note: CSS variable generation has been moved to config files
+ * 
+ * USAGE:
+ * @use "../tools" as tools;
+ * 
+ * // Unit conversion
+ * $rem-value: tools.px-to-rem(16px);
+ * 
+ * // Breakpoints
+ * @include tools.breakpoint("md") { ... }
+ * 
+ * // Layout utilities
+ * @include tools.aspect-ratio(16/9);
+ * 
+ * // Accessibility
+ * @include tools.visually-hidden;
+ * 
+ * // Text utilities
+ * @include tools.truncate-text;
+ */
+/**
+ * UNIT CONVERSION FUNCTIONS
+ * -------------------------
+ * 
+ * Utility functions for converting between different CSS units
+ * 
+ * USAGE:
+ * @use "../tools/unit-conversion" as units;
+ * $rem-value: units.px-to-rem(16px);
+ * $px-value: units.rem-to-px(1.5rem);
+ * $unitless: units.strip-unit(16px);
+ */
+/**
+ * Strip units from a value
+ * @param {Number} $value - Value with units
+ * @return {Number} - Value without units
+ * @example $unitless: strip-unit(16px); // Returns 16
+ */
+/**
+ * Convert px to rem
+ * @param {Number} $px - Pixel value to convert
+ * @param {Number} $base-font-size - Base font size (default: 16px)
+ * @return {Number} - Value in rem units
+ * @example $rem: px-to-rem(24px); // Returns 1.5rem
+ */
+/**
+ * Convert rem to px
+ * @param {Number} $rem - Rem value to convert
+ * @param {Number} $base-font-size - Base font size (default: 16px)
+ * @return {Number} - Value in px units
+ * @example $px: rem-to-px(1.5rem); // Returns 24px
+ */
+/**
+ * TOOLS INDEX
+ * -----------
+ * 
+ * This directory contains SCSS utilities, functions, and mixins
+ * organized into logical groupings for better maintainability.
+ * 
+ * The tools directory includes:
+ * - Unit Conversion: Functions for converting between CSS units
+ * - Layout: Layout-related functions and mixins
+ * - Breakpoints: Responsive media query mixins
+ * - Accessibility: A11y-focused mixins
+ * - Text: Text manipulation utilities
+ * 
+ * Note: CSS variable generation has been moved to config files
+ * 
+ * USAGE:
+ * @use "../tools" as tools;
+ * 
+ * // Unit conversion
+ * $rem-value: tools.px-to-rem(16px);
+ * 
+ * // Breakpoints
+ * @include tools.breakpoint("md") { ... }
+ * 
+ * // Layout utilities
+ * @include tools.aspect-ratio(16/9);
+ * 
+ * // Accessibility
+ * @include tools.visually-hidden;
+ * 
+ * // Text utilities
+ * @include tools.truncate-text;
+ */
+/**
+ * LAYOUT UTILITIES
+ * ----------------
+ * 
+ * Functions and mixins for layout-related calculations and utilities
+ * 
+ * USAGE:
+ * @use "../tools/layout" as layout;
+ * $fluid: layout.fluid-space(1rem, 2rem, 320px, 1200px);
+ * @include layout.aspect-ratio(16/9);
+ * @include layout.clearfix;
+ */
+/**
+ * Calculate fluid spacing between two breakpoints
+ * @param {Number} $min-value - Minimum value
+ * @param {Number} $max-value - Maximum value
+ * @param {Number} $min-breakpoint - Minimum breakpoint
+ * @param {Number} $max-breakpoint - Maximum breakpoint
+ * @return {String} - CSS clamp() function
+ * @example $fluid: fluid-space(1rem, 2rem, 320px, 1200px);
+ */
+/**
+ * Aspect ratio mixin
+ * @param {Number} $ratio - Aspect ratio (width/height)
+ * @example @include aspect-ratio(16/9);
+ */
+/**
+ * Clear fix for floated elements
+ * @example @include clearfix;
+ */
+/**
+ * BREAKPOINT MIXINS
+ * -----------------
+ * 
+ * Responsive breakpoint utilities for media queries
+ * Mobile-first approach using min-width media queries
+ * 
+ * USAGE:
+ * @use "../tools/breakpoints" as bp;
+ * @include bp.breakpoint-up("md") { display: flex; }    // Mobile-first (min-width)
+ * @include bp.breakpoint-down("lg") { display: block; } // Desktop-first (max-width)
+ * @include bp.breakpoint-only("md") { display: grid; }  // Only at specific breakpoint
+ * @include bp.breakpoint-between("sm", "lg") { ... }    // Between two breakpoints
+ */
+/**
+ * BREAKPOINTS CONFIGURATION
+ * ------------------------
+ * 
+ * A comprehensive breakpoint system for responsive design using a mobile-first approach.
+ * This system provides a set of predefined breakpoints and utilities for creating
+ * responsive layouts that start from mobile and scale up to larger screens.
+ * 
+ * USAGE:
+ * 1. Import the breakpoint tools:
+ *    @use "tools/breakpoints" as breakpoints;
+ * 
+ * 2. Generate CSS variables in your root file:
+ *    @include generate-breakpoint-variables();
+ * 
+ * 3. Mobile-First Approach Examples:
+ *    a) Basic Responsive Element:
+ *       .element {
+ *         // Mobile styles (default)
+ *         width: 100%;
+ *         padding: 1rem;
+ *         
+ *         // Tablet and up (md)
+ *         @include bp.breakpoint-up("md") {
+ *           width: 50%;
+ *           padding: 2rem;
+ *         }
+ *         
+ *         // Desktop and up (lg)
+ *         @include bp.breakpoint-up("lg") {
+ *           width: 33.333%;
+ *           padding: 3rem;
+ *         }
+ *       }
+ * 
+ *    b) Responsive Grid System:
+ *       .grid {
+ *         // Mobile: Single column
+ *         display: grid;
+ *         gap: 1rem;
+ *         grid-template-columns: 1fr;
+ *         
+ *         // Tablet: Two columns
+ *         @include bp.breakpoint-up("md") {
+ *           grid-template-columns: repeat(2, 1fr);
+ *         }
+ *         
+ *         // Desktop: Three columns
+ *         @include bp.breakpoint-up("lg") {
+ *           grid-template-columns: repeat(3, 1fr);
+ *         }
+ *         
+ *         // Large Desktop: Four columns
+ *         @include bp.breakpoint-up("xl") {
+ *           grid-template-columns: repeat(4, 1fr);
+ *         }
+ *       }
+ * 
+ *    c) Responsive Navigation:
+ *       .nav {
+ *         // Mobile: Stacked menu
+ *         display: flex;
+ *         flex-direction: column;
+ *         gap: 0.5rem;
+ *         
+ *         // Tablet and up: Horizontal menu
+ *         @include bp.breakpoint-up("md") {
+ *           flex-direction: row;
+ *           gap: 1rem;
+ *         }
+ *       }
+ * 
+ *    d) Responsive Typography:
+ *       .heading {
+ *         // Mobile: Base size
+ *         font-size: 1.5rem;
+ *         line-height: 1.2;
+ *         
+ *         // Tablet: Medium size
+ *         @include bp.breakpoint-up("md") {
+ *           font-size: 2rem;
+ *           line-height: 1.3;
+ *         }
+ *         
+ *         // Desktop: Large size
+ *         @include bp.breakpoint-up("lg") {
+ *           font-size: 2.5rem;
+ *           line-height: 1.4;
+ *         }
+ *       }
+ * 
+ * 4. Available Breakpoint Sizes (Mobile-First):
+ *    - xs: 375px  (Extra small devices - Mobile)
+ *    - sm: 576px  (Small devices - Large Mobile)
+ *    - md: 768px  (Medium devices - Tablet)
+ *    - lg: 992px  (Large devices - Desktop)
+ *    - xl: 1200px (Extra large devices - Large Desktop)
+ *    - xxl: 1400px (2X Extra large devices - Extra Large Desktop)
+ * 
+ * 5. Breakpoint Mixins:
+ *    a) breakpoint-up($size) - Mobile-first (min-width)
+ *       @include bp.breakpoint-up("md") { ... }
+ * 
+ *    b) breakpoint-down($size) - Desktop-first (max-width)
+ *       @include bp.breakpoint-down("lg") { ... }
+ * 
+ *    c) breakpoint-only($size) - Specific breakpoint only
+ *       @include bp.breakpoint-only("md") { ... }
+ * 
+ *    d) breakpoint-between($min, $max) - Between two breakpoints
+ *       @include bp.breakpoint-between("sm", "lg") { ... }
+ * 
+ * 6. Best Practices:
+ *    - Always start with mobile styles as the default
+ *    - Use breakpoint-up() for progressive enhancement
+ *    - Keep mobile styles outside of media queries
+ *    - Use breakpoint-only() for specific device targeting
+ *    - Use breakpoint-between() for custom ranges
+ *    - Avoid using breakpoint-down() unless necessary
+ * 
+ * 7. Common Patterns:
+ *    a) Mobile-First Container:
+ *       .container {
+ *         // Mobile: Full width with padding
+ *         width: 100%;
+ *         padding: 1rem;
+ *         margin: 0 auto;
+ *         
+ *         // Tablet: Max width with larger padding
+ *         @include bp.breakpoint-up("md") {
+ *           max-width: 720px;
+ *           padding: 2rem;
+ *         }
+ *         
+ *         // Desktop: Larger max width
+ *         @include bp.breakpoint-up("lg") {
+ *           max-width: 960px;
+ *         }
+ *         
+ *         // Large Desktop: Even larger max width
+ *         @include bp.breakpoint-up("xl") {
+ *           max-width: 1140px;
+ *         }
+ *       }
+ * 
+ *    b) Responsive Images:
+ *       .responsive-image {
+ *         // Mobile: Full width
+ *         width: 100%;
+ *         height: auto;
+ *         
+ *         // Tablet: Fixed height
+ *         @include bp.breakpoint-up("md") {
+ *           height: 300px;
+ *           object-fit: cover;
+ *         }
+ *         
+ *         // Desktop: Larger height
+ *         @include bp.breakpoint-up("lg") {
+ *           height: 400px;
+ *         }
+ *       }
+ * 
+ *    c) Responsive Spacing:
+ *       .section {
+ *         // Mobile: Compact spacing
+ *         padding: 2rem 1rem;
+ *         margin-bottom: 2rem;
+ *         
+ *         // Tablet: Medium spacing
+ *         @include bp.breakpoint-up("md") {
+ *           padding: 3rem 2rem;
+ *           margin-bottom: 3rem;
+ *         }
+ *         
+ *         // Desktop: Large spacing
+ *         @include bp.breakpoint-up("lg") {
+ *           padding: 4rem 3rem;
+ *           margin-bottom: 4rem;
+ *         }
+ *       }
+ */
+/**
+ * Generate CSS breakpoint variables
+ * Creates CSS custom properties for all breakpoint values
+ * @example @include generate-breakpoint-variables();
+ */
+:root {
+  --breakpoint-xs: 375px;
+  --breakpoint-sm: 576px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 992px;
+  --breakpoint-xl: 1200px;
+  --breakpoint-xxl: 1400px;
+}
+
+/**
+ * Mobile-first breakpoint mixin (min-width)
+ * @param {String} $size - Breakpoint size name
+ * @example @include breakpoint-up("md") { display: flex; }
+ */
+/**
+ * Desktop-first breakpoint mixin (max-width)
+ * @param {String} $size - Breakpoint size name
+ * @example @include breakpoint-down("lg") { display: block; }
+ */
+/**
+ * Breakpoint for specific size only
+ * @param {String} $size - Breakpoint size name
+ * @example @include breakpoint-only("md") { display: grid; }
+ */
+/**
+ * Breakpoint between two sizes
+ * @param {String} $min-size - Minimum breakpoint size name
+ * @param {String} $max-size - Maximum breakpoint size name
+ * @example @include breakpoint-between("sm", "lg") { ... }
+ */
+/**
+ * Legacy breakpoint mixin (now uses mobile-first approach)
+ * @param {String} $size - Breakpoint size name
+ * @example @include breakpoint("md") { display: flex; }
+ * @deprecated Use breakpoint-up() for mobile-first or breakpoint-down() for desktop-first
+ */
+/**
+ * ACCESSIBILITY MIXINS
+ * --------------------
+ * 
+ * Mixins for improving accessibility and user experience
+ * 
+ * USAGE:
+ * @use "../tools/accessibility" as a11y;
+ * @include a11y.visually-hidden;
+ * @include a11y.focus-ring;
+ */
+/**
+ * COLOR CONFIGURATION
+ * ------------------
+ * 
+ * USAGE:
+ * 1. Import this file: @import 'config/colors';
+ * 
+ * 2. Generate CSS variables in your root file:
+ *    @include generate-color-variables();
+ * 
+ * 3. Use colors in your SCSS:
+ *    - Function: color: color('primary');      // Returns #314459
+ *    - Function: border: 1px solid color('primary-300');  // Uses shade variant
+ *    - Function: background: color('primary-alpha-50');  // 50% opacity primary
+ *    - Variable: background: var(--color-primary);  // Use CSS variable
+ *    - Variable: background: var(--color-primary-alpha-30);  // 30% opacity CSS variable
+ *    - Opacity: background: color-alpha('primary', 0.5);  // 50% opacity
+ * 
+ * 4. For theme variations:
+ *    .dark-theme { background: var(--color-dark-800); }
+ * 
+ * 5. Alpha variants are automatically generated for main semantic colors only:
+ *    - Main colors (primary, secondary, tertiary, danger, warning, success, info, black, white)
+ *    - Get alpha variants from 10% to 90% opacity (10%, 20%, 30%, 40%, 50%, 60%, 70%, 80%, 90%)
+ *    - Usage: color('primary-alpha-30') for 30% opacity primary
+ *    - CSS Variables: var(--color-primary-alpha-50) for 50% opacity
+ *    - Variant colors (like primary-300, primary-tint) do NOT get alpha variants
+ */
+/**
+ * Function to get color value
+ * @param {String} $name - The color name from the $colors map
+ * @return {Color} The color value
+ * @example color: color('primary');      // Returns #314459
+ */
+/**
+ * Function to get color with opacity
+ * @param {String} $name - The color name from the $colors map
+ * @param {Number} $alpha - Opacity value between 0 and 1
+ * @return {Color} The rgba color value with opacity
+ * @example background: color-alpha('primary', 0.5); // Returns rgba(49, 68, 89, 0.5)
+ */
+/**
+ * Generate CSS color variables
+ * Creates CSS custom properties for all colors in the $colors map
+ * @example @include generate-color-variables();
+ */
+:root {
+  --color-primary: #314459;
+  --color-primary-tint: #4a637f;
+  --color-primary-shade: #1f2c3a;
+  --color-primary-contrast: #ffffff;
+  --color-primary-50: #e6ebf1;
+  --color-primary-100: #cdd7e3;
+  --color-primary-200: #9fb3c8;
+  --color-primary-300: #718fac;
+  --color-primary-400: #4a637f;
+  --color-primary-500: #314459;
+  --color-primary-600: #28394b;
+  --color-primary-700: #1f2c3a;
+  --color-primary-800: #16202a;
+  --color-primary-900: #0d141a;
+  --color-primary-950: #070c10;
+  --color-secondary: #2a8de9;
+  --color-secondary-tint: #5eabef;
+  --color-secondary-shade: #1971c2;
+  --color-secondary-contrast: #ffffff;
+  --color-secondary-50: #e3f2fd;
+  --color-secondary-100: #bbdefb;
+  --color-secondary-200: #90caf9;
+  --color-secondary-300: #64b5f6;
+  --color-secondary-400: #42a5f5;
+  --color-secondary-500: #2a8de9;
+  --color-secondary-600: #1e7bd6;
+  --color-secondary-700: #1971c2;
+  --color-secondary-800: #155fae;
+  --color-secondary-900: #104b8a;
+  --color-secondary-950: #0a2f5c;
+  --color-tertiary: #8b5cf6;
+  --color-tertiary-tint: #a78bfa;
+  --color-tertiary-shade: #7c3aed;
+  --color-tertiary-contrast: #ffffff;
+  --color-tertiary-50: #f5f3ff;
+  --color-tertiary-100: #ede9fe;
+  --color-tertiary-200: #ddd6fe;
+  --color-tertiary-300: #c4b5fd;
+  --color-tertiary-400: #a78bfa;
+  --color-tertiary-500: #8b5cf6;
+  --color-tertiary-600: #7c3aed;
+  --color-tertiary-700: #6d28d9;
+  --color-tertiary-800: #5b21b6;
+  --color-tertiary-900: #4c1d95;
+  --color-tertiary-950: #3b0764;
+  --color-danger: #e63946;
+  --color-danger-tint: #f06a75;
+  --color-danger-shade: #a52833;
+  --color-danger-contrast: #ffffff;
+  --color-warning: #ffb703;
+  --color-warning-tint: #ffc733;
+  --color-warning-shade: #cc9202;
+  --color-warning-contrast: #000000;
+  --color-success: #2a9d8f;
+  --color-success-tint: #56b3a7;
+  --color-success-shade: #1f7468;
+  --color-success-contrast: #ffffff;
+  --color-info: #219ebc;
+  --color-info-tint: #4fb3d1;
+  --color-info-shade: #197a91;
+  --color-info-contrast: #ffffff;
+  --color-light-50: #fefefe;
+  --color-light-100: #fafafa;
+  --color-light-200: #f5f5f5;
+  --color-light-300: #ebebeb;
+  --color-light-400: #e0e0e0;
+  --color-light-500: #d6d6d6;
+  --color-light-600: #cccccc;
+  --color-light-700: #c2c2c2;
+  --color-light-800: #b8b8b8;
+  --color-light-900: #adadad;
+  --color-light-950: #a3a3a3;
+  --color-dark-50: #ababab;
+  --color-dark-100: #a1a1a1;
+  --color-dark-200: #8e8e8e;
+  --color-dark-300: #7c7c7c;
+  --color-dark-400: #6a6a6a;
+  --color-dark-500: #585858;
+  --color-dark-600: #464646;
+  --color-dark-700: #343434;
+  --color-dark-800: #222222;
+  --color-dark-900: #101010;
+  --color-dark-950: #050505;
+  --color-black: #272727;
+  --color-white: #ffffff;
+  --color-primary-alpha-10: rgba(49, 68, 89, 0.1);
+  --color-primary-alpha-20: rgba(49, 68, 89, 0.2);
+  --color-primary-alpha-30: rgba(49, 68, 89, 0.3);
+  --color-primary-alpha-40: rgba(49, 68, 89, 0.4);
+  --color-primary-alpha-50: rgba(49, 68, 89, 0.5);
+  --color-primary-alpha-60: rgba(49, 68, 89, 0.6);
+  --color-primary-alpha-70: rgba(49, 68, 89, 0.7);
+  --color-primary-alpha-80: rgba(49, 68, 89, 0.8);
+  --color-primary-alpha-90: rgba(49, 68, 89, 0.9);
+  --color-secondary-alpha-10: rgba(42, 141, 233, 0.1);
+  --color-secondary-alpha-20: rgba(42, 141, 233, 0.2);
+  --color-secondary-alpha-30: rgba(42, 141, 233, 0.3);
+  --color-secondary-alpha-40: rgba(42, 141, 233, 0.4);
+  --color-secondary-alpha-50: rgba(42, 141, 233, 0.5);
+  --color-secondary-alpha-60: rgba(42, 141, 233, 0.6);
+  --color-secondary-alpha-70: rgba(42, 141, 233, 0.7);
+  --color-secondary-alpha-80: rgba(42, 141, 233, 0.8);
+  --color-secondary-alpha-90: rgba(42, 141, 233, 0.9);
+  --color-tertiary-alpha-10: rgba(139, 92, 246, 0.1);
+  --color-tertiary-alpha-20: rgba(139, 92, 246, 0.2);
+  --color-tertiary-alpha-30: rgba(139, 92, 246, 0.3);
+  --color-tertiary-alpha-40: rgba(139, 92, 246, 0.4);
+  --color-tertiary-alpha-50: rgba(139, 92, 246, 0.5);
+  --color-tertiary-alpha-60: rgba(139, 92, 246, 0.6);
+  --color-tertiary-alpha-70: rgba(139, 92, 246, 0.7);
+  --color-tertiary-alpha-80: rgba(139, 92, 246, 0.8);
+  --color-tertiary-alpha-90: rgba(139, 92, 246, 0.9);
+  --color-danger-alpha-10: rgba(230, 57, 70, 0.1);
+  --color-danger-alpha-20: rgba(230, 57, 70, 0.2);
+  --color-danger-alpha-30: rgba(230, 57, 70, 0.3);
+  --color-danger-alpha-40: rgba(230, 57, 70, 0.4);
+  --color-danger-alpha-50: rgba(230, 57, 70, 0.5);
+  --color-danger-alpha-60: rgba(230, 57, 70, 0.6);
+  --color-danger-alpha-70: rgba(230, 57, 70, 0.7);
+  --color-danger-alpha-80: rgba(230, 57, 70, 0.8);
+  --color-danger-alpha-90: rgba(230, 57, 70, 0.9);
+  --color-warning-alpha-10: rgba(255, 183, 3, 0.1);
+  --color-warning-alpha-20: rgba(255, 183, 3, 0.2);
+  --color-warning-alpha-30: rgba(255, 183, 3, 0.3);
+  --color-warning-alpha-40: rgba(255, 183, 3, 0.4);
+  --color-warning-alpha-50: rgba(255, 183, 3, 0.5);
+  --color-warning-alpha-60: rgba(255, 183, 3, 0.6);
+  --color-warning-alpha-70: rgba(255, 183, 3, 0.7);
+  --color-warning-alpha-80: rgba(255, 183, 3, 0.8);
+  --color-warning-alpha-90: rgba(255, 183, 3, 0.9);
+  --color-success-alpha-10: rgba(42, 157, 143, 0.1);
+  --color-success-alpha-20: rgba(42, 157, 143, 0.2);
+  --color-success-alpha-30: rgba(42, 157, 143, 0.3);
+  --color-success-alpha-40: rgba(42, 157, 143, 0.4);
+  --color-success-alpha-50: rgba(42, 157, 143, 0.5);
+  --color-success-alpha-60: rgba(42, 157, 143, 0.6);
+  --color-success-alpha-70: rgba(42, 157, 143, 0.7);
+  --color-success-alpha-80: rgba(42, 157, 143, 0.8);
+  --color-success-alpha-90: rgba(42, 157, 143, 0.9);
+  --color-info-alpha-10: rgba(33, 158, 188, 0.1);
+  --color-info-alpha-20: rgba(33, 158, 188, 0.2);
+  --color-info-alpha-30: rgba(33, 158, 188, 0.3);
+  --color-info-alpha-40: rgba(33, 158, 188, 0.4);
+  --color-info-alpha-50: rgba(33, 158, 188, 0.5);
+  --color-info-alpha-60: rgba(33, 158, 188, 0.6);
+  --color-info-alpha-70: rgba(33, 158, 188, 0.7);
+  --color-info-alpha-80: rgba(33, 158, 188, 0.8);
+  --color-info-alpha-90: rgba(33, 158, 188, 0.9);
+  --color-black-alpha-10: rgba(39, 39, 39, 0.1);
+  --color-black-alpha-20: rgba(39, 39, 39, 0.2);
+  --color-black-alpha-30: rgba(39, 39, 39, 0.3);
+  --color-black-alpha-40: rgba(39, 39, 39, 0.4);
+  --color-black-alpha-50: rgba(39, 39, 39, 0.5);
+  --color-black-alpha-60: rgba(39, 39, 39, 0.6);
+  --color-black-alpha-70: rgba(39, 39, 39, 0.7);
+  --color-black-alpha-80: rgba(39, 39, 39, 0.8);
+  --color-black-alpha-90: rgba(39, 39, 39, 0.9);
+  --color-white-alpha-10: rgba(255, 255, 255, 0.1);
+  --color-white-alpha-20: rgba(255, 255, 255, 0.2);
+  --color-white-alpha-30: rgba(255, 255, 255, 0.3);
+  --color-white-alpha-40: rgba(255, 255, 255, 0.4);
+  --color-white-alpha-50: rgba(255, 255, 255, 0.5);
+  --color-white-alpha-60: rgba(255, 255, 255, 0.6);
+  --color-white-alpha-70: rgba(255, 255, 255, 0.7);
+  --color-white-alpha-80: rgba(255, 255, 255, 0.8);
+  --color-white-alpha-90: rgba(255, 255, 255, 0.9);
+}
+
+/**
+ * Visually hidden mixin (for accessibility)
+ * Hides element visually but keeps it available for screen readers
+ * @example @include visually-hidden;
+ */
+/**
+ * Focus ring mixin for better accessibility
+ * @param {Color} $color - Focus ring color (optional)
+ * @param {Number} $width - Focus ring width (optional)
+ * @param {Number} $offset - Focus ring offset (optional)
+ * @example @include focus-ring;
+ */
+/**
+ * TEXT UTILITY MIXINS
+ * -------------------
+ * 
+ * Mixins for text manipulation and display utilities
+ * 
+ * USAGE:
+ * @use "../tools/text" as text;
+ * @include text.truncate-text;
+ * @include text.truncate-multiline(3);
+ */
+/**
+ * Truncate text with ellipsis
+ * @example @include truncate-text;
+ */
+/**
+ * Multi-line text truncation
+ * @param {Number} $lines - Number of lines to show
+ * @example @include truncate-multiline(3);
+ */
+/**
+ * Base Styles
+ */
+/**
+ * MODERN CSS RESET
+ * ================
+ * 
+ * A comprehensive CSS reset based on modern best practices including:
+ * - Josh Comeau's CSS Reset
+ * - Andy Bell's Modern CSS Reset
+ * - Normalize.css principles
+ * - Accessibility improvements
+ * 
+ * Updated: 2024
+ */
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Prevent font size inflation */
+html {
+  -moz-text-size-adjust: none;
+  -webkit-text-size-adjust: none;
+  text-size-adjust: none;
+  font-size: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeSpeed;
+}
+
+/* Remove default margin in favour of better control in authored CSS */
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+figure,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+
+/* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
+ul[role=list],
+ol[role=list] {
+  list-style: none;
+}
+
+/* Remove default list styles */
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Set core body defaults */
+body {
+  min-height: 100vh;
+  line-height: var(--line-height-normal, 1.5);
+  font-family: var(--font-family-base, system-ui, sans-serif);
+  font-size: var(--font-size-base, 1rem);
+  color: var(--color-black, #000);
+  background-color: var(--color-white, #fff);
+  margin: 0;
+  padding: 0;
+}
+
+/* Set shorter line heights on headings and interactive elements */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+button,
+input,
+label {
+  line-height: 1.1;
+}
+
+/* Balance text wrapping on headings */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  text-wrap: balance;
+}
+
+/* A elements that don't have a class get default styles */
+a:not([class]) {
+  -webkit-text-decoration-skip: ink;
+          text-decoration-skip-ink: auto;
+  color: currentColor;
+}
+
+/* Make images easier to work with */
+img,
+picture,
+video,
+canvas,
+svg {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Inherit fonts for inputs and buttons */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+/* Remove default button styles */
+button {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+/* Make sure textareas without a rows attribute are not tiny */
+textarea:not([rows]) {
+  min-height: 10em;
+}
+
+/* Anything that has been anchored to should have extra scroll margin */
+:target {
+  scroll-margin-block: 5ex;
+}
+
+/* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+/* Focus styles */
+:focus-visible {
+  outline: 2px solid var(--color-secondary, #2a8de9);
+  outline-offset: 2px;
+}
+
+/* Remove focus outline for mouse users */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Improve table styling */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* Form elements */
+fieldset {
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+legend {
+  padding: 0;
+}
+
+/* Remove default styling from form elements */
+input[type=search] {
+  -webkit-appearance: textfield;
+  outline-offset: -2px;
+}
+
+input[type=search]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+/* Fix webkit button styling */
+::-webkit-file-upload-button {
+  -webkit-appearance: button;
+  font: inherit;
+}
+
+/* Improve consistency of default fonts */
+code,
+kbd,
+samp,
+pre {
+  font-family: ui-monospace, "Cascadia Code", "Source Code Pro", Menlo, Consolas, "DejaVu Sans Mono", monospace;
+  font-size: 1em;
+}
+
+/* Add the correct font size in all browsers */
+small {
+  font-size: 80%;
+}
+
+/* Prevent sub and sup elements from affecting the line height */
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+sub {
+  bottom: -0.25em;
+}
+
+sup {
+  top: -0.5em;
+}
+
+/* Remove the border on images inside links in IE 10 */
+img {
+  border-style: none;
+}
+
+/* Hide the overflow in IE */
+svg:not(:root) {
+  overflow: hidden;
+}
+
+/* Correct the inheritance and scaling of font size in all browsers */
+pre {
+  font-family: monospace, monospace;
+  font-size: 1em;
+  overflow: auto;
+}
+
+/* Add the correct display in IE 10 */
+[hidden] {
+  display: none;
+}
+
+/* Accessibility improvements */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-family-heading);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-tight);
+  margin-bottom: var(--spacing-4);
+}
+
+h1 {
+  font-size: var(--font-size-4xl);
+}
+
+h2 {
+  font-size: var(--font-size-3xl);
+}
+
+h3 {
+  font-size: var(--font-size-2xl);
+}
+
+h4 {
+  font-size: var(--font-size-xl);
+}
+
+h5 {
+  font-size: var(--font-size-lg);
+}
+
+h6 {
+  font-size: var(--font-size-base);
+}
+
+p {
+  margin-bottom: var(--spacing-4);
+}
+p:last-child {
+  margin-bottom: 0;
+}
+
+.lead {
+  font-size: var(--font-size-xl);
+  line-height: var(--line-height-snug);
+}
+
+a {
+  color: var(--color-primary);
+  text-decoration: underline;
+  transition: color 0.2s;
+}
+a:hover {
+  color: var(--color-primary-400);
+}
+
+.text-small {
+  font-size: var(--font-size-sm);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--button-default-padding-y) var(--button-default-padding-x);
+  border-radius: var(--button-default-border-radius);
+  font-family: var(--font-family-base);
+  font-weight: var(--button-default-font-weight);
+  font-size: var(--button-default-font-size);
+  text-align: center;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: var(--button-default-transition);
+}
+.btn:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+.btn--sm {
+  padding: var(--button-sm-padding-y) var(--button-sm-padding-x);
+  font-size: var(--button-sm-font-size);
+}
+.btn--lg {
+  padding: var(--button-lg-padding-y) var(--button-lg-padding-x);
+  font-size: var(--button-lg-font-size);
+}
+.btn--block {
+  display: block;
+  width: 100%;
+}
+.btn--primary {
+  background-color: var(--color-primary);
+  color: var(--color-primary-contrast);
+  border-color: var(--color-primary);
+}
+.btn--primary:hover {
+  background-color: var(--color-primary-tint);
+  color: var(--color-primary-contrast);
+  border-color: var(--color-primary-tint);
+}
+.btn--secondary {
+  background-color: var(--color-secondary);
+  color: var(--color-secondary-contrast);
+  border-color: var(--color-secondary);
+}
+.btn--secondary:hover {
+  background-color: var(--color-secondary-tint);
+  color: var(--color-secondary-contrast);
+  border-color: var(--color-secondary-tint);
+}
+.btn--danger {
+  background-color: var(--color-danger);
+  color: var(--color-danger-contrast);
+  border-color: var(--color-danger);
+}
+.btn--danger:hover {
+  background-color: var(--color-danger-tint);
+  color: var(--color-danger-contrast);
+  border-color: var(--color-danger-tint);
+}
+.btn--warning {
+  background-color: var(--color-warning);
+  color: var(--color-warning-contrast);
+  border-color: var(--color-warning);
+}
+.btn--warning:hover {
+  background-color: var(--color-warning-tint);
+  color: var(--color-warning-contrast);
+  border-color: var(--color-warning-tint);
+}
+.btn--success {
+  background-color: var(--color-success);
+  color: var(--color-success-contrast);
+  border-color: var(--color-success);
+}
+.btn--success:hover {
+  background-color: var(--color-success-tint);
+  color: var(--color-success-contrast);
+  border-color: var(--color-success-tint);
+}
+.btn--info {
+  background-color: var(--color-info);
+  color: var(--color-info-contrast);
+  border-color: var(--color-info);
+}
+.btn--info:hover {
+  background-color: var(--color-info-tint);
+  color: var(--color-info-contrast);
+  border-color: var(--color-info-tint);
+}
+
+/**
+ * Project: SMACSS SCSS Architecture
+ * Description: This project implements a scalable and modular architecture for CSS (SMACSS) 
+ *              using SCSS to ensure maintainable and reusable styles.
+ * Author: Chris Javier Oliveros
+ * Version: 2.0.0
+ * License: MIT
+ * 
+ * This file serves as the entry point for the SCSS architecture. It organizes and imports 
+ * all styles based on the SMACSS methodology.
+ */
+/**
+ * CONTAINER CONFIGURATION
+ * ----------------------
+ * 
+ * Mobile-first responsive container implementation
+ * 
+ * USAGE:
+ * 1. Apply the container class to create a responsive, centered wrapper:
+ *    <div class="container">Content goes here</div>
+ * 
+ * 2. Container variations:
+ *    - Default: <div class="container">...</div> (max-width: 1200px)
+ *    - Narrow: <div class="container container--narrow">...</div> (max-width: 800px)
+ *    - Wide: <div class="container container--wide">...</div> (max-width: 1600px)
+ *    - Fluid: <div class="container container--fluid">...</div> (max-width: 100%)
+ * 
+ * 3. Container padding is responsive and handled by CSS variables:
+ *    - Mobile: var(--container-padding-sm)
+ *    - Tablet: var(--container-padding-md)
+ *    - Desktop: var(--container-padding-lg)
+ */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--container-padding-sm);
+  padding-right: var(--container-padding-sm);
+}
+@media (min-width: 768px) {
+  .container {
+    padding-left: var(--container-padding-md);
+    padding-right: var(--container-padding-md);
+  }
+}
+@media (min-width: 992px) {
+  .container {
+    padding-left: var(--container-padding-lg);
+    padding-right: var(--container-padding-lg);
+  }
+}
+.container--narrow {
+  max-width: 800px;
+}
+.container--wide {
+  max-width: 1600px;
+}
+.container--fluid {
+  max-width: 100%;
+}
+
+/**
+ * Project: SMACSS SCSS Architecture
+ * Description: This project implements a scalable and modular architecture for CSS (SMACSS) 
+ *              using SCSS to ensure maintainable and reusable styles.
+ * Author: Chris Javier Oliveros
+ * Version: 2.0.0
+ * License: MIT
+ * 
+ * This file serves as the entry point for the SCSS architecture. It organizes and imports 
+ * all styles based on the SMACSS methodology.
+ */
+/**
+ * GRID LAYOUT CONFIGURATION
+ * -----------------------
+ * 
+ * Mobile-first responsive grid layout implementation
+ * 
+ * USAGE:
+ * 1. Apply the grid class to create a responsive grid layout:
+ *    <div class="grid">
+ *      <div>Item 1</div>
+ *      <div>Item 2</div>
+ *    </div>
+ * 
+ * 2. Column variations (mobile-first responsive):
+ *    - Two columns: <div class="grid grid--2-col">...</div>
+ *      Mobile: 1 column, Tablet/Desktop: 2 columns
+ *    
+ *    - Three columns: <div class="grid grid--3-col">...</div>
+ *      Mobile: 1 column, Tablet: 2 columns, Desktop: 3 columns
+ *    
+ *    - Four columns: <div class="grid grid--4-col">...</div>
+ *      Mobile: 1 column, Tablet: 2 columns, Desktop: 4 columns
+ * 
+ * 3. Gap variations:
+ *    - Default: <div class="grid">...</div> (gap: spacing("4"))
+ *    - Small: <div class="grid grid--gap-sm">...</div> (gap: spacing("2"))
+ *    - Large: <div class="grid grid--gap-lg">...</div> (gap: spacing("8"))
+ * 
+ * 4. Auto-fit grid (for card layouts):
+ *    <div class="grid grid--auto-fit">...</div>
+ *    Creates a responsive grid that automatically fits columns based on available space
+ */
+.grid {
+  display: grid;
+  gap: var(--spacing-4);
+}
+.grid--gap-sm {
+  gap: var(--spacing-2);
+}
+.grid--gap-lg {
+  gap: var(--spacing-8);
+}
+.grid--2-col {
+  grid-template-columns: 1fr;
+}
+@media (min-width: 768px) {
+  .grid--2-col {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+.grid--3-col {
+  grid-template-columns: 1fr;
+}
+@media (min-width: 768px) {
+  .grid--3-col {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 992px) {
+  .grid--3-col {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+.grid--4-col {
+  grid-template-columns: 1fr;
+}
+@media (min-width: 576px) {
+  .grid--4-col {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 992px) {
+  .grid--4-col {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+.grid--auto-fit {
+  grid-template-columns: 1fr;
+}
+@media (min-width: 576px) {
+  .grid--auto-fit {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+  }
+}
+
+.flex-row {
+  flex-direction: row !important;
+}
+
+.flex-column {
+  flex-direction: column !important;
+}
+
+.justify-center {
+  justify-content: center !important;
+}
+
+.align-center {
+  align-items: center !important;
+}
+
+/**
+ * Project: SMACSS SCSS Architecture
+ * Description: This project implements a scalable and modular architecture for CSS (SMACSS) 
+ *              using SCSS to ensure maintainable and reusable styles.
+ * Author: Chris Javier Oliveros
+ * Version: 2.0.0
+ * License: MIT
+ * 
+ * This file serves as the entry point for the SCSS architecture. It organizes and imports 
+ * all styles based on the SMACSS methodology.
+ */
+/**
+ * DISPLAY UTILITIES
+ * ----------------
+ * 
+ * Mobile-first responsive display utilities
+ * 
+ * USAGE:
+ * Base classes:
+ * - .d-none: Hide element
+ * - .d-block: Display as block
+ * - .d-flex: Display as flex
+ * - .d-inline: Display as inline
+ * - .d-inline-block: Display as inline-block
+ * - .d-grid: Display as grid
+ * 
+ * Responsive variants (mobile-first):
+ * - .d-sm-block: Display as block from small screens up
+ * - .d-md-flex: Display as flex from medium screens up
+ * - .d-lg-none: Hide from large screens up
+ * etc.
+ */
+.d-none {
+  display: none !important;
+}
+
+.d-block {
+  display: block !important;
+}
+
+.d-flex {
+  display: flex !important;
+}
+
+.d-inline {
+  display: inline !important;
+}
+
+.d-inline-block {
+  display: inline-block !important;
+}
+
+.d-grid {
+  display: grid !important;
+}
+
+@media (min-width: 576px) {
+  .d-sm-none {
+    display: none !important;
+  }
+  .d-sm-block {
+    display: block !important;
+  }
+  .d-sm-flex {
+    display: flex !important;
+  }
+  .d-sm-inline {
+    display: inline !important;
+  }
+  .d-sm-inline-block {
+    display: inline-block !important;
+  }
+  .d-sm-grid {
+    display: grid !important;
+  }
+}
+@media (min-width: 768px) {
+  .d-md-none {
+    display: none !important;
+  }
+  .d-md-block {
+    display: block !important;
+  }
+  .d-md-flex {
+    display: flex !important;
+  }
+  .d-md-inline {
+    display: inline !important;
+  }
+  .d-md-inline-block {
+    display: inline-block !important;
+  }
+  .d-md-grid {
+    display: grid !important;
+  }
+}
+@media (min-width: 992px) {
+  .d-lg-none {
+    display: none !important;
+  }
+  .d-lg-block {
+    display: block !important;
+  }
+  .d-lg-flex {
+    display: flex !important;
+  }
+  .d-lg-inline {
+    display: inline !important;
+  }
+  .d-lg-inline-block {
+    display: inline-block !important;
+  }
+  .d-lg-grid {
+    display: grid !important;
+  }
+}
+@media (min-width: 1200px) {
+  .d-xl-none {
+    display: none !important;
+  }
+  .d-xl-block {
+    display: block !important;
+  }
+  .d-xl-flex {
+    display: flex !important;
+  }
+  .d-xl-inline {
+    display: inline !important;
+  }
+  .d-xl-inline-block {
+    display: inline-block !important;
+  }
+  .d-xl-grid {
+    display: grid !important;
+  }
+}
+@media (min-width: 1400px) {
+  .d-xxl-none {
+    display: none !important;
+  }
+  .d-xxl-block {
+    display: block !important;
+  }
+  .d-xxl-flex {
+    display: flex !important;
+  }
+  .d-xxl-inline {
+    display: inline !important;
+  }
+  .d-xxl-inline-block {
+    display: inline-block !important;
+  }
+  .d-xxl-grid {
+    display: grid !important;
+  }
+}
+.text-center {
+  text-align: center !important;
+}
+
+.text-left {
+  text-align: left !important;
+}
+
+.text-right {
+  text-align: right !important;
+}
+
+/**
+ * SPACING CONFIGURATION
+ * ---------------------
+ * 
+ * USAGE:
+ * 1. Import this file: @import 'config/spacing';
+ * 
+ * 2. Generate CSS variables in your root file:
+ *    @include generate-spacing-variables();
+ * 
+ * 3. Use spacing in your SCSS:
+ *    - Function: margin: spacing(4);      // Returns 1rem
+ *    - Function: padding: spacing('sm');  // Returns 1rem using alias
+ *    - Variable: gap: var(--spacing-6);   // Use CSS variable
+ * 
+ * 4. For container padding:
+ *    padding: var(--container-padding-md); // Responsive padding
+ */
+/**
+ * Function to get spacing value
+ * @param {String|Number} $key - The spacing key or alias
+ * @return {Number} The spacing value in rem
+ * @example padding: spacing(4);      // Returns 1rem
+ * @example margin: spacing('sm');    // Returns 1rem via alias
+ */
+/**
+ * Generate CSS spacing variables
+ * Creates CSS custom properties for all spacing values
+ * @example @include generate-spacing-variables();
+ */
+:root {
+  --spacing-0: 0;
+  --spacing-1: 0.25rem;
+  --spacing-2: 0.5rem;
+  --spacing-3: 0.75rem;
+  --spacing-4: 1rem;
+  --spacing-5: 1.5rem;
+  --spacing-6: 2rem;
+  --spacing-8: 3rem;
+  --spacing-10: 4rem;
+  --spacing-12: 6rem;
+  --spacing-16: 8rem;
+  --container-padding-sm: var(--spacing-4);
+  --container-padding-md: var(--spacing-6);
+  --container-padding-lg: var(--spacing-8);
+}
+
+.m-0 {
+  margin: var(--spacing-0);
+}
+
+.mt-0 {
+  margin-top: var(--spacing-0);
+}
+
+.mb-0 {
+  margin-bottom: var(--spacing-0);
+}
+
+.ml-0 {
+  margin-left: var(--spacing-0);
+}
+
+.mr-0 {
+  margin-right: var(--spacing-0);
+}
+
+.mx-0 {
+  margin-left: var(--spacing-0);
+  margin-right: var(--spacing-0);
+}
+
+.my-0 {
+  margin-top: var(--spacing-0);
+  margin-bottom: var(--spacing-0);
+}
+
+.m-1 {
+  margin: var(--spacing-1);
+}
+
+.mt-1 {
+  margin-top: var(--spacing-1);
+}
+
+.mb-1 {
+  margin-bottom: var(--spacing-1);
+}
+
+.ml-1 {
+  margin-left: var(--spacing-1);
+}
+
+.mr-1 {
+  margin-right: var(--spacing-1);
+}
+
+.mx-1 {
+  margin-left: var(--spacing-1);
+  margin-right: var(--spacing-1);
+}
+
+.my-1 {
+  margin-top: var(--spacing-1);
+  margin-bottom: var(--spacing-1);
+}
+
+.m-2 {
+  margin: var(--spacing-2);
+}
+
+.mt-2 {
+  margin-top: var(--spacing-2);
+}
+
+.mb-2 {
+  margin-bottom: var(--spacing-2);
+}
+
+.ml-2 {
+  margin-left: var(--spacing-2);
+}
+
+.mr-2 {
+  margin-right: var(--spacing-2);
+}
+
+.mx-2 {
+  margin-left: var(--spacing-2);
+  margin-right: var(--spacing-2);
+}
+
+.my-2 {
+  margin-top: var(--spacing-2);
+  margin-bottom: var(--spacing-2);
+}
+
+.m-3 {
+  margin: var(--spacing-3);
+}
+
+.mt-3 {
+  margin-top: var(--spacing-3);
+}
+
+.mb-3 {
+  margin-bottom: var(--spacing-3);
+}
+
+.ml-3 {
+  margin-left: var(--spacing-3);
+}
+
+.mr-3 {
+  margin-right: var(--spacing-3);
+}
+
+.mx-3 {
+  margin-left: var(--spacing-3);
+  margin-right: var(--spacing-3);
+}
+
+.my-3 {
+  margin-top: var(--spacing-3);
+  margin-bottom: var(--spacing-3);
+}
+
+.m-4 {
+  margin: var(--spacing-4);
+}
+
+.mt-4 {
+  margin-top: var(--spacing-4);
+}
+
+.mb-4 {
+  margin-bottom: var(--spacing-4);
+}
+
+.ml-4 {
+  margin-left: var(--spacing-4);
+}
+
+.mr-4 {
+  margin-right: var(--spacing-4);
+}
+
+.mx-4 {
+  margin-left: var(--spacing-4);
+  margin-right: var(--spacing-4);
+}
+
+.my-4 {
+  margin-top: var(--spacing-4);
+  margin-bottom: var(--spacing-4);
+}
+
+.m-5 {
+  margin: var(--spacing-5);
+}
+
+.mt-5 {
+  margin-top: var(--spacing-5);
+}
+
+.mb-5 {
+  margin-bottom: var(--spacing-5);
+}
+
+.ml-5 {
+  margin-left: var(--spacing-5);
+}
+
+.mr-5 {
+  margin-right: var(--spacing-5);
+}
+
+.mx-5 {
+  margin-left: var(--spacing-5);
+  margin-right: var(--spacing-5);
+}
+
+.my-5 {
+  margin-top: var(--spacing-5);
+  margin-bottom: var(--spacing-5);
+}
+
+.m-6 {
+  margin: var(--spacing-6);
+}
+
+.mt-6 {
+  margin-top: var(--spacing-6);
+}
+
+.mb-6 {
+  margin-bottom: var(--spacing-6);
+}
+
+.ml-6 {
+  margin-left: var(--spacing-6);
+}
+
+.mr-6 {
+  margin-right: var(--spacing-6);
+}
+
+.mx-6 {
+  margin-left: var(--spacing-6);
+  margin-right: var(--spacing-6);
+}
+
+.my-6 {
+  margin-top: var(--spacing-6);
+  margin-bottom: var(--spacing-6);
+}
+
+.m-8 {
+  margin: var(--spacing-8);
+}
+
+.mt-8 {
+  margin-top: var(--spacing-8);
+}
+
+.mb-8 {
+  margin-bottom: var(--spacing-8);
+}
+
+.ml-8 {
+  margin-left: var(--spacing-8);
+}
+
+.mr-8 {
+  margin-right: var(--spacing-8);
+}
+
+.mx-8 {
+  margin-left: var(--spacing-8);
+  margin-right: var(--spacing-8);
+}
+
+.my-8 {
+  margin-top: var(--spacing-8);
+  margin-bottom: var(--spacing-8);
+}
+
+.m-10 {
+  margin: var(--spacing-10);
+}
+
+.mt-10 {
+  margin-top: var(--spacing-10);
+}
+
+.mb-10 {
+  margin-bottom: var(--spacing-10);
+}
+
+.ml-10 {
+  margin-left: var(--spacing-10);
+}
+
+.mr-10 {
+  margin-right: var(--spacing-10);
+}
+
+.mx-10 {
+  margin-left: var(--spacing-10);
+  margin-right: var(--spacing-10);
+}
+
+.my-10 {
+  margin-top: var(--spacing-10);
+  margin-bottom: var(--spacing-10);
+}
+
+.m-12 {
+  margin: var(--spacing-12);
+}
+
+.mt-12 {
+  margin-top: var(--spacing-12);
+}
+
+.mb-12 {
+  margin-bottom: var(--spacing-12);
+}
+
+.ml-12 {
+  margin-left: var(--spacing-12);
+}
+
+.mr-12 {
+  margin-right: var(--spacing-12);
+}
+
+.mx-12 {
+  margin-left: var(--spacing-12);
+  margin-right: var(--spacing-12);
+}
+
+.my-12 {
+  margin-top: var(--spacing-12);
+  margin-bottom: var(--spacing-12);
+}
+
+.m-16 {
+  margin: var(--spacing-16);
+}
+
+.mt-16 {
+  margin-top: var(--spacing-16);
+}
+
+.mb-16 {
+  margin-bottom: var(--spacing-16);
+}
+
+.ml-16 {
+  margin-left: var(--spacing-16);
+}
+
+.mr-16 {
+  margin-right: var(--spacing-16);
+}
+
+.mx-16 {
+  margin-left: var(--spacing-16);
+  margin-right: var(--spacing-16);
+}
+
+.my-16 {
+  margin-top: var(--spacing-16);
+  margin-bottom: var(--spacing-16);
+}
+
+.p-0 {
+  padding: var(--spacing-0);
+}
+
+.pt-0 {
+  padding-top: var(--spacing-0);
+}
+
+.pb-0 {
+  padding-bottom: var(--spacing-0);
+}
+
+.pl-0 {
+  padding-left: var(--spacing-0);
+}
+
+.pr-0 {
+  padding-right: var(--spacing-0);
+}
+
+.px-0 {
+  padding-left: var(--spacing-0);
+  padding-right: var(--spacing-0);
+}
+
+.py-0 {
+  padding-top: var(--spacing-0);
+  padding-bottom: var(--spacing-0);
+}
+
+.p-1 {
+  padding: var(--spacing-1);
+}
+
+.pt-1 {
+  padding-top: var(--spacing-1);
+}
+
+.pb-1 {
+  padding-bottom: var(--spacing-1);
+}
+
+.pl-1 {
+  padding-left: var(--spacing-1);
+}
+
+.pr-1 {
+  padding-right: var(--spacing-1);
+}
+
+.px-1 {
+  padding-left: var(--spacing-1);
+  padding-right: var(--spacing-1);
+}
+
+.py-1 {
+  padding-top: var(--spacing-1);
+  padding-bottom: var(--spacing-1);
+}
+
+.p-2 {
+  padding: var(--spacing-2);
+}
+
+.pt-2 {
+  padding-top: var(--spacing-2);
+}
+
+.pb-2 {
+  padding-bottom: var(--spacing-2);
+}
+
+.pl-2 {
+  padding-left: var(--spacing-2);
+}
+
+.pr-2 {
+  padding-right: var(--spacing-2);
+}
+
+.px-2 {
+  padding-left: var(--spacing-2);
+  padding-right: var(--spacing-2);
+}
+
+.py-2 {
+  padding-top: var(--spacing-2);
+  padding-bottom: var(--spacing-2);
+}
+
+.p-3 {
+  padding: var(--spacing-3);
+}
+
+.pt-3 {
+  padding-top: var(--spacing-3);
+}
+
+.pb-3 {
+  padding-bottom: var(--spacing-3);
+}
+
+.pl-3 {
+  padding-left: var(--spacing-3);
+}
+
+.pr-3 {
+  padding-right: var(--spacing-3);
+}
+
+.px-3 {
+  padding-left: var(--spacing-3);
+  padding-right: var(--spacing-3);
+}
+
+.py-3 {
+  padding-top: var(--spacing-3);
+  padding-bottom: var(--spacing-3);
+}
+
+.p-4 {
+  padding: var(--spacing-4);
+}
+
+.pt-4 {
+  padding-top: var(--spacing-4);
+}
+
+.pb-4 {
+  padding-bottom: var(--spacing-4);
+}
+
+.pl-4 {
+  padding-left: var(--spacing-4);
+}
+
+.pr-4 {
+  padding-right: var(--spacing-4);
+}
+
+.px-4 {
+  padding-left: var(--spacing-4);
+  padding-right: var(--spacing-4);
+}
+
+.py-4 {
+  padding-top: var(--spacing-4);
+  padding-bottom: var(--spacing-4);
+}
+
+.p-5 {
+  padding: var(--spacing-5);
+}
+
+.pt-5 {
+  padding-top: var(--spacing-5);
+}
+
+.pb-5 {
+  padding-bottom: var(--spacing-5);
+}
+
+.pl-5 {
+  padding-left: var(--spacing-5);
+}
+
+.pr-5 {
+  padding-right: var(--spacing-5);
+}
+
+.px-5 {
+  padding-left: var(--spacing-5);
+  padding-right: var(--spacing-5);
+}
+
+.py-5 {
+  padding-top: var(--spacing-5);
+  padding-bottom: var(--spacing-5);
+}
+
+.p-6 {
+  padding: var(--spacing-6);
+}
+
+.pt-6 {
+  padding-top: var(--spacing-6);
+}
+
+.pb-6 {
+  padding-bottom: var(--spacing-6);
+}
+
+.pl-6 {
+  padding-left: var(--spacing-6);
+}
+
+.pr-6 {
+  padding-right: var(--spacing-6);
+}
+
+.px-6 {
+  padding-left: var(--spacing-6);
+  padding-right: var(--spacing-6);
+}
+
+.py-6 {
+  padding-top: var(--spacing-6);
+  padding-bottom: var(--spacing-6);
+}
+
+.p-8 {
+  padding: var(--spacing-8);
+}
+
+.pt-8 {
+  padding-top: var(--spacing-8);
+}
+
+.pb-8 {
+  padding-bottom: var(--spacing-8);
+}
+
+.pl-8 {
+  padding-left: var(--spacing-8);
+}
+
+.pr-8 {
+  padding-right: var(--spacing-8);
+}
+
+.px-8 {
+  padding-left: var(--spacing-8);
+  padding-right: var(--spacing-8);
+}
+
+.py-8 {
+  padding-top: var(--spacing-8);
+  padding-bottom: var(--spacing-8);
+}
+
+.p-10 {
+  padding: var(--spacing-10);
+}
+
+.pt-10 {
+  padding-top: var(--spacing-10);
+}
+
+.pb-10 {
+  padding-bottom: var(--spacing-10);
+}
+
+.pl-10 {
+  padding-left: var(--spacing-10);
+}
+
+.pr-10 {
+  padding-right: var(--spacing-10);
+}
+
+.px-10 {
+  padding-left: var(--spacing-10);
+  padding-right: var(--spacing-10);
+}
+
+.py-10 {
+  padding-top: var(--spacing-10);
+  padding-bottom: var(--spacing-10);
+}
+
+.p-12 {
+  padding: var(--spacing-12);
+}
+
+.pt-12 {
+  padding-top: var(--spacing-12);
+}
+
+.pb-12 {
+  padding-bottom: var(--spacing-12);
+}
+
+.pl-12 {
+  padding-left: var(--spacing-12);
+}
+
+.pr-12 {
+  padding-right: var(--spacing-12);
+}
+
+.px-12 {
+  padding-left: var(--spacing-12);
+  padding-right: var(--spacing-12);
+}
+
+.py-12 {
+  padding-top: var(--spacing-12);
+  padding-bottom: var(--spacing-12);
+}
+
+.p-16 {
+  padding: var(--spacing-16);
+}
+
+.pt-16 {
+  padding-top: var(--spacing-16);
+}
+
+.pb-16 {
+  padding-bottom: var(--spacing-16);
+}
+
+.pl-16 {
+  padding-left: var(--spacing-16);
+}
+
+.pr-16 {
+  padding-right: var(--spacing-16);
+}
+
+.px-16 {
+  padding-left: var(--spacing-16);
+  padding-right: var(--spacing-16);
+}
+
+.py-16 {
+  padding-top: var(--spacing-16);
+  padding-bottom: var(--spacing-16);
+}
