@@ -639,22 +639,6 @@ a[target=_blank]::after {
   text-decoration: none;
 }
 
-.skip-link {
-  position: absolute;
-  top: -40px;
-  left: 6px;
-  background: #314459;
-  color: white;
-  padding: 8px;
-  text-decoration: none;
-  border-radius: 4px;
-  z-index: 1000;
-  font-weight: 600;
-}
-.skip-link:focus {
-  top: 6px;
-}
-
 /**
  * Project: SMACSS SCSS Architecture
  * Description: This project implements a scalable and modular architecture for CSS (SMACSS) 
@@ -1083,28 +1067,6 @@ iframe {
 embed,
 object {
   max-width: 100%;
-}
-
-.avatar {
-  border-radius: 50%;
-  object-fit: cover;
-}
-
-.img-thumbnail {
-  border: 1px solid #e0e0e0;
-  border-radius: 4px;
-  padding: 4px;
-  background-color: #ffffff;
-  max-width: 100%;
-  height: auto;
-}
-
-.img-rounded {
-  border-radius: 6px;
-}
-
-.img-circle {
-  border-radius: 50%;
 }
 
 /**

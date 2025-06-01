@@ -80,27 +80,27 @@ object {
   max-width: 100%;
 }
 
-// Avatar/profile images
-.avatar {
-  border-radius: 50%;
-  object-fit: cover;
-}
+// // Avatar/profile images
+// .avatar {
+//   border-radius: 50%;
+//   object-fit: cover;
+// }
 
-// Image thumbnails
-.img-thumbnail {
-  border: 1px solid core.getColor("Light-400");
-  border-radius: 4px;
-  padding: 4px;
-  background-color: core.getColor("White");
-  max-width: 100%;
-  height: auto;
-}
+// // Image thumbnails
+// .img-thumbnail {
+//   border: 1px solid core.getColor("Light-400");
+//   border-radius: 4px;
+//   padding: 4px;
+//   background-color: core.getColor("White");
+//   max-width: 100%;
+//   height: auto;
+// }
 
-// Image shapes
-.img-rounded {
-  border-radius: 6px;
-}
+// // Image shapes
+// .img-rounded {
+//   border-radius: 6px;
+// }
 
-.img-circle {
-  border-radius: 50%;
-}
+// .img-circle {
+//   border-radius: 50%;
+// }

@@ -83,20 +83,20 @@ a[target="_blank"]::after {
   text-decoration: none;
 }
 
-// Skip link for accessibility
-.skip-link {
-  position: absolute;
-  top: -40px;
-  left: 6px;
-  background: core.getColor("Primary");
-  color: white;
-  padding: 8px;
-  text-decoration: none;
-  border-radius: 4px;
-  z-index: 1000;
-  font-weight: 600;
+// // Skip link for accessibility
+// .skip-link {
+//   position: absolute;
+//   top: -40px;
+//   left: 6px;
+//   background: core.getColor("Primary");
+//   color: white;
+//   padding: 8px;
+//   text-decoration: none;
+//   border-radius: 4px;
+//   z-index: 1000;
+//   font-weight: 600;
 
-  &:focus {
-    top: 6px;
-  }
-}
+//   &:focus {
+//     top: 6px;
+//   }
+// }
