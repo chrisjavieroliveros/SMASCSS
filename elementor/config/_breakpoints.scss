@@ -1,12 +1,46 @@
 /**
  * BREAKPOINTS CONFIGURATION
  * ------------------------
- * 
- * A comprehensive breakpoint system for responsive design using a mobile-first approach.
- * This system provides a set of predefined breakpoints and utilities for creating
- * responsive layouts that start from mobile and scale up to larger screens.
- * 
- * USAGE:
+ */
+
+// Breakpoint definitions
+$breakpoints: (
+  "xs": 375px,
+  "sm": 576px,
+  "md": 768px,
+  "lg": 992px,
+  "xl": 1200px,
+  "xxl": 1400px,
+);
+
+// Function to get breakpoint value
+@function breakpoint($name) {
+  @if map-has-key($breakpoints, $name) {
+    @return map-get($breakpoints, $name);
+  }
+
+  @error "Breakpoint '#{$name}' not found in breakpoints map.";
+  @return null;
+}
+
+/**
+ * Generate CSS breakpoint variables
+ * Creates CSS custom properties for all breakpoint values
+ * @example @include generate-breakpoint-variables();
+ */
+@mixin generate-breakpoint-variables() {
+  :root {
+    @each $name, $value in $breakpoints {
+      --breakpoint-#{$name}: #{$value};
+    }
+  }
+}
+
+// Generate CSS variables
+@include generate-breakpoint-variables();
+
+/* 
+* USAGE:
  * 1. Import the breakpoint tools:
  *    @use "tools/breakpoints" as breakpoints;
  * 
@@ -179,40 +213,4 @@
  *           margin-bottom: 4rem;
  *         }
  *       }
- */
-
-// Breakpoint definitions
-$breakpoints: (
-  "xs": 375px,
-  "sm": 576px,
-  "md": 768px,
-  "lg": 992px,
-  "xl": 1200px,
-  "xxl": 1400px,
-);
-
-// Function to get breakpoint value
-@function breakpoint($name) {
-  @if map-has-key($breakpoints, $name) {
-    @return map-get($breakpoints, $name);
-  }
-
-  @error "Breakpoint '#{$name}' not found in breakpoints map.";
-  @return null;
-}
-
-/**
- * Generate CSS breakpoint variables
- * Creates CSS custom properties for all breakpoint values
- * @example @include generate-breakpoint-variables();
- */
-@mixin generate-breakpoint-variables() {
-  :root {
-    @each $name, $value in $breakpoints {
-      --breakpoint-#{$name}: #{$value};
-    }
-  }
-}
-
-// Generate CSS variables
-@include generate-breakpoint-variables();
+*/
