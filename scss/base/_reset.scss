@@ -84,8 +84,8 @@ h6 {
 /*
   Remove list styles on ul, ol elements with a list role
 */
-ul[role='list'],
-ol[role='list'] {
+ul[role="list"],
+ol[role="list"] {
   list-style: none;
 }
 
@@ -221,7 +221,8 @@ code,
 kbd,
 samp,
 pre {
-  font-family: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, 'DejaVu Sans Mono', monospace;
+  font-family: ui-monospace, "Cascadia Code", "Source Code Pro", Menlo, Consolas,
+    "DejaVu Sans Mono", monospace;
   font-size: 1em;
 }
 

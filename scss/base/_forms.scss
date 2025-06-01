@@ -1,0 +1,116 @@
+/**
+ * Forms - Base styles for form elements
+ * Includes: input, textarea, select, fieldset, legend, label
+ */
+
+@use "../core/_index" as core;
+
+// Form container
+form {
+  margin: 0;
+  padding: 0;
+}
+
+// Fieldset and legend
+fieldset {
+  border: 1px solid core.getColor("Light-400");
+  border-radius: 4px;
+  margin: 0 0 core.spacing("5");
+  padding: core.spacing("3") core.spacing("5");
+}
+
+legend {
+  font-weight: 600;
+  padding: 0 core.spacing("2");
+  color: core.getColor("Dark-800");
+}
+
+// Labels
+label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: core.spacing("2");
+  color: core.getColor("Dark-800");
+  cursor: pointer;
+}
+
+// Input fields
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="tel"],
+input[type="url"],
+input[type="search"],
+input[type="number"],
+input[type="date"],
+input[type="datetime-local"],
+input[type="month"],
+input[type="time"],
+input[type="week"],
+textarea,
+select {
+  width: 100%;
+  padding: core.spacing("3");
+  border: 1px solid core.getColor("Light-400");
+  border-radius: 4px;
+  font-family: inherit;
+  font-size: 1rem;
+  line-height: 1.5;
+  background-color: core.getColor("White");
+  color: core.getColor("Dark-800");
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+
+  &:focus {
+    outline: none;
+    border-color: core.getColor("Primary");
+    box-shadow: 0 0 0 2px core.getColor("Primary", 0.2);
+  }
+
+  &:disabled {
+    background-color: core.getColor("Light-200");
+    color: core.getColor("Dark-400");
+    cursor: not-allowed;
+  }
+
+  &::placeholder {
+    color: core.getColor("Dark-400");
+  }
+}
+
+// Textarea specific
+textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+// Select specific
+select {
+  cursor: pointer;
+
+  &[multiple] {
+    height: auto;
+  }
+}
+
+// Checkbox and radio
+input[type="checkbox"],
+input[type="radio"] {
+  width: auto;
+  margin-right: core.spacing("2");
+  cursor: pointer;
+}
+
+// File input
+input[type="file"] {
+  width: 100%;
+  padding: core.spacing("2");
+  border: 1px dashed core.getColor("Light-400");
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+// Range input
+input[type="range"] {
+  width: 100%;
+  cursor: pointer;
+}

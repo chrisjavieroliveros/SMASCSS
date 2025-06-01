@@ -1,7 +1,33 @@
 /**
  * Base Styles
+ * Base styles for HTML elements - these are the defaults that set the foundation
  */
 
+// Core resets and base configurations
 @forward "reset";
-@forward "button";
+
+// Typography and text elements
 @forward "typography";
+
+// Interactive elements
+@forward "button";
+@forward "links";
+
+// Form elements
+@forward "forms";
+
+// Navigation elements
+@forward "navigation";
+
+// Content organization
+@forward "lists";
+@forward "tables";
+
+// Media elements
+@forward "media";
+
+// Code elements
+@forward "code";
+
+// Page structure
+@forward "footer";

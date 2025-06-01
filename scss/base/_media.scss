@@ -1,0 +1,106 @@
+/**
+ * Media - Base styles for media elements
+ * Includes: img, figure, figcaption, video, audio, iframe, embed, object
+ */
+
+@use "../core/_index" as core;
+
+// Images
+img {
+  max-width: 100%;
+  height: auto;
+  vertical-align: middle;
+  border: 0;
+}
+
+// Responsive images
+.img-responsive {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+// Figure and figcaption
+figure {
+  margin: 0 0 core.spacing("5");
+  display: inline-block;
+  max-width: 100%;
+
+  img {
+    display: block;
+    margin-bottom: core.spacing("2");
+  }
+}
+
+figcaption {
+  font-size: 0.875rem;
+  color: core.getColor("Dark-400");
+  font-style: italic;
+  text-align: center;
+  padding: core.spacing("2") 0;
+}
+
+// Video and audio
+video,
+audio {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+// Responsive video wrapper
+.video-responsive {
+  position: relative;
+  padding-bottom: 56.25%; // 16:9 aspect ratio
+  height: 0;
+  overflow: hidden;
+
+  iframe,
+  object,
+  embed,
+  video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+}
+
+// Iframe
+iframe {
+  border: 0;
+  max-width: 100%;
+}
+
+// Embed and object
+embed,
+object {
+  max-width: 100%;
+}
+
+// Avatar/profile images
+.avatar {
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+// Image thumbnails
+.img-thumbnail {
+  border: 1px solid core.getColor("Light-400");
+  border-radius: 4px;
+  padding: 4px;
+  background-color: core.getColor("White");
+  max-width: 100%;
+  height: auto;
+}
+
+// Image shapes
+.img-rounded {
+  border-radius: 6px;
+}
+
+.img-circle {
+  border-radius: 50%;
+}

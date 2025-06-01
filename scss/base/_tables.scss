@@ -1,0 +1,103 @@
+/**
+ * Tables - Base styles for table elements
+ * Includes: table, thead, tbody, tfoot, tr, th, td, caption
+ */
+
+@use "../core/_index" as core;
+
+// Table container
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  margin-bottom: core.spacing("5");
+  background-color: transparent;
+}
+
+// Table caption
+caption {
+  padding: core.spacing("3") 0;
+  color: core.getColor("Dark-400");
+  text-align: left;
+  caption-side: top;
+  font-weight: 600;
+}
+
+// Table header
+thead {
+  th {
+    border-bottom: 2px solid core.getColor("Light-400");
+    font-weight: 600;
+    text-align: left;
+    background-color: core.getColor("Light-200");
+  }
+}
+
+// Table body
+tbody {
+  tr {
+    &:nth-child(even) {
+      background-color: core.getColor("Light-400", 0.1);
+    }
+
+    &:hover {
+      background-color: core.getColor("Primary", 0.05);
+    }
+  }
+}
+
+// Table footer
+tfoot {
+  th,
+  td {
+    border-top: 2px solid core.getColor("Light-400");
+    font-weight: 600;
+    background-color: core.getColor("Light-200");
+  }
+}
+
+// Table cells
+th,
+td {
+  padding: core.spacing("3");
+  border-bottom: 1px solid core.getColor("Light-400");
+  vertical-align: top;
+  text-align: left;
+}
+
+th {
+  font-weight: 600;
+  color: core.getColor("Dark-800");
+}
+
+// Responsive table wrapper
+.table-responsive {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+
+  table {
+    min-width: 600px;
+  }
+}
+
+// Table variants
+.table-striped {
+  tbody tr:nth-child(odd) {
+    background-color: core.getColor("Light-400", 0.1);
+  }
+}
+
+.table-hover {
+  tbody tr:hover {
+    background-color: core.getColor("Primary", 0.05);
+  }
+}
+
+.table-bordered {
+  border: 1px solid core.getColor("Light-400");
+
+  th,
+  td {
+    border: 1px solid core.getColor("Light-400");
+  }
+}

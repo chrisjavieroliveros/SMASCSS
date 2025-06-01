@@ -108,10 +108,11 @@ Typography-related functions like unit conversions (`px-to-rem`, `strip-unit`) a
 // or import scss/base/typography directly if needed elsewhere.
 
 .my-element {
-  color: core.color("primary"); 
-  padding: core.spacing(4); 
+  color: core.color("primary");
+  padding: core.spacing(4);
 
-  @include core.breakpoint("md") { // Breakpoint mixin is still part of core
+  @include core.breakpoint("md") {
+    // Breakpoint mixin is still part of core
     // Styles for medium breakpoints and up
   }
 
@@ -120,6 +121,7 @@ Typography-related functions like unit conversions (`px-to-rem`, `strip-unit`) a
 ```
 
 The `core` system primarily includes:
+
 - Color system (variables and potentially functions/maps in `_colors.scss`)
 - Spacing system (variables and potentially functions/maps in `_spacing.scss`)
 - Breakpoint system (variables and mixins in `_breakpoints.scss`)
@@ -158,6 +160,7 @@ The `helpers` directory provides utility classes. These are typically applied di
 ### 4. Import Order in `main.scss`
 
 The `main.scss` file should follow a logical import order:
+
 1. `core` (configurations, base functions, global mixins)
 2. `base` (resets, base element styles)
 3. `layouts` (structural page layouts)
@@ -403,7 +406,7 @@ Base styles are applied to HTML elements and provide sensible defaults:
 
 ```scss
 // scss/components/_alert.scss
-@use "../core" as core; // For variables, mixins
+@use "../core/_index" as core; // For variables, mixins
 @use "../base/button" as b; // If you need to extend/style base button within alert
 
 .alert {

@@ -1,0 +1,100 @@
+/**
+ * Lists - Base styles for list elements
+ * Includes: ul, ol, li, dl, dt, dd
+ */
+
+@use "../core/_index" as core;
+
+// Unordered and ordered lists
+ul,
+ol {
+  margin: 0 0 core.spacing("5");
+  padding-left: core.spacing("6");
+
+  // Nested lists
+  ul,
+  ol {
+    margin-bottom: 0;
+    margin-top: core.spacing("2");
+  }
+}
+
+// List items
+li {
+  margin-bottom: core.spacing("2");
+  line-height: 1.6;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  // Nested list items
+  li {
+    margin-bottom: core.spacing("1");
+  }
+}
+
+// Remove default list styling when needed
+.list-unstyled {
+  padding-left: 0;
+  list-style: none;
+
+  li {
+    margin-bottom: core.spacing("2");
+  }
+}
+
+// Inline list
+.list-inline {
+  padding-left: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: core.spacing("3");
+
+  li {
+    margin-bottom: 0;
+  }
+}
+
+// Definition lists
+dl {
+  margin: 0 0 core.spacing("5");
+}
+
+dt {
+  font-weight: 600;
+  margin-bottom: core.spacing("2");
+  color: core.getColor("Dark-800");
+}
+
+dd {
+  margin-left: 0;
+  margin-bottom: core.spacing("3");
+  padding-left: core.spacing("5");
+  color: core.getColor("Dark-600");
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+// Horizontal definition list
+.dl-horizontal {
+  @media (min-width: 768px) {
+    dt {
+      float: left;
+      width: 160px;
+      clear: left;
+      text-align: right;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    dd {
+      margin-left: 180px;
+      padding-left: 0;
+    }
+  }
+}

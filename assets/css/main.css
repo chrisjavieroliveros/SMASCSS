@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /**
  * Project: SMACSS SCSS Architecture
  * Description: This project implements a scalable and modular architecture for CSS (SMACSS) 
@@ -88,6 +89,7 @@
  */
 /**
  * Base Styles
+ * Base styles for HTML elements - these are the defaults that set the foundation
  */
 /**
  * MODERN CSS RESET
@@ -198,8 +200,7 @@ body {
   A elements that don't have a class get default styles
 */
 a:not([class]) {
-  -webkit-text-decoration-skip: ink;
-          text-decoration-skip-ink: auto;
+  text-decoration-skip-ink: auto;
 }
 
 /*
@@ -370,6 +371,101 @@ pre {
 }
 
 /**
+ * BASE TYPOGRAPHY STYLES & UTILITY FUNCTIONS
+ * -----------------------------------------
+ * Defines base styles for HTML typographic elements and includes
+ * utility functions for unit conversions related to typography.
+ */
+html,
+body {
+  font-family: sans-serif;
+  font-size: 16px;
+  font-weight: normal;
+  line-height: 1.2;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: sans-serif;
+  font-weight: bold;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+}
+
+h1 {
+  font-size: 2.5rem;
+}
+
+h2 {
+  font-size: 2rem;
+}
+
+h3 {
+  font-size: 1.75rem;
+}
+
+h4 {
+  font-size: 1.5rem;
+}
+
+h5 {
+  font-size: 1.25rem;
+}
+
+h6 {
+  font-size: 1rem;
+}
+
+p {
+  margin-bottom: 1rem;
+}
+p:last-child {
+  margin-bottom: 0;
+}
+
+.lead {
+  font-size: 1.5rem;
+  line-height: 1.35;
+}
+
+a {
+  color: blue;
+  text-decoration: underline;
+  transition: color 0.2s;
+}
+a:hover {
+  color: darkblue;
+}
+
+.text-small {
+  font-size: 0.875rem;
+}
+
+/**
+ * Strip units from a value
+ * @param {Number} $value - Value with units
+ * @return {Number} - Value without units
+ * @example $unitless: strip-unit(16px); // Returns 16
+ */
+/**
+ * Convert px to rem
+ * @param {Number} $px-value - Pixel value to convert
+ * @param {Number} $base-font-size - Base font size (default: 16px)
+ * @return {Number} - Value in rem units
+ * @example $rem: px-to-rem(24px); // Returns 1.5rem
+ */
+/**
+* Convert rem to px
+* @param {Number} $rem-value - Rem value to convert
+* @param {Number} $base-font-size - Base font size (default: 16px)
+* @return {Number} - Value in px units
+* @example $px: rem-to-px(1.5rem); // Returns 24px
+*/
+/**
  * BASE BUTTON STYLES
  * ------------------
  * Defines the foundational appearance and variations for button elements.
@@ -466,100 +562,581 @@ pre {
 }
 
 /**
- * BASE TYPOGRAPHY STYLES & UTILITY FUNCTIONS
- * -----------------------------------------
- * Defines base styles for HTML typographic elements and includes
- * utility functions for unit conversions related to typography.
+ * Project: SMACSS SCSS Architecture
+ * Description: This project implements a scalable and modular architecture for CSS (SMACSS) 
+ *              using SCSS to ensure maintainable and reusable styles.
+ * Author: Chris Javier Oliveros
+ * Version: 2.0.0
+ * License: MIT
+ * 
+ * This file serves as the entry point for the SCSS architecture. It organizes and imports 
+ * all styles based on the SMACSS methodology.
  */
-html,
-body {
-  font-family: sans-serif;
-  font-size: 16px;
-  font-weight: normal;
-  line-height: 1.2;
+/**
+ * Links - Base styles for anchor elements
+ * Includes: a element and various link states
+ */
+a {
+  color: #314459;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+  transition: color 0.2s ease, text-decoration-color 0.2s ease;
+}
+a:hover {
+  color: #1f2c3a;
+  text-decoration-thickness: 2px;
+}
+a:focus {
+  outline: 2px solid #314459;
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+a:active {
+  color: #1f2c3a;
+}
+a:visited {
+  color: #16202a;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: sans-serif;
-  font-weight: bold;
-  line-height: 1.2;
-  margin-bottom: 1rem;
+.link-muted {
+  color: #6a6a6a;
+  text-decoration: none;
+}
+.link-muted:hover, .link-muted:focus {
+  color: #222222;
+  text-decoration: underline;
 }
 
-h1 {
-  font-size: 2.5rem;
+.link-unstyled {
+  color: inherit;
+  text-decoration: none;
+}
+.link-unstyled:hover, .link-unstyled:focus {
+  color: inherit;
+  text-decoration: none;
 }
 
-h2 {
-  font-size: 2rem;
+.link-danger {
+  color: #e63946;
+}
+.link-danger:hover, .link-danger:focus {
+  color: #a52833;
 }
 
-h3 {
-  font-size: 1.75rem;
+.link-success {
+  color: #2a9d8f;
+}
+.link-success:hover, .link-success:focus {
+  color: #1f7468;
 }
 
-h4 {
-  font-size: 1.5rem;
+a[href^=http]:not([href*="yoursite.com"])::after,
+a[target=_blank]::after {
+  content: " ↗";
+  font-size: 0.8em;
+  color: #6a6a6a;
+  text-decoration: none;
 }
 
-h5 {
-  font-size: 1.25rem;
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 6px;
+  background: #314459;
+  color: white;
+  padding: 8px;
+  text-decoration: none;
+  border-radius: 4px;
+  z-index: 1000;
+  font-weight: 600;
+}
+.skip-link:focus {
+  top: 6px;
 }
 
-h6 {
+/**
+ * Project: SMACSS SCSS Architecture
+ * Description: This project implements a scalable and modular architecture for CSS (SMACSS) 
+ *              using SCSS to ensure maintainable and reusable styles.
+ * Author: Chris Javier Oliveros
+ * Version: 2.0.0
+ * License: MIT
+ * 
+ * This file serves as the entry point for the SCSS architecture. It organizes and imports 
+ * all styles based on the SMACSS methodology.
+ */
+/**
+ * Forms - Base styles for form elements
+ * Includes: input, textarea, select, fieldset, legend, label
+ */
+form {
+  margin: 0;
+  padding: 0;
+}
+
+fieldset {
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  margin: 0 0 1.5rem;
+  padding: 0.75rem 1.5rem;
+}
+
+legend {
+  font-weight: 600;
+  padding: 0 0.5rem;
+  color: #222222;
+}
+
+label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  color: #222222;
+  cursor: pointer;
+}
+
+input[type=text],
+input[type=email],
+input[type=password],
+input[type=tel],
+input[type=url],
+input[type=search],
+input[type=number],
+input[type=date],
+input[type=datetime-local],
+input[type=month],
+input[type=time],
+input[type=week],
+textarea,
+select {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  font-family: inherit;
   font-size: 1rem;
+  line-height: 1.5;
+  background-color: #ffffff;
+  color: #222222;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+input[type=text]:focus,
+input[type=email]:focus,
+input[type=password]:focus,
+input[type=tel]:focus,
+input[type=url]:focus,
+input[type=search]:focus,
+input[type=number]:focus,
+input[type=date]:focus,
+input[type=datetime-local]:focus,
+input[type=month]:focus,
+input[type=time]:focus,
+input[type=week]:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: #314459;
+  box-shadow: 0 0 0 2px rgba(49, 68, 89, 0.2);
+}
+input[type=text]:disabled,
+input[type=email]:disabled,
+input[type=password]:disabled,
+input[type=tel]:disabled,
+input[type=url]:disabled,
+input[type=search]:disabled,
+input[type=number]:disabled,
+input[type=date]:disabled,
+input[type=datetime-local]:disabled,
+input[type=month]:disabled,
+input[type=time]:disabled,
+input[type=week]:disabled,
+textarea:disabled,
+select:disabled {
+  background-color: #f5f5f5;
+  color: #6a6a6a;
+  cursor: not-allowed;
+}
+input[type=text]::placeholder,
+input[type=email]::placeholder,
+input[type=password]::placeholder,
+input[type=tel]::placeholder,
+input[type=url]::placeholder,
+input[type=search]::placeholder,
+input[type=number]::placeholder,
+input[type=date]::placeholder,
+input[type=datetime-local]::placeholder,
+input[type=month]::placeholder,
+input[type=time]::placeholder,
+input[type=week]::placeholder,
+textarea::placeholder,
+select::placeholder {
+  color: #6a6a6a;
 }
 
-p {
-  margin-bottom: 1rem;
+textarea {
+  resize: vertical;
+  min-height: 100px;
 }
-p:last-child {
+
+select {
+  cursor: pointer;
+}
+select[multiple] {
+  height: auto;
+}
+
+input[type=checkbox],
+input[type=radio] {
+  width: auto;
+  margin-right: 0.5rem;
+  cursor: pointer;
+}
+
+input[type=file] {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px dashed #e0e0e0;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type=range] {
+  width: 100%;
+  cursor: pointer;
+}
+
+/**
+ * Project: SMACSS SCSS Architecture
+ * Description: This project implements a scalable and modular architecture for CSS (SMACSS) 
+ *              using SCSS to ensure maintainable and reusable styles.
+ * Author: Chris Javier Oliveros
+ * Version: 2.0.0
+ * License: MIT
+ * 
+ * This file serves as the entry point for the SCSS architecture. It organizes and imports 
+ * all styles based on the SMACSS methodology.
+ */
+/**
+ * Navigation - Base styles for navigation elements
+ * Includes: nav, menu elements
+ */
+/**
+ * Project: SMACSS SCSS Architecture
+ * Description: This project implements a scalable and modular architecture for CSS (SMACSS) 
+ *              using SCSS to ensure maintainable and reusable styles.
+ * Author: Chris Javier Oliveros
+ * Version: 2.0.0
+ * License: MIT
+ * 
+ * This file serves as the entry point for the SCSS architecture. It organizes and imports 
+ * all styles based on the SMACSS methodology.
+ */
+/**
+ * Lists - Base styles for list elements
+ * Includes: ul, ol, li, dl, dt, dd
+ */
+ul,
+ol {
+  margin: 0 0 1.5rem;
+  padding-left: 2rem;
+}
+ul ul,
+ul ol,
+ol ul,
+ol ol {
+  margin-bottom: 0;
+  margin-top: 0.5rem;
+}
+
+li {
+  margin-bottom: 0.5rem;
+  line-height: 1.6;
+}
+li:last-child {
+  margin-bottom: 0;
+}
+li li {
+  margin-bottom: 0.25rem;
+}
+
+.list-unstyled {
+  padding-left: 0;
+  list-style: none;
+}
+.list-unstyled li {
+  margin-bottom: 0.5rem;
+}
+
+.list-inline {
+  padding-left: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+.list-inline li {
   margin-bottom: 0;
 }
 
-.lead {
-  font-size: 1.5rem;
-  line-height: 1.35;
+dl {
+  margin: 0 0 1.5rem;
 }
 
-a {
-  color: blue;
-  text-decoration: underline;
-  transition: color 0.2s;
-}
-a:hover {
-  color: darkblue;
+dt {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #222222;
 }
 
-.text-small {
+dd {
+  margin-left: 0;
+  margin-bottom: 0.75rem;
+  padding-left: 1.5rem;
+  color: #464646;
+}
+dd:last-child {
+  margin-bottom: 0;
+}
+
+@media (min-width: 768px) {
+  .dl-horizontal dt {
+    float: left;
+    width: 160px;
+    clear: left;
+    text-align: right;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .dl-horizontal dd {
+    margin-left: 180px;
+    padding-left: 0;
+  }
+}
+
+/**
+ * Project: SMACSS SCSS Architecture
+ * Description: This project implements a scalable and modular architecture for CSS (SMACSS) 
+ *              using SCSS to ensure maintainable and reusable styles.
+ * Author: Chris Javier Oliveros
+ * Version: 2.0.0
+ * License: MIT
+ * 
+ * This file serves as the entry point for the SCSS architecture. It organizes and imports 
+ * all styles based on the SMACSS methodology.
+ */
+/**
+ * Tables - Base styles for table elements
+ * Includes: table, thead, tbody, tfoot, tr, th, td, caption
+ */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  margin-bottom: 1.5rem;
+  background-color: transparent;
+}
+
+caption {
+  padding: 0.75rem 0;
+  color: #6a6a6a;
+  text-align: left;
+  caption-side: top;
+  font-weight: 600;
+}
+
+thead th {
+  border-bottom: 2px solid #e0e0e0;
+  font-weight: 600;
+  text-align: left;
+  background-color: #f5f5f5;
+}
+
+tbody tr:nth-child(even) {
+  background-color: rgba(224, 224, 224, 0.1);
+}
+tbody tr:hover {
+  background-color: rgba(49, 68, 89, 0.05);
+}
+
+tfoot th,
+tfoot td {
+  border-top: 2px solid #e0e0e0;
+  font-weight: 600;
+  background-color: #f5f5f5;
+}
+
+th,
+td {
+  padding: 0.75rem;
+  border-bottom: 1px solid #e0e0e0;
+  vertical-align: top;
+  text-align: left;
+}
+
+th {
+  font-weight: 600;
+  color: #222222;
+}
+
+.table-responsive {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.table-responsive table {
+  min-width: 600px;
+}
+
+.table-striped tbody tr:nth-child(odd) {
+  background-color: rgba(224, 224, 224, 0.1);
+}
+
+.table-hover tbody tr:hover {
+  background-color: rgba(49, 68, 89, 0.05);
+}
+
+.table-bordered {
+  border: 1px solid #e0e0e0;
+}
+.table-bordered th,
+.table-bordered td {
+  border: 1px solid #e0e0e0;
+}
+
+/**
+ * Project: SMACSS SCSS Architecture
+ * Description: This project implements a scalable and modular architecture for CSS (SMACSS) 
+ *              using SCSS to ensure maintainable and reusable styles.
+ * Author: Chris Javier Oliveros
+ * Version: 2.0.0
+ * License: MIT
+ * 
+ * This file serves as the entry point for the SCSS architecture. It organizes and imports 
+ * all styles based on the SMACSS methodology.
+ */
+/**
+ * Media - Base styles for media elements
+ * Includes: img, figure, figcaption, video, audio, iframe, embed, object
+ */
+img {
+  max-width: 100%;
+  height: auto;
+  vertical-align: middle;
+  border: 0;
+}
+
+.img-responsive {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+figure {
+  margin: 0 0 1.5rem;
+  display: inline-block;
+  max-width: 100%;
+}
+figure img {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+figcaption {
   font-size: 0.875rem;
+  color: #6a6a6a;
+  font-style: italic;
+  text-align: center;
+  padding: 0.5rem 0;
+}
+
+video,
+audio {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.video-responsive {
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+  overflow: hidden;
+}
+.video-responsive iframe,
+.video-responsive object,
+.video-responsive embed,
+.video-responsive video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+iframe {
+  border: 0;
+  max-width: 100%;
+}
+
+embed,
+object {
+  max-width: 100%;
+}
+
+.avatar {
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.img-thumbnail {
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  padding: 4px;
+  background-color: #ffffff;
+  max-width: 100%;
+  height: auto;
+}
+
+.img-rounded {
+  border-radius: 6px;
+}
+
+.img-circle {
+  border-radius: 50%;
 }
 
 /**
- * Strip units from a value
- * @param {Number} $value - Value with units
- * @return {Number} - Value without units
- * @example $unitless: strip-unit(16px); // Returns 16
+ * Project: SMACSS SCSS Architecture
+ * Description: This project implements a scalable and modular architecture for CSS (SMACSS) 
+ *              using SCSS to ensure maintainable and reusable styles.
+ * Author: Chris Javier Oliveros
+ * Version: 2.0.0
+ * License: MIT
+ * 
+ * This file serves as the entry point for the SCSS architecture. It organizes and imports 
+ * all styles based on the SMACSS methodology.
  */
 /**
- * Convert px to rem
- * @param {Number} $px-value - Pixel value to convert
- * @param {Number} $base-font-size - Base font size (default: 16px)
- * @return {Number} - Value in rem units
- * @example $rem: px-to-rem(24px); // Returns 1.5rem
+ * Code - Base styles for code elements
+ * Includes: code, pre, kbd, samp, var
  */
 /**
-* Convert rem to px
-* @param {Number} $rem-value - Rem value to convert
-* @param {Number} $base-font-size - Base font size (default: 16px)
-* @return {Number} - Value in px units
-* @example $px: rem-to-px(1.5rem); // Returns 24px
-*/
+ * Project: SMACSS SCSS Architecture
+ * Description: This project implements a scalable and modular architecture for CSS (SMACSS) 
+ *              using SCSS to ensure maintainable and reusable styles.
+ * Author: Chris Javier Oliveros
+ * Version: 2.0.0
+ * License: MIT
+ * 
+ * This file serves as the entry point for the SCSS architecture. It organizes and imports 
+ * all styles based on the SMACSS methodology.
+ */
+/**
+ * Footer - Base styles for footer elements
+ * Includes: footer element and common footer patterns
+ */
 /**
  * LAYOUTS MODULE
  * --------------
