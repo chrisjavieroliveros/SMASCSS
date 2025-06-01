@@ -1,29 +1,27 @@
 /**
- * Project: SMACSS SCSS Architecture
- * Description: This project implements a scalable and modular architecture for CSS (SMACSS) 
- *              using SCSS to ensure maintainable and reusable styles.
- * Author: Chris Javier Oliveros
+ * SMASCSS
+ * ------------------------
+ * Imports all SCSS modules.
  * Version: 2.0.0
- * License: MIT
- * 
- * This file serves as the entry point for the SCSS architecture. It organizes and imports 
- * all styles based on the SMACSS methodology.
  */
 
-// Core: Variables, functions, mixins, and global configurations
+// Core: Base configurations (variables, some core mixins like breakpoints)
 @use "core/_index" as core;
 
-// Base: Reset/normalize, HTML element styling, and base typography
+// Mixins: Global utility mixins
+@use "mixins/_index" as mixins;
+
+// Base: Resets, base element styles, typographic defaults & functions
 @use "base/_index" as base;
 
-// Layouts: Grid systems, containers, and major page structure
-@use "layouts/_index" as layouts; // e.g., _grid.scss, _container.scss
+// Layouts: Structural page elements (containers, grid)
+@use "layouts/_index" as layouts; // Ex: _grid.scss, _container.scss
 
-// Components: Reusable UI modules (cards, buttons, navigation, etc.)
-@use "components/_index" as components; // e.g., _buttons.scss, _cards.scss, _navigation.scss
+// Components: Reusable UI modules
+@use "components/_index" as components; // Ex: _buttons.scss, _cards.scss
 
-// Classes (or Utilities): Helper classes for spacing, display, text, etc.
-@use "helpers/_index" as classes;
+// Classes: Utility classes for spacing, display, text, etc.
+@use "classes/_index" as classes;
 
-// Pages: Specific styles for individual pages or sections
-@use "pages/_index" as pages; // e.g., _home.scss, _about.scss
+// Pages: Page-specific styles
+@use "pages/_index" as pages; // Ex: _home.scss, _about.scss

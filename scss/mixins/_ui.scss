@@ -1,0 +1,14 @@
+/**
+ * UI ELEMENT MIXINS
+ * -----------------
+ */
+
+/**
+ * Applies a disabled state style to an element
+ * @example @include disabled-state;
+ */
+@mixin disabled-state {
+    opacity: 0.6;
+    pointer-events: none;
+    cursor: not-allowed;
+}

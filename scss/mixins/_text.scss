@@ -1,0 +1,28 @@
+/**
+ * TEXT UTILITY MIXINS
+ * -------------------
+ */
+
+/**
+ * Truncate text with ellipsis
+ * @example @include truncate-text;
+ */
+@mixin truncate-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/**
+ * Multi-line text truncation
+ * @param {Number} $lines - Number of lines to show
+ * @example @include truncate-multiline(3);
+ */
+@mixin truncate-multiline($lines: 2) {
+    display: -webkit-box;
+    /* stylelint-disable-line value-no-vendor-prefix */
+    -webkit-line-clamp: $lines;
+    -webkit-box-orient: vertical;
+    /* stylelint-disable-line property-no-vendor-prefix */
+    overflow: hidden;
+}

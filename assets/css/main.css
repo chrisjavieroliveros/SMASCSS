@@ -1,13 +1,8 @@
 /**
- * Project: SMACSS SCSS Architecture
- * Description: This project implements a scalable and modular architecture for CSS (SMACSS) 
- *              using SCSS to ensure maintainable and reusable styles.
- * Author: Chris Javier Oliveros
+ * SMASCSS
+ * ------------------------
+ * Imports all SCSS modules.
  * Version: 2.0.0
- * License: MIT
- * 
- * This file serves as the entry point for the SCSS architecture. It organizes and imports 
- * all styles based on the SMACSS methodology.
  */
 /**
  * COLOR CONFIGURATION
@@ -37,12 +32,6 @@
  * @example margin: spacing('6');     // Returns 2rem
  */
 /**
- * ==========================================================================
- * GLOBAL MIXINS & FUNCTIONS
- * ==========================================================================
- * Combined from _accessibility.scss, _text.scss, _unit-conversion.scss
- */
-/**
  * ACCESSIBILITY MIXINS
  * --------------------
  */
@@ -61,8 +50,6 @@
 /**
  * TEXT UTILITY MIXINS
  * -------------------
- * 
- * Mixins for text manipulation and display utilities
  */
 /**
  * Truncate text with ellipsis
@@ -74,30 +61,25 @@
  * @example @include truncate-multiline(3);
  */
 /**
- * UNIT CONVERSION FUNCTIONS
- * -------------------------
- * 
- * Utility functions for converting between different CSS units
+ * LAYOUT MIXINS
+ * -------------
  */
 /**
- * Strip units from a value
- * @param {Number} $value - Value with units
- * @return {Number} - Value without units
- * @example $unitless: strip-unit(16px); // Returns 16
+ * Clearfix for containing floats
+ * @example @include clearfix;
  */
 /**
- * Convert px to rem
- * @param {Number} $px-value - Pixel value to convert
- * @param {Number} $base-font-size - Base font size (default: 16px)
- * @return {Number} - Value in rem units
- * @example $rem: px-to-rem(24px); // Returns 1.5rem
+ * Maintain aspect ratio of an element
+ * @param {Number} $ratio - Aspect ratio (e.g., 16/9 or 1.777)
+ * @example @include aspect-ratio(16/9);
  */
 /**
- * Convert rem to px
- * @param {Number} $rem-value - Rem value to convert
- * @param {Number} $base-font-size - Base font size (default: 16px)
- * @return {Number} - Value in px units
- * @example $px: rem-to-px(1.5rem); // Returns 24px
+ * UI ELEMENT MIXINS
+ * -----------------
+ */
+/**
+ * Applies a disabled state style to an element
+ * @example @include disabled-state;
  */
 /**
  * Base Styles
@@ -382,6 +364,11 @@ pre {
   border: 0;
 }
 
+/**
+ * BASE BUTTON STYLES
+ * ------------------
+ * Defines the foundational appearance and variations for button elements.
+ */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -473,6 +460,12 @@ pre {
   border-color: #117a8b;
 }
 
+/**
+ * BASE TYPOGRAPHY STYLES & UTILITY FUNCTIONS
+ * -----------------------------------------
+ * Defines base styles for HTML typographic elements and includes
+ * utility functions for unit conversions related to typography.
+ */
 html,
 body {
   font-family: sans-serif;
@@ -543,36 +536,41 @@ a:hover {
 }
 
 /**
- * Project: SMACSS SCSS Architecture
- * Description: This project implements a scalable and modular architecture for CSS (SMACSS) 
- *              using SCSS to ensure maintainable and reusable styles.
- * Author: Chris Javier Oliveros
- * Version: 2.0.0
- * License: MIT
- * 
- * This file serves as the entry point for the SCSS architecture. It organizes and imports 
- * all styles based on the SMACSS methodology.
+ * Strip units from a value
+ * @param {Number} $value - Value with units
+ * @return {Number} - Value without units
+ * @example $unitless: strip-unit(16px); // Returns 16
  */
 /**
- * CONTAINER CONFIGURATION
- * ----------------------
- * 
- * Mobile-first responsive container implementation
- * 
- * USAGE:
- * 1. Apply the container class to create a responsive, centered wrapper:
- *    <div class="container">Content goes here</div>
- * 
- * 2. Container variations:
- *    - Default: <div class="container">...</div> (max-width: 1200px)
- *    - Narrow: <div class="container container--narrow">...</div> (max-width: 800px)
- *    - Wide: <div class="container container--wide">...</div> (max-width: 1600px)
- *    - Fluid: <div class="container container--fluid">...</div> (max-width: 100%)
- * 
- * 3. Container padding is responsive and handled by CSS variables:
- *    - Mobile: var(--container-padding-sm)
- *    - Tablet: var(--container-padding-md)
- *    - Desktop: var(--container-padding-lg)
+ * Convert px to rem
+ * @param {Number} $px-value - Pixel value to convert
+ * @param {Number} $base-font-size - Base font size (default: 16px)
+ * @return {Number} - Value in rem units
+ * @example $rem: px-to-rem(24px); // Returns 1.5rem
+ */
+/**
+* Convert rem to px
+* @param {Number} $rem-value - Rem value to convert
+* @param {Number} $base-font-size - Base font size (default: 16px)
+* @return {Number} - Value in px units
+* @example $px: rem-to-px(1.5rem); // Returns 24px
+*/
+/**
+ * LAYOUTS MODULE
+ * --------------
+ * Forwards all layout-specific SCSS files.
+ */
+/**
+ * SMASCSS
+ * ------------------------
+ * Imports all SCSS modules.
+ * Version: 2.0.0
+ */
+/**
+ * CONTAINER SYSTEM
+ * ----------------
+ * Provides a responsive, centered wrapper with configurable max-widths and padding.
+ * Variations: .container--narrow, .container--wide, .container--full
  */
 .container {
   width: 100%;
@@ -1496,3 +1494,10 @@ a:hover {
 .text-right {
   text-align: right;
 }
+
+/**
+ * PAGES MODULE
+ * ------------
+ * Forwards all page-specific SCSS files.
+ * Add page-specific @forward rules below as needed.
+ */

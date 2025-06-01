@@ -1,3 +1,10 @@
+/**
+ * BASE TYPOGRAPHY STYLES & UTILITY FUNCTIONS
+ * -----------------------------------------
+ * Defines base styles for HTML typographic elements and includes
+ * utility functions for unit conversions related to typography.
+ */
+
 html,
 body {
   font-family: sans-serif;
@@ -67,4 +74,46 @@ a {
 
 .text-small {
   font-size: 0.875rem;
+}
+
+/**
+ * Strip units from a value
+ * @param {Number} $value - Value with units
+ * @return {Number} - Value without units
+ * @example $unitless: strip-unit(16px); // Returns 16
+ */
+@function strip-unit($value) {
+  @if type-of($value)=='number' and not unitless($value) {
+    @return $value / ($value * 0 + 1);
+  }
+
+  @return $value;
+}
+
+/**
+ * Convert px to rem
+ * @param {Number} $px-value - Pixel value to convert
+ * @param {Number} $base-font-size - Base font size (default: 16px)
+ * @return {Number} - Value in rem units
+ * @example $rem: px-to-rem(24px); // Returns 1.5rem
+ */
+@function px-to-rem($px-value, $base-font-size: 16px) {
+  $px-stripped: strip-unit($px-value);
+  $base: strip-unit($base-font-size);
+
+  @return (#{$px-stripped / $base}rem);
+}
+
+/**
+* Convert rem to px
+* @param {Number} $rem-value - Rem value to convert
+* @param {Number} $base-font-size - Base font size (default: 16px)
+* @return {Number} - Value in px units
+* @example $px: rem-to-px(1.5rem); // Returns 24px
+*/
+@function rem-to-px($rem-value, $base-font-size: 16px) {
+  $rem-stripped: strip-unit($rem-value);
+  $base: strip-unit($base-font-size);
+
+  @return (#{$rem-stripped * $base}px);
 }

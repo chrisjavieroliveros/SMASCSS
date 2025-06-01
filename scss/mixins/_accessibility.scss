@@ -1,0 +1,38 @@
+@use "../core/colors" as *;
+
+/**
+ * ACCESSIBILITY MIXINS
+ * --------------------
+ */
+
+/**
+ * Visually hidden mixin (for accessibility)
+ * Hides element visually but keeps it available for screen readers
+ * @example @include visually-hidden;
+ */
+@mixin visually-hidden {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    /* stylelint-disable-line declaration-property-value-allowed-list */
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+}
+
+/**
+ * Focus ring mixin for better accessibility
+ * @param {Color} $color-value - Focus ring color (optional)
+ * @param {Number} $width - Focus ring width (optional)
+ * @param {Number} $offset - Focus ring offset (optional)
+ * @example @include focus-ring;
+ */
+@mixin focus-ring($color-value: color("Primary"), $width: 2px, $offset: 2px) {
+    &:focus-visible {
+        outline: $width solid $color-value;
+        outline-offset: $offset;
+    }
+}
