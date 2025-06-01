@@ -1,0 +1,147 @@
+@use "sass:math";
+
+/**
+ * COLOR CONFIGURATION
+ * ------------------
+ */
+
+// Color palette
+$colors: (
+  // Primary Color Semantic
+  "Primary": #314459,
+  "Primary-Tint": #4a637f,
+  "Primary-Shade": #1f2c3a,
+  "Primary-Contrast": #ffffff,
+
+  // Primary Color Variants
+  "Primary-50": #e6ebf1,
+  "Primary-100": #cdd7e3,
+  "Primary-200": #9fb3c8,
+  "Primary-300": #718fac,
+  "Primary-400": #4a637f,
+  "Primary-500": #314459,
+  "Primary-600": #28394b,
+  "Primary-700": #1f2c3a,
+  "Primary-800": #16202a,
+  "Primary-900": #0d141a,
+  "Primary-950": #070c10,
+
+  // Secondary Color Semantic
+  "Secondary": #2a8de9,
+  "Secondary-Tint": #5eabef,
+  "Secondary-Shade": #1971c2,
+  "Secondary-Contrast": #ffffff,
+
+  // Secondary Color Variants
+  "Secondary-50": #e3f2fd,
+  "Secondary-100": #bbdefb,
+  "Secondary-200": #90caf9,
+  "Secondary-300": #64b5f6,
+  "Secondary-400": #42a5f5,
+  "Secondary-500": #2a8de9,
+  "Secondary-600": #1e7bd6,
+  "Secondary-700": #1971c2,
+  "Secondary-800": #155fae,
+  "Secondary-900": #104b8a,
+  "Secondary-950": #0a2f5c,
+
+  // Tertiary Color Semantic
+  "Tertiary": #8b5cf6,
+  "Tertiary-Tint": #a78bfa,
+  "Tertiary-Shade": #7c3aed,
+  "Tertiary-Contrast": #ffffff,
+
+  // Tertiary Color Variants
+  "Tertiary-50": #f5f3ff,
+  "Tertiary-100": #ede9fe,
+  "Tertiary-200": #ddd6fe,
+  "Tertiary-300": #c4b5fd,
+  "Tertiary-400": #a78bfa,
+  "Tertiary-500": #8b5cf6,
+  "Tertiary-600": #7c3aed,
+  "Tertiary-700": #6d28d9,
+  "Tertiary-800": #5b21b6,
+  "Tertiary-900": #4c1d95,
+  "Tertiary-950": #3b0764,
+
+  // State Color: Danger Semantic
+  "Danger": #e63946,
+  "Danger-Tint": #f06a75,
+  "Danger-Shade": #a52833,
+  "Danger-Contrast": #ffffff,
+
+  // State Color: Warning Semantic
+  "Warning": #ffb703,
+  "Warning-Tint": #ffc733,
+  "Warning-Shade": #cc9202,
+  "Warning-Contrast": #000000,
+
+  // State Color: Success Semantic
+  "Success": #2a9d8f,
+  "Success-Tint": #56b3a7,
+  "Success-Shade": #1f7468,
+  "Success-Contrast": #ffffff,
+
+  // State Color: Info Semantic
+  "Info": #219ebc,
+  "Info-Tint": #4fb3d1,
+  "Info-Shade": #197a91,
+  "Info-Contrast": #ffffff,
+
+  // Neutral Color: Light
+  "Light-50": #fefefe,
+  "Light-100": #fafafa,
+  "Light-200": #f5f5f5,
+  "Light-300": #ebebeb,
+  "Light-400": #e0e0e0,
+  "Light-500": #d6d6d6,
+  "Light-600": #cccccc,
+  "Light-700": #c2c2c2,
+  "Light-800": #b8b8b8,
+  "Light-900": #adadad,
+  "Light-950": #a3a3a3,
+
+  // Neutral Color: Dark
+  "Dark-50": #ababab,
+  "Dark-100": #a1a1a1,
+  "Dark-200": #8e8e8e,
+  "Dark-300": #7c7c7c,
+  "Dark-400": #6a6a6a,
+  "Dark-500": #585858,
+  "Dark-600": #464646,
+  "Dark-700": #343434,
+  "Dark-800": #222222,
+  "Dark-900": #101010,
+  "Dark-950": #050505,
+
+  // Base Colors;
+  "Black": #272727,
+  "White": #ffffff
+);
+
+/**
+ * Function to get color value
+ * @param {String} $name - The color name from the $colors map
+ * @return {Color} The color value
+ * @example color: color('Primary');      // Returns #314459
+ */
+@function color($name) {
+  @if map-has-key($colors, $name) {
+    @return map-get($colors, $name);
+  }
+
+  @error "Color '#{$name}' not found in color map.";
+  @return null;
+}
+
+/**
+ * Function to get color with opacity
+ * @param {String} $name - The color name from the $colors map
+ * @param {Number} $alpha - Opacity value between 0 and 1
+ * @return {Color} The rgba color value with opacity
+ * @example background: color-alpha('Primary-Tint', 0.5); // Returns rgba(74, 99, 127, 0.5)
+ */
+@function color-alpha($name, $alpha) {
+  $color: color($name);
+  @return rgba($color, $alpha);
+}

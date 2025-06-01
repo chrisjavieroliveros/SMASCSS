@@ -1,4 +1,4 @@
-@use "../../tools/_index" as tools;
+@use "../core/breakpoints" as *;
 
 /**
  * DISPLAY UTILITIES
@@ -24,54 +24,72 @@
 
 // Base display utilities
 .d-none {
-  display: none !important;
+  display: none;
 }
 
 .d-block {
-  display: block !important;
+  display: block;
 }
 
 .d-flex {
-  display: flex !important;
+  display: flex;
 }
 
 .d-inline {
-  display: inline !important;
+  display: inline;
 }
 
 .d-inline-block {
-  display: inline-block !important;
+  display: inline-block;
 }
 
 .d-grid {
-  display: grid !important;
+  display: grid;
 }
+
+// Flex utilities
+.flex-row {
+  flex-direction: row;
+}
+
+.flex-column {
+  flex-direction: column;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.align-center {
+  align-items: center;
+}
+
 
 // Mobile-first responsive display utilities
 @each $breakpoint in ("sm", "md", "lg", "xl", "xxl") {
-  @include tools.breakpoint-up($breakpoint) {
+  @media (min-width: breakpoint($breakpoint)) {
     .d-#{$breakpoint}-none {
-      display: none !important;
+      display: none;
     }
 
     .d-#{$breakpoint}-block {
-      display: block !important;
+      display: block;
     }
 
     .d-#{$breakpoint}-flex {
-      display: flex !important;
+      display: flex;
     }
 
     .d-#{$breakpoint}-inline {
-      display: inline !important;
+      display: inline;
     }
 
     .d-#{$breakpoint}-inline-block {
-      display: inline-block !important;
+      display: inline-block;
     }
 
     .d-#{$breakpoint}-grid {
-      display: grid !important;
+      display: grid;
     }
   }
 }

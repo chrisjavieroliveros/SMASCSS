@@ -1,0 +1,126 @@
+/**
+ * ==========================================================================
+ * GLOBAL MIXINS & FUNCTIONS
+ * ==========================================================================
+ * Combined from _accessibility.scss, _text.scss, _unit-conversion.scss
+ */
+
+@use "colors" as *; // Assuming _colors.scss is in the same directory (core/)
+
+/**
+ * ACCESSIBILITY MIXINS
+ * --------------------
+ */
+
+/**
+ * Visually hidden mixin (for accessibility)
+ * Hides element visually but keeps it available for screen readers
+ * @example @include visually-hidden;
+ */
+@mixin visually-hidden {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    /* stylelint-disable-line declaration-property-value-allowed-list */
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+}
+
+/**
+ * Focus ring mixin for better accessibility
+ * @param {Color} $color-value - Focus ring color (optional)
+ * @param {Number} $width - Focus ring width (optional)
+ * @param {Number} $offset - Focus ring offset (optional)
+ * @example @include focus-ring;
+ */
+@mixin focus-ring($color-value: color("Primary"), $width: 2px, $offset: 2px) {
+    &:focus-visible {
+        outline: $width solid $color-value;
+        outline-offset: $offset;
+    }
+}
+
+/**
+ * TEXT UTILITY MIXINS
+ * -------------------
+ * 
+ * Mixins for text manipulation and display utilities
+ */
+
+/**
+ * Truncate text with ellipsis
+ * @example @include truncate-text;
+ */
+@mixin truncate-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/**
+ * Multi-line text truncation
+ * @param {Number} $lines - Number of lines to show
+ * @example @include truncate-multiline(3);
+ */
+@mixin truncate-multiline($lines: 2) {
+    display: -webkit-box;
+    /* stylelint-disable-line value-no-vendor-prefix */
+    -webkit-line-clamp: $lines;
+    -webkit-box-orient: vertical;
+    /* stylelint-disable-line property-no-vendor-prefix */
+    overflow: hidden;
+}
+
+/**
+ * UNIT CONVERSION FUNCTIONS
+ * -------------------------
+ * 
+ * Utility functions for converting between different CSS units
+ */
+
+/**
+ * Strip units from a value
+ * @param {Number} $value - Value with units
+ * @return {Number} - Value without units
+ * @example $unitless: strip-unit(16px); // Returns 16
+ */
+@function strip-unit($value) {
+    @if type-of($value)=='number' and not unitless($value) {
+        /* stylelint-disable-line scss/function-unquote-no-unquoted-strings-in-string-interpolation */
+        @return $value / ($value * 0 + 1);
+    }
+
+    @return $value;
+}
+
+/**
+ * Convert px to rem
+ * @param {Number} $px-value - Pixel value to convert
+ * @param {Number} $base-font-size - Base font size (default: 16px)
+ * @return {Number} - Value in rem units
+ * @example $rem: px-to-rem(24px); // Returns 1.5rem
+ */
+@function px-to-rem($px-value, $base-font-size: 16px) {
+    $px-stripped: strip-unit($px-value);
+    $base: strip-unit($base-font-size);
+
+    @return (#{$px-stripped / $base}rem);
+}
+
+/**
+ * Convert rem to px
+ * @param {Number} $rem-value - Rem value to convert
+ * @param {Number} $base-font-size - Base font size (default: 16px)
+ * @return {Number} - Value in px units
+ * @example $px: rem-to-px(1.5rem); // Returns 24px
+ */
+@function rem-to-px($rem-value, $base-font-size: 16px) {
+    $rem-stripped: strip-unit($rem-value);
+    $base: strip-unit($base-font-size);
+
+    @return (#{$rem-stripped * $base}px);
+}

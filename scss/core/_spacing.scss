@@ -1,20 +1,6 @@
 /**
  * SPACING CONFIGURATION
  * ---------------------
- * 
- * USAGE:
- * 1. Import this file: @import 'config/spacing';
- * 
- * 2. Generate CSS variables in your root file:
- *    @include generate-spacing-variables();
- * 
- * 3. Use spacing in your SCSS:
- *    - Function: margin: spacing(4);      // Returns 1rem
- *    - Function: padding: spacing('sm');  // Returns 1rem using alias
- *    - Variable: gap: var(--spacing-6);   // Use CSS variable
- * 
- * 4. For container padding:
- *    padding: var(--container-padding-md); // Responsive padding
  */
 
 // Base spacing unit (1rem = 16px by default)
@@ -59,16 +45,6 @@ $spacing-aliases: (
   // 6rem
 );
 
-// Container padding responsive scale
-$container-padding: (
-  "sm": var(--spacing-4),
-  // Small screens: 1rem
-  "md": var(--spacing-6),
-  // Medium screens: 2rem
-  "lg": var(--spacing-8),
-  // Large screens: 3rem
-);
-
 /**
  * Function to get spacing value
  * @param {String|Number} $key - The spacing key or alias
@@ -95,23 +71,3 @@ $container-padding: (
   @error "Spacing key '#{$key}' not found in spacing map.";
   @return null;
 }
-
-/**
- * Generate CSS spacing variables
- * Creates CSS custom properties for all spacing values
- * @example @include generate-spacing-variables();
- */
-@mixin generate-spacing-variables() {
-  :root {
-    @each $name, $value in $spacing {
-      --spacing-#{$name}: #{$value};
-    }
-
-    @each $name, $value in $container-padding {
-      --container-padding-#{$name}: #{$value};
-    }
-  }
-}
-
-// Generate CSS variables
-@include generate-spacing-variables();

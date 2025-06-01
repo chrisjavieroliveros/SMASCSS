@@ -1,4 +1,4 @@
-@use "../../tools/_index" as tools;
+@use "../core" as *;
 
 /**
  * CONTAINER CONFIGURATION
@@ -27,20 +27,21 @@
   max-width: 1200px;
   margin-left: auto;
   margin-right: auto;
-  // Mobile-first: Start with small padding
-  padding-left: var(--container-padding-sm);
-  padding-right: var(--container-padding-sm);
+
+  // Mobile: Small padding
+  padding-left: spacing("4");
+  padding-right: spacing("4");
 
   // Tablet and up: Medium padding
-  @include tools.breakpoint-up("md") {
-    padding-left: var(--container-padding-md);
-    padding-right: var(--container-padding-md);
+  @include breakpoint("md") {
+    padding-left: spacing("5");
+    padding-right: spacing("5");
   }
 
   // Desktop and up: Large padding
-  @include tools.breakpoint-up("lg") {
-    padding-left: var(--container-padding-lg);
-    padding-right: var(--container-padding-lg);
+  @include breakpoint("lg") {
+    padding-left: spacing("6");
+    padding-right: spacing("6");
   }
 
   &--narrow {
@@ -51,7 +52,7 @@
     max-width: 1600px;
   }
 
-  &--fluid {
+  &--full {
     max-width: 100%;
   }
 }

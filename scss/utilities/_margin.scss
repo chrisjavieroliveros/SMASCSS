@@ -1,0 +1,42 @@
+$margins: (
+  '0': 0,
+  '1': 0.25rem,
+  '2': 0.5rem,
+  '3': 0.75rem,
+  '4': 1rem,
+  '5': 1.25rem,
+  '6': 1.5rem,
+  'auto': auto
+);
+
+@each $name, $value in $margins {
+  .m-#{$name} {
+    margin: #{$value};
+  }
+
+  .mt-#{$name} {
+    margin-top: #{$value};
+  }
+
+  .mb-#{$name} {
+    margin-bottom: #{$value};
+  }
+
+  .ml-#{$name} {
+    margin-left: #{$value};
+  }
+
+  .mr-#{$name} {
+    margin-right: #{$value};
+  }
+
+  .mx-#{$name} {
+    margin-left: #{$value};
+    margin-right: #{$value};
+  }
+
+  .my-#{$name} {
+    margin-top: #{$value};
+    margin-bottom: #{$value};
+  }
+}
