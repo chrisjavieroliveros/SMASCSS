@@ -43,12 +43,12 @@ SMASCSS provides a complete SCSS framework with:
 scss/
 ├── core/                     # Core functionalities (variables, base functions, global configs)
 │   ├── __index.scss          # Core entry point (forwards all core modules)
-│   ├── _colors.scss          # Color system configuration (variables)
-│   ├── _spacing.scss         # Spacing system configuration (variables)
-│   └── _breakpoints.scss     # Breakpoint definitions (variables) & responsive mixin
+│   ├── _colors.scss          # Color system configuration (comprehensive color palette)
+│   ├── _spacing.scss         # Spacing system configuration (rem-based scale)
+│   └── _breakpoints.scss     # Breakpoint definitions & responsive mixins
 │
 ├── mixins/                   # Global utility mixins
-│   ├── __index.scss          # Forwards all mixins (e.g., accessibility, text, layout, ui)
+│   ├── __index.scss          # Forwards all mixins (accessibility, text, layout, ui)
 │   ├── _accessibility.scss   # Accessibility helper mixins (e.g., visually-hidden)
 │   ├── _text.scss            # Text manipulation mixins (e.g., truncate-text)
 │   ├── _layout.scss          # Layout helper mixins (e.g., clearfix, aspect-ratio)
@@ -56,32 +56,36 @@ scss/
 │
 ├── base/                     # Base styles (resets, typography, element defaults)
 │   ├── __index.scss          # Base entry point
-│   ├── _reset.scss           # CSS reset
-│   ├── _typography.scss      # Base typography styles & typography-related functions (e.g., px-to-rem)
-│   └── _button.scss          # Base button styles
+│   ├── _reset.scss           # Modern CSS reset
+│   ├── _typography.scss      # Base typography styles & utility functions
+│   ├── _button.scss          # Base button styles
+│   ├── _links.scss           # Base anchor/link styles
+│   ├── _forms.scss           # Base form element styles
+│   ├── _lists.scss           # Base list element styles
+│   ├── _tables.scss          # Base table element styles
+│   ├── _media.scss           # Base media element styles (img, video, etc.)
+│   ├── _code.scss            # Base code element styles
+│   ├── _navigation.scss      # Base navigation element styles
+│   └── _footer.scss          # Base footer element styles
 │
-├── layouts/                  # Layout-specific styles (container, grid)
+├── layouts/                  # Layout-specific styles
 │   ├── __index.scss          # Layouts entry point
-│   ├── _container.scss       # Container system
-│   └── _grid.scss            # Grid system (if applicable, or other layout modules)
+│   └── _container.scss       # Responsive container system
 │
 ├── components/               # UI components
-│   ├── __index.scss          # Components entry point
-│   └── (e.g. _card.scss)     # Individual component styles
+│   └── __index.scss          # Components entry point (ready for component additions)
 │
-├── helpers/                  # Helper classes and utility mixins (non-outputting tools are in core)
-│   ├── __index.scss          # Helpers entry point
-│   ├── _display.scss         # Display utility classes
+├── classes/                  # Utility classes for spacing, display, text, etc.
+│   ├── __index.scss          # Classes entry point
+│   ├── _display.scss         # Display and flexbox utility classes
 │   ├── _margin.scss          # Margin utility classes
 │   ├── _padding.scss         # Padding utility classes
-│   ├── _text-align.scss      # Text alignment utility classes
-│   └── (e.g. _misc-utils.scss) # Other miscellaneous utility classes
+│   └── _text-align.scss      # Text alignment utility classes
 │
 ├── pages/                    # Page-specific styles
-│   ├── __index.scss          # Pages entry point
-│   └── (e.g. _home.scss)     # Styles for specific pages
+│   └── __index.scss          # Pages entry point (ready for page-specific styles)
 │
-└── main.scss                 # Main entry point, imports all other modules
+└── main.scss                 # Main entry point, imports all modules in logical order
 ```
 
 ## Quick Start
@@ -95,43 +99,35 @@ scss/
 
 ### 2. Core Configuration & Tools
 
-The `core` directory houses the configuration (like colors, spacing, breakpoints).
-Global utility mixins are now located in their own top-level `scss/mixins/` directory.
-Typography-related functions like unit conversions (`px-to-rem`, `strip-unit`) are located in `scss/base/_typography.scss`.
-`main.scss` handles the primary import of `core` and `mixins`.
+The `core` directory houses the configuration system with comprehensive color palettes, spacing scales, and responsive breakpoints. Global utility mixins are located in the top-level `scss/mixins/` directory. Typography-related functions like unit conversions are located in `scss/base/_typography.scss`.
 
 ```scss
 // Example of using core variables and mixins
 @use "path/to/scss/core" as core;
 @use "path/to/scss/mixins" as mixins;
-// For functions in base/typography.scss, you would typically use them within other base styles
-// or import scss/base/typography directly if needed elsewhere.
 
 .my-element {
-  color: core.color("primary");
-  padding: core.spacing(4);
+  color: core.getColor("Primary");
+  padding: core.spacing("4");
 
   @include core.breakpoint("md") {
-    // Breakpoint mixin is still part of core
-    // Styles for medium breakpoints and up
+    // Responsive styles for medium breakpoints and up
+    padding: core.spacing("6");
   }
 
-  @include mixins.visually-hidden; // Example of using an accessibility mixin from the mixins directory
+  @include mixins.visually-hidden; // Accessibility mixin from mixins directory
 }
 ```
 
-The `core` system primarily includes:
+The `core` system includes:
 
-- Color system (variables and potentially functions/maps in `_colors.scss`)
-- Spacing system (variables and potentially functions/maps in `_spacing.scss`)
-- Breakpoint system (variables and mixins in `_breakpoints.scss`)
+- **Color system**: Comprehensive color palette with semantic naming and variants (`_colors.scss`)
+- **Spacing system**: Rem-based spacing scale from 0.25rem to 8rem (`_spacing.scss`)
+- **Breakpoint system**: Mobile-first responsive breakpoints with utility functions and mixins (`_breakpoints.scss`)
 
-The `scss/mixins/` directory contains a collection of global mixins (e.g., for accessibility, text manipulation, layout, UI helpers).
+The `scss/mixins/` directory contains global utility mixins for accessibility, text manipulation, layout helpers, and UI states.
 
-Utility functions for unit conversion (`px-to-rem`, `rem-to-px`, `strip-unit`) are located in `scss/base/_typography.scss`.
-
-Configure fonts, sizes, and weights in `scss/base/_typography.scss` for base HTML elements. This file now also contains typography-related functions like `px-to-rem` and `strip-unit`.
-Core typography variables (like font families, base sizes if needed globally beyond base element styling) could be defined in `scss/core/_config.scss` (if you create one) or a dedicated `scss/core/_typography-vars.scss`.
+Typography functions for unit conversion and base typography styles are centralized in `scss/base/_typography.scss`.
 
 ```scss
 // Example for base typography (scss/base/_typography.scss):
@@ -147,26 +143,27 @@ Core typography variables (like font families, base sizes if needed globally bey
 // }
 ```
 
-### 3. Using Helper Utilities
+### 3. Using Utility Classes
 
-The `helpers` directory provides utility classes. These are typically applied directly in your HTML.
+The `classes` directory provides utility classes for common styling needs. These are applied directly in your HTML.
 
-```scss
-// SCSS for helpers is imported in main.scss
-// HTML usage:
-// <div class="d-flex justify-content-center mt-4 p-2">...</div>
+```html
+<!-- Example HTML usage -->
+<div class="d-flex mt-4 mb-2 p-3">Styled with utility classes.</div>
+<div class="text-center mx-auto">Centered content with auto margins.</div>
 ```
 
 ### 4. Import Order in `main.scss`
 
-The `main.scss` file should follow a logical import order:
+The `main.scss` file follows a logical import order:
 
-1. `core` (configurations, base functions, global mixins)
-2. `base` (resets, base element styles)
-3. `layouts` (structural page layouts)
-4. `components` (reusable UI elements)
-5. `helpers` (utility classes)
-6. `pages` (page-specific styles)
+1. `core` - Configuration system (colors, spacing, breakpoints)
+2. `mixins` - Global utility mixins
+3. `base` - CSS reset, base element styles, typography
+4. `layouts` - Structural page elements (container system)
+5. `components` - Reusable UI components
+6. `classes` - Utility classes for spacing, display, text alignment
+7. `pages` - Page-specific styles
 
 ## Configuration System
 
@@ -174,208 +171,282 @@ Configuration for your project (colors, typography defaults, spacing units, brea
 
 ### Colors
 
-Configure your color palette in `scss/core/_colors.scss`. It's recommended to expose these as SCSS variables and potentially CSS custom properties for dynamic theming.
+Configure your color palette in `scss/core/_colors.scss`. The system includes a comprehensive color palette with semantic naming, color variants, and utility functions.
 
 ```scss
-// scss/core/_colors.scss
-// $primary-color: #007bff;
-// ... other color variables
+// scss/core/_colors.scss includes:
+// - Primary, Secondary, Tertiary color families with 50-950 variants
+// - Success, Warning, Danger, Info status colors
+// - Neutral grays from Light to Dark
+// - Utility colors (Black, White, Transparent)
 
 // Example usage in a component:
-// @use "../core/colors" as c;
-// .button {
-//   background-color: c.$primary-color;
-// }
+@use "../core" as core;
+.button {
+  background-color: core.getColor("Primary");
+  color: core.getColor("Primary-Contrast");
 
-// If generating CSS custom properties (handled in a global or core file):
+  &:hover {
+    background-color: core.getColor("Primary-600");
+  }
+
+  &--success {
+    background-color: core.getColor("Success");
+  }
+}
+
+// The system also generates CSS custom properties:
 // :root {
-//   --color-primary: #007bff;
-// }
-// .button {
-//   background-color: var(--color-primary);
+//   --color-primary: #314459;
+//   --color-primary-contrast: #ffffff;
+//   --color-success: #28a745;
 // }
 ```
 
 ### Typography
 
-Configure fonts, sizes, and weights in `scss/base/_typography.scss` for base HTML elements. This file now also contains typography-related functions like `px-to-rem` and `strip-unit`.
-Core typography variables (like font families, base sizes if needed globally beyond base element styling) could be defined in `scss/core/_config.scss` (if you create one) or a dedicated `scss/core/_typography-vars.scss`.
+Base typography styles and utility functions are defined in `scss/base/_typography.scss`. This file provides sensible defaults for all HTML typographic elements and includes utility functions for unit conversions.
 
 ```scss
-// Example for base typography (scss/base/_typography.scss):
-// html, body {
-//   font-family: sans-serif;
-//   font-size: 16px; // Base for px-to-rem
-// }
-// @function px-to-rem($px-value, $base-font-size: 16px) { ... }
+// scss/base/_typography.scss provides:
+// - Base font family, size, and line-height for html/body
+// - Heading hierarchy (h1-h6) with appropriate sizing
+// - Typography utility functions
 
-// Using the function (typically within other SCSS files that import base/typography or core if re-exported):
-// .some-component {
-//   padding: px-to-rem(20px); // Assumes px-to-rem is available in the scope
-// }
+// The file includes elements like:
+html,
+body {
+  font-family: sans-serif;
+  font-size: 16px; // Base for rem calculations
+  line-height: 1.2;
+}
+
+h1 {
+  font-size: 2.5rem;
+} // 40px
+h2 {
+  font-size: 2rem;
+} // 32px
+h3 {
+  font-size: 1.75rem;
+} // 28px
+h4 {
+  font-size: 1.5rem;
+} // 24px
+h5 {
+  font-size: 1.25rem;
+} // 20px
+h6 {
+  font-size: 1rem;
+} // 16px
+
+// Usage in components:
+@use "../base/typography" as typo;
+.custom-heading {
+  @extend h2; // Inherit h2 styling
+}
 ```
 
 ### Spacing
 
-Configure spacing scale in `scss/core/_spacing.scss`. These are often unit-based values (e.g., rem, px) used by mixins or utility classes.
+Configure the spacing scale in `scss/core/_spacing.scss`. The system uses a rem-based scale that provides consistent spacing throughout your application.
 
 ```scss
-// scss/core/_spacing.scss
-// $spacing-unit: 1rem;
-// $spacing-map: (
-//   0: 0,
-//   1: $spacing-unit * 0.25,
-//   2: $spacing-unit * 0.5,
-//   4: $spacing-unit,
-//   8: $spacing-unit * 2
-// );
+// scss/core/_spacing.scss includes:
+$spacing: (
+  "0": 0,
+  "1": 0.25rem,
+  // 4px
+  "2": 0.5rem,
+  // 8px
+  "3": 0.75rem,
+  // 12px
+  "4": 1rem,
+  // 16px
+  "5": 1.5rem,
+  // 24px
+  "6": 2rem,
+  // 32px
+  "8": 3rem,
+  // 48px
+  "10": 4rem,
+  // 64px
+  "12": 6rem,
+  // 96px
+  "16": 8rem,
+  // 128px
+);
 
-// Using spacing (via a function or directly)
-// @use "../core/spacing" as s;
-// .component {
-//   margin: map-get(s.$spacing-map, 4);
-//   padding: map-get(s.$spacing-map, 8);
-// }
+// Usage in components:
+@use "../core" as core;
+.component {
+  margin: core.spacing("4");
+  padding: core.spacing("6");
 
-// If generating CSS variables for spacing utilities:
-// :root {
-//   --spacing-1: 0.25rem; /* etc. */
-// }
-// .p-1 { padding: var(--spacing-1); }
+  @include core.breakpoint("md") {
+    padding: core.spacing("8");
+  }
+}
+
+// The spacing values are also used by utility classes:
+// .mt-4 { margin-top: 1rem; }
+// .p-6 { padding: 2rem; }
 ```
 
 ### Breakpoints
 
-Configure responsive breakpoints in `scss/core/_breakpoints.scss`. This file typically contains a map of breakpoint names to values and mixins for applying styles at those breakpoints.
+Configure responsive breakpoints in `scss/core/_breakpoints.scss`. The system provides both functions and mixins for responsive design with a mobile-first approach.
 
 ```scss
-// scss/core/_breakpoints.scss
-// $breakpoints: (
-//   "sm": 576px,
-//   "md": 768px,
-//   "lg": 992px
-// );
-// @mixin breakpoint($name) {
-//   @if map-has-key($breakpoints, $name) {
-//     @media (min-width: map-get($breakpoints, $name)) {
-//       @content;
-//     }
-//   }
-// }
+// scss/core/_breakpoints.scss includes:
+$breakpoints: (
+  "xs": 375px,
+  "sm": 576px,
+  "md": 768px,
+  "lg": 992px,
+  "xl": 1200px,
+  "xxl": 1400px,
+);
 
-// Using breakpoint mixin (assuming core is imported as 'core')
-// .responsive-element {
-//   width: 100%;
-//   @include core.breakpoint("md") {
-//     width: 50%;
-//   }
-// }
+// Using breakpoint mixin (mobile-first):
+@use "../core" as core;
+.responsive-element {
+  width: 100%;
+  padding: core.spacing("4");
+
+  @include core.breakpoint("md") {
+    width: 50%;
+    padding: core.spacing("6");
+  }
+
+  @include core.breakpoint("lg") {
+    width: 33.333%;
+    padding: core.spacing("8");
+  }
+}
+
+// Using breakpoint function:
+.custom-media-query {
+  @media (min-width: core.breakpoint("lg")) {
+    // Custom responsive styles
+  }
+}
 ```
 
 ## Tools & Utilities
 
-Global utility mixins are now in the `scss/mixins/` directory (e.g., for accessibility, text, layout, UI). These are used within your SCSS files.
-The `scss/base/_typography.scss` file contains unit conversion functions (`px-to-rem`, `rem-to-px`, `strip-unit`).
-The `scss/helpers/` directory is primarily for utility classes that apply single-purpose styling directly in HTML.
+The framework provides three types of utilities:
+
+- **Global mixins** in `scss/mixins/` for use within SCSS files
+- **Typography functions** in `scss/base/_typography.scss` for unit conversions
+- **Utility classes** in `scss/classes/` for direct HTML application
 
 ### Global Mixins (in `scss/mixins/`)
 
-Located in `scss/mixins/`, these are used within your SCSS files after importing `mixins` (usually in `main.scss`).
-Example: `_accessibility.scss` contains `visually-hidden`, `_layout.scss` contains `clearfix`.
+Located in `scss/mixins/`, these are used within your SCSS files. The mixins are organized by category for better maintainability.
 
 ```scss
-// In main.scss (or where you manage global imports):
-// @use "path/to/scss/mixins" as mixins;
+// Usage in components (assuming mixins are available via main.scss imports):
+@use "../mixins" as mixins;
 
-// Usage in a component:
-// Assumes main.scss has made mixins available, or you @use mixins directly in the component file.
 .visually-hidden-text {
   @include mixins.visually-hidden;
 }
 
-.float-container {
+.clearfix-container {
   @include mixins.clearfix;
+}
+
+.truncated-text {
+  @include mixins.truncate-text;
+}
+
+.aspect-ratio-video {
+  @include mixins.aspect-ratio(16/9);
+}
+
+.disabled-button {
+  @include mixins.disabled-state;
 }
 ```
 
-### Unit Conversion Functions (in `base/_typography.scss`)
+Available mixin categories:
 
-These functions are now part of `scss/base/_typography.scss`.
-They are typically used when defining other base styles or within components if you need to convert units.
+- **Accessibility**: `visually-hidden` for screen reader only content
+- **Text**: `truncate-text`, `truncate-multiline` for text overflow handling
+- **Layout**: `clearfix`, `aspect-ratio` for layout utilities
+- **UI**: `disabled-state` for consistent disabled styling
+
+### Typography Functions (in `base/_typography.scss`)
+
+Unit conversion and typography-related functions are included in the base typography module.
 
 ```scss
-// In scss/base/_typography.scss (already defined there)
-// @function px-to-rem($px-value, $base-font-size: 16px) { ... }
+// These functions are available when typography is imported:
+@use "../base/typography" as typo;
 
-// Example usage if you were to import scss/base/_typography.scss directly
-// or if its functions are made available globally via main.scss and @use with a global namespace.
-// For simplicity, assume it's available:
-// .element {
-//   font-size: px-to-rem(18px); // Convert 18px to rem
-// }
+.element {
+  font-size: typo.px-to-rem(18px); // Convert pixels to rem
+  line-height: typo.rem-to-px(1.5rem); // Convert rem to pixels
+  margin: typo.strip-unit(16px); // Remove unit from value
+}
 ```
 
-### Helper Utility Classes
+### Utility Classes (in `scss/classes/`)
 
-Located in `scss/helpers/`, these generate CSS classes (e.g., `.mt-1`, `.p-2`, `.d-flex`).
-Files like `_margin.scss`, `_padding.scss`, `_display.scss` generate these. They are imported via `scss/helpers/__index.scss` into `main.scss`.
+Located in `scss/classes/`, these generate CSS classes for common styling patterns. Apply them directly in HTML.
 
 ```html
-<!-- Example HTML usage -->
-<div class="mt-4 mb-2 p-3 d-block">Styled with helper classes.</div>
-```
+<!-- Spacing utilities -->
+<div class="mt-4 mb-2 p-3">Margin top, margin bottom, padding all sides</div>
 
-No direct SCSS usage example is needed here as these are applied via HTML classes. Their generation is handled within the `helpers` files.
+<!-- Display utilities -->
+<div class="d-flex">Flexbox container</div>
+<div class="d-none">Hidden element</div>
+
+<!-- Text alignment -->
+<div class="text-center">Centered text</div>
+<div class="text-right">Right-aligned text</div>
+
+<!-- Responsive utilities -->
+<div class="d-block d-md-flex">Block on mobile, flex on tablet+</div>
+```
 
 ## Theme System
 
 ### Base Styles
 
-Base styles are applied to HTML elements and provide sensible defaults:
+Base styles provide sensible defaults for HTML elements and include comprehensive coverage:
 
-- **Reset**: Normalizes browser differences
-- **Typography**: Heading hierarchy and text styles
-- **Buttons**: Default button styling
+- **Reset**: Modern CSS reset with improved defaults (`_reset.scss`)
+- **Typography**: Heading hierarchy, base fonts, and utility functions (`_typography.scss`)
+- **Interactive Elements**: Button and link styling (`_button.scss`, `_links.scss`)
+- **Forms**: Complete form element styling (`_forms.scss`)
+- **Content**: Lists, tables, and media elements (`_lists.scss`, `_tables.scss`, `_media.scss`)
+- **Structure**: Navigation and footer elements (`_navigation.scss`, `_footer.scss`)
+- **Code**: Styling for code elements (`_code.scss`)
 
 ### Layout System
 
 #### Container System
+
+The container system provides responsive, centered content wrappers with configurable max-widths and intelligent padding.
 
 ```html
 <!-- Default container (max-width: 1200px) -->
 <div class="container">Content</div>
 
 <!-- Container variations -->
-<div class="container container--narrow">Narrow content</div>
-<div class="container container--wide">Wide content</div>
-<div class="container container--fluid">Full width</div>
+<div class="container container--narrow">Narrow content (max-width: 800px)</div>
+<div class="container container--wide">Wide content (max-width: 1600px)</div>
+<div class="container container--full">Full width content</div>
 ```
 
-#### Grid System
+The container system includes:
 
-```html
-<!-- Basic grid -->
-<div class="grid">
-  <div>Item 1</div>
-  <div>Item 2</div>
-</div>
-
-<!-- Responsive columns -->
-<div class="grid grid--2-col">2 columns on tablet+</div>
-<div class="grid grid--3-col">3 columns on desktop</div>
-<div class="grid grid--4-col">4 columns on desktop</div>
-
-<!-- Gap variations -->
-<div class="grid grid--gap-sm">Small gap</div>
-<div class="grid grid--gap-lg">Large gap</div>
-
-<!-- Auto-fit for cards -->
-<div class="grid grid--auto-fit">
-  <div class="card">Card 1</div>
-  <div class="card">Card 2</div>
-  <div class="card">Card 3</div>
-</div>
-```
+- **Responsive padding**: Scales from mobile (1rem) to desktop (2rem)
+- **Automatic centering**: Uses auto margins for horizontal centering
+- **Flexible max-widths**: Multiple container sizes for different content needs
 
 ### Utility Classes
 
@@ -383,19 +454,41 @@ Base styles are applied to HTML elements and provide sensible defaults:
 
 ```html
 <!-- Margin utilities -->
-<div class="m-4">All margins</div>
-<div class="mt-2 mb-4">Top and bottom margins</div>
-<div class="mx-6">Horizontal margins</div>
+<div class="m-4">All margins (1rem)</div>
+<div class="mt-2 mb-4">Top margin (0.5rem) and bottom margin (1rem)</div>
+<div class="mx-6">Horizontal margins (2rem)</div>
+<div class="my-auto">Vertical margins auto</div>
 
 <!-- Padding utilities -->
-<div class="p-8">All padding</div>
-<div class="px-4 py-2">Horizontal and vertical padding</div>
+<div class="p-8">All padding (3rem)</div>
+<div class="px-4 py-2">
+  Horizontal padding (1rem) and vertical padding (0.5rem)
+</div>
 ```
 
 #### Display & Flexbox
 
 ```html
-<div class="flex-row justify-center align-center">Centered flex content</div>
+<!-- Display utilities -->
+<div class="d-block">Display block</div>
+<div class="d-flex">Display flex</div>
+<div class="d-none">Hidden element</div>
+<div class="d-inline-block">Display inline-block</div>
+
+<!-- Flexbox utilities -->
+<div class="d-flex flex-row">Flex row direction</div>
+<div class="d-flex flex-column">Flex column direction</div>
+
+<!-- Responsive display -->
+<div class="d-none d-md-block">Hidden on mobile, visible on tablet+</div>
+```
+
+#### Text Alignment
+
+```html
+<div class="text-left">Left-aligned text</div>
+<div class="text-center">Centered text</div>
+<div class="text-right">Right-aligned text</div>
 ```
 
 ## Component Development
@@ -406,21 +499,31 @@ Base styles are applied to HTML elements and provide sensible defaults:
 
 ```scss
 // scss/components/_alert.scss
-@use "../core/_index" as core; // For variables, mixins
-@use "../base/button" as b; // If you need to extend/style base button within alert
+@use "../core" as core;
 
 .alert {
-  padding: core.spacing(4); // Example if spacing() is a function/map access
-  // or padding: var(--spacing-4) if using CSS variables generated from core
+  padding: core.spacing("4");
   border: 1px solid transparent;
+  border-radius: 4px;
+  margin-bottom: core.spacing("4");
 
   &--success {
-    background-color: core.color("success-bg"); // Example
-    border-color: core.color("success-border");
-    color: core.color("success-text");
+    background-color: core.getColor("Success-50");
+    border-color: core.getColor("Success-300");
+    color: core.getColor("Success-800");
   }
 
-  // ... other modifiers
+  &--warning {
+    background-color: core.getColor("Warning-50");
+    border-color: core.getColor("Warning-300");
+    color: core.getColor("Warning-800");
+  }
+
+  &--danger {
+    background-color: core.getColor("Danger-50");
+    border-color: core.getColor("Danger-300");
+    color: core.getColor("Danger-800");
+  }
 }
 ```
 
@@ -429,7 +532,6 @@ Base styles are applied to HTML elements and provide sensible defaults:
 ```scss
 // scss/components/__index.scss
 @forward "alert";
-// ...existing forwards...
 ```
 
 ### Component Best Practices
@@ -471,48 +573,56 @@ Base styles are applied to HTML elements and provide sensible defaults:
 ### Complete Component Example
 
 ```scss
-// theme/components/_pricing-card.scss
-@use "../../core" as core; // Updated path for core variables
-@use "../../mixins" as mixins; // For global mixins
+// scss/components/_pricing-card.scss
+@use "../core" as core;
+@use "../mixins" as mixins;
 
 .pricing-card {
-  background: var(--color-white);
-  border: 1px solid var(--color-light-300);
-  border-radius: var(--border-radius-lg);
-  padding: var(--spacing-6);
+  background: core.getColor("White");
+  border: 1px solid core.getColor("Light-300");
+  border-radius: 8px;
+  padding: core.spacing("6");
   text-align: center;
   transition: transform 0.2s, box-shadow 0.2s;
 
   &:hover {
     transform: translateY(-2px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 10px 25px core.getColor("Dark-900", 0.1);
   }
 
   @include core.breakpoint("md") {
-    padding: var(--spacing-8);
+    padding: core.spacing("8");
   }
 
   &__title {
-    font-size: var(--font-size-xl);
-    font-weight: var(--font-weight-bold);
-    margin-bottom: var(--spacing-2);
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-bottom: core.spacing("2");
+    color: core.getColor("Dark-800");
   }
 
   &__price {
-    font-size: var(--font-size-4xl);
-    font-weight: var(--font-weight-bold);
-    color: var(--color-primary);
-    margin-bottom: var(--spacing-4);
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: core.getColor("Primary");
+    margin-bottom: core.spacing("4");
+
+    &::before {
+      content: "$";
+      font-size: 1.5rem;
+      vertical-align: top;
+    }
   }
 
   &__features {
     list-style: none;
     padding: 0;
-    margin-bottom: var(--spacing-6);
+    margin-bottom: core.spacing("6");
 
     li {
-      padding: var(--spacing-2) 0;
-      border-bottom: 1px solid var(--color-light-200);
+      padding: core.spacing("2") 0;
+      border-bottom: 1px solid core.getColor("Light-200");
+      color: core.getColor("Dark-600");
 
       &:last-child {
         border-bottom: none;
@@ -521,7 +631,7 @@ Base styles are applied to HTML elements and provide sensible defaults:
   }
 
   &--featured {
-    border-color: var(--color-primary);
+    border-color: core.getColor("Primary");
     position: relative;
 
     &::before {
@@ -530,12 +640,12 @@ Base styles are applied to HTML elements and provide sensible defaults:
       top: 0;
       left: 50%;
       transform: translate(-50%, -50%);
-      background: var(--color-primary);
-      color: var(--color-white);
-      padding: var(--spacing-1) var(--spacing-3);
-      border-radius: var(--border-radius-full);
-      font-size: var(--font-size-sm);
-      font-weight: var(--font-weight-medium);
+      background: core.getColor("Primary");
+      color: core.getColor("White");
+      padding: core.spacing("1") core.spacing("3");
+      border-radius: 100px;
+      font-size: 0.875rem;
+      font-weight: 500;
     }
   }
 }
@@ -544,37 +654,44 @@ Base styles are applied to HTML elements and provide sensible defaults:
 ### Usage in HTML
 
 ```html
-<div class="grid grid--3-col grid--gap-lg">
-  <div class="pricing-card">
-    <h3 class="pricing-card__title">Basic</h3>
-    <div class="pricing-card__price">$9</div>
-    <ul class="pricing-card__features">
-      <li>Feature 1</li>
-      <li>Feature 2</li>
-    </ul>
-    <button class="btn btn--primary">Choose Plan</button>
-  </div>
+<!-- Using container and utility classes -->
+<div class="container">
+  <div class="d-flex flex-column">
+    <!-- Mobile: stacked, larger screens: could use CSS Grid when available -->
+    <div class="pricing-card">
+      <h3 class="pricing-card__title">Basic</h3>
+      <div class="pricing-card__price">9</div>
+      <ul class="pricing-card__features">
+        <li>Feature 1</li>
+        <li>Feature 2</li>
+        <li>Email support</li>
+      </ul>
+      <button class="btn btn--primary">Choose Plan</button>
+    </div>
 
-  <div class="pricing-card pricing-card--featured">
-    <h3 class="pricing-card__title">Pro</h3>
-    <div class="pricing-card__price">$19</div>
-    <ul class="pricing-card__features">
-      <li>Everything in Basic</li>
-      <li>Feature 3</li>
-      <li>Feature 4</li>
-    </ul>
-    <button class="btn btn--primary">Choose Plan</button>
-  </div>
+    <div class="pricing-card pricing-card--featured mt-4">
+      <h3 class="pricing-card__title">Pro</h3>
+      <div class="pricing-card__price">19</div>
+      <ul class="pricing-card__features">
+        <li>Everything in Basic</li>
+        <li>Advanced features</li>
+        <li>Priority support</li>
+        <li>API access</li>
+      </ul>
+      <button class="btn btn--primary">Choose Plan</button>
+    </div>
 
-  <div class="pricing-card">
-    <h3 class="pricing-card__title">Enterprise</h3>
-    <div class="pricing-card__price">$39</div>
-    <ul class="pricing-card__features">
-      <li>Everything in Pro</li>
-      <li>Feature 5</li>
-      <li>Priority Support</li>
-    </ul>
-    <button class="btn btn--primary">Choose Plan</button>
+    <div class="pricing-card mt-4">
+      <h3 class="pricing-card__title">Enterprise</h3>
+      <div class="pricing-card__price">39</div>
+      <ul class="pricing-card__features">
+        <li>Everything in Pro</li>
+        <li>Custom integrations</li>
+        <li>Dedicated support</li>
+        <li>SLA guarantee</li>
+      </ul>
+      <button class="btn btn--primary">Choose Plan</button>
+    </div>
   </div>
 </div>
 ```
