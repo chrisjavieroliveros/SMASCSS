@@ -23,7 +23,7 @@
 @use "components/_index" as components; // e.g., _buttons.scss, _cards.scss, _navigation.scss
 
 // Classes (or Utilities): Helper classes for spacing, display, text, etc.
-@use "utilities/_index" as classes; // e.g., _margins.scss, _padding.scss, _text-alignment.scss
+@use "helpers/_index" as classes;
 
 // Pages: Specific styles for individual pages or sections
 @use "pages/_index" as pages; // e.g., _home.scss, _about.scss

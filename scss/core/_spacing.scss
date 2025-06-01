@@ -31,37 +31,14 @@ $spacing: (
   // 128px
 );
 
-// Spacing aliases for common use cases
-$spacing-aliases: (
-  "xs": "1",
-  // 0.25rem
-  "sm": "4",
-  // 1rem
-  "md": "6",
-  // 2rem
-  "lg": "8",
-  // 3rem
-  "xl": "12",
-  // 6rem
-);
-
 /**
  * Function to get spacing value
- * @param {String|Number} $key - The spacing key or alias
+ * @param {String|Number} $key - The spacing key
  * @return {Number} The spacing value in rem
  * @example padding: spacing(4);      // Returns 1rem
- * @example margin: spacing('sm');    // Returns 1rem via alias
+ * @example margin: spacing('6');     // Returns 2rem
  */
 @function spacing($key) {
-
-  // Check if it's an alias first
-  @if map-has-key($spacing-aliases, $key) {
-    $alias-key: map-get($spacing-aliases, $key);
-
-    @if map-has-key($spacing, $alias-key) {
-      @return map-get($spacing, $alias-key);
-    }
-  }
 
   // Check if it's a direct key
   @if map-has-key($spacing, $key) {

@@ -14,17 +14,12 @@
  * ------------------
  */
 /**
- * Function to get color value
+ * Function to get color value with optional opacity
  * @param {String} $name - The color name from the $colors map
- * @return {Color} The color value
- * @example color: color('Primary');      // Returns #314459
- */
-/**
- * Function to get color with opacity
- * @param {String} $name - The color name from the $colors map
- * @param {Number} $alpha - Opacity value between 0 and 1
- * @return {Color} The rgba color value with opacity
- * @example background: color-alpha('Primary-Tint', 0.5); // Returns rgba(74, 99, 127, 0.5)
+ * @param {Number} $alpha - Optional opacity value between 0 and 1
+ * @return {Color} The color value or rgba color value with opacity
+ * @example color: getColor('Primary');           // Returns #314459
+ * @example background: getColor('Primary-Tint', 0.5); // Returns rgba(74, 99, 127, 0.5)
  */
 /**
  * BREAKPOINTS CONFIGURATION
@@ -36,10 +31,73 @@
  */
 /**
  * Function to get spacing value
- * @param {String|Number} $key - The spacing key or alias
+ * @param {String|Number} $key - The spacing key
  * @return {Number} The spacing value in rem
  * @example padding: spacing(4);      // Returns 1rem
- * @example margin: spacing('sm');    // Returns 1rem via alias
+ * @example margin: spacing('6');     // Returns 2rem
+ */
+/**
+ * ==========================================================================
+ * GLOBAL MIXINS & FUNCTIONS
+ * ==========================================================================
+ * Combined from _accessibility.scss, _text.scss, _unit-conversion.scss
+ */
+/**
+ * ACCESSIBILITY MIXINS
+ * --------------------
+ */
+/**
+ * Visually hidden mixin (for accessibility)
+ * Hides element visually but keeps it available for screen readers
+ * @example @include visually-hidden;
+ */
+/**
+ * Focus ring mixin for better accessibility
+ * @param {Color} $color-value - Focus ring color (optional)
+ * @param {Number} $width - Focus ring width (optional)
+ * @param {Number} $offset - Focus ring offset (optional)
+ * @example @include focus-ring;
+ */
+/**
+ * TEXT UTILITY MIXINS
+ * -------------------
+ * 
+ * Mixins for text manipulation and display utilities
+ */
+/**
+ * Truncate text with ellipsis
+ * @example @include truncate-text;
+ */
+/**
+ * Multi-line text truncation
+ * @param {Number} $lines - Number of lines to show
+ * @example @include truncate-multiline(3);
+ */
+/**
+ * UNIT CONVERSION FUNCTIONS
+ * -------------------------
+ * 
+ * Utility functions for converting between different CSS units
+ */
+/**
+ * Strip units from a value
+ * @param {Number} $value - Value with units
+ * @return {Number} - Value without units
+ * @example $unitless: strip-unit(16px); // Returns 16
+ */
+/**
+ * Convert px to rem
+ * @param {Number} $px-value - Pixel value to convert
+ * @param {Number} $base-font-size - Base font size (default: 16px)
+ * @return {Number} - Value in rem units
+ * @example $rem: px-to-rem(24px); // Returns 1.5rem
+ */
+/**
+ * Convert rem to px
+ * @param {Number} $rem-value - Rem value to convert
+ * @param {Number} $base-font-size - Base font size (default: 16px)
+ * @return {Number} - Value in px units
+ * @example $px: rem-to-px(1.5rem); // Returns 24px
  */
 /**
  * Base Styles
@@ -49,124 +107,136 @@
  * ================
  * 
  * A comprehensive CSS reset based on modern best practices including:
- * - Josh Comeau's CSS Reset
+ * - Josh Comeau's CSS Reset (2023)
  * - Andy Bell's Modern CSS Reset
- * - Normalize.css principles
- * - Accessibility improvements
+ * - Current web standards and accessibility guidelines
  * 
  * Updated: 2024
  */
-/* Box sizing rules */
+/* 
+  1. Use a more-intuitive box-sizing model.
+*/
 *,
 *::before,
 *::after {
   box-sizing: border-box;
 }
 
-/* Prevent font size inflation */
-html {
-  -moz-text-size-adjust: none;
-  -webkit-text-size-adjust: none;
-  text-size-adjust: none;
-  font-size: 100%;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeSpeed;
-}
-
-/* Remove default margin in favour of better control in authored CSS */
-body,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-figure,
-blockquote,
-dl,
-dd {
+/*
+  2. Remove default margin
+*/
+* {
   margin: 0;
 }
 
-/* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
-ul[role=list],
-ol[role=list] {
-  list-style: none;
-}
-
-/* Remove default list styles */
-ul,
-ol {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-/* Set core body defaults */
+/*
+  3. Typographic tweaks!
+  4. Add accessible line-height
+  5. Improve text rendering
+*/
 body {
-  min-height: 100vh;
-  line-height: var(--line-height-normal, 1.5);
-  font-family: var(--font-family-base, system-ui, sans-serif);
-  font-size: var(--font-size-base, 1rem);
-  color: var(--color-black, #000);
-  background-color: var(--color-white, #fff);
-  margin: 0;
-  padding: 0;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
 }
 
-/* Set shorter line heights on headings and interactive elements */
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-button,
+/*
+  6. Improve media defaults
+*/
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+/*
+  7. Remove built-in form typography styles
+*/
 input,
-label {
-  line-height: 1.1;
+button,
+textarea,
+select {
+  font: inherit;
 }
 
-/* Balance text wrapping on headings */
+/*
+  8. Avoid text overflows
+*/
+p,
 h1,
 h2,
 h3,
 h4,
 h5,
 h6 {
-  text-wrap: balance;
+  overflow-wrap: break-word;
 }
 
-/* A elements that don't have a class get default styles */
+/*
+  9. Create a root stacking context
+*/
+#root,
+#__next {
+  isolation: isolate;
+}
+
+/* Additional modern reset rules */
+/*
+  Remove list styles on ul, ol elements with a list role
+*/
+ul[role=list],
+ol[role=list] {
+  list-style: none;
+}
+
+/*
+  Set core root defaults
+*/
+html:focus-within {
+  scroll-behavior: smooth;
+}
+
+/*
+  Set core body defaults
+*/
+body {
+  min-height: 100vh;
+  text-rendering: optimizeSpeed;
+  font-family: system-ui, sans-serif;
+}
+
+/*
+  A elements that don't have a class get default styles
+*/
 a:not([class]) {
   -webkit-text-decoration-skip: ink;
-  text-decoration-skip-ink: auto;
-  color: currentColor;
+          text-decoration-skip-ink: auto;
 }
 
-/* Make images easier to work with */
+/*
+  Make images easier to work with
+*/
 img,
-picture,
-video,
-canvas,
-svg {
+picture {
   max-width: 100%;
-  height: auto;
   display: block;
 }
 
-/* Inherit fonts for inputs and buttons */
+/*
+  Inherit fonts for inputs and buttons
+*/
 input,
 button,
 textarea,
 select {
   font: inherit;
-  color: inherit;
 }
 
-/* Remove default button styles */
+/*
+  Remove default button styles
+*/
 button {
   background: none;
   border: none;
@@ -174,22 +244,27 @@ button {
   cursor: pointer;
 }
 
-/* Make sure textareas without a rows attribute are not tiny */
+/*
+  Make sure textareas without a rows attribute are not tiny
+*/
 textarea:not([rows]) {
   min-height: 10em;
 }
 
-/* Anything that has been anchored to should have extra scroll margin */
+/*
+  Anything that has been anchored to should have extra scroll margin
+*/
 :target {
   scroll-margin-block: 5ex;
 }
 
-/* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
+/*
+  Remove all animations, transitions and smooth scroll for people that prefer not to see them
+*/
 @media (prefers-reduced-motion: reduce) {
   html:focus-within {
     scroll-behavior: auto;
   }
-
   *,
   *::before,
   *::after {
@@ -199,25 +274,23 @@ textarea:not([rows]) {
     scroll-behavior: auto !important;
   }
 }
-
-/* Focus styles */
+/* Focus management */
 :focus-visible {
-  outline: 2px solid var(--color-secondary, #2a8de9);
+  outline: 2px solid #005fcc;
   outline-offset: 2px;
 }
 
-/* Remove focus outline for mouse users */
 :focus:not(:focus-visible) {
   outline: none;
 }
 
-/* Improve table styling */
+/* Table improvements */
 table {
   border-collapse: collapse;
   border-spacing: 0;
 }
 
-/* Form elements */
+/* Form improvements */
 fieldset {
   margin: 0;
   padding: 0;
@@ -228,7 +301,7 @@ legend {
   padding: 0;
 }
 
-/* Remove default styling from form elements */
+/* Remove default styling from search inputs */
 input[type=search] {
   -webkit-appearance: textfield;
   outline-offset: -2px;
@@ -244,7 +317,7 @@ input[type=search]::-webkit-search-decoration {
   font: inherit;
 }
 
-/* Improve consistency of default fonts */
+/* Monospace font improvements */
 code,
 kbd,
 samp,
@@ -253,12 +326,11 @@ pre {
   font-size: 1em;
 }
 
-/* Add the correct font size in all browsers */
+/* Typography improvements */
 small {
   font-size: 80%;
 }
 
-/* Prevent sub and sup elements from affecting the line height */
 sub,
 sup {
   font-size: 75%;
@@ -275,29 +347,29 @@ sup {
   top: -0.5em;
 }
 
-/* Remove the border on images inside links in IE 10 */
+/* Remove border on images inside links */
 img {
   border-style: none;
 }
 
-/* Hide the overflow in IE */
+/* SVG improvements */
 svg:not(:root) {
   overflow: hidden;
 }
 
-/* Correct the inheritance and scaling of font size in all browsers */
+/* Pre element improvements */
 pre {
   font-family: monospace, monospace;
   font-size: 1em;
   overflow: auto;
 }
 
-/* Add the correct display in IE 10 */
+/* Hidden attribute support */
 [hidden] {
   display: none;
 }
 
-/* Accessibility improvements */
+/* Screen reader only utility class */
 .sr-only {
   position: absolute;
   width: 1px;
@@ -324,93 +396,77 @@ pre {
   border: 1px solid transparent;
   transition: background-color 0.3s ease;
 }
-
 .btn:focus-visible {
-  outline: 2px solid #007bff;
+  outline: 2px solid getColor(Primary);
   outline-offset: 2px;
 }
-
 .btn--sm {
   padding: 8px 12px;
   font-size: 14px;
 }
-
 .btn--lg {
   padding: 12px 20px;
   font-size: 18px;
 }
-
 .btn--block {
   display: block;
   width: 100%;
 }
-
 .btn--primary {
   background-color: #007bff;
   color: #ffffff;
   border-color: #007bff;
 }
-
 .btn--primary:hover {
   background-color: #0056b3;
   color: #ffffff;
   border-color: #0056b3;
 }
-
 .btn--secondary {
   background-color: #6c757d;
   color: #ffffff;
   border-color: #6c757d;
 }
-
 .btn--secondary:hover {
   background-color: #545b62;
   color: #ffffff;
   border-color: #545b62;
 }
-
 .btn--danger {
   background-color: #dc3545;
   color: #ffffff;
   border-color: #dc3545;
 }
-
 .btn--danger:hover {
   background-color: #c82333;
   color: #ffffff;
   border-color: #c82333;
 }
-
 .btn--warning {
   background-color: #ffc107;
   color: #212529;
   border-color: #ffc107;
 }
-
 .btn--warning:hover {
   background-color: #e0a800;
   color: #212529;
   border-color: #e0a800;
 }
-
 .btn--success {
   background-color: #28a745;
   color: #ffffff;
   border-color: #28a745;
 }
-
 .btn--success:hover {
   background-color: #1e7e34;
   color: #ffffff;
   border-color: #1e7e34;
 }
-
 .btn--info {
   background-color: #17a2b8;
   color: #ffffff;
   border-color: #17a2b8;
 }
-
 .btn--info:hover {
   background-color: #117a8b;
   color: #ffffff;
@@ -464,7 +520,6 @@ h6 {
 p {
   margin-bottom: 1rem;
 }
-
 p:last-child {
   margin-bottom: 0;
 }
@@ -479,13 +534,74 @@ a {
   text-decoration: underline;
   transition: color 0.2s;
 }
-
 a:hover {
   color: darkblue;
 }
 
 .text-small {
   font-size: 0.875rem;
+}
+
+/**
+ * Project: SMACSS SCSS Architecture
+ * Description: This project implements a scalable and modular architecture for CSS (SMACSS) 
+ *              using SCSS to ensure maintainable and reusable styles.
+ * Author: Chris Javier Oliveros
+ * Version: 2.0.0
+ * License: MIT
+ * 
+ * This file serves as the entry point for the SCSS architecture. It organizes and imports 
+ * all styles based on the SMACSS methodology.
+ */
+/**
+ * CONTAINER CONFIGURATION
+ * ----------------------
+ * 
+ * Mobile-first responsive container implementation
+ * 
+ * USAGE:
+ * 1. Apply the container class to create a responsive, centered wrapper:
+ *    <div class="container">Content goes here</div>
+ * 
+ * 2. Container variations:
+ *    - Default: <div class="container">...</div> (max-width: 1200px)
+ *    - Narrow: <div class="container container--narrow">...</div> (max-width: 800px)
+ *    - Wide: <div class="container container--wide">...</div> (max-width: 1600px)
+ *    - Fluid: <div class="container container--fluid">...</div> (max-width: 100%)
+ * 
+ * 3. Container padding is responsive and handled by CSS variables:
+ *    - Mobile: var(--container-padding-sm)
+ *    - Tablet: var(--container-padding-md)
+ *    - Desktop: var(--container-padding-lg)
+ */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+@media (min-width: 768px) {
+  .container {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+@media (min-width: 992px) {
+  .container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+.container--narrow {
+  max-width: 800px;
+}
+.container--wide {
+  max-width: 1600px;
+}
+.container--full {
+  max-width: 100%;
 }
 
 /**
@@ -553,132 +669,102 @@ a:hover {
   .d-sm-none {
     display: none;
   }
-
   .d-sm-block {
     display: block;
   }
-
   .d-sm-flex {
     display: flex;
   }
-
   .d-sm-inline {
     display: inline;
   }
-
   .d-sm-inline-block {
     display: inline-block;
   }
-
   .d-sm-grid {
     display: grid;
   }
 }
-
 @media (min-width: 768px) {
   .d-md-none {
     display: none;
   }
-
   .d-md-block {
     display: block;
   }
-
   .d-md-flex {
     display: flex;
   }
-
   .d-md-inline {
     display: inline;
   }
-
   .d-md-inline-block {
     display: inline-block;
   }
-
   .d-md-grid {
     display: grid;
   }
 }
-
 @media (min-width: 992px) {
   .d-lg-none {
     display: none;
   }
-
   .d-lg-block {
     display: block;
   }
-
   .d-lg-flex {
     display: flex;
   }
-
   .d-lg-inline {
     display: inline;
   }
-
   .d-lg-inline-block {
     display: inline-block;
   }
-
   .d-lg-grid {
     display: grid;
   }
 }
-
 @media (min-width: 1200px) {
   .d-xl-none {
     display: none;
   }
-
   .d-xl-block {
     display: block;
   }
-
   .d-xl-flex {
     display: flex;
   }
-
   .d-xl-inline {
     display: inline;
   }
-
   .d-xl-inline-block {
     display: inline-block;
   }
-
   .d-xl-grid {
     display: grid;
   }
 }
-
 @media (min-width: 1400px) {
   .d-xxl-none {
     display: none;
   }
-
   .d-xxl-block {
     display: block;
   }
-
   .d-xxl-flex {
     display: flex;
   }
-
   .d-xxl-inline {
     display: inline;
   }
-
   .d-xxl-inline-block {
     display: inline-block;
   }
-
   .d-xxl-grid {
     display: grid;
   }
 }
-
 .m-0 {
   margin: 0;
 }
