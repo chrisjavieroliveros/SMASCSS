@@ -5,7 +5,7 @@
  * Functions and mixins for layout-related calculations and utilities
  * 
  * USAGE:
- * @use "../tools/layout" as layout;
+ * @use "../mixins/layout" as layout;
  * $fluid: layout.fluid-space(1rem, 2rem, 320px, 1200px);
  * @include layout.aspect-ratio(16/9);
  * @include layout.clearfix;

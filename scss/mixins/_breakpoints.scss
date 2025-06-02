@@ -6,7 +6,7 @@
  * Mobile-first approach using min-width media queries
  * 
  * USAGE:
- * @use "../tools/breakpoints" as bp;
+ * @use "../mixins/breakpoints" as bp;
  * @include bp.breakpoint-up("md") { display: flex; }    // Mobile-first (min-width)
  * @include bp.breakpoint-down("lg") { display: block; } // Desktop-first (max-width)
  * @include bp.breakpoint-only("md") { display: grid; }  // Only at specific breakpoint
@@ -25,9 +25,7 @@
     @media (min-width: breakpoints.breakpoint($size)) {
       @content;
     }
-  }
-
-  @else {
+  } @else {
     @error "Breakpoint '#{$size}' not found in breakpoints map.";
   }
 }
@@ -44,9 +42,7 @@
     @media (max-width: calc(#{$breakpoint-value} - 0.02px)) {
       @content;
     }
-  }
-
-  @else {
+  } @else {
     @error "Breakpoint '#{$size}' not found in breakpoints map.";
   }
 }
@@ -69,16 +65,12 @@
       @media (min-width: #{$min-width}) and (max-width: #{$max-width}) {
         @content;
       }
-    }
-
-    @else {
+    } @else {
       @media (min-width: breakpoints.breakpoint($size)) {
         @content;
       }
     }
-  }
-
-  @else {
+  } @else {
     @error "Breakpoint '#{$size}' not found in breakpoints map.";
   }
 }
@@ -90,16 +82,16 @@
  * @example @include breakpoint-between("sm", "lg") { ... }
  */
 @mixin breakpoint-between($min-size, $max-size) {
-  @if map-has-key(breakpoints.$breakpoints, $min-size) and map-has-key(breakpoints.$breakpoints, $max-size) {
+  @if map-has-key(breakpoints.$breakpoints, $min-size) and
+    map-has-key(breakpoints.$breakpoints, $max-size)
+  {
     $min-width: breakpoints.breakpoint($min-size);
     $max-width: calc(#{breakpoints.breakpoint($max-size)} - 0.02px);
 
     @media (min-width: #{$min-width}) and (max-width: #{$max-width}) {
       @content;
     }
-  }
-
-  @else {
+  } @else {
     @error "One or both breakpoints not found in breakpoints map.";
   }
 }

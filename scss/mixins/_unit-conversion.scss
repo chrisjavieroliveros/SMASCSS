@@ -5,7 +5,7 @@
  * Utility functions for converting between different CSS units
  * 
  * USAGE:
- * @use "../tools/unit-conversion" as units;
+ * @use "../mixins/unit-conversion" as units;
  * $rem-value: units.px-to-rem(16px);
  * $px-value: units.rem-to-px(1.5rem);
  * $unitless: units.strip-unit(16px);

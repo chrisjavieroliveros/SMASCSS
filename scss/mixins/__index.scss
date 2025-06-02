@@ -1,11 +1,11 @@
 /**
- * TOOLS INDEX
+ * MIXINS INDEX
  * -----------
  * 
  * This directory contains SCSS utilities, functions, and mixins
  * organized into logical groupings for better maintainability.
  * 
- * The tools directory includes:
+ * The mixins directory includes:
  * - Unit Conversion: Functions for converting between CSS units
  * - Layout: Layout-related functions and mixins
  * - Breakpoints: Responsive media query mixins
@@ -15,22 +15,22 @@
  * Note: CSS variable generation has been moved to config files
  * 
  * USAGE:
- * @use "../tools" as tools;
+ * @use "../mixins" as mixins;
  * 
  * // Unit conversion
- * $rem-value: tools.px-to-rem(16px);
+ * $rem-value: mixins.px-to-rem(16px);
  * 
  * // Breakpoints
- * @include tools.breakpoint("md") { ... }
+ * @include mixins.breakpoint("md") { ... }
  * 
  * // Layout utilities
- * @include tools.aspect-ratio(16/9);
+ * @include mixins.aspect-ratio(16/9);
  * 
  * // Accessibility
- * @include tools.visually-hidden;
+ * @include mixins.visually-hidden;
  * 
  * // Text utilities
- * @include tools.truncate-text;
+ * @include mixins.truncate-text;
  */
 
 // Forward all specialized tool modules

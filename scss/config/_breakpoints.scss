@@ -41,8 +41,8 @@ $breakpoints: (
 
 /* 
 * USAGE:
- * 1. Import the breakpoint tools:
- *    @use "tools/breakpoints" as breakpoints;
+ * 1. Import the breakpoint mixins:
+ *    @use "mixins/breakpoints" as breakpoints;
  * 
  * 2. Generate CSS variables in your root file:
  *    @include generate-breakpoint-variables();

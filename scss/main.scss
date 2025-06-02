@@ -10,8 +10,8 @@
  * all styles based on the SMACSS methodology.
  */
 
-//  Import All Tools;
-@use "tools/__index" as tools;
+//  Import All Mixins;
+@use "mixins/__index" as mixins;
 
 // Import base styles
 @use "theme/base/_index" as base;
@@ -25,8 +25,8 @@
 @use "theme/components/_index" as components;
 // Purpose: Reusable UI components, such as buttons, cards, and other modular elements.
 
-// Import utilities
-@use "theme/utilities/_index" as utilities;
+// Import classes
+@use "theme/classes/_index" as classes;
 // Purpose: Utility classes and helper styles for quick and specific adjustments
 // (e.g., margin helpers, text alignment).
 

@@ -12,7 +12,7 @@ A comprehensive SCSS architecture designed for maintainable, scalable, and organ
 - [Folder Structure](#folder-structure)
 - [Quick Start](#quick-start)
 - [Configuration System](#configuration-system)
-- [Tools & Utilities](#tools--utilities)
+- [Mixins & Utilities](#mixins--utilities)
 - [Theme System](#theme-system)
 - [Component Development](#component-development)
 - [Layout System](#layout-system)
@@ -24,13 +24,13 @@ A comprehensive SCSS architecture designed for maintainable, scalable, and organ
 SMASCSS provides a complete SCSS framework with:
 
 - **Configuration-driven design** - Centralized configuration for colors, typography, spacing, and breakpoints
-- **Modular tools system** - Utilities for unit conversion, layout, accessibility, and responsive design
-- **Flexible theme system** - Base styles, layouts, components, and utilities
+- **Modular mixins system** - Utilities for unit conversion, layout, accessibility, and responsive design
+- **Flexible theme system** - Base styles, layouts, components, and utility classes
 - **CSS custom properties generation** - Automatic CSS variable creation for runtime theming
 
 ## Architecture Principles
 
-1. **Separation of Concerns** - Clear distinction between configuration, tools, and theme
+1. **Separation of Concerns** - Clear distinction between configuration, mixins, and theme
 2. **Modularity** - Each file serves a single purpose and can be imported independently
 3. **Scalability** - Architecture scales from small projects to enterprise applications
 4. **Maintainability** - Organized structure makes updates and debugging straightforward
@@ -49,8 +49,8 @@ scss/
 │   ├── _breakpoints.scss     # Responsive breakpoints
 │   └── _buttons.scss         # Button configuration
 │
-├── tools/                     # Utilities & functions (no CSS output)
-│   ├── __index.scss          # Tools entry point
+├── mixins/                    # Utilities & functions (no CSS output)
+│   ├── __index.scss          # Mixins entry point
 │   ├── _unit-conversion.scss # Unit conversion functions
 │   ├── _layout.scss          # Layout utilities & functions
 │   ├── _breakpoints.scss     # Responsive mixins
@@ -107,23 +107,24 @@ The configuration system automatically generates CSS custom properties from your
 ```
 
 The configuration system includes:
+
 - Color system with CSS variable generation
 - Typography system with font variables
 - Spacing scale with CSS custom properties
 - Breakpoint system with responsive variables
 - Button configuration with theme variables
 
-### 3. Use the Tools
+### 3. Use the Mixins
 
 ```scss
-// Import tools for development
-@use "tools" as tools;
+// Import mixins for development
+@use "mixins" as mixins;
 
 .my-component {
-  padding: tools.spacing(4);
+  padding: mixins.spacing(4);
 
-  @include tools.breakpoint("md") {
-    padding: tools.spacing(6);
+  @include mixins.breakpoint("md") {
+    padding: mixins.spacing(6);
   }
 }
 ```
@@ -131,11 +132,12 @@ The configuration system includes:
 ### 4. Import Order
 
 The main.scss file follows this specific import order:
-1. Tools (utilities and functions)
+
+1. Mixins (utilities and functions)
 2. Base styles (resets and defaults)
 3. Layouts (structural components)
 4. Components (reusable UI elements)
-5. Utilities (helper classes)
+5. Classes (helper classes)
 6. Page-specific styles
 
 ## Configuration System
@@ -207,26 +209,26 @@ Configure responsive breakpoints in `config/_breakpoints.scss`:
 .responsive-element {
   width: 100%;
 
-  @include tools.breakpoint("md") {
+  @include mixins.breakpoint("md") {
     width: 50%;
   }
 
-  @include tools.breakpoint("lg") {
+  @include mixins.breakpoint("lg") {
     width: 33.333%;
   }
 }
 ```
 
-## Tools & Utilities
+## Mixins & Utilities
 
 ### Unit Conversion
 
 ```scss
-@use "tools" as tools;
+@use "mixins" as mixins;
 
 .element {
-  font-size: tools.px-to-rem(18px); // Convert 18px to rem
-  width: tools.rem-to-px(2rem); // Convert 2rem to px
+  font-size: mixins.px-to-rem(18px); // Convert 18px to rem
+  width: mixins.rem-to-px(2rem); // Convert 2rem to px
 }
 ```
 
@@ -235,17 +237,17 @@ Configure responsive breakpoints in `config/_breakpoints.scss`:
 ```scss
 // Fluid spacing between breakpoints
 .hero {
-  padding: tools.fluid-space(1rem, 3rem, 320px, 1200px);
+  padding: mixins.fluid-space(1rem, 3rem, 320px, 1200px);
 }
 
 // Aspect ratio
 .video-container {
-  @include tools.aspect-ratio(16/9);
+  @include mixins.aspect-ratio(16/9);
 }
 
 // Clearfix
 .float-container {
-  @include tools.clearfix;
+  @include mixins.clearfix;
 }
 ```
 
@@ -254,12 +256,12 @@ Configure responsive breakpoints in `config/_breakpoints.scss`:
 ```scss
 // Visually hidden (for screen readers)
 .sr-only {
-  @include tools.visually-hidden;
+  @include mixins.visually-hidden;
 }
 
 // Focus ring
 .interactive-element {
-  @include tools.focus-ring;
+  @include mixins.focus-ring;
 }
 ```
 
@@ -268,12 +270,12 @@ Configure responsive breakpoints in `config/_breakpoints.scss`:
 ```scss
 // Truncate text
 .truncated {
-  @include tools.truncate-text;
+  @include mixins.truncate-text;
 }
 
 // Multiple line truncation
 .excerpt {
-  @include tools.truncate-text(3); // 3 lines
+  @include mixins.truncate-text(3); // 3 lines
 }
 ```
 
@@ -356,7 +358,7 @@ Base styles are applied to HTML elements and provide sensible defaults:
 
 ```scss
 // theme/components/_alert.scss
-@use "../../tools" as tools;
+@use "../../mixins" as mixins;
 @use "../../config/colors" as colors;
 
 .alert {
@@ -426,7 +428,7 @@ Base styles are applied to HTML elements and provide sensible defaults:
 
 ```scss
 // theme/components/_pricing-card.scss
-@use "../../tools" as tools;
+@use "../../mixins" as mixins;
 
 .pricing-card {
   background: var(--color-white);
@@ -441,7 +443,7 @@ Base styles are applied to HTML elements and provide sensible defaults:
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
   }
 
-  @include tools.breakpoint("md") {
+  @include mixins.breakpoint("md") {
     padding: var(--spacing-8);
   }
 

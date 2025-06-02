@@ -1,4 +1,4 @@
-@use "../../tools/_index" as tools;
+@use "../../mixins/_index" as mixins;
 
 /**
  * CONTAINER CONFIGURATION
@@ -32,13 +32,13 @@
   padding-right: var(--container-padding-sm);
 
   // Tablet and up: Medium padding
-  @include tools.breakpoint-up("md") {
+  @include mixins.breakpoint-up("md") {
     padding-left: var(--container-padding-md);
     padding-right: var(--container-padding-md);
   }
 
   // Desktop and up: Large padding
-  @include tools.breakpoint-up("lg") {
+  @include mixins.breakpoint-up("lg") {
     padding-left: var(--container-padding-lg);
     padding-right: var(--container-padding-lg);
   }

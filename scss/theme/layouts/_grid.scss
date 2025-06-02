@@ -1,4 +1,4 @@
-@use "../../tools/_index" as tools;
+@use "../../mixins/_index" as mixins;
 
 /**
  * GRID LAYOUT CONFIGURATION
@@ -52,7 +52,7 @@
     grid-template-columns: 1fr;
 
     // Tablet and up: 2 columns
-    @include tools.breakpoint-up("md") {
+    @include mixins.breakpoint-up("md") {
       grid-template-columns: repeat(2, 1fr);
     }
   }
@@ -62,12 +62,12 @@
     grid-template-columns: 1fr;
 
     // Tablet: 2 columns
-    @include tools.breakpoint-up("md") {
+    @include mixins.breakpoint-up("md") {
       grid-template-columns: repeat(2, 1fr);
     }
 
     // Desktop and up: 3 columns
-    @include tools.breakpoint-up("lg") {
+    @include mixins.breakpoint-up("lg") {
       grid-template-columns: repeat(3, 1fr);
     }
   }
@@ -77,12 +77,12 @@
     grid-template-columns: 1fr;
 
     // Small tablet: 2 columns
-    @include tools.breakpoint-up("sm") {
+    @include mixins.breakpoint-up("sm") {
       grid-template-columns: repeat(2, 1fr);
     }
 
     // Desktop and up: 4 columns
-    @include tools.breakpoint-up("lg") {
+    @include mixins.breakpoint-up("lg") {
       grid-template-columns: repeat(4, 1fr);
     }
   }
@@ -93,7 +93,7 @@
     grid-template-columns: 1fr;
 
     // Small screens and up: Auto-fit with minimum card width
-    @include tools.breakpoint-up("sm") {
+    @include mixins.breakpoint-up("sm") {
       grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
     }
   }

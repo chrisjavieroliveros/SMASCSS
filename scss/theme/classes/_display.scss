@@ -1,4 +1,4 @@
-@use "../../tools/_index" as tools;
+@use "../../mixins/_index" as mixins;
 
 /**
  * DISPLAY UTILITIES
@@ -49,7 +49,7 @@
 
 // Mobile-first responsive display utilities
 @each $breakpoint in ("sm", "md", "lg", "xl", "xxl") {
-  @include tools.breakpoint-up($breakpoint) {
+  @include mixins.breakpoint-up($breakpoint) {
     .d-#{$breakpoint}-none {
       display: none !important;
     }

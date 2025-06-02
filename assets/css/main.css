@@ -10,13 +10,13 @@
  * all styles based on the SMACSS methodology.
  */
 /**
- * TOOLS INDEX
+ * MIXINS INDEX
  * -----------
  * 
  * This directory contains SCSS utilities, functions, and mixins
  * organized into logical groupings for better maintainability.
  * 
- * The tools directory includes:
+ * The mixins directory includes:
  * - Unit Conversion: Functions for converting between CSS units
  * - Layout: Layout-related functions and mixins
  * - Breakpoints: Responsive media query mixins
@@ -26,22 +26,22 @@
  * Note: CSS variable generation has been moved to config files
  * 
  * USAGE:
- * @use "../tools" as tools;
+ * @use "../mixins" as mixins;
  * 
  * // Unit conversion
- * $rem-value: tools.px-to-rem(16px);
+ * $rem-value: mixins.px-to-rem(16px);
  * 
  * // Breakpoints
- * @include tools.breakpoint("md") { ... }
+ * @include mixins.breakpoint("md") { ... }
  * 
  * // Layout utilities
- * @include tools.aspect-ratio(16/9);
+ * @include mixins.aspect-ratio(16/9);
  * 
  * // Accessibility
- * @include tools.visually-hidden;
+ * @include mixins.visually-hidden;
  * 
  * // Text utilities
- * @include tools.truncate-text;
+ * @include mixins.truncate-text;
  */
 /**
  * UNIT CONVERSION FUNCTIONS
@@ -50,7 +50,7 @@
  * Utility functions for converting between different CSS units
  * 
  * USAGE:
- * @use "../tools/unit-conversion" as units;
+ * @use "../mixins/unit-conversion" as units;
  * $rem-value: units.px-to-rem(16px);
  * $px-value: units.rem-to-px(1.5rem);
  * $unitless: units.strip-unit(16px);
@@ -76,13 +76,13 @@
  * @example $px: rem-to-px(1.5rem); // Returns 24px
  */
 /**
- * TOOLS INDEX
+ * MIXINS INDEX
  * -----------
  * 
  * This directory contains SCSS utilities, functions, and mixins
  * organized into logical groupings for better maintainability.
  * 
- * The tools directory includes:
+ * The mixins directory includes:
  * - Unit Conversion: Functions for converting between CSS units
  * - Layout: Layout-related functions and mixins
  * - Breakpoints: Responsive media query mixins
@@ -92,22 +92,22 @@
  * Note: CSS variable generation has been moved to config files
  * 
  * USAGE:
- * @use "../tools" as tools;
+ * @use "../mixins" as mixins;
  * 
  * // Unit conversion
- * $rem-value: tools.px-to-rem(16px);
+ * $rem-value: mixins.px-to-rem(16px);
  * 
  * // Breakpoints
- * @include tools.breakpoint("md") { ... }
+ * @include mixins.breakpoint("md") { ... }
  * 
  * // Layout utilities
- * @include tools.aspect-ratio(16/9);
+ * @include mixins.aspect-ratio(16/9);
  * 
  * // Accessibility
- * @include tools.visually-hidden;
+ * @include mixins.visually-hidden;
  * 
  * // Text utilities
- * @include tools.truncate-text;
+ * @include mixins.truncate-text;
  */
 /**
  * LAYOUT UTILITIES
@@ -116,7 +116,7 @@
  * Functions and mixins for layout-related calculations and utilities
  * 
  * USAGE:
- * @use "../tools/layout" as layout;
+ * @use "../mixins/layout" as layout;
  * $fluid: layout.fluid-space(1rem, 2rem, 320px, 1200px);
  * @include layout.aspect-ratio(16/9);
  * @include layout.clearfix;
@@ -147,7 +147,7 @@
  * Mobile-first approach using min-width media queries
  * 
  * USAGE:
- * @use "../tools/breakpoints" as bp;
+ * @use "../mixins/breakpoints" as bp;
  * @include bp.breakpoint-up("md") { display: flex; }    // Mobile-first (min-width)
  * @include bp.breakpoint-down("lg") { display: block; } // Desktop-first (max-width)
  * @include bp.breakpoint-only("md") { display: grid; }  // Only at specific breakpoint
@@ -173,8 +173,8 @@
 
 /* 
 * USAGE:
- * 1. Import the breakpoint tools:
- *    @use "tools/breakpoints" as breakpoints;
+ * 1. Import the breakpoint mixins:
+ *    @use "mixins/breakpoints" as breakpoints;
  * 
  * 2. Generate CSS variables in your root file:
  *    @include generate-breakpoint-variables();
@@ -380,7 +380,7 @@
  * Mixins for improving accessibility and user experience
  * 
  * USAGE:
- * @use "../tools/accessibility" as a11y;
+ * @use "../mixins/accessibility" as a11y;
  * @include a11y.visually-hidden;
  * @include a11y.focus-ring;
  */
@@ -618,7 +618,7 @@
  * Mixins for text manipulation and display utilities
  * 
  * USAGE:
- * @use "../tools/text" as text;
+ * @use "../mixins/text" as text;
  * @include text.truncate-text;
  * @include text.truncate-multiline(3);
  */
