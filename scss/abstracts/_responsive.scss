@@ -1,0 +1,249 @@
+/**
+ * RESPONSIVE MIXINS - Developer Usage Guide
+ * ==========================================
+ * 
+ * CORE MIXINS:
+ * @include bp-up(md)        - Min-width from breakpoint up
+ * @include bp-down(lg)      - Max-width up to breakpoint
+ * @include bp-between(sm, lg) - Between two breakpoints
+ * @include bp-only(md)      - Only at specific breakpoint
+ * 
+ * SEMANTIC MIXINS (Recommended):
+ * @include mobile-up        - 600px+ (WordPress mobile boundary)
+ * @include tablet-up        - 782px+ (WordPress tablet boundary) 
+ * @include desktop-up       - 1024px+ (Common desktop)
+ * @include mobile-only      - <600px only
+ * @include tablet-only      - 600px-782px only
+ * 
+ * WORDPRESS-SPECIFIC (Use for WP core compatibility):
+ * @include wp-mobile-only   - <600px (exact WP mobile)
+ * @include wp-tablet-only   - 600px-782px (exact WP tablet)
+ * @include wp-desktop-up    - 782px+ (exact WP desktop)
+ * 
+ * UTILITY MIXINS:
+ * @include container-padding - Responsive container padding
+ * @include reduced-motion   - Accessibility: reduced motion
+ * @include dark-mode        - Dark mode preference
+ * @include retina           - High-DPI displays
+ * 
+ * BREAKPOINTS: xs(0) sm(600px) md(782px) lg(1024px) xl(1200px) xxl(1400px)
+ */
+
+// Breakpoint Variables (WordPress-aligned with extended flexibility)
+$breakpoints: (
+  xs: 0,
+  sm: 600px,
+  md: 782px,
+  lg: 1024px,
+  xl: 1200px,
+  xxl: 1400px,
+) !default;
+
+// Core responsive mixins
+@mixin bp-up($breakpoint) {
+  @if map-has-key($breakpoints, $breakpoint) {
+    $value: map-get($breakpoints, $breakpoint);
+    @if $value > 0 {
+      @media (min-width: $value) {
+        @content;
+      }
+    } @else {
+      @content;
+    }
+  } @else if type-of($breakpoint) == number {
+    @media (min-width: $breakpoint) {
+      @content;
+    }
+  } @else {
+    @warn "Invalid breakpoint: #{$breakpoint}";
+  }
+}
+
+@mixin bp-down($breakpoint) {
+  @if map-has-key($breakpoints, $breakpoint) {
+    $value: map-get($breakpoints, $breakpoint);
+    @if $value > 0 {
+      @media (max-width: ($value - 0.02px)) {
+        @content;
+      }
+    }
+  } @else if type-of($breakpoint) == number {
+    @media (max-width: ($breakpoint - 0.02px)) {
+      @content;
+    }
+  } @else {
+    @warn "Invalid breakpoint: #{$breakpoint}";
+  }
+}
+
+@mixin bp-between($lower, $upper) {
+  @if map-has-key($breakpoints, $lower) and map-has-key($breakpoints, $upper) {
+    $lower-value: map-get($breakpoints, $lower);
+    $upper-value: map-get($breakpoints, $upper);
+
+    @media (min-width: $lower-value) and (max-width: ($upper-value - 0.02px)) {
+      @content;
+    }
+  } @else {
+    @warn "Invalid breakpoint range: #{$lower} to #{$upper}";
+  }
+}
+
+@mixin bp-only($breakpoint) {
+  @if $breakpoint == xs {
+    @include bp-down(sm) {
+      @content;
+    }
+  } @else if $breakpoint == sm {
+    @include bp-between(sm, md) {
+      @content;
+    }
+  } @else if $breakpoint == md {
+    @include bp-between(md, lg) {
+      @content;
+    }
+  } @else if $breakpoint == lg {
+    @include bp-between(lg, xl) {
+      @content;
+    }
+  } @else if $breakpoint == xl {
+    @include bp-between(xl, xxl) {
+      @content;
+    }
+  } @else if $breakpoint == xxl {
+    @include bp-up(xxl) {
+      @content;
+    }
+  }
+}
+
+// Semantic/Device-oriented aliases
+@mixin mobile-up {
+  @include bp-up(sm) {
+    @content;
+  }
+}
+
+@mixin mobile-down {
+  @include bp-down(sm) {
+    @content;
+  }
+}
+
+@mixin mobile-only {
+  @include bp-only(xs) {
+    @content;
+  }
+}
+
+@mixin tablet-up {
+  @include bp-up(md) {
+    @content;
+  }
+}
+
+@mixin tablet-down {
+  @include bp-down(md) {
+    @content;
+  }
+}
+
+@mixin tablet-only {
+  @include bp-between(sm, md) {
+    @content;
+  }
+}
+
+@mixin desktop-up {
+  @include bp-up(lg) {
+    @content;
+  }
+}
+
+@mixin desktop-down {
+  @include bp-down(lg) {
+    @content;
+  }
+}
+
+@mixin desktop-only {
+  @include bp-between(lg, xxl) {
+    @content;
+  }
+}
+
+@mixin large-desktop-up {
+  @include bp-up(xl) {
+    @content;
+  }
+}
+
+@mixin extra-large-up {
+  @include bp-up(xxl) {
+    @content;
+  }
+}
+
+// Container-based responsive mixins (matches your CSS custom properties)
+@mixin container-padding {
+  padding-left: var(--container-x-padding-xs);
+  padding-right: var(--container-x-padding-xs);
+
+  @include mobile-up {
+    padding-left: var(--container-x-padding-sm);
+    padding-right: var(--container-x-padding-sm);
+  }
+
+  @include tablet-up {
+    padding-left: var(--container-x-padding-md);
+    padding-right: var(--container-x-padding-md);
+  }
+
+  @include desktop-up {
+    padding-left: var(--container-x-padding-lg);
+    padding-right: var(--container-x-padding-lg);
+  }
+
+  @include large-desktop-up {
+    padding-left: var(--container-x-padding-xl);
+    padding-right: var(--container-x-padding-xl);
+  }
+}
+
+// Modern responsive features
+@mixin reduced-motion {
+  @media (prefers-reduced-motion: reduce) {
+    @content;
+  }
+}
+
+@mixin dark-mode {
+  @media (prefers-color-scheme: dark) {
+    @content;
+  }
+}
+
+@mixin retina {
+  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    @content;
+  }
+}
+
+// WordPress-standard aliases for consistency
+@mixin wp-mobile-only {
+  @media (max-width: 599.98px) {
+    @content;
+  }
+}
+
+@mixin wp-tablet-only {
+  @media (min-width: 600px) and (max-width: 781.98px) {
+    @content;
+  }
+}
+
+@mixin wp-desktop-up {
+  @media (min-width: 782px) {
+    @content;
+  }
+}

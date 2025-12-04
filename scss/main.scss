@@ -1,32 +1,6 @@
-/**
- * Project: SMACSS SCSS Architecture
- * Description: This project implements a scalable and modular architecture for CSS (SMACSS) 
- *              using SCSS to ensure maintainable and reusable styles.
- * Author: Chris Javier Oliveros
- * Version: 2.0.0
- * License: MIT
- * 
- * This file serves as the entry point for the SCSS architecture. It organizes and imports 
- * all styles based on the SMACSS methodology.
- */
-
-// Core: Base configurations (variables, some core mixins like breakpoints)
-@use "core/_index" as core;
-
-// Mixins: Global utility mixins
-@use "mixins/_index" as mixins;
-
-// Base: Resets, base element styles, typographic defaults & functions
-@use "base/_index" as base;
-
-// Layouts: Structural page elements (containers, grid)
-@use "layouts/_index" as layouts; // Ex: _grid.scss, _container.scss
-
-// Components: Reusable UI modules
-@use "components/_index" as components; // Ex: _buttons.scss, _cards.scss
-
-// Classes: Utility classes for spacing, display, text, etc.
-@use "classes/_index" as classes;
-
-// Pages: Page-specific styles
-@use "pages/_index" as pages; // Ex: _home.scss, _about.scss
+@use "abstracts" as *;
+@use "base";
+@use "layout";
+@use "components";
+@use "pages";
+@use "utilities";

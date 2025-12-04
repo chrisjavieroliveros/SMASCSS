@@ -1,0 +1,15 @@
+@use "../abstracts" as *;
+
+.split {
+  display: flex;
+  flex-direction: column;
+  gap: rem(16);
+
+  &__main {
+    flex: 2;
+  }
+
+  &__aside {
+    flex: 1;
+  }
+}

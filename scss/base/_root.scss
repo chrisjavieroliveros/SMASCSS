@@ -1,0 +1,14 @@
+@use "sass:meta";
+@use "../abstracts" as *;
+
+:root {
+  @each $key, $value in $colors {
+    @if meta.type-of($value) == "map" {
+      @each $subkey, $subvalue in $value {
+        --color-#{$key}-#{$subkey}: #{$subvalue};
+      }
+    } @else {
+      --color-#{$key}: #{$value};
+    }
+  }
+}
