@@ -5,6 +5,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>FeatherCSS - Architecture Test</title>
+
+
   <link rel="stylesheet" href="assets/css/main.min.css">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -23,28 +25,27 @@
 
   <main class="container">
     <!-- Section 1: Typography & Colors -->
-    <section style="margin-top: 2rem;">
+    <section>
       <h2>Typography & Colors</h2>
       <p class="text-Primary">This is primary text</p>
       <p class="text-Secondary">This is secondary text</p>
       <p class="text-Danger">This is danger text</p>
       <p class="text-Success">This is success text</p>
 
-      <div
-        style="margin-top: 1rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
-        <div class="bg-Primary" style="padding: 1rem; color: white;">Primary Background</div>
-        <div class="bg-Secondary" style="padding: 1rem; color: white;">Secondary Background</div>
-        <div class="bg-Success" style="padding: 1rem; color: white;">Success Background</div>
-        <div class="bg-Danger" style="padding: 1rem; color: white;">Danger Background</div>
-        <div class="bg-Warning" style="padding: 1rem;">Warning Background</div>
-        <div class="bg-Info" style="padding: 1rem; color: white;">Info Background</div>
+      <div class="color-demo-grid">
+        <div class="bg-Primary text-white">Primary Background</div>
+        <div class="bg-Secondary text-white">Secondary Background</div>
+        <div class="bg-Success text-white">Success Background</div>
+        <div class="bg-Danger text-white">Danger Background</div>
+        <div class="bg-Warning">Warning Background</div>
+        <div class="bg-Info text-white">Info Background</div>
       </div>
     </section>
 
     <!-- Section 2: Buttons -->
-    <section style="margin-top: 3rem;">
+    <section>
       <h2>Buttons</h2>
-      <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+      <div class="button-demo-row">
         <button>Primary Button</button>
         <button class="btn">Button with Class</button>
         <a href="#" class="btn">Link as Button</a>
@@ -52,14 +53,14 @@
     </section>
 
     <!-- Section 3: Layout - Split -->
-    <section style="margin-top: 3rem;">
+    <section>
       <h2>Split Layout</h2>
       <div class="split">
-        <div class="split__main" style="background: var(--color-Light-100); padding: 1rem;">
+        <div class="split__main">
           <h3>Main Content</h3>
           <p>This is the main content area (flex: 2)</p>
         </div>
-        <aside class="split__aside" style="background: var(--color-Light-200); padding: 1rem;">
+        <aside class="split__aside">
           <h3>Sidebar</h3>
           <p>This is the aside area (flex: 1)</p>
         </aside>
@@ -67,62 +68,58 @@
     </section>
 
     <!-- Section 4: Responsive Test -->
-    <section style="margin-top: 3rem;">
+    <section>
       <h2>Responsive Test</h2>
-      <div class="responsive-demo" style="background: var(--color-Info-50); padding: 1rem;">
+      <div class="responsive-demo">
         <p>Resize your browser to test responsive features. This section needs custom styles to demonstrate responsive
           mixins.</p>
       </div>
     </section>
 
     <!-- Section 5: Form Elements -->
-    <section style="margin-top: 3rem;">
+    <section>
       <h2>Form Elements</h2>
-      <form style="max-width: 500px;">
-        <div style="margin-bottom: 1rem;">
-          <label for="name" style="display: block; margin-bottom: 0.5rem;">Name:</label>
-          <input type="text" id="name" placeholder="Enter your name"
-            style="width: 100%; padding: 0.5rem; border: 1px solid var(--color-Light-500); border-radius: 0.25rem;">
+      <form class="form-demo">
+        <div class="form-group">
+          <label for="name">Name:</label>
+          <input type="text" id="name" placeholder="Enter your name" class="form-input">
         </div>
-        <div style="margin-bottom: 1rem;">
-          <label for="email" style="display: block; margin-bottom: 0.5rem;">Email:</label>
-          <input type="email" id="email" placeholder="Enter your email"
-            style="width: 100%; padding: 0.5rem; border: 1px solid var(--color-Light-500); border-radius: 0.25rem;">
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input type="email" id="email" placeholder="Enter your email" class="form-input">
         </div>
-        <div style="margin-bottom: 1rem;">
-          <label for="message" style="display: block; margin-bottom: 0.5rem;">Message:</label>
-          <textarea id="message" rows="4" placeholder="Enter your message"
-            style="width: 100%; padding: 0.5rem; border: 1px solid var(--color-Light-500); border-radius: 0.25rem;"></textarea>
+        <div class="form-group">
+          <label for="message">Message:</label>
+          <textarea id="message" rows="4" placeholder="Enter your message" class="form-input"></textarea>
         </div>
         <button type="submit">Submit Form</button>
       </form>
     </section>
 
     <!-- Section 6: Card Component Test -->
-    <section style="margin-top: 3rem; margin-bottom: 3rem;">
+    <section>
       <h2>Card Components (needs component definition)</h2>
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
-        <div class="card" style="border: 1px solid var(--color-Light-400); border-radius: 0.5rem; padding: 1.5rem;">
+      <div class="card-demo-grid">
+        <div class="card">
           <h3>Card Title 1</h3>
           <p>This demonstrates the need for reusable card components.</p>
-          <button style="margin-top: 1rem;">Learn More</button>
+          <button>Learn More</button>
         </div>
-        <div class="card" style="border: 1px solid var(--color-Light-400); border-radius: 0.5rem; padding: 1.5rem;">
+        <div class="card">
           <h3>Card Title 2</h3>
           <p>Cards are common components that should be standardized.</p>
-          <button style="margin-top: 1rem;">Learn More</button>
+          <button>Learn More</button>
         </div>
-        <div class="card" style="border: 1px solid var(--color-Light-400); border-radius: 0.5rem; padding: 1.5rem;">
+        <div class="card">
           <h3>Card Title 3</h3>
           <p>Consider creating a cards component file.</p>
-          <button style="margin-top: 1rem;">Learn More</button>
+          <button>Learn More</button>
         </div>
       </div>
     </section>
   </main>
 
-  <footer class="container"
-    style="margin-top: 3rem; padding: 2rem 1rem; background: var(--color-Dark-500); color: white;">
+  <footer class="container footer-demo">
     <p>&copy; 2025 FeatherCSS Test</p>
   </footer>
 </body>
