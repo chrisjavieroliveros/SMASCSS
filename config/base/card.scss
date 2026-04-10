@@ -1,0 +1,10 @@
+:root {
+  --ui-card-padding: 1.5rem;
+  --ui-card-gap: 1rem;
+  --ui-card-radius: var(--ui-radius-lg);
+  --ui-card-border-width: var(--ui-border-width-1);
+  --ui-card-border: var(--ui-color-border);
+  --ui-card-bg: linear-gradient(180deg, rgb(255 255 255 / 0.98), rgb(250 246 240 / 1));
+  --ui-card-color: var(--ui-color-text);
+  --ui-card-shadow: var(--ui-shadow-1);
+}

@@ -1,0 +1,39 @@
+.ui-card {
+  display: grid;
+  gap: var(--ui-card-gap, 1rem);
+  padding: var(--ui-card-padding, 1.5rem);
+  border: var(--ui-card-border-width, 1px) solid var(--ui-card-border, #dddddd);
+  border-radius: var(--ui-card-radius, 1.5rem);
+  background: var(--ui-card-bg, #ffffff);
+  color: var(--ui-card-color, inherit);
+  box-shadow: var(--ui-card-shadow, none);
+
+  > * {
+    margin: 0;
+  }
+}
+
+.ui-card__eyebrow {
+  color: var(--ui-color-accent, currentColor);
+  font-size: var(--ui-font-size-100, 0.875rem);
+  font-weight: var(--ui-font-weight-strong, 700);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.ui-card__title {
+  font-family: var(--ui-font-family-heading, var(--ui-font-family-base, "Segoe UI", sans-serif));
+  font-size: var(--ui-font-size-300, 1.125rem);
+  line-height: var(--ui-line-height-tight, 1.15);
+}
+
+.ui-card__body {
+  color: var(--ui-color-text-muted, #707070);
+}
+
+.ui-card__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ui-space-2, 0.5rem);
+  align-items: center;
+}

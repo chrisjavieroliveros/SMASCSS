@@ -1,0 +1,14 @@
+:root {
+  --ui-input-min-height: 3rem;
+  --ui-input-padding-x: 1rem;
+  --ui-input-padding-y: 0.8rem;
+  --ui-input-radius: var(--ui-radius-md);
+  --ui-input-border-width: var(--ui-border-width-1);
+  --ui-input-border: var(--ui-color-border);
+  --ui-input-bg: var(--ui-color-surface);
+  --ui-input-color: var(--ui-color-text);
+  --ui-input-placeholder: var(--ui-color-text-muted);
+  --ui-input-shadow: inset 0 1px 0 rgb(255 255 255 / 0.75);
+  --ui-input-focus-border: var(--ui-color-primary);
+  --ui-input-focus-ring: 0 0 0 4px rgb(176 69 47 / 0.12);
+}

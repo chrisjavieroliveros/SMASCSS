@@ -1,0 +1,15 @@
+:root {
+  --ui-button-min-height: 2.875rem;
+  --ui-button-padding-x: 1.1rem;
+  --ui-button-padding-y: 0.8rem;
+  --ui-button-gap: 0.55rem;
+  --ui-button-radius: 999px;
+  --ui-button-border-width: var(--ui-border-width-1);
+  --ui-button-border: transparent;
+  --ui-button-bg: var(--ui-color-primary);
+  --ui-button-bg-hover: var(--ui-color-primary-strong);
+  --ui-button-color: var(--ui-color-primary-contrast);
+  --ui-button-shadow: none;
+  --ui-button-font-size: var(--ui-font-size-200);
+  --ui-button-font-weight: var(--ui-font-weight-strong);
+}

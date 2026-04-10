@@ -4,12 +4,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SMASCSS Revamp Step 0</title>
+  <title>SMASCSS Midnight Theme Demo</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@500;700&family=Manrope:wght@500;700&display=swap"
     rel="stylesheet">
   <link rel="stylesheet" href="./config.css">
+  <link rel="stylesheet" href="./themes/midnight.css">
   <link rel="stylesheet" href="./core.css">
   <link rel="stylesheet" href="./components/button.css">
   <link rel="stylesheet" href="./components/input.css">
@@ -65,11 +66,9 @@
     <div class="ui-shell ui-stack">
       <header class="demo-header">
         <p class="ui-eyebrow">SMASCSS Step 0</p>
-        <h1 class="ui-title">Config-driven UI CSS with component-level loading.</h1>
+        <h1 class="ui-title">Exact same markup, different config outcome.</h1>
         <p class="ui-subtitle">
-          The same markup below works with the default theme in
-          <code>config.css</code> or the alternate theme in <code>themes/midnight.css</code>.
-          Swap only the theme stylesheet and the library adapts.
+          This page adds only <code>themes/midnight.css</code> on top of the default config. Components are unchanged.
         </p>
         <div class="demo-toolbar">
           <a class="ui-button" href="./index.html">Default Theme</a>
@@ -79,29 +78,27 @@
 
       <section class="demo-split">
         <div class="ui-card">
-          <p class="ui-card__eyebrow">Config Contract</p>
-          <h2 class="ui-card__title">One theme file defines the feel of the whole library.</h2>
+          <p class="ui-card__eyebrow">Theme Override</p>
+          <h2 class="ui-card__title">Tokens and recipes are swappable without changing classes.</h2>
           <p class="ui-card__body">
-            Global tokens handle palette, typography, spacing, radius, shadows, and motion. Component recipe variables
-            handle button, input, and card behavior without changing selectors.
+            The button gradient, input chrome, page surface, and card depth are all controlled by config variables.
           </p>
           <div class="ui-card__actions">
-            <a class="ui-button" href="./config.css">Open config.css</a>
+            <a class="ui-button" href="./themes/midnight.css">Open midnight.css</a>
           </div>
         </div>
 
         <div class="ui-panel ui-stack">
-          <h2 class="ui-section-title">Input and action primitives</h2>
+          <h2 class="ui-section-title">Same semantic API</h2>
           <label class="ui-field">
             <span class="ui-label">Project name</span>
             <input class="ui-input" type="text" value="SMASCSS Revamp">
-            <span class="ui-help">The shape and spacing come from input recipe variables.</span>
+            <span class="ui-help">`.ui-input` is unchanged between themes.</span>
           </label>
 
           <label class="ui-field">
             <span class="ui-label">Direction</span>
-            <textarea
-              class="ui-textarea">Tailwind-level flexibility, but with semantic markup and swappable configs.</textarea>
+            <textarea class="ui-textarea">Config CSS drives the look. Component CSS defines the structure.</textarea>
           </label>
 
           <div class="ui-cluster">
@@ -112,15 +109,16 @@
       </section>
 
       <section class="ui-stack">
-        <h2 class="ui-section-title">Lazy-loadable components</h2>
+        <h2 class="ui-section-title">Component bundles remain isolated</h2>
         <p class="demo-note">
-          Each component is shipped as its own stylesheet. `core.css` provides only shared structure and tokens.
+          Consumers can include only the component files they actually render, as long as `config.css` and `core.css`
+          are loaded first.
         </p>
         <div class="demo-card-grid">
           <article class="ui-card">
             <p class="ui-card__eyebrow">Button</p>
-            <h3 class="ui-card__title">components/button.css</h3>
-            <p class="ui-card__body">Provides the `.ui-button` API and depends only on token variables.</p>
+            <h3 class="ui-card__title">Semantic action primitive</h3>
+            <p class="ui-card__body">Recipe variables define spacing, border, fill, radius, color, and motion.</p>
             <div class="ui-card__actions">
               <a class="ui-button" href="./components/button.css">Inspect</a>
             </div>
@@ -128,8 +126,8 @@
 
           <article class="ui-card">
             <p class="ui-card__eyebrow">Input</p>
-            <h3 class="ui-card__title">components/input.css</h3>
-            <p class="ui-card__body">Provides `.ui-input`, `.ui-textarea`, and simple field helpers.</p>
+            <h3 class="ui-card__title">Shared form field styling</h3>
+            <p class="ui-card__body">Inputs and textareas share a recipe and rely on the same global scale.</p>
             <div class="ui-card__actions">
               <a class="ui-button" href="./components/input.css">Inspect</a>
             </div>
@@ -137,21 +135,14 @@
 
           <article class="ui-card">
             <p class="ui-card__eyebrow">Card</p>
-            <h3 class="ui-card__title">components/card.css</h3>
-            <p class="ui-card__body">Provides `.ui-card` and lightweight semantic sub-elements for composition.</p>
+            <h3 class="ui-card__title">Surface primitive for composition</h3>
+            <p class="ui-card__body">Card structure is minimal so the same API can support many future components.</p>
             <div class="ui-card__actions">
               <a class="ui-button" href="./components/card.css">Inspect</a>
             </div>
           </article>
         </div>
       </section>
-
-      <footer class="demo-footer">
-        <p class="demo-note">
-          Legacy SCSS remains in <code>legacy/</code> as reference. The new root-level library is CSS-first and
-          component-oriented.
-        </p>
-      </footer>
     </div>
   </main>
 </body>
