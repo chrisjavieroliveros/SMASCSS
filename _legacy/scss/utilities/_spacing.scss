@@ -1,0 +1,97 @@
+/**
+ * SPACING UTILITIES
+ * Generate margin and padding utilities
+ * Usage: .m-4, .mt-2, .px-6, etc.
+ */
+
+@use "../abstracts" as *;
+
+// Spacing scale (matches common design systems)
+$spacing-scale: (
+  0: 0,
+  1: rem(4),
+  2: rem(8),
+  3: rem(12),
+  4: rem(16),
+  5: rem(20),
+  6: rem(24),
+  7: rem(28),
+  8: rem(32),
+  10: rem(40),
+  12: rem(48),
+  16: rem(64),
+  20: rem(80),
+  24: rem(96),
+) !default;
+
+// Spacing properties and their CSS equivalents
+$spacing-properties: (
+  "m": "margin",
+  "p": "padding",
+) !default;
+
+// Spacing directions
+$spacing-directions: (
+  "t": "top",
+  "r": "right",
+  "b": "bottom",
+  "l": "left",
+) !default;
+
+// Generate spacing utilities
+@each $prop-key, $prop-value in $spacing-properties {
+  @each $size-key, $size-value in $spacing-scale {
+    // All sides: .m-4, .p-2
+    .#{$prop-key}-#{$size-key} {
+      #{$prop-value}: $size-value;
+    }
+
+    // Individual sides: .mt-4, .pr-2
+    @each $dir-key, $dir-value in $spacing-directions {
+      .#{$prop-key}#{$dir-key}-#{$size-key} {
+        #{$prop-value}-#{$dir-value}: $size-value;
+      }
+    }
+
+    // Horizontal (left + right): .mx-4, .px-2
+    .#{$prop-key}x-#{$size-key} {
+      #{$prop-value}-left: $size-value;
+      #{$prop-value}-right: $size-value;
+    }
+
+    // Vertical (top + bottom): .my-4, .py-2
+    .#{$prop-key}y-#{$size-key} {
+      #{$prop-value}-top: $size-value;
+      #{$prop-value}-bottom: $size-value;
+    }
+  }
+}
+
+// Auto margin utilities (commonly used for centering)
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.ml-auto {
+  margin-left: auto;
+}
+
+.mr-auto {
+  margin-right: auto;
+}
+
+// Gap utilities (for flex/grid containers)
+@each $size-key, $size-value in $spacing-scale {
+  .gap-#{$size-key} {
+    gap: $size-value;
+  }
+
+  .gap-x-#{$size-key} {
+    column-gap: $size-value;
+  }
+
+  .gap-y-#{$size-key} {
+    row-gap: $size-value;
+  }
+}

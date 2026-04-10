@@ -9,11 +9,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@500;700&family=Manrope:wght@500;700&display=swap"
     rel="stylesheet">
-  <link rel="stylesheet" href="./config.css">
-  <link rel="stylesheet" href="./core.css">
-  <link rel="stylesheet" href="./components/button.css">
-  <link rel="stylesheet" href="./components/input.css">
-  <link rel="stylesheet" href="./components/card.css">
+  <link rel="stylesheet" href="./assets/css/config.min.css">
+  <link rel="stylesheet" href="./assets/css/library.min.css">
   <style>
     .demo-header,
     .demo-footer {
@@ -67,9 +64,9 @@
         <p class="ui-eyebrow">SMASCSS Step 0</p>
         <h1 class="ui-title">Config-driven UI CSS with component-level loading.</h1>
         <p class="ui-subtitle">
-          The same markup below works with the default theme in
-          <code>config.css</code> or the alternate theme in <code>themes/midnight.css</code>.
-          Swap only the theme stylesheet and the library adapts.
+          The mockup now reads from compiled outputs in <code>assets/css/</code>.
+          The authored sources now live in mirrored <code>/config</code> and <code>/library</code> trees split into
+          base, layout, and components, while the browser consumes your compiler output.
         </p>
         <div class="demo-toolbar">
           <a class="ui-button" href="./index.html">Default Theme</a>
@@ -86,7 +83,7 @@
             handle button, input, and card behavior without changing selectors.
           </p>
           <div class="ui-card__actions">
-            <a class="ui-button" href="./config.css">Open config.css</a>
+            <a class="ui-button" href="./assets/css/config.min.css">Open compiled config</a>
           </div>
         </div>
 
@@ -114,33 +111,34 @@
       <section class="ui-stack">
         <h2 class="ui-section-title">Lazy-loadable components</h2>
         <p class="demo-note">
-          Each component is shipped as its own stylesheet. `core.css` provides only shared structure and tokens.
+          The current mockup loads the compiler outputs from <code>assets/css/config.min.css</code> and
+          <code>assets/css/library.min.css</code>.
         </p>
         <div class="demo-card-grid">
           <article class="ui-card">
             <p class="ui-card__eyebrow">Button</p>
-            <h3 class="ui-card__title">components/button.css</h3>
-            <p class="ui-card__body">Provides the `.ui-button` API and depends only on token variables.</p>
+            <h3 class="ui-card__title">config/components/_button.scss</h3>
+            <p class="ui-card__body">Recipe values for `.ui-button` live in the mirrored config tree.</p>
             <div class="ui-card__actions">
-              <a class="ui-button" href="./components/button.css">Inspect</a>
+              <a class="ui-button" href="./config/components/_button.scss">Inspect config</a>
             </div>
           </article>
 
           <article class="ui-card">
             <p class="ui-card__eyebrow">Input</p>
-            <h3 class="ui-card__title">components/input.css</h3>
-            <p class="ui-card__body">Provides `.ui-input`, `.ui-textarea`, and simple field helpers.</p>
+            <h3 class="ui-card__title">library/components/_input.scss</h3>
+            <p class="ui-card__body">Component rules for `.ui-input` and `.ui-textarea` now live in the dedicated component layer.</p>
             <div class="ui-card__actions">
-              <a class="ui-button" href="./components/input.css">Inspect</a>
+              <a class="ui-button" href="./library/components/_input.scss">Inspect library</a>
             </div>
           </article>
 
           <article class="ui-card">
-            <p class="ui-card__eyebrow">Card</p>
-            <h3 class="ui-card__title">components/card.css</h3>
-            <p class="ui-card__body">Provides `.ui-card` and lightweight semantic sub-elements for composition.</p>
+            <p class="ui-card__eyebrow">Layout</p>
+            <h3 class="ui-card__title">library/layout/_primitives.scss</h3>
+            <p class="ui-card__body">Shared layout primitives are now separate from base and component concerns.</p>
             <div class="ui-card__actions">
-              <a class="ui-button" href="./components/card.css">Inspect</a>
+              <a class="ui-button" href="./library/layout/_primitives.scss">Inspect layout</a>
             </div>
           </article>
         </div>
@@ -148,8 +146,8 @@
 
       <footer class="demo-footer">
         <p class="demo-note">
-          Legacy SCSS remains in <code>legacy/</code> as reference. The new root-level library is CSS-first and
-          component-oriented.
+          Legacy SCSS remains in <code>legacy/</code> as reference. Active source now lives in <code>/config</code> and
+          <code>/library</code>, and compiled browser assets live in <code>assets/css/</code>.
         </p>
       </footer>
     </div>

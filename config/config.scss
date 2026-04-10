@@ -1,4 +1,5 @@
 @use "tokens";
-@use "base/button";
-@use "base/input";
-@use "base/card";
+@use "layout/primitives";
+@use "components/button";
+@use "components/input";
+@use "components/card";

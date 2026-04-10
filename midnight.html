@@ -9,12 +9,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@500;700&family=Manrope:wght@500;700&display=swap"
     rel="stylesheet">
-  <link rel="stylesheet" href="./config.css">
-  <link rel="stylesheet" href="./themes/midnight.css">
-  <link rel="stylesheet" href="./core.css">
-  <link rel="stylesheet" href="./components/button.css">
-  <link rel="stylesheet" href="./components/input.css">
-  <link rel="stylesheet" href="./components/card.css">
+  <link rel="stylesheet" href="./assets/css/config.min.css">
+  <link rel="stylesheet" href="./assets/css/library.min.css">
   <style>
     .demo-header,
     .demo-footer {
@@ -68,7 +64,8 @@
         <p class="ui-eyebrow">SMASCSS Step 0</p>
         <h1 class="ui-title">Exact same markup, different config outcome.</h1>
         <p class="ui-subtitle">
-          This page adds only <code>themes/midnight.css</code> on top of the default config. Components are unchanged.
+          This mockup is aligned to the compiler pipeline and expects themed output to be emitted under
+          <code>assets/css/</code>. The semantic API stays unchanged.
         </p>
         <div class="demo-toolbar">
           <a class="ui-button" href="./index.html">Default Theme</a>
@@ -84,7 +81,7 @@
             The button gradient, input chrome, page surface, and card depth are all controlled by config variables.
           </p>
           <div class="ui-card__actions">
-            <a class="ui-button" href="./themes/midnight.css">Open midnight.css</a>
+            <a class="ui-button" href="./config/themes/midnight.scss">Open theme source</a>
           </div>
         </div>
 
@@ -111,8 +108,8 @@
       <section class="ui-stack">
         <h2 class="ui-section-title">Component bundles remain isolated</h2>
         <p class="demo-note">
-          Consumers can include only the component files they actually render, as long as `config.css` and `core.css`
-          are loaded first.
+          The authored source is now split into base, layout, and components across mirrored config and library trees,
+          while the browser reads compiled assets from <code>assets/css/</code>.
         </p>
         <div class="demo-card-grid">
           <article class="ui-card">
@@ -120,7 +117,7 @@
             <h3 class="ui-card__title">Semantic action primitive</h3>
             <p class="ui-card__body">Recipe variables define spacing, border, fill, radius, color, and motion.</p>
             <div class="ui-card__actions">
-              <a class="ui-button" href="./components/button.css">Inspect</a>
+              <a class="ui-button" href="./config/components/_button.scss">Inspect config</a>
             </div>
           </article>
 
@@ -129,16 +126,16 @@
             <h3 class="ui-card__title">Shared form field styling</h3>
             <p class="ui-card__body">Inputs and textareas share a recipe and rely on the same global scale.</p>
             <div class="ui-card__actions">
-              <a class="ui-button" href="./components/input.css">Inspect</a>
+              <a class="ui-button" href="./library/components/_input.scss">Inspect library</a>
             </div>
           </article>
 
           <article class="ui-card">
-            <p class="ui-card__eyebrow">Card</p>
-            <h3 class="ui-card__title">Surface primitive for composition</h3>
-            <p class="ui-card__body">Card structure is minimal so the same API can support many future components.</p>
+            <p class="ui-card__eyebrow">Layout</p>
+            <h3 class="ui-card__title">Dedicated primitive layer</h3>
+            <p class="ui-card__body">Layout primitives now live outside base and components so the scaffold stays clear.</p>
             <div class="ui-card__actions">
-              <a class="ui-button" href="./components/card.css">Inspect</a>
+              <a class="ui-button" href="./library/layout/_primitives.scss">Inspect layout</a>
             </div>
           </article>
         </div>

@@ -1,4 +1,7 @@
-@use "foundations/core";
-@use "base/button";
-@use "base/input";
-@use "base/card";
+@use "base/reset";
+@use "base/root";
+@use "base/typography";
+@use "layout/primitives";
+@use "components/button";
+@use "components/input";
+@use "components/card";

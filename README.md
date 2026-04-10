@@ -4,14 +4,14 @@ SMASCSS is now being rebuilt as a config-driven UI CSS library.
 
 SCSS is the authored source. The source is now split into `/library` and `/config`.
 
-- `/library` contains the actual component and foundation CSS rules.
+- `/library` contains the actual base, layout, and component CSS rules.
 - `/config` contains the mirrored token and recipe files that drive `/library`.
 
 The checked-in CSS files at the repo root are still the current browser-consumable outputs for the demos until a Sass build step is added.
 
 ## Step 0 Contract
 
-- `/library/**/*.scss` contains the emitted style rules.
+- `/library/**/*.scss` contains the emitted style rules, organized as `base`, `layout`, and `components`.
 - `/config/**/*.scss` contains mirrored config for tokens and component recipes.
 - `config/config.scss` is the config entrypoint and composes the mirrored config files.
 - `library/library.scss` is the library entrypoint and composes the emitted style rules.
@@ -23,7 +23,7 @@ The checked-in CSS files at the repo root are still the current browser-consumab
 
 ## Files
 
-- `library/`: authored library rules
+- `library/`: authored source split into `base/`, `layout/`, and `components/`
 - `config/`: authored config tree that mirrors the library structure
 - `config.css`: default design system and component recipes
 - `themes/midnight.css`: example swap-in theme override
@@ -38,11 +38,13 @@ The checked-in CSS files at the repo root are still the current browser-consumab
 
 Source files to edit:
 
-1. `config/tokens.scss`
-2. `config/base/*.scss`
-3. `config/themes/*.scss`
-4. `library/foundations/core.scss`
-5. `library/base/*.scss`
+1. `config/_tokens.scss`
+2. `config/layout/_*.scss`
+3. `config/components/_*.scss`
+4. `config/themes/*.scss`
+5. `library/base/_*.scss`
+6. `library/layout/_*.scss`
+7. `library/components/_*.scss`
 
 Browser load order:
 
