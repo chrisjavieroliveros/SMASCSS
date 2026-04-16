@@ -1,7 +1,12 @@
+// Base Styles;
 @use "base/reset";
 @use "base/root";
 @use "base/typography";
-@use "layout/primitives";
+
+// Layout Styles;
+@use "layout/container";
+
+// Component Styles;
 @use "components/button";
 @use "components/input";
 @use "components/card";

@@ -1,0 +1,15 @@
+$tokens: (
+  scheme: light,
+  text: #18212f,
+  text-muted: #5d6778,
+  background: #f6f3ee,
+  surface: #ffffff,
+  surface-muted: #ede7de,
+  border: #d7d0c6,
+  primary: #b0452f,
+  primary-strong: #923522,
+  primary-contrast: #fffaf4,
+  accent: #234154,
+  focus: color-mix(in srgb, var(--ui-color-primary) 35%, white),
+  shadow: rgb(19 29 38 / 0.14),
+);

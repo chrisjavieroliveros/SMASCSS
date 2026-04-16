@@ -1,0 +1,8 @@
+$shadow-tokens: (
+  1: 0 18px 45px -28px var(--ui-color-shadow),
+  2: 0 28px 60px -32px rgb(19 29 38 / 0.24),
+);
+
+$transition-tokens: (
+  fast: 160ms ease,
+);

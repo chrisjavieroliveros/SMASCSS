@@ -25,6 +25,8 @@ The checked-in CSS files at the repo root are still the current browser-consumab
 
 - `library/`: authored source split into `base/`, `layout/`, and `components/`
 - `config/`: authored config tree that mirrors the library structure
+- `config/tokens/`: raw token maps split by domain for color, type, spacing, shape, effects, and layout
+- `config/_tokens.scss`: token emitter that turns the token maps into the shared `:root` custom properties
 - `config.css`: default design system and component recipes
 - `themes/midnight.css`: example swap-in theme override
 - `core.css`: foundations only
@@ -38,7 +40,7 @@ The checked-in CSS files at the repo root are still the current browser-consumab
 
 Source files to edit:
 
-1. `config/_tokens.scss`
+1. `config/tokens/_*.scss`
 2. `config/layout/_*.scss`
 3. `config/components/_*.scss`
 4. `config/themes/*.scss`

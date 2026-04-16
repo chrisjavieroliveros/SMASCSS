@@ -4,7 +4,7 @@
 // Layout Configs;
 @use "layout/container";
 
-// Component Configs;
-@use "components/button";
-@use "components/input";
-@use "components/card";
+// Base Element Configs;
+@use "base/button";
+@use "base/input";
+@use "base/card";

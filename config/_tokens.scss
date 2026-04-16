@@ -1,48 +1,40 @@
+@use "sass:meta";
+@use "sass:map";
+
+@use "tokens/colors";
+@use "tokens/effects";
+@use "tokens/layout";
+@use "tokens/shape";
+@use "tokens/spacing";
+@use "tokens/typography";
+
+@mixin emit-custom-properties($namespace, $tokens) {
+  @each $name, $value in $tokens {
+    --ui-#{$namespace}-#{$name}: #{meta.inspect($value)};
+  }
+}
+
 :root {
-  color-scheme: light;
-  --ui-color-scheme: light;
+  color-scheme: map.get(colors.$tokens, scheme);
 
-  /* Global tokens */
-  --ui-color-text: #18212f;
-  --ui-color-text-muted: #5d6778;
-  --ui-color-background: #f6f3ee;
-  --ui-color-surface: #ffffff;
-  --ui-color-surface-muted: #ede7de;
-  --ui-color-border: #d7d0c6;
-  --ui-color-primary: #b0452f;
-  --ui-color-primary-strong: #923522;
-  --ui-color-primary-contrast: #fffaf4;
-  --ui-color-accent: #234154;
-  --ui-color-focus: color-mix(in srgb, var(--ui-color-primary) 35%, white);
-  --ui-color-shadow: rgb(19 29 38 / 0.14);
-
-  --ui-font-family-base: "Manrope", "Segoe UI", sans-serif;
-  --ui-font-family-heading: "DM Sans", "Segoe UI", sans-serif;
-  --ui-font-size-100: 0.875rem;
-  --ui-font-size-200: 1rem;
-  --ui-font-size-300: 1.125rem;
-  --ui-font-size-400: 1.5rem;
-  --ui-font-size-500: 2.5rem;
-  --ui-font-weight-regular: 500;
-  --ui-font-weight-strong: 700;
-  --ui-line-height-tight: 1.15;
-  --ui-line-height-base: 1.6;
-
-  --ui-space-1: 0.25rem;
-  --ui-space-2: 0.5rem;
-  --ui-space-3: 0.75rem;
-  --ui-space-4: 1rem;
-  --ui-space-5: 1.5rem;
-  --ui-space-6: 2rem;
-  --ui-space-7: 3rem;
-
-  --ui-radius-sm: 0.5rem;
-  --ui-radius-md: 0.9rem;
-  --ui-radius-lg: 1.5rem;
-  --ui-border-width-1: 1px;
-  --ui-border-width-2: 2px;
-  --ui-shadow-1: 0 18px 45px -28px var(--ui-color-shadow);
-  --ui-shadow-2: 0 28px 60px -32px rgb(19 29 38 / 0.24);
-  --ui-container-width: 72rem;
-  --ui-transition-fast: 160ms ease;
+  @include emit-custom-properties("color", colors.$tokens);
+  @include emit-custom-properties(
+    "font-family",
+    typography.$font-family-tokens
+  );
+  @include emit-custom-properties("font-size", typography.$font-size-tokens);
+  @include emit-custom-properties(
+    "font-weight",
+    typography.$font-weight-tokens
+  );
+  @include emit-custom-properties(
+    "line-height",
+    typography.$line-height-tokens
+  );
+  @include emit-custom-properties("space", spacing.$tokens);
+  @include emit-custom-properties("radius", shape.$radius-tokens);
+  @include emit-custom-properties("border-width", shape.$border-width-tokens);
+  @include emit-custom-properties("shadow", effects.$shadow-tokens);
+  @include emit-custom-properties("container", layout.$tokens);
+  @include emit-custom-properties("transition", effects.$transition-tokens);
 }
