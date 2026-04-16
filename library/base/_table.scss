@@ -1,0 +1,47 @@
+table:not([class]) {
+  width: var(--ui-table-width, 100%);
+  margin-block-start: var(--ui-table-margin-block-start, 0);
+  margin-block-end: var(--ui-table-margin-block-end, var(--ui-space-5, 1.5rem));
+  border-collapse: var(--ui-table-border-collapse, collapse);
+  background: var(--ui-table-background, transparent);
+  color: var(--ui-table-color, inherit);
+}
+
+caption:not([class]) {
+  margin-block-end: var(
+    --ui-table-caption-margin-block-end,
+    var(--ui-space-2, 0.5rem)
+  );
+  color: var(--ui-table-caption-color, var(--ui-color-text-muted, #707070));
+  font-size: var(
+    --ui-table-caption-font-size,
+    var(--ui-font-size-100, 0.875rem)
+  );
+  font-weight: var(
+    --ui-table-caption-font-weight,
+    var(--ui-font-weight-regular, 500)
+  );
+  text-align: left;
+}
+
+th:not([class]),
+td:not([class]) {
+  padding: var(--ui-table-cell-padding-y, var(--ui-space-3, 0.75rem))
+    var(--ui-table-cell-padding-x, var(--ui-space-4, 1rem));
+  border-block-end: var(--ui-table-cell-border-width, 1px) solid
+    var(--ui-table-cell-border-color, var(--ui-color-border, #cccccc));
+  text-align: left;
+  vertical-align: top;
+}
+
+thead:not([class]) th:not([class]) {
+  background: var(
+    --ui-table-head-background,
+    var(--ui-color-surface-muted, #f3f3f3)
+  );
+  color: var(--ui-table-head-color, var(--ui-color-text, #111111));
+}
+
+tbody:not([class]) tr:not([class]):nth-child(even) {
+  background: var(--ui-table-striped-background, transparent);
+}

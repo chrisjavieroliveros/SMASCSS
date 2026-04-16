@@ -2,19 +2,19 @@
 
 SMASCSS is now being rebuilt as a config-driven UI CSS library.
 
-SCSS is the authored source. The source is now split into `/library` and `/config`.
+SCSS is the authored source. The source is now split into `/library` and `/configs`.
 
 - `/library` contains the actual base, layout, and component CSS rules.
-- `/config` contains the mirrored token and recipe files that drive `/library`.
+- `/configs` contains the mirrored primitive and recipe files that drive `/library`.
 
 The checked-in CSS files at the repo root are still the current browser-consumable outputs for the demos until a Sass build step is added.
 
 ## Step 0 Contract
 
 - `/library/**/*.scss` contains the emitted style rules, organized as `base`, `layout`, and `components`.
-- `/config/**/*.scss` contains mirrored config for tokens and component recipes.
-- `config/config.scss` is the config entrypoint and composes the mirrored config files.
-- `library/library.scss` is the library entrypoint and composes the emitted style rules.
+- `/configs/**/*.scss` contains the authored configuration for primitives, recipes, and themes.
+- `configs/config.scss` is the config entrypoint and composes the authored config files.
+- `library/main.scss` is the library entrypoint and composes the emitted style rules.
 - `config.css` mirrors the config layer for browser loading.
 - `core.css` mirrors the foundation layer and provides reset, typography, layout primitives, and shared helpers only.
 - `components/*.css` mirror the component layer and are isolated entrypoints.
@@ -24,9 +24,9 @@ The checked-in CSS files at the repo root are still the current browser-consumab
 ## Files
 
 - `library/`: authored source split into `base/`, `layout/`, and `components/`
-- `config/`: authored config tree that mirrors the library structure
-- `config/tokens/`: raw token maps split by domain for color, type, spacing, shape, effects, and layout
-- `config/_tokens.scss`: token emitter that turns the token maps into the shared `:root` custom properties
+- `configs/`: authored config tree with primitive files at the root plus recipe folders for `base/`, `layout/`, and `themes/`
+- `configs/_tokens.scss`: primitive emitter that turns the root config files into the shared `:root` custom properties
+- `configs/_colors.scss`, `configs/_typography.scss`, `configs/_spacing.scss`, `configs/_shape.scss`, `configs/_effects.scss`, `configs/_sizing.scss`: primitive config files
 - `config.css`: default design system and component recipes
 - `themes/midnight.css`: example swap-in theme override
 - `core.css`: foundations only
@@ -40,10 +40,10 @@ The checked-in CSS files at the repo root are still the current browser-consumab
 
 Source files to edit:
 
-1. `config/tokens/_*.scss`
-2. `config/layout/_*.scss`
-3. `config/components/_*.scss`
-4. `config/themes/*.scss`
+1. `configs/_*.scss`
+2. `configs/layout/_*.scss`
+3. `configs/base/_*.scss`
+4. `configs/themes/*.scss`
 5. `library/base/_*.scss`
 6. `library/layout/_*.scss`
 7. `library/components/_*.scss`

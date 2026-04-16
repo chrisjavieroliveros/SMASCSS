@@ -1,3 +1,117 @@
+h1:not([class]),
+h2:not([class]),
+h3:not([class]),
+h4:not([class]),
+h5:not([class]),
+h6:not([class]) {
+  margin-block-start: var(--ui-heading-margin-block-start, 0);
+  margin-block-end: var(--ui-heading-margin-block-end, var(--ui-space-4, 1rem));
+  color: var(--ui-heading-color, var(--ui-color-text, #111111));
+  font-family: var(
+    --ui-heading-font-family,
+    var(--ui-font-family-heading, var(--ui-font-family-base, "Segoe UI", sans-serif))
+  );
+  font-weight: var(--ui-heading-font-weight, var(--ui-font-weight-strong, 700));
+  line-height: var(--ui-heading-line-height, var(--ui-line-height-tight, 1.15));
+}
+
+h1:not([class]) {
+  font-size: var(--ui-h1-font-size, 2.5rem);
+}
+
+h2:not([class]) {
+  font-size: var(--ui-h2-font-size, 2rem);
+}
+
+h3:not([class]) {
+  font-size: var(--ui-h3-font-size, 1.5rem);
+}
+
+h4:not([class]) {
+  font-size: var(--ui-h4-font-size, 1.5rem);
+}
+
+h5:not([class]) {
+  font-size: var(--ui-h5-font-size, 1.125rem);
+}
+
+h6:not([class]) {
+  font-size: var(--ui-h6-font-size, 1rem);
+}
+
+p:not([class]) {
+  margin-block-start: var(--ui-paragraph-margin-block-start, 0);
+  margin-block-end: var(--ui-paragraph-margin-block-end, var(--ui-space-4, 1rem));
+}
+
+ul:not([class]),
+ol:not([class]) {
+  margin-block-start: var(--ui-list-margin-block-start, 0);
+  margin-block-end: var(--ui-list-margin-block-end, var(--ui-space-4, 1rem));
+  padding-inline-start: var(--ui-list-padding-inline-start, 1.25em);
+}
+
+li:not([class]) + li:not([class]) {
+  margin-block-start: var(--ui-list-item-margin-block-start, var(--ui-space-2, 0.5rem));
+}
+
+blockquote:not([class]) {
+  margin-block-start: var(--ui-blockquote-margin-block-start, 0);
+  margin-block-end: var(--ui-blockquote-margin-block-end, var(--ui-space-5, 1.5rem));
+  padding-inline-start: var(--ui-blockquote-padding-inline-start, var(--ui-space-4, 1rem));
+  border-inline-start: var(--ui-blockquote-border-width, 3px) solid
+    var(--ui-blockquote-border-color, var(--ui-color-border, #cccccc));
+  color: var(--ui-blockquote-color, var(--ui-color-text-muted, #707070));
+  font-size: var(--ui-blockquote-font-size, 1.125rem);
+  font-style: var(--ui-blockquote-font-style, italic);
+}
+
+code:not([class]),
+kbd:not([class]),
+samp:not([class]) {
+  padding: var(--ui-code-padding-block, 0.15em) var(--ui-code-padding-inline, 0.3em);
+  border-radius: var(--ui-code-radius, 0.5rem);
+  background: var(--ui-code-background, #f3f3f3);
+  color: var(--ui-code-color, currentColor);
+  font-family: var(--ui-code-font-family, monospace);
+  font-size: var(--ui-code-font-size, 0.95em);
+}
+
+pre:not([class]) {
+  margin-block-start: var(--ui-pre-margin-block-start, 0);
+  margin-block-end: var(--ui-pre-margin-block-end, var(--ui-space-5, 1.5rem));
+  padding: var(--ui-pre-padding, var(--ui-space-4, 1rem));
+  overflow-x: auto;
+  border: var(--ui-pre-border-width, 1px) solid
+    var(--ui-pre-border-color, var(--ui-color-border, #cccccc));
+  border-radius: var(--ui-pre-radius, 0.9rem);
+  background: var(--ui-pre-background, #ffffff);
+  color: var(--ui-pre-color, currentColor);
+}
+
+pre:not([class]) code:not([class]) {
+  padding: 0;
+  border-radius: 0;
+  background: transparent;
+}
+
+small:not([class]) {
+  font-size: var(--ui-small-font-size, 0.875rem);
+}
+
+mark:not([class]) {
+  padding-inline: var(--ui-mark-padding-inline, 0.15em);
+  background: var(--ui-mark-background, #fff3bf);
+  color: var(--ui-mark-color, currentColor);
+}
+
+hr:not([class]) {
+  margin-block: var(--ui-hr-margin-block, var(--ui-space-6, 2rem));
+  border: 0;
+  border-block-start: var(--ui-hr-border-width, 1px) solid
+    var(--ui-hr-border-color, var(--ui-color-border, #cccccc));
+}
+
 .ui-eyebrow {
   margin: 0;
   color: var(--ui-color-accent, #244261);

@@ -1,0 +1,25 @@
+:root {
+  --ui-form-gap: var(--ui-space-4);
+
+  --ui-label-display: block;
+  --ui-label-margin-block-end: var(--ui-space-2);
+  --ui-label-color: var(--ui-color-text);
+  --ui-label-font-size: var(--ui-font-size-100);
+  --ui-label-font-weight: var(--ui-font-weight-strong);
+  --ui-label-line-height: var(--ui-line-height-base);
+
+  --ui-fieldset-margin-block-start: 0;
+  --ui-fieldset-margin-block-end: var(--ui-space-5);
+  --ui-fieldset-padding: var(--ui-space-4);
+  --ui-fieldset-border-width: var(--ui-border-width-1);
+  --ui-fieldset-border-color: var(--ui-color-border);
+  --ui-fieldset-radius: var(--ui-radius-md);
+
+  --ui-legend-padding-inline: var(--ui-space-2);
+  --ui-legend-color: var(--ui-color-text);
+  --ui-legend-font-family: var(--ui-font-family-heading);
+  --ui-legend-font-size: var(--ui-font-size-100);
+  --ui-legend-font-weight: var(--ui-font-weight-strong);
+
+  --ui-control-accent-color: var(--ui-color-primary);
+}

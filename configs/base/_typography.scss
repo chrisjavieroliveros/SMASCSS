@@ -1,0 +1,63 @@
+:root {
+  --ui-flow-space: var(--ui-space-4);
+
+  --ui-heading-margin-block-start: 0;
+  --ui-heading-margin-block-end: var(--ui-space-4);
+  --ui-heading-color: var(--ui-color-text);
+  --ui-heading-font-family: var(--ui-font-family-heading);
+  --ui-heading-font-weight: var(--ui-font-weight-strong);
+  --ui-heading-line-height: var(--ui-line-height-tight);
+
+  --ui-h1-font-size: clamp(2.5rem, 5vw, 4rem);
+  --ui-h2-font-size: clamp(2rem, 4vw, 3rem);
+  --ui-h3-font-size: clamp(1.5rem, 3vw, 2.125rem);
+  --ui-h4-font-size: var(--ui-font-size-400);
+  --ui-h5-font-size: var(--ui-font-size-300);
+  --ui-h6-font-size: var(--ui-font-size-200);
+
+  --ui-paragraph-margin-block-start: 0;
+  --ui-paragraph-margin-block-end: var(--ui-space-4);
+
+  --ui-list-margin-block-start: 0;
+  --ui-list-margin-block-end: var(--ui-space-4);
+  --ui-list-padding-inline-start: 1.25em;
+  --ui-list-item-margin-block-start: var(--ui-space-2);
+
+  --ui-blockquote-margin-block-start: 0;
+  --ui-blockquote-margin-block-end: var(--ui-space-5);
+  --ui-blockquote-padding-inline-start: var(--ui-space-4);
+  --ui-blockquote-border-width: 3px;
+  --ui-blockquote-border-color: var(--ui-color-border);
+  --ui-blockquote-color: var(--ui-color-text-muted);
+  --ui-blockquote-font-size: var(--ui-font-size-300);
+  --ui-blockquote-font-style: italic;
+
+  --ui-code-font-family:
+    ui-monospace, "SFMono-Regular", "SF Mono", "Cascadia Code", "Roboto Mono",
+    Consolas, "Liberation Mono", Menlo, monospace;
+  --ui-code-font-size: 0.95em;
+  --ui-code-padding-block: 0.15em;
+  --ui-code-padding-inline: 0.3em;
+  --ui-code-radius: var(--ui-radius-sm);
+  --ui-code-background: var(--ui-color-surface-muted);
+  --ui-code-color: var(--ui-color-text);
+
+  --ui-pre-margin-block-start: 0;
+  --ui-pre-margin-block-end: var(--ui-space-5);
+  --ui-pre-padding: var(--ui-space-4);
+  --ui-pre-radius: var(--ui-radius-md);
+  --ui-pre-border-width: var(--ui-border-width-1);
+  --ui-pre-border-color: var(--ui-color-border);
+  --ui-pre-background: var(--ui-color-surface);
+  --ui-pre-color: var(--ui-color-text);
+
+  --ui-small-font-size: var(--ui-font-size-100);
+
+  --ui-mark-padding-inline: 0.15em;
+  --ui-mark-background: color-mix(in srgb, var(--ui-color-primary) 12%, white);
+  --ui-mark-color: var(--ui-color-text);
+
+  --ui-hr-margin-block: var(--ui-space-6);
+  --ui-hr-border-width: var(--ui-border-width-1);
+  --ui-hr-border-color: var(--ui-color-border);
+}

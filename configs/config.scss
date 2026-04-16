@@ -1,5 +1,10 @@
 // Base Configs;
 @use "tokens";
+@use "base/root";
+@use "base/typography";
+@use "base/media";
+@use "base/table";
+@use "base/form";
 
 // Layout Configs;
 @use "layout/container";

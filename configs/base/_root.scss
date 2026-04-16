@@ -1,0 +1,25 @@
+:root {
+  --ui-html-color-scheme: var(--ui-color-scheme);
+  --ui-html-font-family: var(--ui-font-family-base);
+  --ui-html-line-height: var(--ui-line-height-base);
+
+  --ui-body-margin: 0;
+  --ui-body-min-height: 100vh;
+  --ui-body-background: var(--ui-color-background);
+  --ui-body-color: var(--ui-color-text);
+  --ui-body-font-family: var(--ui-font-family-base);
+  --ui-body-font-size: var(--ui-font-size-200);
+  --ui-body-line-height: var(--ui-line-height-base);
+  --ui-body-text-rendering: optimizeLegibility;
+
+  --ui-link-color: var(--ui-color-primary);
+  --ui-link-color-hover: var(--ui-color-primary-strong);
+  --ui-link-decoration: underline;
+  --ui-link-decoration-thickness: 0.08em;
+  --ui-link-underline-offset: 0.18em;
+
+  --ui-focus-outline-width: 2px;
+  --ui-focus-outline-style: solid;
+  --ui-focus-outline-color: var(--ui-color-focus);
+  --ui-focus-outline-offset: 2px;
+}

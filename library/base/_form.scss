@@ -1,0 +1,139 @@
+form:not([class]) {
+  display: grid;
+  gap: var(--ui-form-gap, var(--ui-space-4, 1rem));
+}
+
+label:not([class]) {
+  display: var(--ui-label-display, block);
+  margin-block-end: var(--ui-label-margin-block-end, var(--ui-space-2, 0.5rem));
+  color: var(--ui-label-color, var(--ui-color-text, #111111));
+  font-size: var(--ui-label-font-size, var(--ui-font-size-100, 0.875rem));
+  font-weight: var(--ui-label-font-weight, var(--ui-font-weight-strong, 700));
+  line-height: var(--ui-label-line-height, var(--ui-line-height-base, 1.6));
+}
+
+fieldset:not([class]) {
+  min-inline-size: 0;
+  margin-block-start: var(--ui-fieldset-margin-block-start, 0);
+  margin-block-end: var(--ui-fieldset-margin-block-end, var(--ui-space-5, 1.5rem));
+  padding: var(--ui-fieldset-padding, var(--ui-space-4, 1rem));
+  border: var(--ui-fieldset-border-width, 1px) solid
+    var(--ui-fieldset-border-color, var(--ui-color-border, #cccccc));
+  border-radius: var(--ui-fieldset-radius, var(--ui-radius-md, 0.9rem));
+}
+
+legend:not([class]) {
+  padding-inline: var(--ui-legend-padding-inline, var(--ui-space-2, 0.5rem));
+  color: var(--ui-legend-color, var(--ui-color-text, #111111));
+  font-family: var(
+    --ui-legend-font-family,
+    var(--ui-font-family-heading, var(--ui-font-family-base, "Segoe UI", sans-serif))
+  );
+  font-size: var(--ui-legend-font-size, var(--ui-font-size-100, 0.875rem));
+  font-weight: var(--ui-legend-font-weight, var(--ui-font-weight-strong, 700));
+}
+
+button:not([class]) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--ui-button-gap, 0.5rem);
+  min-height: var(--ui-button-min-height, 2.75rem);
+  padding: var(--ui-button-padding-y, 0.75rem) var(--ui-button-padding-x, 1rem);
+  border: var(--ui-button-border-width, 1px) solid var(--ui-button-border, transparent);
+  border-radius: var(--ui-button-radius, 999px);
+  background: var(--ui-button-bg, #111111);
+  color: var(--ui-button-color, #ffffff);
+  box-shadow: var(--ui-button-shadow, none);
+  cursor: pointer;
+  font-size: var(--ui-button-font-size, 1rem);
+  font-weight: var(--ui-button-font-weight, 700);
+  line-height: 1;
+  transition:
+    background var(--ui-transition-fast, 160ms ease),
+    color var(--ui-transition-fast, 160ms ease),
+    border-color var(--ui-transition-fast, 160ms ease),
+    box-shadow var(--ui-transition-fast, 160ms ease),
+    transform var(--ui-transition-fast, 160ms ease);
+
+  &:hover {
+    background: var(--ui-button-bg-hover, var(--ui-button-bg, #111111));
+    transform: translateY(-1px);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+
+  &:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+}
+
+input:not([class]):where(
+    [type="email"],
+    [type="number"],
+    [type="password"],
+    [type="search"],
+    [type="tel"],
+    [type="text"],
+    [type="url"],
+    [type="date"],
+    [type="datetime-local"],
+    [type="month"],
+    [type="time"],
+    [type="week"]
+  ),
+select:not([class]),
+textarea:not([class]) {
+  width: 100%;
+  min-height: var(--ui-input-min-height, 3rem);
+  padding: var(--ui-input-padding-y, 0.8rem) var(--ui-input-padding-x, 1rem);
+  border: var(--ui-input-border-width, 1px) solid var(--ui-input-border, #cccccc);
+  border-radius: var(--ui-input-radius, 0.75rem);
+  background: var(--ui-input-bg, #ffffff);
+  color: var(--ui-input-color, #111111);
+  box-shadow: var(--ui-input-shadow, none);
+  transition:
+    border-color var(--ui-transition-fast, 160ms ease),
+    box-shadow var(--ui-transition-fast, 160ms ease),
+    background var(--ui-transition-fast, 160ms ease);
+}
+
+input:not([class])::placeholder,
+textarea:not([class])::placeholder {
+  color: var(--ui-input-placeholder, #707070);
+}
+
+input:not([class]):where(
+    [type="email"],
+    [type="number"],
+    [type="password"],
+    [type="search"],
+    [type="tel"],
+    [type="text"],
+    [type="url"],
+    [type="date"],
+    [type="datetime-local"],
+    [type="month"],
+    [type="time"],
+    [type="week"]
+  ):focus,
+select:not([class]):focus,
+textarea:not([class]):focus {
+  border-color: var(--ui-input-focus-border, currentColor);
+  box-shadow: var(--ui-input-shadow, none),
+    var(--ui-input-focus-ring, 0 0 0 3px rgb(0 0 0 / 0.08));
+  outline: none;
+}
+
+textarea:not([class]) {
+  min-height: 8rem;
+  resize: vertical;
+}
+
+input:not([class]):where([type="checkbox"], [type="radio"]) {
+  accent-color: var(--ui-control-accent-color, var(--ui-color-primary, #111111));
+}

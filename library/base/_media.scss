@@ -1,0 +1,19 @@
+img:not([class]),
+picture:not([class]) img,
+svg:not([class]),
+video:not([class]) {
+  border: var(--ui-media-border-width, 0) solid var(--ui-media-border-color, transparent);
+  border-radius: var(--ui-media-radius, 0);
+}
+
+figure:not([class]) {
+  margin-block-start: var(--ui-figure-margin-block-start, 0);
+  margin-block-end: var(--ui-figure-margin-block-end, var(--ui-space-5, 1.5rem));
+}
+
+figcaption:not([class]) {
+  margin-block-start: var(--ui-figcaption-margin-block-start, var(--ui-space-3, 0.75rem));
+  color: var(--ui-figcaption-color, var(--ui-color-text-muted, #707070));
+  font-size: var(--ui-figcaption-font-size, var(--ui-font-size-100, 0.875rem));
+  line-height: var(--ui-figcaption-line-height, var(--ui-line-height-base, 1.6));
+}

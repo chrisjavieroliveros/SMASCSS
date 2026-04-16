@@ -1,26 +1,34 @@
 html {
-  color-scheme: var(--ui-color-scheme, light);
-  font-family: var(--ui-font-family-base, "Segoe UI", sans-serif);
-  line-height: var(--ui-line-height-base, 1.6);
+  color-scheme: var(--ui-html-color-scheme, var(--ui-color-scheme, light));
+  font-family: var(--ui-html-font-family, var(--ui-font-family-base, "Segoe UI", sans-serif));
+  line-height: var(--ui-html-line-height, var(--ui-line-height-base, 1.6));
   -webkit-text-size-adjust: 100%;
 }
 
 body {
-  margin: 0;
-  min-height: 100vh;
-  background: var(--ui-color-background, #ffffff);
-  color: var(--ui-color-text, #111111);
-  font-family: var(--ui-font-family-base, "Segoe UI", sans-serif);
-  font-size: var(--ui-font-size-200, 1rem);
-  line-height: var(--ui-line-height-base, 1.6);
-  text-rendering: optimizeLegibility;
+  margin: var(--ui-body-margin, 0);
+  min-height: var(--ui-body-min-height, 100vh);
+  background: var(--ui-body-background, var(--ui-color-background, #ffffff));
+  color: var(--ui-body-color, var(--ui-color-text, #111111));
+  font-family: var(--ui-body-font-family, var(--ui-font-family-base, "Segoe UI", sans-serif));
+  font-size: var(--ui-body-font-size, var(--ui-font-size-200, 1rem));
+  line-height: var(--ui-body-line-height, var(--ui-line-height-base, 1.6));
+  text-rendering: var(--ui-body-text-rendering, optimizeLegibility);
 }
 
-a {
-  color: inherit;
+a:not([class]) {
+  color: var(--ui-link-color, currentColor);
+  text-decoration: var(--ui-link-decoration, underline);
+  text-decoration-thickness: var(--ui-link-decoration-thickness, 0.08em);
+  text-underline-offset: var(--ui-link-underline-offset, 0.18em);
+
+  &:hover {
+    color: var(--ui-link-color-hover, var(--ui-link-color, currentColor));
+  }
 }
 
 :focus-visible {
-  outline: 2px solid var(--ui-color-focus, #4f7cff);
-  outline-offset: 2px;
+  outline: var(--ui-focus-outline-width, 2px) var(--ui-focus-outline-style, solid)
+    var(--ui-focus-outline-color, var(--ui-color-focus, #4f7cff));
+  outline-offset: var(--ui-focus-outline-offset, 2px);
 }

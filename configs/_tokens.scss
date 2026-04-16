@@ -1,12 +1,12 @@
 @use "sass:meta";
 @use "sass:map";
 
-@use "tokens/colors";
-@use "tokens/effects";
-@use "tokens/layout";
-@use "tokens/shape";
-@use "tokens/spacing";
-@use "tokens/typography";
+@use "colors";
+@use "effects";
+@use "shape";
+@use "sizing";
+@use "spacing";
+@use "typography";
 
 @mixin emit-custom-properties($namespace, $tokens) {
   @each $name, $value in $tokens {
@@ -35,6 +35,6 @@
   @include emit-custom-properties("radius", shape.$radius-tokens);
   @include emit-custom-properties("border-width", shape.$border-width-tokens);
   @include emit-custom-properties("shadow", effects.$shadow-tokens);
-  @include emit-custom-properties("container", layout.$tokens);
+  @include emit-custom-properties("container", sizing.$container-tokens);
   @include emit-custom-properties("transition", effects.$transition-tokens);
 }
