@@ -1,7 +1,24 @@
 @use "sass:meta";
+@use "sass:string";
+
+@function normalize-token-name($name, $lowercase: false) {
+  $normalized-name: string.unquote("#{$name}");
+
+  @if $lowercase {
+    @return string.to-lower-case($normalized-name);
+  }
+
+  @return $normalized-name;
+}
 
 @mixin emit-custom-properties($namespace, $tokens) {
   @each $name, $value in $tokens {
-    --ui-#{$namespace}-#{$name}: #{meta.inspect($value)};
+    --ui-#{$namespace}-#{normalize-token-name($name)}: #{meta.inspect($value)};
+  }
+}
+
+@mixin emit-prefixed-custom-properties($prefix, $tokens, $lowercase: false) {
+  @each $name, $value in $tokens {
+    --#{$prefix}-#{normalize-token-name($name, $lowercase)}: #{meta.inspect($value)};
   }
 }

@@ -10,6 +10,11 @@
 :root {
   color-scheme: map.get(colors.$tokens, scheme);
 
+  @include custom-properties.emit-prefixed-custom-properties(
+    "color",
+    colors.$colors,
+    true
+  );
   @include custom-properties.emit-custom-properties("color", colors.$tokens);
   @include custom-properties.emit-custom-properties(
     "font-family",
