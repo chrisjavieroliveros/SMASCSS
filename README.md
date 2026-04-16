@@ -24,9 +24,10 @@ The checked-in CSS files at the repo root are still the current browser-consumab
 ## Files
 
 - `library/`: authored source split into `base/`, `layout/`, and `components/`
-- `configs/`: authored config tree with primitive files at the root plus recipe folders for `base/`, `layout/`, and `themes/`
-- `configs/_tokens.scss`: primitive emitter that turns the root config files into the shared `:root` custom properties
-- `configs/_colors.scss`, `configs/_typography.scss`, `configs/_spacing.scss`, `configs/_shape.scss`, `configs/_effects.scss`, `configs/_sizing.scss`: primitive config files
+- `configs/`: authored config tree with public entrypoints plus `abstracts/`, `helpers/`, and recipe folders for `base/`, `layout/`, and `themes/`
+- `configs/_tokens.scss`: primitive emitter entrypoint that turns the abstract config maps into shared `:root` custom properties
+- `configs/abstracts/_*.scss`: primitive config maps for color, type, spacing, shape, effects, and sizing
+- `configs/helpers/_custom-properties.scss`: helper mixin for emitting custom properties
 - `config.css`: default design system and component recipes
 - `themes/midnight.css`: example swap-in theme override
 - `core.css`: foundations only
@@ -40,9 +41,9 @@ The checked-in CSS files at the repo root are still the current browser-consumab
 
 Source files to edit:
 
-1. `configs/_*.scss`
-2. `configs/layout/_*.scss`
-3. `configs/base/_*.scss`
+1. `configs/abstracts/_*.scss`
+2. `configs/base/_*.scss`
+3. `configs/layout/_*.scss`
 4. `configs/themes/*.scss`
 5. `library/base/_*.scss`
 6. `library/layout/_*.scss`

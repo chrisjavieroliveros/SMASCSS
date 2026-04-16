@@ -1,0 +1,7 @@
+@use "sass:meta";
+
+@mixin emit-custom-properties($namespace, $tokens) {
+  @each $name, $value in $tokens {
+    --ui-#{$namespace}-#{$name}: #{meta.inspect($value)};
+  }
+}

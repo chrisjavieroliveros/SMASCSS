@@ -1,40 +1,51 @@
-@use "sass:meta";
 @use "sass:map";
-
-@use "colors";
-@use "effects";
-@use "shape";
-@use "sizing";
-@use "spacing";
-@use "typography";
-
-@mixin emit-custom-properties($namespace, $tokens) {
-  @each $name, $value in $tokens {
-    --ui-#{$namespace}-#{$name}: #{meta.inspect($value)};
-  }
-}
+@use "abstracts/colors";
+@use "abstracts/effects";
+@use "abstracts/shape";
+@use "abstracts/sizing";
+@use "abstracts/spacing";
+@use "abstracts/typography";
+@use "helpers/custom-properties";
 
 :root {
   color-scheme: map.get(colors.$tokens, scheme);
 
-  @include emit-custom-properties("color", colors.$tokens);
-  @include emit-custom-properties(
+  @include custom-properties.emit-custom-properties("color", colors.$tokens);
+  @include custom-properties.emit-custom-properties(
     "font-family",
     typography.$font-family-tokens
   );
-  @include emit-custom-properties("font-size", typography.$font-size-tokens);
-  @include emit-custom-properties(
+  @include custom-properties.emit-custom-properties(
+    "font-size",
+    typography.$font-size-tokens
+  );
+  @include custom-properties.emit-custom-properties(
     "font-weight",
     typography.$font-weight-tokens
   );
-  @include emit-custom-properties(
+  @include custom-properties.emit-custom-properties(
     "line-height",
     typography.$line-height-tokens
   );
-  @include emit-custom-properties("space", spacing.$tokens);
-  @include emit-custom-properties("radius", shape.$radius-tokens);
-  @include emit-custom-properties("border-width", shape.$border-width-tokens);
-  @include emit-custom-properties("shadow", effects.$shadow-tokens);
-  @include emit-custom-properties("container", sizing.$container-tokens);
-  @include emit-custom-properties("transition", effects.$transition-tokens);
+  @include custom-properties.emit-custom-properties("space", spacing.$tokens);
+  @include custom-properties.emit-custom-properties(
+    "radius",
+    shape.$radius-tokens
+  );
+  @include custom-properties.emit-custom-properties(
+    "border-width",
+    shape.$border-width-tokens
+  );
+  @include custom-properties.emit-custom-properties(
+    "shadow",
+    effects.$shadow-tokens
+  );
+  @include custom-properties.emit-custom-properties(
+    "container",
+    sizing.$container-tokens
+  );
+  @include custom-properties.emit-custom-properties(
+    "transition",
+    effects.$transition-tokens
+  );
 }
