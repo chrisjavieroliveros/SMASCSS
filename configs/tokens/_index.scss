@@ -35,8 +35,14 @@
     "line-height",
     typography.$line-height-tokens
   );
-  @include custom-properties.emit-custom-properties("space", spacing.$space-tokens);
-  @include custom-properties.emit-custom-properties("radius", shape.$radius-tokens);
+  @include custom-properties.emit-custom-properties(
+    "space",
+    spacing.$space-tokens
+  );
+  @include custom-properties.emit-custom-properties(
+    "radius",
+    shape.$radius-tokens
+  );
   @include custom-properties.emit-custom-properties(
     "border-width",
     shape.$border-width-tokens
