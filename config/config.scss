@@ -1,5 +1,10 @@
+// Base Configs;
 @use "tokens";
-@use "layout/primitives";
+
+// Layout Configs;
+@use "layout/container";
+
+// Component Configs;
 @use "components/button";
 @use "components/input";
 @use "components/card";

@@ -9,7 +9,10 @@
 
 .ui-title {
   margin: 0;
-  font-family: var(--ui-font-family-heading, var(--ui-font-family-base, "Segoe UI", sans-serif));
+  font-family: var(
+    --ui-font-family-heading,
+    var(--ui-font-family-base, "Segoe UI", sans-serif)
+  );
   font-size: clamp(2.2rem, 5vw, var(--ui-font-size-500, 2.5rem));
   line-height: var(--ui-line-height-tight, 1.15);
 }
@@ -23,7 +26,10 @@
 
 .ui-section-title {
   margin: 0;
-  font-family: var(--ui-font-family-heading, var(--ui-font-family-base, "Segoe UI", sans-serif));
+  font-family: var(
+    --ui-font-family-heading,
+    var(--ui-font-family-base, "Segoe UI", sans-serif)
+  );
   font-size: var(--ui-font-size-400, 1.5rem);
   line-height: var(--ui-line-height-tight, 1.15);
 }
