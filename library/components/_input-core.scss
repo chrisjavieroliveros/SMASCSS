@@ -3,7 +3,8 @@
   width: 100%;
   min-height: var(--ui-input-min-height, 3rem);
   padding: var(--ui-input-padding-y, 0.8rem) var(--ui-input-padding-x, 1rem);
-  border: var(--ui-input-border-width, 1px) solid var(--ui-input-border, #cccccc);
+  border: var(--ui-input-border-width, 1px) solid
+    var(--ui-input-border, #cccccc);
   border-radius: var(--ui-input-radius, 0.75rem);
   background: var(--ui-input-bg, #ffffff);
   color: var(--ui-input-color, #111111);
@@ -19,7 +20,9 @@
 
   &:focus {
     border-color: var(--ui-input-focus-border, currentColor);
-    box-shadow: var(--ui-input-shadow, none), var(--ui-input-focus-ring, 0 0 0 3px rgb(0 0 0 / 0.08));
+    box-shadow:
+      var(--ui-input-shadow, none),
+      var(--ui-input-focus-ring, 0 0 0 3px rgb(0 0 0 / 0.08));
     outline: none;
   }
 }

@@ -1,21 +1,24 @@
 @use "sass:map";
-@use "abstracts/colors";
-@use "abstracts/effects";
-@use "abstracts/shape";
-@use "abstracts/sizing";
-@use "abstracts/spacing";
-@use "abstracts/typography";
-@use "helpers/custom-properties";
+@use "../helpers/custom-properties";
+@use "colors";
+@use "effects";
+@use "shape";
+@use "sizing";
+@use "spacing";
+@use "typography";
 
 :root {
-  color-scheme: map.get(colors.$tokens, scheme);
+  color-scheme: map.get(colors.$semantic-colors, scheme);
 
   @include custom-properties.emit-prefixed-custom-properties(
     "color",
     colors.$colors,
     true
   );
-  @include custom-properties.emit-custom-properties("color", colors.$tokens);
+  @include custom-properties.emit-custom-properties(
+    "color",
+    colors.$semantic-colors
+  );
   @include custom-properties.emit-custom-properties(
     "font-family",
     typography.$font-family-tokens
@@ -32,11 +35,8 @@
     "line-height",
     typography.$line-height-tokens
   );
-  @include custom-properties.emit-custom-properties("space", spacing.$tokens);
-  @include custom-properties.emit-custom-properties(
-    "radius",
-    shape.$radius-tokens
-  );
+  @include custom-properties.emit-custom-properties("space", spacing.$space-tokens);
+  @include custom-properties.emit-custom-properties("radius", shape.$radius-tokens);
   @include custom-properties.emit-custom-properties(
     "border-width",
     shape.$border-width-tokens

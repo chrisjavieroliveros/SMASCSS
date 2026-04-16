@@ -1,15 +1,3 @@
-// Base Configs;
 @use "tokens";
-@use "base/root";
-@use "base/typography";
-@use "base/media";
-@use "base/table";
-@use "base/form";
-
-// Layout Configs;
-@use "layout/container";
-
-// Base Element Configs;
-@use "base/button";
-@use "base/input";
-@use "base/card";
+@use "defaults";
+@use "recipes";

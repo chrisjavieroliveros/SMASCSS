@@ -19,6 +19,8 @@
 
 @mixin emit-prefixed-custom-properties($prefix, $tokens, $lowercase: false) {
   @each $name, $value in $tokens {
-    --#{$prefix}-#{normalize-token-name($name, $lowercase)}: #{meta.inspect($value)};
+    --#{$prefix}-#{normalize-token-name($name, $lowercase)}: #{meta.inspect(
+        $value
+      )};
   }
 }

@@ -22,7 +22,10 @@
 }
 
 .ui-card__title {
-  font-family: var(--ui-font-family-heading, var(--ui-font-family-base, "Segoe UI", sans-serif));
+  font-family: var(
+    --ui-font-family-heading,
+    var(--ui-font-family-base, "Segoe UI", sans-serif)
+  );
   font-size: var(--ui-font-size-300, 1.125rem);
   line-height: var(--ui-line-height-tight, 1.15);
 }

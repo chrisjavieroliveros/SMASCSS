@@ -5,7 +5,8 @@
   gap: var(--ui-button-gap, 0.5rem);
   min-height: var(--ui-button-min-height, 2.75rem);
   padding: var(--ui-button-padding-y, 0.75rem) var(--ui-button-padding-x, 1rem);
-  border: var(--ui-button-border-width, 1px) solid var(--ui-button-border, transparent);
+  border: var(--ui-button-border-width, 1px) solid
+    var(--ui-button-border, transparent);
   border-radius: var(--ui-button-radius, 999px);
   background: var(--ui-button-bg, #111111);
   color: var(--ui-button-color, #ffffff);

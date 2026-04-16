@@ -65,8 +65,8 @@
         <h1 class="ui-title">Config-driven UI CSS with component-level loading.</h1>
         <p class="ui-subtitle">
           The mockup now reads from compiled outputs in <code>assets/css/</code>.
-          The authored sources now live in mirrored <code>/config</code> and <code>/library</code> trees split into
-          base, layout, and components, while the browser consumes your compiler output.
+          The authored sources now live in <code>/configs</code> and <code>/library</code>, with tokens, defaults, and
+          recipes driving a global stylesheet while component implementation stays isolated from it.
         </p>
         <div class="demo-toolbar">
           <a class="ui-button" href="./index.html">Default Theme</a>
@@ -79,8 +79,8 @@
           <p class="ui-card__eyebrow">Config Contract</p>
           <h2 class="ui-card__title">One theme file defines the feel of the whole library.</h2>
           <p class="ui-card__body">
-            Global tokens handle palette, typography, spacing, radius, shadows, and motion. Component recipe variables
-            handle button, input, and card behavior without changing selectors.
+            Global tokens handle palette, typography, spacing, radius, shadows, and motion. Defaults shape semantic
+            HTML, while recipes drive component behavior without changing selectors.
           </p>
           <div class="ui-card__actions">
             <a class="ui-button" href="./assets/css/config.min.css">Open compiled config</a>
@@ -112,34 +112,36 @@
         <h2 class="ui-section-title">Lazy-loadable components</h2>
         <p class="demo-note">
           The current mockup loads the compiler outputs from <code>assets/css/config.min.css</code> and
-          <code>assets/css/library.min.css</code>.
+          <code>assets/css/library.min.css</code>. In the new source architecture, <code>library/main.scss</code> stays
+          global-only and components compile independently.
         </p>
         <div class="demo-card-grid">
           <article class="ui-card">
             <p class="ui-card__eyebrow">Button</p>
-            <h3 class="ui-card__title">config/components/_button.scss</h3>
-            <p class="ui-card__body">Recipe values for `.ui-button` live in the mirrored config tree.</p>
+            <h3 class="ui-card__title">configs/recipes/components/_button.scss</h3>
+            <p class="ui-card__body">Recipe values for <code>.ui-button</code> live in the component recipe layer.</p>
             <div class="ui-card__actions">
-              <a class="ui-button" href="./config/components/_button.scss">Inspect config</a>
+              <a class="ui-button" href="./configs/recipes/components/_button.scss">Inspect config</a>
             </div>
           </article>
 
           <article class="ui-card">
             <p class="ui-card__eyebrow">Input</p>
-            <h3 class="ui-card__title">library/components/_input.scss</h3>
-            <p class="ui-card__body">Component rules for `.ui-input` and `.ui-textarea` now live in the dedicated
-              component layer.</p>
+            <h3 class="ui-card__title">library/components/_input-core.scss</h3>
+            <p class="ui-card__body">Component implementation stays isolated in core partials and out of the global
+              stylesheet.</p>
             <div class="ui-card__actions">
-              <a class="ui-button" href="./library/components/_input.scss">Inspect library</a>
+              <a class="ui-button" href="./library/components/_input-core.scss">Inspect library</a>
             </div>
           </article>
 
           <article class="ui-card">
-            <p class="ui-card__eyebrow">Layout</p>
-            <h3 class="ui-card__title">library/layout/_primitives.scss</h3>
-            <p class="ui-card__body">Shared layout primitives are now separate from base and component concerns.</p>
+            <p class="ui-card__eyebrow">Tokens</p>
+            <h3 class="ui-card__title">configs/tokens/_colors.scss</h3>
+            <p class="ui-card__body">Primitive tokens and semantic aliases are centralized so projects rebrand by
+              editing config, not component rules.</p>
             <div class="ui-card__actions">
-              <a class="ui-button" href="./library/layout/_primitives.scss">Inspect layout</a>
+              <a class="ui-button" href="./configs/tokens/_colors.scss">Inspect tokens</a>
             </div>
           </article>
         </div>
@@ -147,7 +149,7 @@
 
       <footer class="demo-footer">
         <p class="demo-note">
-          Legacy SCSS remains in <code>legacy/</code> as reference. Active source now lives in <code>/config</code> and
+          Legacy SCSS remains in <code>legacy/</code> as reference. Active source now lives in <code>/configs</code> and
           <code>/library</code>, and compiled browser assets live in <code>assets/css/</code>.
         </p>
       </footer>
