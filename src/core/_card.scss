@@ -18,13 +18,23 @@
     color: var(--_fg);
     box-shadow: var(--_shadow);
 
-    > * { margin: 0; }
+    > * {
+      margin: 0;
+    }
 
-    &[data-variant="flat"] { --_shadow: none; }
-    &[data-variant="muted"] { --_bg: var(--ui-color-surface-muted, #f3f3f3); }
+    &[data-variant="flat"] {
+      --_shadow: none;
+    }
+    &[data-variant="muted"] {
+      --_bg: var(--ui-color-surface-muted, #f3f3f3);
+    }
 
-    &[data-pad="sm"] { --_pad: var(--ui-space-4, 1rem); }
-    &[data-pad="lg"] { --_pad: var(--ui-space-6, 2rem); }
+    &[data-pad="sm"] {
+      --_pad: var(--ui-space-4, 1rem);
+    }
+    &[data-pad="lg"] {
+      --_pad: var(--ui-space-6, 2rem);
+    }
   }
 
   .ui-card__eyebrow {
@@ -44,7 +54,9 @@
     line-height: var(--ui-line-height-tight, 1.15);
   }
 
-  .ui-card__body { color: var(--ui-color-text-muted, #707070); }
+  .ui-card__body {
+    color: var(--ui-color-text-muted, #707070);
+  }
 
   .ui-card__actions {
     display: flex;

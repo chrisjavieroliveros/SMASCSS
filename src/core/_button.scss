@@ -48,13 +48,19 @@
       transform: translateY(-1px);
     }
 
-    &:active { transform: translateY(0); }
+    &:active {
+      transform: translateY(0);
+    }
 
     // ── Shape variants ──────────────────────────────────────────────────
     &[data-variant="outline"] {
       --_bg: transparent;
       --_fg: var(--ui-color-primary, #c33329);
-      --_bg-hover: color-mix(in srgb, var(--ui-color-primary, #c33329) 12%, transparent);
+      --_bg-hover: color-mix(
+        in srgb,
+        var(--ui-color-primary, #c33329) 12%,
+        transparent
+      );
       --_border: currentColor;
     }
 
