@@ -1,0 +1,8 @@
+@layer layout {
+  // Constrain to a comfortable reading measure and center it.
+  .center {
+    box-sizing: content-box;
+    max-inline-size: var(--center-max, 60ch);
+    margin-inline: auto;
+  }
+}

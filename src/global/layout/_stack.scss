@@ -1,0 +1,11 @@
+@layer layout {
+  // Vertical rhythm: children separated by a single gap.
+  .stack {
+    display: grid;
+    gap: var(--stack-gap, var(--ui-space-4, 1rem));
+  }
+
+  .stack[data-gap="sm"] { --stack-gap: var(--ui-space-2, 0.5rem); }
+  .stack[data-gap="lg"] { --stack-gap: var(--ui-space-6, 2rem); }
+  .stack[data-gap="xl"] { --stack-gap: var(--ui-space-7, 3rem); }
+}

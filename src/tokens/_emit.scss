@@ -1,0 +1,27 @@
+@use "sass:meta";
+@use "sass:string";
+
+// Normalize a Sass map key into a CSS custom-property name fragment.
+@function normalize-token-name($name, $lowercase: false) {
+  $normalized-name: string.unquote("#{$name}");
+
+  @if $lowercase {
+    @return string.to-lower-case($normalized-name);
+  }
+
+  @return $normalized-name;
+}
+
+// Emit semantic tokens as --ui-<namespace>-<name>: <value>;
+@mixin custom($namespace, $tokens) {
+  @each $name, $value in $tokens {
+    --ui-#{$namespace}-#{normalize-token-name($name)}: #{meta.inspect($value)};
+  }
+}
+
+// Emit raw ramp tokens as --<prefix>-<name>: <value>; (lowercased by default).
+@mixin prefixed($prefix, $tokens, $lowercase: true) {
+  @each $name, $value in $tokens {
+    --#{$prefix}-#{normalize-token-name($name, $lowercase)}: #{meta.inspect($value)};
+  }
+}

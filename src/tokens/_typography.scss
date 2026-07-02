@@ -1,0 +1,30 @@
+$font-family-tokens: (
+  base: (
+    "Manrope",
+    "Segoe UI",
+    sans-serif,
+  ),
+  heading: (
+    "DM Sans",
+    "Segoe UI",
+    sans-serif,
+  ),
+);
+
+$font-size-tokens: (
+  100: 0.875rem,
+  200: 1rem,
+  300: 1.125rem,
+  400: 1.5rem,
+  500: 2.5rem,
+);
+
+$font-weight-tokens: (
+  regular: 500,
+  strong: 700,
+);
+
+$line-height-tokens: (
+  tight: 1.15,
+  base: 1.6,
+);

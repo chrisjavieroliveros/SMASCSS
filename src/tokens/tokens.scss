@@ -1,0 +1,37 @@
+// ENTRY → tokens.css
+// The design-system contract: every primitive value as a CSS custom property.
+// Load this first, on every page. It is also the ONLY file an external host
+// (Astro / WordPress / Elementor) needs to adopt your brand.
+@use "sass:map";
+@use "../_layers";
+@use "emit";
+@use "colors";
+@use "typography";
+@use "spacing";
+@use "shape";
+@use "sizing";
+@use "effects";
+
+@layer tokens {
+  :root {
+    color-scheme: map.get(colors.$semantic-colors, scheme);
+
+    // Raw palette ramps (--color-primary-500, --color-info-400, …)
+    @include emit.prefixed("color", colors.$colors);
+
+    // Semantic tokens (--ui-color-primary, --ui-color-surface, …)
+    @include emit.custom("color", colors.$semantic-colors);
+
+    // Scale tokens
+    @include emit.custom("font-family", typography.$font-family-tokens);
+    @include emit.custom("font-size", typography.$font-size-tokens);
+    @include emit.custom("font-weight", typography.$font-weight-tokens);
+    @include emit.custom("line-height", typography.$line-height-tokens);
+    @include emit.custom("space", spacing.$space-tokens);
+    @include emit.custom("radius", shape.$radius-tokens);
+    @include emit.custom("border-width", shape.$border-width-tokens);
+    @include emit.custom("shadow", effects.$shadow-tokens);
+    @include emit.custom("container", sizing.$container-tokens);
+    @include emit.custom("transition", effects.$transition-tokens);
+  }
+}

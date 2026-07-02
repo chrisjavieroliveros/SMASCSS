@@ -1,0 +1,11 @@
+@layer layout {
+  // Responsive auto-fit grid; set --grid-min to control the breakpoint.
+  .grid {
+    display: grid;
+    gap: var(--grid-gap, var(--ui-space-5, 1.5rem));
+    grid-template-columns: repeat(
+      auto-fit,
+      minmax(min(100%, var(--grid-min, 16rem)), 1fr)
+    );
+  }
+}
