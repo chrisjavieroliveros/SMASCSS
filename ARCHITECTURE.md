@@ -35,7 +35,7 @@ flip any of them and this doc updates.
 | 1 | Per-page CSS strategy | **Manual composition** — each page has an entry that `@use`s only what it needs. No purge/scan step. |
 | 2 | Core portability contract | **Self-sufficient + token hooks** — renders bare via fallbacks, upgrades when tokens exist. |
 | 3 | Specificity / embedding | **CSS `@layer` cascade layers.** |
-| 4 | Distribution | **Both** — SCSS source *and* per-component compiled CSS. |
+| 4 | Distribution | **SCSS source partials**, `@use`'d directly by whoever compiles; per-component compiled CSS produced on demand (§9). |
 | 5 | Token layer | **Separate `tokens.css`, loaded first.** Shippable on its own. |
 | 6 | Universal chrome (header/footer) | **No shared bundle — everything is per-page.** One mental model. |
 | 7 | Variant API | **Data-attributes** (`[data-variant]`, `[data-size]`, `[data-tone]`). |
@@ -104,15 +104,12 @@ src/
     layout/
       _container.scss  _stack.scss  _cluster.scss  _grid.scss  _center.scss  _index.scss
 
-  core/                        // the PORTABLE library
+  core/                        // the PORTABLE library — partials only
     _index.scss                //   @forward every component (whole-library / SCSS consumers)
-    _button.scss               //   component partials live directly in core/
+    _button.scss               //   components are @use'd directly by whoever compiles
     _input.scss
     _textarea.scss
     _card.scss
-    dist/                      //   standalone compiled drop-ins
-      button.scss              //   ENTRY → core/dist/button.css
-      input.scss  textarea.scss  card.scss
 
   themes/                      // → themes/<name>.css  (separate, swappable at runtime)
     midnight.scss              //   ENTRY
@@ -319,29 +316,36 @@ inline style="--_bg: …"      // one instance
 
 ---
 
-## 9. Standalone distribution
+## 9. Distribution
 
-Each component partial lives directly in `core/` (`core/_button.scss`); its
-standalone entry lives in `core/dist/`. They're kept apart on purpose: a partial
-`_button.scss` and an entry `button.scss` in the *same* folder make
-`@use "core/button"` an ambiguous import and Sass errors. With this split,
-`@use "core/button"` unambiguously resolves to the partial.
+Components ship as **source partials** (`core/_button.scss`). Whoever compiles
+`@use`s them directly:
+
+- Your pages: `@use "../core/button"` (see §10).
+- Astro / Vite / `@wordpress/scripts`: `@use "core/button"`, or `@use "core/index"`
+  for the whole library, and let the bundler tree-shake.
+
+`@use` is a source-time mechanism, so this covers every consumer that runs Sass.
+
+**A pre-built `.css` per component is an on-demand build, not a standing folder.**
+A host that only accepts a finished file (paste into Elementor, enqueue a plain
+stylesheet) needs a compiled artifact — but a partial isn't a compile target and
+lacks the `@layer` statement. When that need arises, add a one-off entry:
 
 ```scss
-// src/core/dist/button.scss   → core/dist/button.css
-@use "../../_layers";
-@use "../button";
+// e.g. build/button.scss   → button.css   (create only when a host needs a file)
+@use "../src/_layers";
+@use "../src/core/button";
 ```
 
-`core/dist/button.css` is fully drop-in: fallbacks make it render with nothing
-else present; loading `tokens.css` (or a theme) alongside upgrades it to brand.
+Keep such entries out of `core/` — a partial `_button.scss` and an entry
+`button.scss` in the *same* folder make `@use "core/button"` an ambiguous import
+that Sass rejects. Put them in a separate build/output location.
 
-SCSS-based consumers (Astro/Vite) instead `@use "core/button"` — or
-`@use "core/index"` for the whole library — and let their bundler tree-shake.
-
-**Layered by default (decision D4):** drop-ins carry `@layer components`, so a
-host theme can still override them. If a specific host clobbers a component,
-add an unlayered build for *that* component rather than delayering everything.
+**Layered by design (decision D4):** a compiled component carries `@layer
+components`, so a host theme can still override it. If a specific host clobbers a
+component, emit an unlayered build for *that* component rather than delayering
+everything.
 
 ---
 
@@ -415,7 +419,7 @@ CSS changes; no rebuild.
 | `configs/recipes/*` | **deleted** | Component defaults move *into* each component as `--_*` vars. Biggest change; it is what makes components portable. |
 | `configs/defaults/*` + `library/base/*` | `src/global/base/*` | Merges the two places base styling currently lives. |
 | `library/layout/*` | `src/global/layout/*` | + new primitives (stack, cluster, grid, center). |
-| `library/components/_*-core.scss` | `src/core/_<name>.scss` (+ `dist/<name>.scss` entry) | Refactor to the §8 pattern. |
+| `library/components/_*-core.scss` | `src/core/_<name>.scss` | Refactor to the §8 pattern; `@use`'d directly by whoever compiles. |
 | `configs/config.scss` | `src/tokens/tokens.scss` | Token entry replaces the config aggregator. |
 | `configs/themes/midnight.scss` | `src/themes/midnight.scss` | Wrap in `@layer tokens`. |
 | `library/main.scss` | `src/global/main.scss` | Adds `@use "../_layers"`. |
@@ -428,9 +432,9 @@ CSS changes; no rebuild.
 
 ### Add a component
 1. `src/core/_<name>.scss` — author to the §8 pattern.
-2. `src/core/dist/<name>.scss` — `@use "../../_layers"; @use "../<name>";`.
-3. Add `@forward "<name>";` to `src/core/_index.scss`.
-4. Use it in a page via `@use "../core/<name>";`.
+2. Add `@forward "<name>";` to `src/core/_index.scss`.
+3. Use it in a page via `@use "../core/<name>";`.
+4. Only if an external host needs a pre-built file: add a one-off entry (§9).
 
 ### Add a page
 1. `src/pages/<name>.scss` — `@use "../_layers";` then `@use` the components it needs.

@@ -22,6 +22,8 @@
 // Emit raw ramp tokens as --<prefix>-<name>: <value>; (lowercased by default).
 @mixin prefixed($prefix, $tokens, $lowercase: true) {
   @each $name, $value in $tokens {
-    --#{$prefix}-#{normalize-token-name($name, $lowercase)}: #{meta.inspect($value)};
+    --#{$prefix}-#{normalize-token-name($name, $lowercase)}: #{meta.inspect(
+        $value
+      )};
   }
 }
