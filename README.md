@@ -7,7 +7,7 @@
 **Two component tiers.** `primitives/` holds the portable, self-sufficient
 `.ui-*` atoms (button, input, textarea, card) — the "drop anywhere" set.
 `components/` holds composed, reusable blocks assembled from primitives + layout
-(e.g. `.hero`). Both are authored in `@layer components`; page-specific *tweaks*
+(e.g. `.hero`). Both are authored in `@layer component`; page-specific *tweaks*
 to either live in the `page` layer, inside the page bundle that uses them.
 
 This is the contract: *what the system guarantees* and *how to author against
@@ -71,7 +71,7 @@ across separately-compiled stylesheets.
 
 ```scss
 // src/_layers.scss
-@layer variables, reset, base, layout, components, page, overrides;
+@layer variables, reset, base, layout, component, page, override;
 ```
 
 Layer purpose and why the order is what it is:
@@ -82,9 +82,9 @@ Layer purpose and why the order is what it is:
 | `reset` | `main.css` | Normalize / reset. Near the bottom so element defaults override it. |
 | `base` | `main.css` | Semantic element defaults (typography, forms, tables, media). |
 | `layout` | `main.css` | Layout primitives (stack, cluster, grid, container, center). |
-| `components` | `primitives/`, `components/` | `.ui-*` primitives and composed blocks (`.hero`). Sits above base/layout so components win over generic element styling. |
-| `page` | page bundles | Page-specific styling and tweaks. Above `components`, so a page can adjust a primitive or block with no `!important`. |
-| `overrides` | anywhere | Deliberate last-word escape hatch. |
+| `component` | `primitives/`, `components/` | `.ui-*` primitives and composed blocks (`.hero`). Sits above base/layout so components win over generic element styling. |
+| `page` | page bundles | Page-specific styling and tweaks. Above `component`, so a page can adjust a primitive or block with no `!important`. |
+| `override` | anywhere | Deliberate last-word escape hatch. |
 
 **The embedding guarantee:** any CSS *outside* all layers — a WordPress theme,
 an Elementor global style — automatically beats *everything* inside layers.
@@ -114,17 +114,17 @@ src/
     _index.scss                //   @forward every base partial (main.scss @uses this)
     _reset.scss  _root.scss  _typography.scss  _media.scss  _form.scss  _table.scss
 
-  layout/                      // @layer layout — layout primitives (bundled into main.css)
+  layouts/                     // @layer layout — layout primitives (bundled into main.css)
     _container.scss  _stack.scss  _cluster.scss  _grid.scss  _center.scss  _index.scss
 
-  primitives/                  // ATOMS — the portable library, partials only, @layer components
+  primitives/                  // ATOMS — the portable library, partials only, @layer component
     _index.scss                //   @forward every primitive (whole-library / SCSS consumers)
     _button.scss               //   primitives are @use'd directly by whoever compiles
     _input.scss
     _textarea.scss
     _card.scss
 
-  components/                  // MOLECULES — composed, reusable blocks, partials only, @layer components
+  components/                  // MOLECULES — composed, reusable blocks, partials only, @layer component
     _index.scss                //   @forward every block (whole-library / SCSS consumers)
     _hero.scss                 //   e.g. .hero, assembled from primitives + layout
 
@@ -226,11 +226,11 @@ base element styling, and layout primitives — and **nothing component-level**.
 // @layer reset + base — base/_index.scss @forwards every base partial
 @use "base/index" as base;
 // @layer layout
-@use "layout/index" as layout;
+@use "layouts/index" as layouts;
 ```
 
 > **Namespace the two `index` modules.** Sass names a module after its last path
-> segment, so `base/index` and `layout/index` both default to `index` and collide.
+> segment, so `base/index` and `layouts/index` both default to `index` and collide.
 > Alias them (`as base`, `as layout`). They emit CSS for side effects only — main
 > references no members — so the names are arbitrary, just distinct.
 
@@ -243,7 +243,7 @@ Each partial wraps its rules in the correct layer, e.g.:
 // src/base/_typography.scss
 @layer base { body { font-family: var(--ui-font-family-base, system-ui); } }
 
-// src/layout/_stack.scss
+// src/layouts/_stack.scss
 @layer layout {
   .stack { display: flex; flex-direction: column; gap: var(--ui-space-4, 1rem); }
 }
@@ -259,13 +259,13 @@ Layout primitives are the deliberate replacement for a utility layer (decision
 This is the heart of the system. Every primitive follows one recipe that
 delivers self-sufficiency, token upgrade, data-attribute variants, and layer
 placement simultaneously. Composed `components/` blocks assemble these primitives
-in the same `@layer components`; page-specific tweaks to them live in the `page` layer.
+in the same `@layer component`; page-specific tweaks to them live in the `page` layer.
 
 ### 8.1 Reference implementation
 
 ```scss
 // src/primitives/_button.scss
-@layer components {
+@layer component {
   .ui-button {
     // Private vars: hard fallback ← global token. This chain is what makes the
     // component render bare AND adopt the design system when it's present.
@@ -320,7 +320,7 @@ in the same `@layer components`; page-specific tweaks to them live in the `page`
 
 ### 8.2 The rules every component follows
 
-1. **Wrap in `@layer components`.**
+1. **Wrap in `@layer component`.**
 2. **Every themeable property reads a private `--_*` var.** The `--_*` var
    defaults to a semantic token, which itself has a hard literal fallback:
    `--_bg: var(--ui-color-primary, #c33329);`
@@ -392,7 +392,7 @@ uses, and any composed blocks it renders.
 // Composed blocks this page renders:
 @use "../components/hero";
 
-// Page-specific tweaks live in the `page` layer (above `components`) and ship
+// Page-specific tweaks live in the `page` layer (above `component`) and ship
 // only in home.css:
 @layer page {
   .hero .ui-button { --_radius: 999px; }   // pill buttons in the hero, home only
@@ -400,8 +400,8 @@ uses, and any composed blocks it renders.
 ```
 
 ```scss
-// src/components/_hero.scss  — reusable block, @layer components
-@layer components {
+// src/components/_hero.scss  — reusable block, @layer component
+@layer component {
   .hero { display: grid; gap: var(--ui-space-6, 2rem); }
   .hero__actions { display: flex; flex-wrap: wrap; gap: var(--ui-space-3, .75rem); }
 }
@@ -455,7 +455,7 @@ CSS changes; no rebuild.
 | `configs/helpers/_custom-properties.scss` | `src/variables/_emit.scss` | Renamed. |
 | `configs/recipes/*` | **deleted** | Component defaults move *into* each component as `--_*` vars. Biggest change; it is what makes components portable. |
 | `configs/defaults/*` + `library/base/*` | `src/base/*` | Merges the two places base styling currently lives. |
-| `library/layout/*` | `src/layout/*` | + new primitives (stack, cluster, grid, center). |
+| `library/layout/*` | `src/layouts/*` | + new primitives (stack, cluster, grid, center). |
 | `library/components/_*-core.scss` | `src/primitives/_<name>.scss` | Refactor to the §8 pattern; `@use`'d directly by whoever compiles. |
 | `configs/config.scss` | `src/variables/variables.scss` | Variables entry replaces the config aggregator. |
 | `configs/themes/midnight.scss` | `src/themes/theme-midnight.scss` | Wrap in `@layer variables`. |
@@ -474,7 +474,7 @@ CSS changes; no rebuild.
 4. Only if an external host needs a pre-built file: add a one-off entry (§9).
 
 ### Add a composed block
-1. `src/components/_<name>.scss` — assemble primitives + layout; wrap in `@layer components`.
+1. `src/components/_<name>.scss` — assemble primitives + layout; wrap in `@layer component`.
 2. Add `@forward "<name>";` to `src/components/_index.scss`.
 3. Use it in a page via `@use "../components/<name>";`. Page-specific tweaks go in
    that page's own `@layer page` block.
@@ -504,7 +504,7 @@ CSS changes; no rebuild.
 | Composed block class | `.<block>` / `.<block>__<part>` | `.hero`, `.hero__actions` |
 | Variant / state | `data-<axis>="<value>"` | `data-variant="outline"` |
 | Layout primitive | `.<name>` (unprefixed) | `.stack`, `.grid` |
-| Cascade layers | `variables, reset, base, layout, components, page, overrides` | |
+| Cascade layers | `variables, reset, base, layout, component, page, override` | |
 
 ---
 

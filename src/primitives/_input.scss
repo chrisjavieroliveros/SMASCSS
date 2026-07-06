@@ -1,5 +1,5 @@
 // primitives/input — single-line control + field composition helpers.
-@layer components {
+@layer component {
   .ui-input {
     --_bg: var(--ui-color-surface, #ffffff);
     --_fg: var(--ui-color-text, #111111);

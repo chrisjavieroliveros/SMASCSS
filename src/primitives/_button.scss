@@ -2,7 +2,7 @@
 // primitives/button — REFERENCE IMPLEMENTATION
 //
 // Every primitive follows this exact recipe:
-//   1. Wrapped in @layer components.
+//   1. Wrapped in @layer component.
 //   2. Every themeable property reads a private --_* var.
 //   3. Each --_* var defaults to a semantic token, which has a hard literal
 //      fallback: --_bg: var(--ui-color-primary, #c33329);
@@ -10,7 +10,7 @@
 //   4. Variants are data-attributes that ONLY reassign --_* vars.
 //   5. Self-contained: references tokens + its own vars, nothing else.
 // ─────────────────────────────────────────────────────────────────────────
-@layer components {
+@layer component {
   .ui-button {
     --_bg: var(--ui-color-primary, #c33329);
     --_fg: var(--ui-color-primary-contrast, #ffffff);

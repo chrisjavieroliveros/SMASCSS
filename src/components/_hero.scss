@@ -1,7 +1,7 @@
 // components/hero — a reusable composed block: a vertical hero section built
-// from primitives + layout tokens. Lives in @layer components so a page can
+// from primitives + layout tokens. Lives in @layer component so a page can
 // tweak it from the `page` layer without !important.
-@layer components {
+@layer component {
   .hero {
     display: grid;
     gap: var(--ui-space-6, 2rem);
