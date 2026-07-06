@@ -63,7 +63,7 @@
         <a href="#base">Base elements</a>
         <a href="#layout">Layout primitives</a>
         <a href="#buttons">Button</a>
-        <a href="#inputs">Input &amp; Field</a>
+        <a href="#inputs">Input</a>
         <a href="#textarea">Textarea</a>
         <a href="#cards">Card</a>
         <a href="#hero">Hero (composed)</a>
@@ -258,90 +258,69 @@
 
     <!-- ─── BUTTON ──────────────────────────────────────────────────────── -->
     <section class="sg-section" id="buttons">
-      <h2>Button <small>.ui-button · primitive (atom)</small></h2>
-      <p class="note">Variants are data-attributes that only reassign private <code>--_*</code> vars. Nothing here
-        targets a new selector.</p>
+      <h2>Button <small>button, .btn · base element</small></h2>
+      <p class="note">A plain base style: every <code>&lt;button&gt;</code> and anything with <code>.btn</code>
+        (e.g. a link) gets the default look. No variants — restyle a single instance by reassigning a private
+        <code>--_*</code> var.</p>
 
       <div class="sg-block">
-        <h3>Variants</h3>
+        <h3>Default</h3>
         <div class="sg-demo">
           <div class="sg-stage">
-            <button class="ui-button">Primary</button>
-            <button class="ui-button" data-variant="outline">Outline</button>
-            <button class="ui-button" data-variant="ghost">Ghost</button>
+            <button>Native button</button>
+            <a class="btn" href="#buttons">Link as .btn</a>
+            <button disabled>Disabled</button>
           </div>
-          <pre
-            class="sg-code"><span class="t">&lt;button</span> <span class="a">class</span>=<span class="c">"ui-button"</span><span class="t">&gt;</span>Primary<span class="t">&lt;/button&gt;</span>
-<span class="t">&lt;button</span> <span class="a">class</span>=<span class="c">"ui-button"</span> <span class="a">data-variant</span>=<span class="c">"outline"</span><span class="t">&gt;</span>Outline<span class="t">&lt;/button&gt;</span>
-<span class="t">&lt;button</span> <span class="a">class</span>=<span class="c">"ui-button"</span> <span class="a">data-variant</span>=<span class="c">"ghost"</span><span class="t">&gt;</span>Ghost<span class="t">&lt;/button&gt;</span></pre>
+          <pre class="sg-code"><span class="t">&lt;button&gt;</span>Native button<span class="t">&lt;/button&gt;</span>
+<span class="t">&lt;a</span> <span class="a">class</span>=<span class="c">"btn"</span> <span class="a">href</span>=<span class="c">"#"</span><span class="t">&gt;</span>Link as .btn<span class="t">&lt;/a&gt;</span>
+<span class="t">&lt;button</span> <span class="a">disabled</span><span class="t">&gt;</span>Disabled<span class="t">&lt;/button&gt;</span></pre>
         </div>
       </div>
 
       <div class="sg-block">
-        <h3>Sizes</h3>
+        <h3>One-off tweak — reassign a private var (no variant needed)</h3>
         <div class="sg-demo">
           <div class="sg-stage">
-            <button class="ui-button" data-size="sm">Small</button>
-            <button class="ui-button">Default</button>
-            <button class="ui-button" data-size="lg">Large</button>
+            <button style="--_radius:999px">Pill (--_radius)</button>
+            <button style="--_bg:var(--ui-color-accent)">Accent (--_bg)</button>
           </div>
-        </div>
-      </div>
-
-      <div class="sg-block">
-        <h3>Tones &amp; states</h3>
-        <div class="sg-demo">
-          <div class="sg-stage">
-            <button class="ui-button" data-tone="danger">Danger</button>
-            <button class="ui-button" data-tone="success">Success</button>
-            <button class="ui-button" disabled>Disabled</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="sg-block">
-        <h3>Block</h3>
-        <div class="sg-demo">
-          <div class="sg-stage" data-col>
-            <button class="ui-button" data-block>Full-width button</button>
-          </div>
+          <pre class="sg-code"><span class="t">&lt;button</span> <span class="a">style</span>=<span class="c">"--_radius:999px"</span><span class="t">&gt;</span>Pill<span class="t">&lt;/button&gt;</span>
+<span class="t">&lt;button</span> <span class="a">style</span>=<span class="c">"--_bg:var(--ui-color-accent)"</span><span class="t">&gt;</span>Accent<span class="t">&lt;/button&gt;</span></pre>
         </div>
       </div>
     </section>
 
     <!-- ─── INPUT ───────────────────────────────────────────────────────── -->
     <section class="sg-section" id="inputs">
-      <h2>Input &amp; Field <small>.ui-input · .ui-field · .ui-label · .ui-help</small></h2>
+      <h2>Input <small>input, .input · base element</small></h2>
+      <p class="note">Text-like inputs and anything with <code>.input</code> get the default look. Labels use the
+        plain <code>&lt;label&gt;</code> base style — no field wrapper needed.</p>
       <div class="sg-demo">
         <div class="sg-stage" data-col style="max-width:26rem">
-          <div class="ui-field">
-            <label class="ui-label" for="e1">Email address</label>
-            <input class="ui-input" id="e1" type="email" placeholder="you@example.com" />
-            <span class="ui-help">We'll never share it.</span>
+          <div>
+            <label for="e1">Email address</label>
+            <input id="e1" type="email" placeholder="you@example.com" />
           </div>
-          <div class="ui-field">
-            <label class="ui-label" for="e2">Invalid example</label>
-            <input class="ui-input" id="e2" aria-invalid="true" value="not-an-email" />
-            <span class="ui-help" data-tone="danger">Enter a valid email.</span>
+          <div>
+            <label for="e2">Invalid (aria-invalid)</label>
+            <input id="e2" type="email" aria-invalid="true" value="not-an-email" />
           </div>
-          <input class="ui-input" data-size="sm" placeholder="Small input" />
-          <input class="ui-input" disabled value="Disabled" />
+          <input class="input" placeholder=".input on a bare element" />
+          <input type="text" disabled value="Disabled" />
         </div>
-        <pre class="sg-code"><span class="t">&lt;div</span> <span class="a">class</span>=<span class="c">"ui-field"</span><span class="t">&gt;</span>
-  <span class="t">&lt;label</span> <span class="a">class</span>=<span class="c">"ui-label"</span><span class="t">&gt;</span>Email<span class="t">&lt;/label&gt;</span>
-  <span class="t">&lt;input</span> <span class="a">class</span>=<span class="c">"ui-input"</span> <span class="a">type</span>=<span class="c">"email"</span><span class="t">&gt;</span>
-  <span class="t">&lt;span</span> <span class="a">class</span>=<span class="c">"ui-help"</span><span class="t">&gt;</span>…<span class="t">&lt;/span&gt;</span>
-<span class="t">&lt;/div&gt;</span></pre>
+        <pre class="sg-code"><span class="t">&lt;label</span> <span class="a">for</span>=<span class="c">"email"</span><span class="t">&gt;</span>Email<span class="t">&lt;/label&gt;</span>
+<span class="t">&lt;input</span> <span class="a">id</span>=<span class="c">"email"</span> <span class="a">type</span>=<span class="c">"email"</span><span class="t">&gt;</span>
+<span class="t">&lt;input</span> <span class="a">class</span>=<span class="c">"input"</span> <span class="a">aria-invalid</span>=<span class="c">"true"</span><span class="t">&gt;</span></pre>
       </div>
     </section>
 
     <!-- ─── TEXTAREA ────────────────────────────────────────────────────── -->
     <section class="sg-section" id="textarea">
-      <h2>Textarea <small>.ui-textarea</small></h2>
+      <h2>Textarea <small>textarea, .textarea · base element</small></h2>
       <div class="sg-demo">
         <div class="sg-stage" data-col style="max-width:32rem">
-          <textarea class="ui-textarea" placeholder="Write a message…"></textarea>
-          <textarea class="ui-textarea" aria-invalid="true">Invalid state</textarea>
+          <textarea placeholder="Write a message…"></textarea>
+          <textarea aria-invalid="true">Invalid state</textarea>
         </div>
       </div>
     </section>
@@ -356,8 +335,8 @@
             <h3 class="ui-card__title">Default card</h3>
             <p class="ui-card__body">A surface container with slot helpers for consistent internal rhythm.</p>
             <div class="ui-card__actions">
-              <button class="ui-button" data-size="sm">Action</button>
-              <button class="ui-button" data-size="sm" data-variant="ghost">Cancel</button>
+              <button class="btn">Action</button>
+              <button class="btn" style="--_bg:var(--ui-color-surface-muted);--_fg:var(--ui-color-text)">Cancel</button>
             </div>
           </div>
           <div class="ui-card" data-variant="muted" data-pad="lg" style="max-width:20rem">
@@ -372,22 +351,22 @@
     <!-- ─── HERO (composed block) ───────────────────────────────────────── -->
     <section class="sg-section" id="hero">
       <h2>Hero <small>.hero · composed block (molecule) from components/</small></h2>
-      <p class="note">A molecule assembled from primitives + layout. Note the buttons are pills — that's the
-        page-local <code>.hero .ui-button { --_radius }</code> tweak in <code>library.scss</code>'s
-        <code>@layer page</code>, overriding the component with no <code>!important</code>.
+      <p class="note">A molecule assembled from base elements + layout. Note the buttons are pills — that's the
+        page-local <code>.hero .btn { --_radius }</code> tweak in <code>library.scss</code>'s
+        <code>@layer page</code>, overriding the base button with no <code>!important</code>.
       </p>
       <div class="sg-demo">
         <div class="sg-stage" data-col>
           <div class="hero">
             <div class="stack" data-gap="sm">
               <span class="ui-card__eyebrow">Composed block</span>
-              <h2 style="border:0;margin:0;padding:0">Build the page from primitives.</h2>
+              <h2 style="border:0;margin:0;padding:0">Build the page from base elements.</h2>
               <p style="max-width:48ch;color:var(--ui-color-text-muted)">The hero owns only layout; every
-                control inside is a plain primitive, re-skinned by the page layer.</p>
+                control inside is a plain base element, re-skinned by the page layer.</p>
             </div>
             <div class="hero__actions">
-              <button class="ui-button">Get started</button>
-              <button class="ui-button" data-variant="outline">Read the docs</button>
+              <button class="btn">Get started</button>
+              <button class="btn" style="--_bg:var(--ui-color-surface-muted);--_fg:var(--ui-color-text)">Read the docs</button>
             </div>
           </div>
         </div>
@@ -396,18 +375,19 @@
 
     <!-- ─── ANATOMY ─────────────────────────────────────────────────────── -->
     <section class="sg-section" id="anatomy">
-      <h2>Component anatomy <small>the three-tier fallback that makes it portable</small></h2>
-      <p class="note">Every themeable property flows through one chain. Drop the component anywhere and it still
-        renders; load variables and it adopts the brand; load a theme and it re-skins — no selector ever changes.
+      <h2>Anatomy <small>the three-tier fallback that makes it portable</small></h2>
+      <p class="note">Every themeable property flows through one chain: private var ← semantic variable ← hard
+        literal. Reassign one var to restyle — inline, in a page layer, or a theme — with no selector duplication
+        and no <code>!important</code>.
       </p>
       <div class="sg-demo">
         <pre class="sg-code"><span class="c">/* private var  ←  semantic variable  ←  hard literal fallback */</span>
-<span class="a">.ui-button</span> {
+<span class="a">button</span>, <span class="a">.btn</span> {
   <span class="t">--_bg</span>: <span class="a">var</span>(<span class="t">--ui-color-primary</span>, <span class="c">#c33329</span>);   <span class="c">/* ① renders bare */</span>
   background: <span class="a">var</span>(<span class="t">--_bg</span>);                       <span class="c">/* ② adopts variables */</span>
 }
-<span class="a">.ui-button</span>[<span class="a">data-tone</span>=<span class="c">"danger"</span>] {
-  <span class="t">--_bg</span>: <span class="a">var</span>(<span class="t">--ui-color-danger</span>, <span class="c">#b91c1c</span>);    <span class="c">/* ③ variant only reassigns the var */</span>
+<span class="a">.hero</span> <span class="a">.btn</span> {                              <span class="c">/* @layer page */</span>
+  <span class="t">--_radius</span>: <span class="c">999px</span>;                        <span class="c">/* ③ one var, no new rule */</span>
 }</pre>
       </div>
     </section>
