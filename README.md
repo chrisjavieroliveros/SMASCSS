@@ -71,15 +71,15 @@ across separately-compiled stylesheets.
 
 ```scss
 // src/_layers.scss
-@layer reset, variables, base, layout, components, page, overrides;
+@layer variables, reset, base, layout, components, page, overrides;
 ```
 
 Layer purpose and why the order is what it is:
 
 | Layer | Owner | Contains |
 |-------|-------|----------|
-| `reset` | `main.css` | Normalize / reset. Lowest priority so everything overrides it. |
-| `variables` | `variables.css`, theme files | `:root { --ui-* }`. A theme loaded *later* redefines these in the **same** layer and wins by source order — no separate theme layer needed. Components re-resolve automatically because they read variables through `var()`. |
+| `variables` | `variables.css`, theme files | `:root { --ui-* }`. First, so it's the foundation everything else reads. Nothing else declares these properties, so its position is inert at render time — but a theme loaded *later* redefines them in the **same** layer and wins by source order, and components re-resolve automatically because they read variables through `var()`. |
+| `reset` | `main.css` | Normalize / reset. Near the bottom so element defaults override it. |
 | `base` | `main.css` | Semantic element defaults (typography, forms, tables, media). |
 | `layout` | `main.css` | Layout primitives (stack, cluster, grid, container, center). |
 | `components` | `primitives/`, `components/` | `.ui-*` primitives and composed blocks (`.hero`). Sits above base/layout so components win over generic element styling. |
@@ -111,6 +111,7 @@ src/
     _effects.scss
 
   base/                        // @layer reset + base — bare element defaults (bundled into main.css)
+    _index.scss                //   @forward every base partial (main.scss @uses this)
     _reset.scss  _root.scss  _typography.scss  _media.scss  _form.scss  _table.scss
 
   layout/                      // @layer layout — layout primitives (bundled into main.css)
@@ -222,17 +223,16 @@ base element styling, and layout primitives — and **nothing component-level**.
 // src/main.scss
 @use "_layers";
 
-// @layer reset
-@use "base/reset";
-// @layer base
-@use "base/root";
-@use "base/typography";
-@use "base/media";
-@use "base/form";
-@use "base/table";
+// @layer reset + base — base/_index.scss @forwards every base partial
+@use "base/index" as base;
 // @layer layout
-@use "layout/index";
+@use "layout/index" as layout;
 ```
+
+> **Namespace the two `index` modules.** Sass names a module after its last path
+> segment, so `base/index` and `layout/index` both default to `index` and collide.
+> Alias them (`as base`, `as layout`). They emit CSS for side effects only — main
+> references no members — so the names are arbitrary, just distinct.
 
 Each partial wraps its rules in the correct layer, e.g.:
 
@@ -504,7 +504,7 @@ CSS changes; no rebuild.
 | Composed block class | `.<block>` / `.<block>__<part>` | `.hero`, `.hero__actions` |
 | Variant / state | `data-<axis>="<value>"` | `data-variant="outline"` |
 | Layout primitive | `.<name>` (unprefixed) | `.stack`, `.grid` |
-| Cascade layers | `reset, variables, base, layout, components, page, overrides` | |
+| Cascade layers | `variables, reset, base, layout, components, page, overrides` | |
 
 ---
 

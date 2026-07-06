@@ -3,15 +3,8 @@
 // Reset + semantic element defaults + layout primitives. No components.
 @use "_layers";
 
-// @layer reset
-@use "base/reset";
-
-// @layer base
-@use "base/root";
-@use "base/typography";
-@use "base/media";
-@use "base/form";
-@use "base/table";
+// @layer reset + base
+@use "base/index" as base;
 
 // @layer layout
-@use "layout/index";
+@use "layout/index" as layout;

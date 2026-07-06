@@ -1,0 +1,350 @@
+// ENTRY → library.css
+// ─────────────────────────────────────────────────────────────────────────
+// THE WORKED EXAMPLE — how any page in this system consumes the architecture.
+//
+// A page bundle is a manifest. It does three things and nothing more:
+//   1. Pull the canonical @layer order (so precedence holds across the
+//      separately-compiled variables.css / main.css / theme / this file).
+//   2. @use ONLY the primitives + composed blocks this page actually renders,
+//      so the page ships just its own components — no global component bloat.
+//   3. Author page-specific styling in @layer page (which sits ABOVE
+//      `components`, so a page can tweak a component with no !important).
+//
+// The GLOBAL stylesheets are linked separately in the HTML <head>:
+//     variables.css   → :root { --ui-* }         (the design-system contract)
+//     main.css        → reset + base + layout     (the "super globals")
+//     theme-*.css      → optional variable overrides (swapped at runtime)
+// This bundle carries only what is unique to THIS page.
+// ─────────────────────────────────────────────────────────────────────────
+@use "../_layers";
+
+// ── Primitives this page renders (atoms) ─────────────────────────────────
+@use "../primitives/button";
+@use "../primitives/input";
+@use "../primitives/textarea";
+@use "../primitives/card";
+
+// ── Composed blocks this page renders (molecules) ────────────────────────
+@use "../components/hero";
+
+// ── Page-specific styling: the styleguide chrome ─────────────────────────
+// Everything below is unique to this page, so it lives in @layer page.
+@layer page {
+  :root {
+    --sg-mono: ui-monospace, "SF Mono", "Cascadia Code", Menlo, monospace;
+  }
+
+  body {
+    // Base already sets background/color/font from the variables; we only add
+    // a transition so the runtime theme swap animates smoothly.
+    transition: background 0.3s ease, color 0.3s ease;
+  }
+
+  // Sticky header
+  .sg-top {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+    padding: var(--ui-space-4, 1rem) var(--ui-space-5, 1.5rem);
+    background: color-mix(in srgb, var(--ui-color-surface, #fff) 88%, transparent);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--ui-color-border, #d7d0c6);
+  }
+
+  .sg-brand {
+    display: flex;
+    align-items: baseline;
+    gap: 0.6rem;
+  }
+  .sg-brand b {
+    font-family: var(--ui-font-family-heading);
+    font-size: 1.35rem;
+    letter-spacing: -0.02em;
+  }
+  .sg-brand span {
+    font-size: 0.8rem;
+    color: var(--ui-color-text-muted);
+  }
+
+  .sg-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    padding: 0.5rem 0.9rem;
+    border-radius: 999px;
+    border: 1px solid var(--ui-color-border);
+    background: var(--ui-color-surface);
+    color: var(--ui-color-text);
+    font-size: 0.85rem;
+    font-weight: 700;
+  }
+
+  .sg-wrap {
+    max-width: 74rem;
+    margin-inline: auto;
+    padding: var(--ui-space-6, 2rem) var(--ui-space-5, 1.5rem) var(--ui-space-7, 3rem);
+  }
+
+  // Cascade-layer diagram
+  .sg-layers {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: var(--ui-space-4, 1rem);
+  }
+  .sg-layers .lyr {
+    font-family: var(--sg-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.04em;
+    padding: 0.35rem 0.7rem;
+    border-radius: 6px;
+    background: var(--ui-color-surface-muted);
+    border: 1px solid var(--ui-color-border);
+    color: var(--ui-color-text-muted);
+  }
+  .sg-layers .lyr b {
+    color: var(--ui-color-text);
+  }
+  .sg-layers .arw {
+    align-self: center;
+    color: var(--ui-color-text-muted);
+    font-size: 0.8rem;
+  }
+
+  // Section + subsection
+  .sg-section {
+    margin-top: var(--ui-space-7, 3rem);
+    scroll-margin-top: 5rem;
+  }
+  .sg-section > h2 {
+    font-family: var(--ui-font-family-heading);
+    font-size: 1.6rem;
+    letter-spacing: -0.02em;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.25rem;
+    border-bottom: 2px solid var(--ui-color-border);
+  }
+  .sg-section > h2 small {
+    font-weight: 500;
+    font-size: 0.8rem;
+    color: var(--ui-color-text-muted);
+    font-family: var(--sg-mono);
+  }
+  .sg-block {
+    margin-top: var(--ui-space-6, 2rem);
+  }
+  .sg-block > h3 {
+    font-size: 1.05rem;
+    margin-bottom: 0.35rem;
+  }
+  .sg-block > p.note {
+    color: var(--ui-color-text-muted);
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    max-width: 62ch;
+  }
+
+  // Demo canvas + code pairing
+  .sg-demo {
+    border: 1px solid var(--ui-color-border);
+    border-radius: var(--ui-radius-md, 0.9rem);
+    overflow: hidden;
+    background: var(--ui-color-surface);
+  }
+  .sg-stage {
+    padding: var(--ui-space-5, 1.5rem);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: center;
+  }
+  .sg-stage[data-col] {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .sg-code {
+    margin: 0;
+    padding: var(--ui-space-4, 1rem) var(--ui-space-5, 1.5rem);
+    background: var(--ui-color-surface-muted);
+    border-top: 1px solid var(--ui-color-border);
+    font-family: var(--sg-mono);
+    font-size: 0.78rem;
+    line-height: 1.6;
+    color: var(--ui-color-text);
+    overflow-x: auto;
+    white-space: pre;
+  }
+  .sg-code .t {
+    color: var(--ui-color-primary);
+  }
+  .sg-code .a {
+    color: var(--ui-color-accent);
+  }
+  .sg-code .c {
+    color: var(--ui-color-text-muted);
+  }
+
+  // A standalone code block (no demo above it) — for the consumption example
+  .sg-codeblock {
+    border: 1px solid var(--ui-color-border);
+    border-radius: var(--ui-radius-md, 0.9rem);
+    overflow: hidden;
+
+    .sg-code {
+      border-top: 0;
+      background: var(--ui-color-surface);
+    }
+    .sg-code + .sg-code {
+      border-top: 1px solid var(--ui-color-border);
+      background: var(--ui-color-surface-muted);
+    }
+  }
+
+  // Variable swatch grids
+  .sg-swatches {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(9rem, 1fr));
+    gap: 0.75rem;
+  }
+  .sw {
+    border: 1px solid var(--ui-color-border);
+    border-radius: 10px;
+    overflow: hidden;
+    background: var(--ui-color-surface);
+  }
+  .sw .chip {
+    height: 3.5rem;
+  }
+  .sw .meta {
+    padding: 0.5rem 0.65rem;
+  }
+  .sw .meta b {
+    display: block;
+    font-size: 0.78rem;
+  }
+  .sw .meta code {
+    font-family: var(--sg-mono);
+    font-size: 0.68rem;
+    color: var(--ui-color-text-muted);
+  }
+
+  .sg-ramp {
+    display: flex;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid var(--ui-color-border);
+    margin-bottom: 0.5rem;
+  }
+  .sg-ramp .step {
+    flex: 1;
+    height: 3rem;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding-bottom: 0.2rem;
+    font-family: var(--sg-mono);
+    font-size: 0.6rem;
+  }
+  .sg-ramp-label {
+    font-family: var(--sg-mono);
+    font-size: 0.72rem;
+    color: var(--ui-color-text-muted);
+    margin-bottom: 0.25rem;
+  }
+
+  .sg-scale {
+    display: grid;
+    gap: 0.5rem;
+  }
+  .sg-scale .row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .sg-scale .bar {
+    height: 1rem;
+    background: var(--ui-color-primary);
+    border-radius: 3px;
+  }
+  .sg-scale .row code {
+    font-family: var(--sg-mono);
+    font-size: 0.72rem;
+    color: var(--ui-color-text-muted);
+    min-width: 11rem;
+  }
+
+  // Scoped tables
+  .sg-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.82rem;
+  }
+  .sg-table th,
+  .sg-table td {
+    text-align: left;
+    padding: 0.5rem 0.65rem;
+    border-bottom: 1px solid var(--ui-color-border);
+  }
+  .sg-table th {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--ui-color-text-muted);
+  }
+  .sg-table code {
+    font-family: var(--sg-mono);
+    font-size: 0.74rem;
+    color: var(--ui-color-primary);
+  }
+  .sg-table td.desc {
+    color: var(--ui-color-text-muted);
+  }
+
+  // TOC nav
+  .sg-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: var(--ui-space-5, 1.5rem);
+  }
+  .sg-nav a {
+    font-size: 0.8rem;
+    text-decoration: none;
+    padding: 0.35rem 0.75rem;
+    border-radius: 999px;
+    background: var(--ui-color-surface-muted);
+    color: var(--ui-color-text);
+    border: 1px solid var(--ui-color-border);
+  }
+  .sg-nav a:hover {
+    border-color: var(--ui-color-primary);
+    color: var(--ui-color-primary);
+  }
+
+  .sg-fill {
+    background: var(--ui-color-primary);
+    color: var(--ui-color-primary-contrast);
+    padding: 1rem;
+    border-radius: 8px;
+  }
+
+  .sg-foot {
+    margin-top: var(--ui-space-7, 3rem);
+    padding-top: var(--ui-space-5, 1.5rem);
+    border-top: 1px solid var(--ui-color-border);
+    color: var(--ui-color-text-muted);
+    font-size: 0.82rem;
+  }
+
+  // Page-local component tweak — demonstrates the `page` layer beating
+  // `components` with no !important. Pill buttons inside the hero demo only.
+  .hero .ui-button {
+    --_radius: 999px;
+  }
+}

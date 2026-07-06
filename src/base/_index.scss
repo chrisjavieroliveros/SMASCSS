@@ -1,0 +1,12 @@
+// The base tier as one module. main.scss @uses this, so the whole base layer
+// loads (and emits) through a single entry — mirrors layout/_index.scss.
+//
+// NOTE: _reset.scss emits into @layer reset; the rest emit into @layer base.
+// The global @layer order in _layers.scss keeps precedence correct regardless
+// of the @forward order below.
+@forward "reset"; // @layer reset
+@forward "root"; // @layer base ↓
+@forward "typography";
+@forward "media";
+@forward "form";
+@forward "table";
