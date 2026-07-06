@@ -120,12 +120,11 @@ src/
     _index.scss                //   @forward every block (whole-library / SCSS consumers)
     _hero.scss                 //   e.g. .hero, assembled from primitives + layout
 
-  themes/                      // → themes/<name>.css  (separate, swappable at runtime)
-    theme-midnight.scss        //   ENTRY
+  themes/                      // → theme-<name>.css  (separate, swappable at runtime)
+    theme-midnight.scss        //   ENTRY → theme-midnight.css
 
   pages/                       // one flat entry per page (manual composition, per-page)
     home.scss                  //   ENTRY → home.css: @use only the primitives/components it needs
-    about.scss
 
 preview/                       // demo HTML (never compiled)
   index.html  midnight.html
@@ -135,6 +134,18 @@ preview/                       // demo HTML (never compiled)
 compile to a same-named `.css`; `_name.scss` files are partials and never emit
 on their own. The external compiler globs entries, so *adding a page or a
 standalone component is just dropping a file* — no build config to edit.
+
+**Flat output.** The compiler emits by **basename only** — every entry lands
+directly in the output dir (e.g. `assets/css/`) as `<basename>.css`, regardless
+of which `src/` subfolder it lives in. `src/themes/theme-midnight.scss` →
+`assets/css/theme-midnight.css`; there is **no** `themes/` output subfolder. Two
+consequences:
+
+- **Entry basenames must be globally unique.** A `pages/tokens.scss` would clobber
+  `tokens/tokens.scss` in the output. Keep every entry's basename distinct across
+  the whole tree.
+- **The `theme-` filename prefix is the namespacing** a subfolder would otherwise
+  provide — it's why theme entries are named `theme-<name>.scss`, not `<name>.scss`.
 
 > ⚠️ A folder named `_legacy/` does **not** stop its inner `main.scss` (no
 > leading underscore) from being globbed and compiled. `_legacy/` is removed;
@@ -147,7 +158,7 @@ standalone component is just dropping a file* — no build config to edit.
 ```html
 <link rel="stylesheet" href="/css/tokens.css">          <!-- 1. design tokens (global) -->
 <link rel="stylesheet" href="/css/main.css">            <!-- 2. reset + base + layout (global) -->
-<link rel="stylesheet" href="/css/themes/midnight.css"> <!-- 3. optional theme override -->
+<link rel="stylesheet" href="/css/theme-midnight.css">  <!-- 3. optional theme override -->
 <link rel="stylesheet" href="/css/home.css">            <!-- 4. THIS page's components + styles -->
 ```
 
@@ -372,15 +383,21 @@ uses, and any composed blocks it renders.
 @use "../primitives/button";
 @use "../primitives/card";
 
-// Composed blocks, in the `page` layer so they can tweak primitives:
-@use "../components/hero";   // _hero.scss
+// Composed blocks this page renders:
+@use "../components/hero";
+
+// Page-specific tweaks live in the `page` layer (above `components`) and ship
+// only in home.css:
+@layer page {
+  .hero .ui-button { --_radius: 999px; }   // pill buttons in the hero, home only
+}
 ```
 
 ```scss
-// src/components/_hero.scss
-@layer page {
-  .home-hero { display: grid; gap: var(--ui-space-6, 2rem); }
-  .home-hero .ui-button { --_radius: 999px; }   // page-local primitive tweak
+// src/components/_hero.scss  — reusable block, @layer components
+@layer components {
+  .hero { display: grid; gap: var(--ui-space-6, 2rem); }
+  .hero__actions { display: flex; flex-wrap: wrap; gap: var(--ui-space-3, .75rem); }
 }
 ```
 
@@ -400,7 +417,7 @@ tokens in the `tokens` layer. Loaded after `tokens.css`, they win by source
 order; components adopt them for free because they read tokens through `var()`.
 
 ```scss
-// src/themes/theme-midnight.scss   → themes/theme-midnight.css
+// src/themes/theme-midnight.scss   → theme-midnight.css
 @use "../_layers";
 
 @layer tokens {
@@ -450,9 +467,10 @@ CSS changes; no rebuild.
 4. Only if an external host needs a pre-built file: add a one-off entry (§9).
 
 ### Add a composed block
-1. `src/components/_<name>.scss` — assemble primitives + layout; wrap in the layer
-   that matches its reuse (`@layer page` for page sections).
-2. Use it in a page via `@use "../components/<name>";`.
+1. `src/components/_<name>.scss` — assemble primitives + layout; wrap in `@layer components`.
+2. Add `@forward "<name>";` to `src/components/_index.scss`.
+3. Use it in a page via `@use "../components/<name>";`. Page-specific tweaks go in
+   that page's own `@layer page` block.
 
 ### Add a page
 1. `src/pages/<name>.scss` — `@use "../_layers";` then `@use` the primitives/components it needs.
@@ -476,7 +494,7 @@ CSS changes; no rebuild.
 | Palette ramp | `--color-<name>-<step>` | `--color-primary-500` |
 | Component private var | `--_<role>` | `--_bg`, `--_pad` |
 | Primitive class | `.ui-<name>` | `.ui-button` |
-| Composed block class | `.<block>` / `.<block>__<part>` | `.home-hero`, `.home-hero__actions` |
+| Composed block class | `.<block>` / `.<block>__<part>` | `.hero`, `.hero__actions` |
 | Variant / state | `data-<axis>="<value>"` | `data-variant="outline"` |
 | Layout primitive | `.<name>` (unprefixed) | `.stack`, `.grid` |
 | Cascade layers | `reset, tokens, base, layout, components, page, overrides` | |
@@ -487,7 +505,7 @@ CSS changes; no rebuild.
 
 `SMASCSS` currently ships a checked-in `assets/css/main.min.css` as demo output.
 Under this architecture the compiler emits, at minimum:
-`tokens.css`, `main.css`, `themes/*.css`, and one `*.css` per page (primitives and
-composed blocks ship inside the page bundles that `@use` them, not as standalone files).
-Output layout is the compiler's concern; a mirror of `src/` under `assets/css/`
-keeps paths predictable.
+`tokens.css`, `main.css`, `theme-<name>.css`, and one `<page>.css` per page
+(primitives and composed blocks ship inside the page bundles that `@use` them, not
+as standalone files). Output is **flat** — one `<basename>.css` per entry directly
+under `assets/css/`, no subfolders (see §4), so entry basenames stay globally unique.
