@@ -1,0 +1,34 @@
+// ═══════════════════════════════════════════════════════════════════════════
+// VARIABLES — your theme.  → compiles to variables.css
+// ═══════════════════════════════════════════════════════════════════════════
+// This folder IS the theme. Every design value lives here as a Sass map in a
+// clearly-named file (_colors, _spacing, _radius, _shadows, _transitions) —
+// edit THOSE files to rebrand. Each of those files ALSO emits its own tokens
+// (into @layer variables), so this entry just gathers them; you rarely touch it.
+//
+// Colors are emitted from the palette as --color-<Name> (case-preserved, e.g.
+// --color-Primary, --color-Secondary-500); the rest emit as --ui-<group>-<name>.
+//
+// REQUIRED — load variables.css first, on every page. Consumers read these
+// tokens with NO literal fallback, so nothing renders correctly until it is
+// present. It is also the ONLY file an external host (Astro / WordPress /
+// Elementor) needs to adopt your brand.
+//
+// NOTE: typography tokens (font-family / -size / -weight / line-height) are NOT
+// here — they live with the typography styling in base/_typography.scss and ship
+// in main.css. The emitter (emit.*) is Sass machinery, not a value you edit — it
+// lives in abstracts/_emit.scss.
+@use "../_layers";
+
+// ── The theme value maps — each file emits its own tokens ──────────────────
+@use "colors";
+@use "spacing";
+@use "radius";
+@use "shadows";
+@use "transitions";
+
+@layer variables {
+  :root {
+    color-scheme: light;
+  }
+}

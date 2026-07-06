@@ -18,7 +18,7 @@
     margin-block-start: var(--ui-fieldset-margin-block-start, 0);
     margin-block-end: var(--ui-fieldset-margin-block-end, var(--ui-space-5));
     padding: var(--ui-fieldset-padding, var(--ui-space-4));
-    border: var(--ui-fieldset-border-width, var(--ui-border-width-1)) solid
+    border: var(--ui-fieldset-border-width, 1px) solid
       var(--ui-fieldset-border-color, var(--color-Light-300));
     border-radius: var(--ui-fieldset-radius, var(--ui-radius-md));
   }
@@ -41,7 +41,7 @@
     width: 100%;
     min-height: 3rem;
     padding: var(--ui-space-3) var(--ui-space-4);
-    border: var(--ui-border-width-1) solid var(--color-Light-300);
+    border: 1px solid var(--color-Light-300);
     border-radius: var(--ui-radius-sm);
     background: var(--color-White);
     color: var(--color-Black);

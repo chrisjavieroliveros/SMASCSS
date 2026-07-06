@@ -3,7 +3,7 @@
   .container {
     width: min(
       100% - (var(--container-gutter, var(--ui-space-5)) * 2),
-      var(--container-max, var(--ui-container-width))
+      var(--container-max, 72rem)
     );
     margin-inline: auto;
   }

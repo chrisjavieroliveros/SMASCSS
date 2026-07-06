@@ -1,0 +1,19 @@
+// ───────────────────────────────────────────────────────────────────────────
+// RADIUS — corner rounding, in px.
+// Edit these to make the whole system more or less rounded.
+// Emitted (here, in @layer variables) as --ui-radius-sm / -md / -lg.
+// ───────────────────────────────────────────────────────────────────────────
+@use "../_layers";
+@use "../abstracts/emit";
+
+$radius-tokens: (
+  sm: 8px,
+  md: 14px,
+  lg: 24px,
+);
+
+@layer variables {
+  :root {
+    @include emit.custom("radius", $radius-tokens);
+  }
+}

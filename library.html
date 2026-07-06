@@ -10,11 +10,11 @@
        HOW A PAGE CONSUMES THE SYSTEM — this is the whole point of this file.
        Nothing is inlined. Every page links the same cached globals, then its
        own page bundle. This exact <head> is the runtime load order (§5).
-         1. config.css     → :root { --color-* / --ui-* }  the contract (REQUIRED)
+         1. variables.css  → :root { --color-* / --ui-* }  the contract (REQUIRED)
          2. main.css       → reset + base + layout          the "super globals"
          3. <page>.css      → only THIS page's primitives + components + chrome
   ═══════════════════════════════════════════════════════════════════════════ -->
-  <link rel="stylesheet" href="assets/css/config.min.css" />
+  <link rel="stylesheet" href="assets/css/variables.min.css" />
   <link rel="stylesheet" href="assets/css/main.min.css" />
   <link rel="stylesheet" href="assets/css/library.min.css" />
 </head>
@@ -30,16 +30,16 @@
     <section class="sg-section" id="overview" style="margin-top:var(--ui-space-6,2rem)">
       <h2>Overview <small>this page is the worked example</small></h2>
       <p class="note" style="max-width:72ch">
-        This file loads nothing inline. It links the compiled <code>config.css</code>,
+        This file loads nothing inline. It links the compiled <code>variables.css</code>,
         <code>main.css</code>, and its own <code>library.css</code> bundle exactly as any Astro page,
         WordPress template, or plain HTML page would. Components read private <code>--_*</code> vars
-        that read the required <b>tokens</b> (the palette + scales) from <code>config.css</code> — it must be loaded
+        that read the required <b>tokens</b> (the palette + scales) from <code>variables.css</code> — it must be loaded
         (there's no bare fallback for design values). Cascade layers keep the whole thing overridable
         by any host.
       </p>
       <div class="sg-layers">
         <span class="lyr">@layer</span>
-        <span class="lyr"><b>config</b></span><span class="arw">→</span>
+        <span class="lyr"><b>variables</b></span><span class="arw">→</span>
         <span class="lyr"><b>reset</b></span><span class="arw">→</span>
         <span class="lyr"><b>base</b></span><span class="arw">→</span>
         <span class="lyr"><b>layout</b></span><span class="arw">→</span>
@@ -51,7 +51,7 @@
       </div>
       <nav class="sg-nav">
         <a href="#consumption">How it's built</a>
-        <a href="#config">Config</a>
+        <a href="#variables">Variables</a>
         <a href="#ramps">Palette ramps</a>
         <a href="#base">Base elements</a>
         <a href="#layout">Layout primitives</a>
@@ -78,7 +78,7 @@
         <div class="sg-codeblock">
           <pre
             class="sg-code"><span class="c">&lt;!-- globals: cached once, shared by every page --&gt;</span>
-<span class="t">&lt;link</span> <span class="a">rel</span>=<span class="c">"stylesheet"</span> <span class="a">href</span>=<span class="c">"assets/css/config.min.css"</span><span class="t">&gt;</span>      <span class="c">1 · :root { --color-* / --ui-* }</span>
+<span class="t">&lt;link</span> <span class="a">rel</span>=<span class="c">"stylesheet"</span> <span class="a">href</span>=<span class="c">"assets/css/variables.min.css"</span><span class="t">&gt;</span>   <span class="c">1 · :root { --color-* / --ui-* }</span>
 <span class="t">&lt;link</span> <span class="a">rel</span>=<span class="c">"stylesheet"</span> <span class="a">href</span>=<span class="c">"assets/css/main.min.css"</span><span class="t">&gt;</span>        <span class="c">2 · reset + base + layout</span>
 <span class="c">&lt;!-- this page's bundle: primitives + components + page chrome --&gt;</span>
 <span class="t">&lt;link</span> <span class="a">rel</span>=<span class="c">"stylesheet"</span> <span class="a">href</span>=<span class="c">"assets/css/library.min.css"</span><span class="t">&gt;</span>     <span class="c">3 · THIS page only</span></pre>
@@ -117,12 +117,12 @@
       </p>
     </section>
 
-    <!-- ─── CONFIG (PALETTE) ─────────────────────────────────────────────── -->
-    <section class="sg-section" id="config">
-      <h2>Config <small>--color-* · your brand palette</small></h2>
+    <!-- ─── VARIABLES (PALETTE) ──────────────────────────────────────────── -->
+    <section class="sg-section" id="variables">
+      <h2>Variables <small>--color-* · your brand palette</small></h2>
       <p class="note">The palette components read directly, e.g. <code>var(--color-Primary)</code>. Rebrand by
-        editing <code>config/_colors.scss</code> — no selector touches. Swatches below are live, read from the
-        linked <code>config.css</code>.</p>
+        editing <code>variables/_colors.scss</code> — no selector touches. Swatches below are live, read from the
+        linked <code>variables.css</code>.</p>
       <div class="sg-swatches" id="paletteSwatches"></div>
 
       <div class="sg-block">
@@ -375,15 +375,15 @@
     <!-- ─── ANATOMY ─────────────────────────────────────────────────────── -->
     <section class="sg-section" id="anatomy">
       <h2>Anatomy <small>the private-var chain that makes it portable</small></h2>
-      <p class="note">Every themeable property flows through one chain: private var ← required config token.
+      <p class="note">Every themeable property flows through one chain: private var ← required variables token.
         Reassign one var to restyle — inline or in a page layer — with no selector duplication
-        and no <code>!important</code>. <code>config.css</code> must be loaded; there's no baked literal
+        and no <code>!important</code>. <code>variables.css</code> must be loaded; there's no baked literal
         fallback for design values.
       </p>
       <div class="sg-demo">
-        <pre class="sg-code"><span class="c">/* private var  ←  required config token */</span>
+        <pre class="sg-code"><span class="c">/* private var  ←  required variables token */</span>
 <span class="a">button</span>, <span class="a">.btn</span> {
-  <span class="t">--_bg</span>: <span class="a">var</span>(<span class="t">--color-Primary</span>);                  <span class="c">/* ① reads config */</span>
+  <span class="t">--_bg</span>: <span class="a">var</span>(<span class="t">--color-Primary</span>);                  <span class="c">/* ① reads variables */</span>
   background: <span class="a">var</span>(<span class="t">--_bg</span>);                       <span class="c">/* ② adopts tokens */</span>
 }
 <span class="a">.hero</span> <span class="a">.btn</span> {                              <span class="c">/* @layer page */</span>
@@ -393,14 +393,14 @@
     </section>
 
     <footer class="sg-foot">
-      This page links <code>config.css</code> + <code>main.css</code> + <code>library.css</code> (its own
+      This page links <code>variables.css</code> + <code>main.css</code> + <code>library.css</code> (its own
       bundle from <code>src/pages/library.scss</code>), plus the optional midnight theme. Recompile
       <code>src/</code> to refresh — the CSS is never inlined here.
     </footer>
   </div>
 
   <script>
-    // ── Live-read the palette from the linked config.css → swatches.
+    // ── Live-read the palette from the linked variables.css → swatches.
     const PALETTE = [
       'White', 'Black', 'Primary', 'Primary-Shade', 'Primary-Contrast',
       'Secondary', 'Light-50', 'Light-300', 'Dark-200',

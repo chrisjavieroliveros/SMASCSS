@@ -1,6 +1,6 @@
 # AGENTS.md
 
-Operating guide for AI agents working in **SMASCSS** — a config-driven,
+Operating guide for AI agents working in **SMASCSS** — a variable-driven,
 per-page-optimized SCSS system. [`README.md`](README.md) is the canonical spec;
 this file is the short version plus the rules that are easy to get wrong.
 
@@ -8,16 +8,17 @@ this file is the short version plus the rules that are easy to get wrong.
 
 ## The one-paragraph mental model
 
-Design values live as CSS custom properties in `config.css` (loaded first,
-everywhere, and **REQUIRED** — it's the single source of truth for every design
-value). `main.css` is the always-loaded baseline: reset + global element
-defaults + layout primitives, and **nothing component-level**. Each *page* ships
-its own bundle that `@use`s only the primitives and composed blocks it renders.
-Precedence across these separately-compiled files is held by one shared
-`@layer` order. Every reusable piece reads the required config tokens directly,
-so the same source drops into Astro, a WordPress block, or Elementor with zero of
-the rest of the system loaded — you just ship `config.css` (one small file)
-alongside the piece.
+Design values live as CSS custom properties in `variables.css` (loaded first,
+everywhere, and **REQUIRED** — it's the single source of truth for the palette
+and scales). `main.css` is the always-loaded baseline: reset + global element
+defaults + layout primitives, and **nothing component-level** (it also carries
+the typography tokens, which live next to the type styling in
+`base/_typography.scss`). Each *page* ships its own bundle that `@use`s only the
+primitives and composed blocks it renders. Precedence across these
+separately-compiled files is held by one shared `@layer` order. Every reusable
+piece reads the required tokens directly, so the same source drops into Astro, a
+WordPress block, or Elementor with zero of the rest of the system loaded — you
+ship `variables.css` (plus `main.css` for the type tokens) alongside the piece.
 
 ---
 
@@ -37,7 +38,7 @@ alongside the piece.
    before any rules. The canonical order lives in [`src/_layers.scss`](src/_layers.scss):
 
    ```scss
-   @layer config, reset, base, layout, primitive, component, page, override;
+   @layer variables, reset, base, layout, primitive, component, page, override;
    ```
 
    Do not reorder or rename layers without the user asking — precedence across
@@ -58,13 +59,13 @@ alongside the piece.
 
 | Folder | Layer | What lives there | Loaded |
 |--------|-------|------------------|--------|
-| `config/` | `config` | `:root { --color-* / --ui-* }` design tokens (colors emit case-preserved as `--color-<Name>`, read directly); entry → `config.css` | globally, first (REQUIRED) |
-| `base/` | `reset` + `base` | reset, `:root`, typography, media | globally (in `main.css`) |
+| `variables/` | `variables` | `:root { --color-* / --ui-* }` design tokens — palette + space/radius/shadow/transition scales (colors emit case-preserved as `--color-<Name>`, read directly); each value file emits its own tokens; entry → `variables.css` | globally, first (REQUIRED) |
+| `base/` | `reset` + `base` | reset, `:root`, typography, media. Typography *tokens* (font/size/weight/line-height) are emitted here into `@layer variables` — they ship in `main.css`, next to the type styling | globally (in `main.css`) |
 | `layouts/` | `layout` | layout primitives: `container`, `stack`, `cluster`, `grid`, `center` | globally (in `main.css`) |
 | `primitives/` | `primitive` | **opt-in** pieces: `button, .btn`, `form`, `input`, `textarea`, `table`, `.ui-card` | per page (`@use` each) |
 | `components/` | `component` | composed reusable blocks: `.hero` | per page (`@use` each) |
 | `pages/` | `page` | one flat entry per page; page-specific tweaks | it *is* the page |
-| `abstracts/` | **none** | pure Sass tools — `responsive` mixins (`mobile-up` … `desktop-xl-down`, `responsive-prop`) + `emit` (the token emitter that builds `config.css`); **emit no CSS on their own** | `responsive` where a media query is needed; `emit` by `config.scss` |
+| `abstracts/` | **none** | pure Sass tools — `responsive` mixins (`mobile-up` … `desktop-xl-down`, `responsive-prop`) + `emit` (the token emitter that builds `variables.css`); **emit no CSS on their own** | `responsive` where a media query is needed; `emit` by each `variables/_*.scss` (and `base/_typography.scss`) |
 
 Notes:
 - Nothing component-level ships in `main.css`. Every control — including
@@ -80,14 +81,14 @@ Notes:
 
 ## The private-var recipe (every primitive & component)
 
-A private var reads the required config token, so a piece adopts the design system
-(load `config.css` alongside it):
+A private var reads the required design token, so a piece adopts the design system
+(load `variables.css` alongside it):
 
 ```scss
 // src/primitives/_card.scss
 @layer primitive {              // primitives → `primitive`; components → `component`
   .ui-card {
-    --_bg:     var(--color-White);        // private ← required config token (no literal fallback)
+    --_bg:     var(--color-White);        // private ← required design token (no literal fallback)
     --_radius: var(--ui-radius-lg);
 
     background: var(--_bg);      // every themeable property reads a --_* var
@@ -99,7 +100,7 @@ A private var reads the required config token, so a piece adopts the design syst
 }
 ```
 
-Override precedence, low → high: config token (`--color-*` / `--ui-*`) →
+Override precedence, low → high: design token (`--color-*` / `--ui-*`) →
 `[data-*]` variant → inline `style="--_bg: …"`.
 
 ---
@@ -112,12 +113,12 @@ Override precedence, low → high: config token (`--color-*` / `--ui-*`) →
   `@use "../components/<name>"` from pages that render it.
 - **Add a page** → `src/pages/<name>.scss`: `@use "../_layers";` then `@use` the
   primitives/components it needs; page tweaks in `@layer page`.
-- **Add a config token** → add to the right value map in `src/config/_*.scss`
-  (one file per category: `_colors`, `_typography`, `_spacing`, `_radius`,
-  `_borders`, `_shadows`, `_motion`, `_sizing`); it emits automatically via
-  `abstracts/_emit.scss`. Reference as `var(--ui-…)` (config required; no
-  literal fallback).
-- **Rebrand** → edit the hexes in `src/config/_colors.scss` (colors emit
+- **Add a design token** → add to the right value map in `src/variables/_*.scss`
+  (one file per category: `_colors`, `_spacing`, `_radius`, `_shadows`,
+  `_transitions`) — or, for font tokens, `src/base/_typography.scss`. Each file
+  emits its own tokens via its `emit.*` call (`abstracts/_emit.scss`). Reference
+  as `var(--ui-…)` (variables required; no literal fallback).
+- **Rebrand** → edit the hexes in `src/variables/_colors.scss` (colors emit
   case-preserved as `--color-<Name>`; every component follows because it reads
   `var(--color-*)` directly). For a scoped/dark override, redeclare the
   `--color-*` vars in a later `:root`/scope. No runtime theme stylesheets.

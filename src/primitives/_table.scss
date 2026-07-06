@@ -26,11 +26,8 @@
   td {
     padding: var(--ui-table-cell-padding-y, var(--ui-space-3))
       var(--ui-table-cell-padding-x, var(--ui-space-4));
-    border-block-end: var(
-        --ui-table-cell-border-width,
-        var(--ui-border-width-1)
-      )
-      solid var(--ui-table-cell-border-color, var(--color-Light-300));
+    border-block-end: var(--ui-table-cell-border-width, 1px) solid
+      var(--ui-table-cell-border-color, var(--color-Light-300));
     text-align: left;
     vertical-align: top;
   }

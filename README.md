@@ -1,6 +1,6 @@
 # SMASCSS
 
-> A config-driven, per-page-optimized SCSS system whose **primitives** are
+> A variable-driven, per-page-optimized SCSS system whose **primitives** are
 > portable enough to drop into an Astro component, a WordPress block, or an
 > Elementor widget — with **zero** of the rest of the system loaded.
 
@@ -20,7 +20,7 @@ This is the contract: *what the system guarantees* and *how to author against
 it*. The `src/` tree is the implementation; [§12](#12-migration-map) records the
 migration from the original `configs/` + `library/` layout (now removed).
 
-**Lineage.** The taxonomy — `config · base · layout · primitives · components ·
+**Lineage.** The taxonomy — `variables · base · layout · primitives · components ·
 pages` — is a deliberate blend: **SMACSS** (base / layout / module / theme
 buckets), **Atomic Design** (primitives = atoms, components = molecules), **Every
 Layout** (the `stack` / `cluster` / `center` / `grid` layout primitives), and
@@ -36,7 +36,7 @@ those references so the system reads as familiar, not bespoke.
 2. **Pages ship only what they use.** Each page compiles its own bundle that
    `@use`s only the components it actually renders. No global component bloat.
 3. **A portable `primitives/`.** Every primitive is self-sufficient: drop it into
-   any host alongside `config.css` (one small tokens file) and it renders and
+   any host alongside `variables.css` (the tokens file) and it renders and
    themes correctly with **zero** of the rest of the system loaded. One source
    powers the architecture and every external host.
 4. **Predictable cascade under hostile hosts.** WordPress/Elementor styles
@@ -52,16 +52,16 @@ flip any of them and this doc updates.
 | # | Decision | Choice |
 |---|----------|--------|
 | 1 | Per-page CSS strategy | **Manual composition** — each page has an entry that `@use`s only what it needs. No purge/scan step. |
-| 2 | Component portability contract | **Config-driven + token hooks** — components read required `config.css` tokens directly; no baked literal fallbacks. Ship the piece alongside `config.css`. |
+| 2 | Component portability contract | **Variable-driven + token hooks** — components read required `variables.css` tokens directly; no baked literal fallbacks. Ship the piece alongside `variables.css`. |
 | 3 | Specificity / embedding | **CSS `@layer` cascade layers.** |
 | 4 | Distribution | **SCSS source partials**, `@use`'d directly by whoever compiles; per-component compiled CSS produced on demand (§9). |
-| 5 | Config layer | **Separate `config.css`, loaded first and REQUIRED.** Shippable on its own. |
+| 5 | Variables layer | **Separate `variables.css`, loaded first and REQUIRED.** Shippable on its own. |
 | 6 | Universal chrome (header/footer) | **No shared bundle — everything is per-page.** One mental model. |
 | 7 | Variant API | **Data-attributes** (`[data-variant]`, `[data-size]`, `[data-tone]`). |
 | 8 | Build tool | **External** — the compiler is out of scope; it auto-globs non-partial `.scss`. |
-| 9 | Component defaults | **Self-contained via private `--_*` vars** that read the required global config tokens. |
+| 9 | Component defaults | **Self-contained via private `--_*` vars** that read the required global design tokens. |
 | 10 | Utilities | **None** — layout primitives + component vars only. |
-| 11 | Theming | **Rebrand by editing the palette** in `config/_colors.scss` (or overriding `--color-*` in a later `:root`); no runtime theme stylesheets. |
+| 11 | Theming | **Rebrand by editing the palette** in `variables/_colors.scss` (or overriding `--color-*` in a later `:root`); no runtime theme stylesheets. |
 | 12 | Entry discovery | **Auto-glob** — any non-`_` `.scss` compiles to a matching `.css`; folders are free to reorganize. |
 | D1 | Class prefix | *(default)* `.ui-` for classes, `--_*` for private vars, `--ui-*` for tokens. |
 | D2 | Component v1 catalog | *(default)* all opt-in `primitives/`: `button`, `form`, `input`, `textarea`, `table`, `card`. Nothing component-level ships in `main.css`. |
@@ -78,14 +78,14 @@ across separately-compiled stylesheets.
 
 ```scss
 // src/_layers.scss
-@layer config, reset, base, layout, primitive, component, page, override;
+@layer variables, reset, base, layout, primitive, component, page, override;
 ```
 
 Layer purpose and why the order is what it is:
 
 | Layer | Owner | Contains |
 |-------|-------|----------|
-| `config` | `config.css` | `:root { --color-* / --ui-* }`. First, so it's the foundation everything else reads. Nothing else declares these properties, so its position is inert at render time. A later `:root` (in a page or override) can still redeclare a token and win by source order, and components re-resolve automatically because they read tokens through `var()`. |
+| `variables` | `variables.css` | `:root { --color-* / --ui-* }`. First, so it's the foundation everything else reads. Nothing else declares these properties, so its position is inert at render time. A later `:root` (in a page or override) can still redeclare a token and win by source order, and components re-resolve automatically because they read tokens through `var()`. (Typography tokens are emitted from `base/_typography.scss` into this same layer, so they ship in `main.css` rather than `variables.css` — see §6.) |
 | `reset` | `main.css` | Normalize / reset. Near the bottom so element defaults override it. |
 | `base` | `main.css` | Global semantic element defaults (`:root`, typography, media). Shipped everywhere. |
 | `layout` | `main.css` | Layout primitives (stack, cluster, grid, container, center). |
@@ -110,22 +110,20 @@ src/
 
   abstracts/                   // TOOLS — pure Sass (mixins/functions), emit NO CSS, not a layer
     _responsive.scss           //   device-named responsive mixins (mobile-up … desktop-xl-down) + responsive-prop
-    _emit.scss                 //   token emitter — turns config maps into --ui-* custom properties
+    _emit.scss                 //   token emitter — turns value maps into --ui-* custom properties
 
-  config/                      // → config.css   (loaded first, everywhere, REQUIRED; shippable alone)
-    config.scss                //   ENTRY: assembles the maps + emits :root { --ui-* } inside @layer config
+  variables/                   // → variables.css  (loaded first, everywhere, REQUIRED; shippable alone)
+    variables.scss             //   ENTRY: @uses the value files (each emits its own tokens) + color-scheme
     _colors.scss               //   brand palette (emitted case-preserved as --color-<Name>)   ← the value files you EDIT
-    _typography.scss           //   fonts, sizes, weights, line-heights
     _spacing.scss              //   the space scale
-    _radius.scss               //   corner rounding
-    _borders.scss              //   border widths
+    _radius.scss               //   corner rounding (in px)
     _shadows.scss              //   elevation
-    _motion.scss               //   transitions
-    _sizing.scss               //   container / layout widths
+    _transitions.scss          //   transition durations + reusable power1–4 easing curves
 
   base/                        // @layer reset + base — TRULY GLOBAL defaults (bundled into main.css)
     _index.scss                //   @forward every base partial (main.scss @uses this)
-    _reset.scss  _root.scss  _typography.scss  _media.scss
+    _reset.scss  _root.scss  _media.scss
+    _typography.scss           //   font tokens (emitted into @layer variables) + the element styling that reads them
 
   layouts/                     // @layer layout — layout primitives (bundled into main.css)
     _container.scss  _stack.scss  _cluster.scss  _grid.scss  _center.scss  _index.scss
@@ -170,48 +168,54 @@ of which `src/` subfolder it lives in. `src/pages/home.scss` →
 ## 5. Runtime load order
 
 ```html
-<link rel="stylesheet" href="/css/config.css">          <!-- 1. design tokens (global, REQUIRED) -->
+<link rel="stylesheet" href="/css/variables.css">       <!-- 1. design tokens (global, REQUIRED) -->
 <link rel="stylesheet" href="/css/main.css">            <!-- 2. reset + base + layout (global) -->
 <link rel="stylesheet" href="/css/home.css">            <!-- 3. THIS page's components + styles -->
 ```
 
 Steps 1–2 are the same on every page and cache once. Step 3 is unique per page
-and carries only that page's components. Step 1 (`config.css`) is **required** —
-it holds every design value the rest of the system reads.
+and carries only that page's components. Step 1 (`variables.css`) is **required** —
+it holds the palette plus the space/radius/shadow/transition scales. (The
+typography tokens live with the typography styling in `base/_typography.scss`, so
+they ship in `main.css`; both globals load on every page.)
 
 ---
 
-## 6. Config (`config.css`)
+## 6. Variables (`variables.css`)
 
-Config is the primitive design values (a.k.a. design tokens) emitted as CSS custom
-properties. It is the **single source of truth** for every design value the system
-reads, and the **only** file an external host needs to adopt your brand — it can be
-shipped entirely on its own. It is **required**: load it first, on every page.
+Variables are the primitive design values (a.k.a. design tokens) emitted as CSS
+custom properties. They are the **single source of truth** for the palette and
+scales the system reads, and the **primary** file an external host needs to adopt
+your brand — it can be shipped on its own. It is **required**: load it first, on
+every page.
+
+**Each value file emits its own tokens.** There is no central emit block — every
+`variables/_*.scss` `@use`s the emitter and wraps its own `:root { --… }` in
+`@layer variables`. The entry just gathers them and sets `color-scheme`:
 
 ```scss
-// src/config/config.scss
-@use "../_layers";                 // establishes @layer order
-@use "../abstracts/emit";          // the emitter is a Sass tool, kept out of config/
-@use "colors";
-@use "typography";
+// src/variables/variables.scss
+@use "../_layers";        // establishes @layer order
+@use "colors";            // each file below emits its own --… tokens
 @use "spacing";
 @use "radius";
-@use "borders";
 @use "shadows";
-@use "motion";
-@use "sizing";
+@use "transitions";
 
-@layer config {
-  :root {
-    color-scheme: light;
+@layer variables {
+  :root { color-scheme: light; }
+}
+```
 
-    @include emit.prefixed("color", colors.$colors, false);   // --color-Primary … (false = preserve case)
-    @include emit.custom("font-size", typography.$font-size-tokens);
-    @include emit.custom("space", spacing.$space-tokens);
-    @include emit.custom("radius", radius.$radius-tokens);
-    @include emit.custom("shadow", shadows.$shadow-tokens);
-    // …every token map
-  }
+```scss
+// src/variables/_radius.scss — the self-emitting pattern every value file follows
+@use "../_layers";
+@use "../abstracts/emit";
+
+$radius-tokens: (sm: 8px, md: 14px, lg: 24px);   // px
+
+@layer variables {
+  :root { @include emit.custom("radius", $radius-tokens); }
 }
 ```
 
@@ -220,16 +224,22 @@ Conventions:
   (e.g. `--color-Primary`, `--color-Primary-Shade`, `--color-Secondary-500`),
   and read **directly** by components — there is no semantic color layer.
 - **Scale tokens** (`--ui-space-3`, `--ui-radius-sm`) are the primitive steps.
-- **Heading & display type scales** live here too, folded into the font-size and
-  line-height maps: `--ui-font-size-h1 … -h6` (heading steps),
-  `--ui-font-size-display-1 … -3` (display steps), and `--ui-line-height-display`.
-  `base/typography` reads these rather than hardcoding sizes.
+  Radius values are authored in **px**.
+- **Reusable easings.** `_transitions.scss` emits `--ui-ease-power1 … -power4` —
+  cubic-bezier approximations of GSAP's Power (Quad→Cubic→Quart→Quint) ease-out
+  curves — usable anywhere a timing function is needed.
+- **Typography tokens live with the styling.** Fonts, sizes, weights, and
+  line-heights — including the heading (`--ui-font-size-h1 … -h6`) and display
+  (`--ui-font-size-display-1 … -3`) scales — are defined and emitted (into
+  `@layer variables`) in `base/_typography.scss`, right next to the element rules
+  that read them. They ship in `main.css`, not `variables.css`; both globals load
+  everywhere, so the tokens are always present.
 - The full palette ramp is exposed (`--color-Primary-500`) for direct use.
 
-Config owns all design values (color, space, size, radius, font, shadow,
-border-width); consumers read them with **no literal fallback**. Only structural
-or behavioral CSS-keyword defaults (`margin: 0`, `currentColor`, `underline`) stay
-inline — those are not tokens and config does not own them.
+Variables own the design values (color, space, radius, shadow, transition, font);
+consumers read them with **no literal fallback**. Only structural or behavioral
+CSS-keyword defaults (`margin: 0`, `currentColor`, `underline`) and trivial
+constants (a `1px` hairline border) stay inline — those are not tokens.
 
 ---
 
@@ -318,8 +328,8 @@ just with a bare element selector instead of a `.ui-<name>` class.)
 // src/primitives/_card.scss
 @layer primitive {
   .ui-card {
-    // Private vars read the required config token — no literal fallback. This is
-    // what lets the primitive adopt the design system (config.css must be loaded).
+    // Private vars read the required design token — no literal fallback. This is
+    // what lets the primitive adopt the design system (variables.css must be loaded).
     --_bg:     var(--color-White);
     --_fg:     var(--color-Black);
     --_border: var(--color-Light-300);
@@ -331,7 +341,7 @@ just with a bare element selector instead of a `.ui-<name>` class.)
     display: grid;
     gap: var(--_gap);
     padding: var(--_pad);
-    border: var(--ui-border-width-1) solid var(--_border);
+    border: 1px solid var(--_border);
     border-radius: var(--_radius);
     background: var(--_bg);
     color: var(--_fg);
@@ -369,8 +379,8 @@ just with a bare element selector instead of a `.ui-<name>` class.)
 1. **Wrap in `@layer primitive`** (a composed block in `components/` wraps in
    `@layer component` instead — that is the only difference).
 2. **Every themeable property reads a private `--_*` var.** The `--_*` var reads
-   a config token — a palette color (`--color-*`) or a scale token (`--ui-*`),
-   guaranteed by the required `config.css` — no literal fallback:
+   a design token — a palette color (`--color-*`) or a scale token (`--ui-*`),
+   guaranteed by the required `variables.css` — no literal fallback:
    `--_bg: var(--color-White);`
 3. **Variants only reassign `--_*` vars.** No variant restates layout/structure.
    This keeps variant CSS tiny and impossible to desync from the base.
@@ -384,7 +394,7 @@ just with a bare element selector instead of a `.ui-<name>` class.)
 ```
 inline style="--_bg: …"      // one instance
   ↑ [data-*] variant          // a variant class of instances
-    ↑ config token (--color-* / --ui-*)  // the whole design system (required base)
+    ↑ variables token (--color-* / --ui-*)  // the whole design system (required base)
 ```
 
 ---
@@ -467,8 +477,8 @@ and there is no scanning step that can guess wrong.
 ## 11. Rebranding
 
 There is no separate theme stylesheet and no runtime theme-swapping. Rebrand by
-editing the hex values in `config/_colors.scss` — every component follows for
-free because they read `var(--color-*)` directly (config emits the palette
+editing the hex values in `variables/_colors.scss` — every component follows for
+free because they read `var(--color-*)` directly (that file emits the palette
 case-preserved as `--color-<Name>`).
 
 For a **scoped** override — a section, a page, a `prefers-color-scheme` block —
@@ -483,7 +493,7 @@ wins by source order and components re-resolve automatically:
 }
 ```
 
-No component CSS changes; no rebuild beyond recompiling `config.css` when you
+No component CSS changes; no rebuild beyond recompiling `variables.css` when you
 edit the palette source.
 
 ---
@@ -492,14 +502,14 @@ edit the palette source.
 
 | Today | Becomes | Note |
 |-------|---------|------|
-| `configs/tokens/*` | `src/config/*` | Wrap emission in `@layer config`. |
-| `configs/helpers/_custom-properties.scss` | `src/abstracts/_emit.scss` | Renamed; lives in `abstracts/` — it's a Sass tool, not a config value. |
+| `configs/tokens/*` | `src/variables/*` | Wrap emission in `@layer variables`; each file emits its own tokens. |
+| `configs/helpers/_custom-properties.scss` | `src/abstracts/_emit.scss` | Renamed; lives in `abstracts/` — it's a Sass tool, not a design value. |
 | `configs/recipes/*` | **deleted** | Component defaults move *into* each component as `--_*` vars. Biggest change; it is what makes components portable. |
 | `configs/defaults/*` + `library/base/*` | `src/base/*` | Merges the two places base styling currently lives. |
 | `library/layout/*` | `src/layouts/*` | + new primitives (stack, cluster, grid, center). |
 | `library/components/_*-core.scss` | `src/primitives/_<name>.scss` | Refactor to the §8 pattern; `@use`'d directly by whoever compiles. |
-| `configs/config.scss` | `src/config/config.scss` | Config entry (`config.scss`) replaces the old aggregator. |
-| `configs/themes/midnight.scss` | **removed** | Runtime theme stylesheets are gone; rebrand by editing the palette in `config/_colors.scss` (§11). |
+| `configs/config.scss` | `src/variables/variables.scss` | Variables entry (`variables.scss`) replaces the old aggregator. |
+| `configs/themes/midnight.scss` | **removed** | Runtime theme stylesheets are gone; rebrand by editing the palette in `variables/_colors.scss` (§11). |
 | `library/main.scss` | `src/main.scss` | Adds `@use "_layers"`. |
 | `_legacy/` | **deleted** | Preserved in git history. |
 | `index.html`, `midnight.html` | `library.html` | Consolidated into one standalone styleguide; never compiled. |
@@ -526,15 +536,16 @@ edit the palette source.
 1. `src/pages/<name>.scss` — `@use "../_layers";` then `@use` the primitives/components it needs.
 2. Done — the compiler globs the new flat entry automatically.
 
-### Add a config token
-1. Add to the relevant map in `src/config/_*.scss`.
-2. It emits automatically via `abstracts/_emit.scss`. Reference it as `var(--ui-…)` — config
-   is required, so no literal fallback (an optional override hook may chain to the
-   token: `var(--ui-hook, var(--ui-…))`).
+### Add a design token
+1. Add to the relevant map in `src/variables/_*.scss` (or, for font tokens,
+   `src/base/_typography.scss`).
+2. It emits automatically via that file's own `emit.*` call. Reference it as
+   `var(--ui-…)` — variables are required, so no literal fallback (an optional
+   override hook may chain to the token: `var(--ui-hook, var(--ui-…))`).
 
 ### Rebrand
-1. Edit the hexes in `src/config/_colors.scss` — every component follows because
-   it reads `var(--color-*)` directly. Recompile `config.css`.
+1. Edit the hexes in `src/variables/_colors.scss` — every component follows because
+   it reads `var(--color-*)` directly. Recompile `variables.css`.
 2. For a scoped/dark override instead: redeclare the `--color-*` vars in a later
    `:root`/scope (§11); no component CSS changes.
 
@@ -561,7 +572,7 @@ edit the palette source.
 | Variant / state | `data-<axis>="<value>"` | `data-variant="outline"` |
 | Layout primitive | `.<name>` (unprefixed) | `.stack`, `.grid` |
 | Responsive mixin | `<device>-up` / `<device>-down` | `@include desktop-up { … }` |
-| Cascade layers | `config, reset, base, layout, primitive, component, page, override` | |
+| Cascade layers | `variables, reset, base, layout, primitive, component, page, override` | |
 
 ---
 
@@ -569,7 +580,7 @@ edit the palette source.
 
 `SMASCSS` currently ships a checked-in `assets/css/main.min.css` as demo output.
 Under this architecture the compiler emits, at minimum:
-`config.css`, `main.css`, and one `<page>.css` per page
+`variables.css`, `main.css`, and one `<page>.css` per page
 (primitives and composed blocks ship inside the page bundles that `@use` them, not
 as standalone files). Output is **flat** — one `<basename>.css` per entry directly
 under `assets/css/`, no subfolders (see §4), so entry basenames stay globally unique.

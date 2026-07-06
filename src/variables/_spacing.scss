@@ -1,0 +1,30 @@
+// ───────────────────────────────────────────────────────────────────────────
+// SPACING — the space scale.
+// One scale drives every margin, padding, and gap in the system. Edit the
+// steps to tighten or loosen the whole layout at once.
+// Emitted (here, in @layer variables) as --ui-space-1 … --ui-space-7.
+// ───────────────────────────────────────────────────────────────────────────
+@use "../_layers";
+@use "../abstracts/emit";
+
+$space-tokens: (
+  1: 0.25rem,
+  // 4px
+  2: 0.5rem,
+  // 8px
+  3: 0.75rem,
+  // 12px
+  4: 1rem,
+  // 16px
+  5: 1.5rem,
+  // 24px
+  6: 2rem,
+  // 32px
+  7: 3rem, // 48px
+);
+
+@layer variables {
+  :root {
+    @include emit.custom("space", $space-tokens);
+  }
+}
