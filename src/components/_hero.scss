@@ -4,13 +4,13 @@
 @layer component {
   .hero {
     display: grid;
-    gap: var(--ui-space-6, 2rem);
-    padding-block: var(--ui-space-7, 3rem);
+    gap: var(--ui-space-6);
+    padding-block: var(--ui-space-7);
   }
 
   .hero__actions {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--ui-space-3, 0.75rem);
+    gap: var(--ui-space-3);
   }
 }

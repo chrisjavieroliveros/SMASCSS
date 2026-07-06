@@ -9,28 +9,28 @@
       [type="datetime-local"], [type="month"], [type="time"], [type="week"]
     ),
   .input {
-    --_bg: var(--ui-color-surface, #ffffff);
-    --_fg: var(--ui-color-text, #111111);
-    --_border: var(--ui-color-border, #cccccc);
-    --_focus-border: var(--ui-color-primary, #c33329);
+    --_bg: var(--ui-color-surface);
+    --_fg: var(--ui-color-text);
+    --_border: var(--ui-color-border);
+    --_focus-border: var(--ui-color-primary);
     --_focus-ring: 0 0 0 3px
-      color-mix(in srgb, var(--ui-color-primary, #c33329) 22%, transparent);
+      color-mix(in srgb, var(--ui-color-primary) 22%, transparent);
 
     width: 100%;
     min-height: 3rem;
-    padding: var(--ui-space-3, 0.8rem) var(--ui-space-4, 1rem);
-    border: var(--ui-border-width-1, 1px) solid var(--_border);
-    border-radius: var(--ui-radius-sm, 0.5rem);
+    padding: var(--ui-space-3) var(--ui-space-4);
+    border: var(--ui-border-width-1) solid var(--_border);
+    border-radius: var(--ui-radius-sm);
     background: var(--_bg);
     color: var(--_fg);
     font: inherit;
     transition:
-      border-color var(--ui-transition-fast, 160ms ease),
-      box-shadow var(--ui-transition-fast, 160ms ease),
-      background var(--ui-transition-fast, 160ms ease);
+      border-color var(--ui-transition-fast),
+      box-shadow var(--ui-transition-fast),
+      background var(--ui-transition-fast);
 
     &::placeholder {
-      color: var(--ui-color-text-muted, #707070);
+      color: var(--ui-color-text-muted);
     }
 
     &:focus {
@@ -41,10 +41,10 @@
 
     // Native validity state — a11y, not a decorative variant.
     &[aria-invalid="true"] {
-      --_border: var(--ui-color-danger, #b91c1c);
-      --_focus-border: var(--ui-color-danger, #b91c1c);
+      --_border: var(--ui-color-danger);
+      --_focus-border: var(--ui-color-danger);
       --_focus-ring: 0 0 0 3px
-        color-mix(in srgb, var(--ui-color-danger, #b91c1c) 22%, transparent);
+        color-mix(in srgb, var(--ui-color-danger) 22%, transparent);
     }
 
     &:disabled,
@@ -56,6 +56,6 @@
 
   // Checkbox / radio just adopt the brand accent.
   input:where([type="checkbox"], [type="radio"]) {
-    accent-color: var(--ui-color-primary, #111111);
+    accent-color: var(--ui-color-primary);
   }
 }

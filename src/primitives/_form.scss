@@ -1,49 +1,37 @@
 @layer primitive {
   form:not([class]) {
     display: grid;
-    gap: var(--ui-form-gap, var(--ui-space-4, 1rem));
+    gap: var(--ui-form-gap, var(--ui-space-4));
   }
 
   label:not([class]) {
     display: var(--ui-label-display, block);
-    margin-block-end: var(
-      --ui-label-margin-block-end,
-      var(--ui-space-2, 0.5rem)
-    );
-    color: var(--ui-label-color, var(--ui-color-text, #111111));
-    font-size: var(--ui-label-font-size, var(--ui-font-size-100, 0.875rem));
-    font-weight: var(--ui-label-font-weight, var(--ui-font-weight-strong, 700));
-    line-height: var(--ui-label-line-height, var(--ui-line-height-base, 1.6));
+    margin-block-end: var(--ui-label-margin-block-end, var(--ui-space-2));
+    color: var(--ui-label-color, var(--ui-color-text));
+    font-size: var(--ui-label-font-size, var(--ui-font-size-100));
+    font-weight: var(--ui-label-font-weight, var(--ui-font-weight-strong));
+    line-height: var(--ui-label-line-height, var(--ui-line-height-base));
   }
 
   fieldset:not([class]) {
     min-inline-size: 0;
     margin-block-start: var(--ui-fieldset-margin-block-start, 0);
-    margin-block-end: var(
-      --ui-fieldset-margin-block-end,
-      var(--ui-space-5, 1.5rem)
-    );
-    padding: var(--ui-fieldset-padding, var(--ui-space-4, 1rem));
-    border: var(--ui-fieldset-border-width, 1px) solid
-      var(--ui-fieldset-border-color, var(--ui-color-border, #cccccc));
-    border-radius: var(--ui-fieldset-radius, var(--ui-radius-md, 0.9rem));
+    margin-block-end: var(--ui-fieldset-margin-block-end, var(--ui-space-5));
+    padding: var(--ui-fieldset-padding, var(--ui-space-4));
+    border: var(--ui-fieldset-border-width, var(--ui-border-width-1)) solid
+      var(--ui-fieldset-border-color, var(--ui-color-border));
+    border-radius: var(--ui-fieldset-radius, var(--ui-radius-md));
   }
 
   legend:not([class]) {
-    padding-inline: var(--ui-legend-padding-inline, var(--ui-space-2, 0.5rem));
-    color: var(--ui-legend-color, var(--ui-color-text, #111111));
+    padding-inline: var(--ui-legend-padding-inline, var(--ui-space-2));
+    color: var(--ui-legend-color, var(--ui-color-text));
     font-family: var(
       --ui-legend-font-family,
-      var(
-        --ui-font-family-heading,
-        var(--ui-font-family-base, "Segoe UI", sans-serif)
-      )
+      var(--ui-font-family-heading, var(--ui-font-family-base))
     );
-    font-size: var(--ui-legend-font-size, var(--ui-font-size-100, 0.875rem));
-    font-weight: var(
-      --ui-legend-font-weight,
-      var(--ui-font-weight-strong, 700)
-    );
+    font-size: var(--ui-legend-font-size, var(--ui-font-size-100));
+    font-weight: var(--ui-legend-font-weight, var(--ui-font-weight-strong));
   }
 
   // <button>, <input>, and <textarea> now have their own base files
@@ -52,21 +40,21 @@
   select:not([class]) {
     width: 100%;
     min-height: 3rem;
-    padding: var(--ui-space-3, 0.8rem) var(--ui-space-4, 1rem);
-    border: var(--ui-border-width-1, 1px) solid var(--ui-color-border, #cccccc);
-    border-radius: var(--ui-radius-sm, 0.5rem);
-    background: var(--ui-color-surface, #ffffff);
-    color: var(--ui-color-text, #111111);
+    padding: var(--ui-space-3) var(--ui-space-4);
+    border: var(--ui-border-width-1) solid var(--ui-color-border);
+    border-radius: var(--ui-radius-sm);
+    background: var(--ui-color-surface);
+    color: var(--ui-color-text);
     transition:
-      border-color var(--ui-transition-fast, 160ms ease),
-      box-shadow var(--ui-transition-fast, 160ms ease),
-      background var(--ui-transition-fast, 160ms ease);
+      border-color var(--ui-transition-fast),
+      box-shadow var(--ui-transition-fast),
+      background var(--ui-transition-fast);
   }
 
   select:not([class]):focus {
-    border-color: var(--ui-color-primary, currentColor);
+    border-color: var(--ui-color-primary);
     box-shadow: 0 0 0 3px
-      color-mix(in srgb, var(--ui-color-primary, #000) 18%, transparent);
+      color-mix(in srgb, var(--ui-color-primary) 18%, transparent);
     outline: none;
   }
 }

@@ -2,8 +2,8 @@
   // Centered, gutter-aware max-width wrapper.
   .container {
     width: min(
-      100% - (var(--container-gutter, var(--ui-space-5, 1.5rem)) * 2),
-      var(--container-max, var(--ui-container-width, 72rem))
+      100% - (var(--container-gutter, var(--ui-space-5)) * 2),
+      var(--container-max, var(--ui-container-width))
     );
     margin-inline: auto;
   }

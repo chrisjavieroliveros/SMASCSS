@@ -3,32 +3,35 @@
 // buttons. Plain styling — no variants, no sizes, no tones. The private --_*
 // vars stay as theming hooks so a page or component can retune one property
 // (e.g. `.hero .btn { --_radius: 999px }`) without a variant system.
+//
+// Config is REQUIRED: the --_* hooks read config tokens directly, no literal
+// fallback. Structural constants (min-height, line-height:1) stay literal.
 @layer primitive {
   button,
   .btn {
-    --_bg: var(--ui-color-primary, #c33329);
-    --_fg: var(--ui-color-primary-contrast, #ffffff);
-    --_bg-hover: var(--ui-color-primary-strong, #a52a2a);
-    --_radius: var(--ui-radius-sm, 0.5rem);
+    --_bg: var(--ui-color-primary);
+    --_fg: var(--ui-color-primary-contrast);
+    --_bg-hover: var(--ui-color-primary-strong);
+    --_radius: var(--ui-radius-sm);
 
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: var(--ui-space-2, 0.5rem);
+    gap: var(--ui-space-2);
     min-height: 2.875rem;
-    padding: var(--ui-space-3, 0.75rem) var(--ui-space-4, 1rem);
-    border: var(--ui-border-width-1, 1px) solid transparent;
+    padding: var(--ui-space-3) var(--ui-space-4);
+    border: var(--ui-border-width-1) solid transparent;
     border-radius: var(--_radius);
     background: var(--_bg);
     color: var(--_fg);
     font: inherit;
-    font-weight: var(--ui-font-weight-strong, 700);
+    font-weight: var(--ui-font-weight-strong);
     line-height: 1;
     text-decoration: none;
     cursor: pointer;
     transition:
-      background var(--ui-transition-fast, 160ms ease),
-      transform var(--ui-transition-fast, 160ms ease);
+      background var(--ui-transition-fast),
+      transform var(--ui-transition-fast);
 
     &:hover {
       background: var(--_bg-hover);

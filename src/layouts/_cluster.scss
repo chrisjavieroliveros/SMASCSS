@@ -5,7 +5,7 @@
     flex-wrap: wrap;
     align-items: var(--cluster-align, center);
     justify-content: var(--cluster-justify, flex-start);
-    gap: var(--cluster-gap, var(--ui-space-3, 0.75rem));
+    gap: var(--cluster-gap, var(--ui-space-3));
   }
 
   .cluster[data-justify="between"] {

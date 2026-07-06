@@ -10,12 +10,12 @@
        HOW A PAGE CONSUMES THE SYSTEM — this is the whole point of this file.
        Nothing is inlined. Every page links the same THREE cached globals, then
        its own page bundle. This exact <head> is the runtime load order (§5).
-         1. variables.css  → :root { --ui-* }        the design-system contract
+         1. config.css     → :root { --ui-* }        the design-system contract (REQUIRED)
          2. main.css       → reset + base + layout    the "super globals"
-         3. theme-*.css     → optional variable overrides, swapped at runtime
+         3. theme-*.css     → optional token overrides, swapped at runtime
          4. <page>.css      → only THIS page's primitives + components + chrome
   ═══════════════════════════════════════════════════════════════════════════ -->
-  <link rel="stylesheet" href="assets/css/variables.min.css" />
+  <link rel="stylesheet" href="assets/css/config.min.css" />
   <link rel="stylesheet" href="assets/css/main.min.css" />
   <link id="theme" rel="stylesheet" href="assets/css/theme-midnight.min.css" />
   <link rel="stylesheet" href="assets/css/library.min.css" />
@@ -38,16 +38,16 @@
     <section class="sg-section" id="overview" style="margin-top:var(--ui-space-6,2rem)">
       <h2>Overview <small>this page is the worked example</small></h2>
       <p class="note" style="max-width:72ch">
-        This file loads nothing inline. It links the compiled <code>variables.css</code>,
+        This file loads nothing inline. It links the compiled <code>config.css</code>,
         <code>main.css</code>, and its own <code>library.css</code> bundle exactly as any Astro page,
         WordPress template, or plain HTML page would. Components read private <code>--_*</code> vars
-        that fall back to semantic <b>variables</b>, which fall back to hard literals — so a component
-        renders bare and upgrades automatically once <code>variables.css</code> is present. Cascade
-        layers keep the whole thing overridable by any host.
+        that read the required semantic <b>tokens</b> from <code>config.css</code> — it must be loaded
+        (there's no bare fallback for design values). Cascade layers keep the whole thing overridable
+        by any host.
       </p>
       <div class="sg-layers">
         <span class="lyr">@layer</span>
-        <span class="lyr"><b>variables</b></span><span class="arw">→</span>
+        <span class="lyr"><b>config</b></span><span class="arw">→</span>
         <span class="lyr"><b>reset</b></span><span class="arw">→</span>
         <span class="lyr"><b>base</b></span><span class="arw">→</span>
         <span class="lyr"><b>layout</b></span><span class="arw">→</span>
@@ -59,7 +59,7 @@
       </div>
       <nav class="sg-nav">
         <a href="#consumption">How it's built</a>
-        <a href="#variables">Variables</a>
+        <a href="#config">Config</a>
         <a href="#ramps">Palette ramps</a>
         <a href="#base">Base elements</a>
         <a href="#layout">Layout primitives</a>
@@ -86,7 +86,7 @@
         <div class="sg-codeblock">
           <pre
             class="sg-code"><span class="c">&lt;!-- globals: cached once, shared by every page --&gt;</span>
-<span class="t">&lt;link</span> <span class="a">rel</span>=<span class="c">"stylesheet"</span> <span class="a">href</span>=<span class="c">"assets/css/variables.min.css"</span><span class="t">&gt;</span>   <span class="c">1 · :root { --ui-* }</span>
+<span class="t">&lt;link</span> <span class="a">rel</span>=<span class="c">"stylesheet"</span> <span class="a">href</span>=<span class="c">"assets/css/config.min.css"</span><span class="t">&gt;</span>      <span class="c">1 · :root { --ui-* }</span>
 <span class="t">&lt;link</span> <span class="a">rel</span>=<span class="c">"stylesheet"</span> <span class="a">href</span>=<span class="c">"assets/css/main.min.css"</span><span class="t">&gt;</span>        <span class="c">2 · reset + base + layout</span>
 <span class="t">&lt;link</span> <span class="a">rel</span>=<span class="c">"stylesheet"</span> <span class="a">href</span>=<span class="c">"assets/css/theme-midnight.min.css"</span><span class="t">&gt;</span> <span class="c">3 · optional theme</span>
 <span class="c">&lt;!-- this page's bundle: primitives + components + page chrome --&gt;</span>
@@ -128,10 +128,10 @@
     </section>
 
     <!-- ─── SEMANTIC VARIABLES ──────────────────────────────────────────── -->
-    <section class="sg-section" id="variables">
-      <h2>Semantic variables <small>--ui-color-* · the design-system contract</small></h2>
-      <p class="note">The interface components read through. Rebrand or theme by changing only these — no
-        selector touches. Swatches below are live, read from the linked <code>variables.css</code>.</p>
+    <section class="sg-section" id="config">
+      <h2>Config <small>--ui-color-* · the design-system contract</small></h2>
+      <p class="note">The semantic tokens components read through. Rebrand or theme by changing only these — no
+        selector touches. Swatches below are live, read from the linked <code>config.css</code>.</p>
       <div class="sg-swatches" id="semanticSwatches"></div>
 
       <div class="sg-block">
@@ -383,16 +383,17 @@
 
     <!-- ─── ANATOMY ─────────────────────────────────────────────────────── -->
     <section class="sg-section" id="anatomy">
-      <h2>Anatomy <small>the three-tier fallback that makes it portable</small></h2>
-      <p class="note">Every themeable property flows through one chain: private var ← semantic variable ← hard
-        literal. Reassign one var to restyle — inline, in a page layer, or a theme — with no selector duplication
-        and no <code>!important</code>.
+      <h2>Anatomy <small>the private-var chain that makes it portable</small></h2>
+      <p class="note">Every themeable property flows through one chain: private var ← required config token.
+        Reassign one var to restyle — inline, in a page layer, or a theme — with no selector duplication
+        and no <code>!important</code>. <code>config.css</code> must be loaded; there's no baked literal
+        fallback for design values.
       </p>
       <div class="sg-demo">
-        <pre class="sg-code"><span class="c">/* private var  ←  semantic variable  ←  hard literal fallback */</span>
+        <pre class="sg-code"><span class="c">/* private var  ←  required config token */</span>
 <span class="a">button</span>, <span class="a">.btn</span> {
-  <span class="t">--_bg</span>: <span class="a">var</span>(<span class="t">--ui-color-primary</span>, <span class="c">#c33329</span>);   <span class="c">/* ① renders bare */</span>
-  background: <span class="a">var</span>(<span class="t">--_bg</span>);                       <span class="c">/* ② adopts variables */</span>
+  <span class="t">--_bg</span>: <span class="a">var</span>(<span class="t">--ui-color-primary</span>);              <span class="c">/* ① reads config */</span>
+  background: <span class="a">var</span>(<span class="t">--_bg</span>);                       <span class="c">/* ② adopts tokens */</span>
 }
 <span class="a">.hero</span> <span class="a">.btn</span> {                              <span class="c">/* @layer page */</span>
   <span class="t">--_radius</span>: <span class="c">999px</span>;                        <span class="c">/* ③ one var, no new rule */</span>
@@ -401,7 +402,7 @@
     </section>
 
     <footer class="sg-foot">
-      This page links <code>variables.css</code> + <code>main.css</code> + <code>library.css</code> (its own
+      This page links <code>config.css</code> + <code>main.css</code> + <code>library.css</code> (its own
       bundle from <code>src/pages/library.scss</code>), plus the optional midnight theme. Recompile
       <code>src/</code> to refresh — the CSS is never inlined here.
     </footer>
@@ -417,7 +418,7 @@
       label.textContent = themeLink.disabled ? 'Light' : 'Midnight';
     });
 
-    // ── Live-read semantic variables from the linked variables.css → swatches.
+    // ── Live-read semantic tokens from the linked config.css → swatches.
     const SEMANTIC = [
       'text', 'text-muted', 'background', 'surface', 'surface-muted', 'border',
       'primary', 'primary-strong', 'primary-contrast', 'accent',
