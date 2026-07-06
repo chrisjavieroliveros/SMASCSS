@@ -1,4 +1,4 @@
-// core/textarea — multi-line control. Self-contained (mirrors .ui-input vars).
+// primitives/textarea — multi-line control. Self-contained (mirrors .ui-input vars).
 @layer components {
   .ui-textarea {
     --_bg: var(--ui-color-surface, #ffffff);

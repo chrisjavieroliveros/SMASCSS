@@ -1,8 +1,14 @@
 # SMASCSS
 
-> A config-driven, per-page-optimized SCSS system whose **components** are
+> A config-driven, per-page-optimized SCSS system whose **primitives** are
 > portable enough to drop into an Astro component, a WordPress block, or an
 > Elementor widget — with **zero** of the rest of the system loaded.
+
+**Two component tiers.** `primitives/` holds the portable, self-sufficient
+`.ui-*` atoms (button, input, textarea, card) — authored in `@layer components`,
+these are the "drop anywhere" set. `components/` holds composed, project-specific
+blocks assembled from primitives + layout (e.g. `.home-hero`) — authored in the
+layer that matches their reuse (`@layer page` for page-specific sections).
 
 This is the contract: *what the system guarantees* and *how to author against
 it*. The `src/` tree is the implementation; [§12](#12-migration-map) records the
@@ -16,7 +22,7 @@ migration from the original `configs/` + `library/` layout (now removed).
    base element styling + layout primitives. No components live here.
 2. **Pages ship only what they use.** Each page compiles its own bundle that
    `@use`s only the components it actually renders. No global component bloat.
-3. **A portable `components/`.** Every component renders correctly *bare* (no
+3. **A portable `primitives/`.** Every primitive renders correctly *bare* (no
    tokens, no theme) and *upgrades automatically* when the design system is
    present. One source powers the architecture and every external host.
 4. **Predictable cascade under hostile hosts.** WordPress/Elementor styles
@@ -69,8 +75,8 @@ Layer purpose and why the order is what it is:
 | `tokens` | `tokens.css`, theme files | `:root { --ui-* }`. A theme loaded *later* redefines these in the **same** layer and wins by source order — no separate theme layer needed. Components re-resolve automatically because they read tokens through `var()`. |
 | `base` | `main.css` | Semantic element defaults (typography, forms, tables, media). |
 | `layout` | `main.css` | Layout primitives (stack, cluster, grid, container, center). |
-| `components` | `components/` | `.ui-*` components. Sits above base/layout so components win over generic element styling. |
-| `page` | page bundles | Page-specific styling. Above `components`, so a page can adjust a component with no `!important`. |
+| `components` | `primitives/` | `.ui-*` primitives. Sits above base/layout so components win over generic element styling. |
+| `page` | page bundles, `components/` | Page-specific styling and composed blocks (`.home-hero`). Above `components`, so a page can adjust a primitive with no `!important`. |
 | `overrides` | anywhere | Deliberate last-word escape hatch. |
 
 **The embedding guarantee:** any CSS *outside* all layers — a WordPress theme,
@@ -103,20 +109,21 @@ src/
     layout/
       _container.scss  _stack.scss  _cluster.scss  _grid.scss  _center.scss  _index.scss
 
-  components/                        // the PORTABLE library — partials only
-    _index.scss                //   @forward every component (whole-library / SCSS consumers)
-    _button.scss               //   components are @use'd directly by whoever compiles
+  primitives/                  // the PORTABLE library — partials only, @layer components
+    _index.scss                //   @forward every primitive (whole-library / SCSS consumers)
+    _button.scss               //   primitives are @use'd directly by whoever compiles
     _input.scss
     _textarea.scss
     _card.scss
 
-  themes/                      // → themes/<name>.css  (separate, swappable at runtime)
-    midnight.scss              //   ENTRY
+  components/                  // composed, project-specific blocks — partials only
+    _home-hero.scss            //   e.g. .home-hero, assembled from primitives + layout
 
-  pages/                       // one folder per page (manual composition, per-page)
-    home/
-      home.scss                //   ENTRY → home.css: @use only the components it needs + page partials
-      _home-hero.scss          //   page-only styles live as partials beside the entry
+  themes/                      // → themes/<name>.css  (separate, swappable at runtime)
+    theme-midnight.scss        //   ENTRY
+
+  pages/                       // one flat entry per page (manual composition, per-page)
+    home.scss                  //   ENTRY → home.css: @use only the primitives/components it needs
     about.scss
 
 preview/                       // demo HTML (never compiled)
@@ -229,16 +236,17 @@ Layout primitives are the deliberate replacement for a utility layer (decision
 
 ---
 
-## 8. Components — the authoring pattern
+## 8. Primitives — the authoring pattern
 
-This is the heart of the system. Every component follows one recipe that
+This is the heart of the system. Every primitive follows one recipe that
 delivers self-sufficiency, token upgrade, data-attribute variants, and layer
-placement simultaneously.
+placement simultaneously. Composed `components/` blocks assemble these primitives
+but follow the layer that matches their reuse (`@layer page` for page sections).
 
 ### 8.1 Reference implementation
 
 ```scss
-// src/components/_button.scss
+// src/primitives/_button.scss
 @layer components {
   .ui-button {
     // Private vars: hard fallback ← global token. This chain is what makes the
@@ -318,11 +326,11 @@ inline style="--_bg: …"      // one instance
 
 ## 9. Distribution
 
-Components ship as **source partials** (`components/_button.scss`). Whoever compiles
+Primitives ship as **source partials** (`primitives/_button.scss`). Whoever compiles
 `@use`s them directly:
 
-- Your pages: `@use "../../components/button"` (see §10).
-- Astro / Vite / `@wordpress/scripts`: `@use "components/button"`, or `@use "components/index"`
+- Your pages: `@use "../primitives/button"` (see §10).
+- Astro / Vite / `@wordpress/scripts`: `@use "primitives/button"`, or `@use "primitives/index"`
   for the whole library, and let the bundler tree-shake.
 
 `@use` is a source-time mechanism, so this covers every consumer that runs Sass.
@@ -335,11 +343,11 @@ lacks the `@layer` statement. When that need arises, add a one-off entry:
 ```scss
 // e.g. build/button.scss   → button.css   (create only when a host needs a file)
 @use "../src/_layers";
-@use "../src/components/button";
+@use "../src/primitives/button";
 ```
 
-Keep such entries out of `components/` — a partial `_button.scss` and an entry
-`button.scss` in the *same* folder make `@use "components/button"` an ambiguous import
+Keep such entries out of `primitives/` — a partial `_button.scss` and an entry
+`button.scss` in the *same* folder make `@use "primitives/button"` an ambiguous import
 that Sass rejects. Put them in a separate build/output location.
 
 **Layered by design (decision D4):** a compiled component carries `@layer
@@ -351,35 +359,34 @@ everything.
 
 ## 10. Page composition
 
-Each page is its own folder: an entry named after the page (so it emits
-`<name>.css`) plus its private partials beside it. The entry is a manifest — it
-pulls the layer order, the exact components the page uses, and its own
-partials.
+Each page is a single flat entry named after the page (so it emits `<name>.css`).
+The entry is a manifest — it pulls the layer order, the exact primitives the page
+uses, and any composed blocks it renders.
 
 ```scss
-// src/pages/home/home.scss   → home.css
-@use "../../_layers";
+// src/pages/home.scss   → home.css
+@use "../_layers";
 
-// Only what this page renders:
-@use "../../components/button";
-@use "../../components/card";
+// Only the primitives this page renders:
+@use "../primitives/button";
+@use "../primitives/card";
 
-// Page-specific styling, in the `page` layer so it can tweak components:
-@use "home-hero";        // _home-hero.scss (same folder)
+// Composed blocks, in the `page` layer so they can tweak primitives:
+@use "../components/home-hero";   // _home-hero.scss
 ```
 
 ```scss
-// src/pages/home/_home-hero.scss
+// src/components/_home-hero.scss
 @layer page {
   .home-hero { display: grid; gap: var(--ui-space-6, 2rem); }
-  .home-hero .ui-button { --_radius: 999px; }   // page-local component tweak
+  .home-hero .ui-button { --_radius: 999px; }   // page-local primitive tweak
 }
 ```
 
 > Name the entry `home.scss`, not `index.scss` — the compiler emits a `.css`
 > matching the entry's basename, and you want `home.css`.
 
-Trade-off, accepted per decision #6: a component used on five pages appears in
+Trade-off, accepted per decision #6: a primitive used on five pages appears in
 five page bundles. In exchange every page downloads *only* its own components,
 and there is no scanning step that can guess wrong.
 
@@ -392,7 +399,7 @@ tokens in the `tokens` layer. Loaded after `tokens.css`, they win by source
 order; components adopt them for free because they read tokens through `var()`.
 
 ```scss
-// src/themes/midnight.scss   → themes/midnight.css
+// src/themes/theme-midnight.scss   → themes/theme-midnight.css
 @use "../_layers";
 
 @layer tokens {
@@ -424,9 +431,9 @@ CSS changes; no rebuild.
 | `configs/recipes/*` | **deleted** | Component defaults move *into* each component as `--_*` vars. Biggest change; it is what makes components portable. |
 | `configs/defaults/*` + `library/base/*` | `src/global/base/*` | Merges the two places base styling currently lives. |
 | `library/layout/*` | `src/global/layout/*` | + new primitives (stack, cluster, grid, center). |
-| `library/components/_*-core.scss` | `src/components/_<name>.scss` | Refactor to the §8 pattern; `@use`'d directly by whoever compiles. |
+| `library/components/_*-core.scss` | `src/primitives/_<name>.scss` | Refactor to the §8 pattern; `@use`'d directly by whoever compiles. |
 | `configs/config.scss` | `src/tokens/tokens.scss` | Token entry replaces the config aggregator. |
-| `configs/themes/midnight.scss` | `src/themes/midnight.scss` | Wrap in `@layer tokens`. |
+| `configs/themes/midnight.scss` | `src/themes/theme-midnight.scss` | Wrap in `@layer tokens`. |
 | `library/main.scss` | `src/global/main.scss` | Adds `@use "../_layers"`. |
 | `_legacy/` | **deleted** | Preserved in git history. |
 | `index.html`, `midnight.html` | `preview/` | Kept as demos; never compiled. |
@@ -435,16 +442,20 @@ CSS changes; no rebuild.
 
 ## 13. Playbooks
 
-### Add a component
-1. `src/components/_<name>.scss` — author to the §8 pattern.
-2. Add `@forward "<name>";` to `src/components/_index.scss`.
-3. Use it in a page via `@use "../../components/<name>";`.
+### Add a primitive
+1. `src/primitives/_<name>.scss` — author to the §8 pattern.
+2. Add `@forward "<name>";` to `src/primitives/_index.scss`.
+3. Use it in a page via `@use "../primitives/<name>";`.
 4. Only if an external host needs a pre-built file: add a one-off entry (§9).
 
+### Add a composed block
+1. `src/components/_<name>.scss` — assemble primitives + layout; wrap in the layer
+   that matches its reuse (`@layer page` for page sections).
+2. Use it in a page via `@use "../components/<name>";`.
+
 ### Add a page
-1. `src/pages/<name>/<name>.scss` — `@use "../../_layers";` then `@use` the components it needs.
-2. Page-only styles → `src/pages/<name>/_*.scss` in `@layer page`, `@use`'d by the entry.
-3. Done — the compiler globs the new entry automatically.
+1. `src/pages/<name>.scss` — `@use "../_layers";` then `@use` the primitives/components it needs.
+2. Done — the compiler globs the new flat entry automatically.
 
 ### Add a token
 1. Add to the relevant map in `src/tokens/_*.scss`.
@@ -463,7 +474,8 @@ CSS changes; no rebuild.
 | Global token | `--ui-<group>-<name>` | `--ui-color-primary`, `--ui-space-3` |
 | Palette ramp | `--color-<name>-<step>` | `--color-primary-500` |
 | Component private var | `--_<role>` | `--_bg`, `--_pad` |
-| Component class | `.ui-<name>` | `.ui-button` |
+| Primitive class | `.ui-<name>` | `.ui-button` |
+| Composed block class | `.<block>` / `.<block>__<part>` | `.home-hero`, `.home-hero__actions` |
 | Variant / state | `data-<axis>="<value>"` | `data-variant="outline"` |
 | Layout primitive | `.<name>` (unprefixed) | `.stack`, `.grid` |
 | Cascade layers | `reset, tokens, base, layout, components, page, overrides` | |
@@ -474,6 +486,7 @@ CSS changes; no rebuild.
 
 `SMASCSS` currently ships a checked-in `assets/css/main.min.css` as demo output.
 Under this architecture the compiler emits, at minimum:
-`tokens.css`, `main.css`, `themes/*.css`, `components/*.css`, and one `*.css` per page.
+`tokens.css`, `main.css`, `themes/*.css`, and one `*.css` per page (primitives and
+composed blocks ship inside the page bundles that `@use` them, not as standalone files).
 Output layout is the compiler's concern; a mirror of `src/` under `assets/css/`
 keeps paths predictable.

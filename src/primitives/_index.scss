@@ -1,6 +1,6 @@
 // Whole-library forward — for SCSS consumers who want everything, or a
-// "kitchen sink" build. Per-page bundles should @use individual components
-// instead (e.g. @use "../core/button") so only what's used compiles in.
+// "kitchen sink" build. Per-page bundles should @use individual primitives
+// instead (e.g. @use "../primitives/button") so only what's used compiles in.
 @forward "button";
 @forward "input";
 @forward "textarea";

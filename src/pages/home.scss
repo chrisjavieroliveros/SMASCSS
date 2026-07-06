@@ -1,12 +1,12 @@
 // ENTRY → home.css
-// A page bundle is a manifest: pull the layer order, @use ONLY the core
-// components this page renders, then its own partials. Nothing else ships.
-@use "../../_layers";
+// A page bundle is a manifest: pull the layer order, @use ONLY the primitives
+// this page renders, then its own page components. Nothing else ships.
+@use "../_layers";
 
-// Components this page uses (and only these):
-@use "../../components/button";
-@use "../../components/card";
-@use "../../components/input";
+// Primitives this page uses (and only these):
+@use "../primitives/button";
+@use "../primitives/card";
+@use "../primitives/input";
 
-// Page-specific styling:
-@use "home-hero";
+// Page components:
+@use "../components/home-hero";

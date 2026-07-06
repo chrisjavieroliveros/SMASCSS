@@ -1,7 +1,7 @@
 // ─────────────────────────────────────────────────────────────────────────
-// core/button — REFERENCE IMPLEMENTATION
+// primitives/button — REFERENCE IMPLEMENTATION
 //
-// Every core component follows this exact recipe:
+// Every primitive follows this exact recipe:
 //   1. Wrapped in @layer components.
 //   2. Every themeable property reads a private --_* var.
 //   3. Each --_* var defaults to a semantic token, which has a hard literal
