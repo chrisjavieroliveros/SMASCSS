@@ -1,7 +1,7 @@
-// ENTRY → tokens.css
-// The design-system contract: every primitive value as a CSS custom property.
-// Load this first, on every page. It is also the ONLY file an external host
-// (Astro / WordPress / Elementor) needs to adopt your brand.
+// ENTRY → variables.css
+// The design-system contract: every primitive value as a CSS custom property
+// (a "CSS variable"). Load this first, on every page. It is also the ONLY file
+// an external host (Astro / WordPress / Elementor) needs to adopt your brand.
 @use "sass:map";
 @use "../_layers";
 @use "emit";
@@ -12,7 +12,7 @@
 @use "sizing";
 @use "effects";
 
-@layer tokens {
+@layer variables {
   :root {
     color-scheme: map.get(colors.$semantic-colors, scheme);
 

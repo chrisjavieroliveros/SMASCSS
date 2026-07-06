@@ -1,7 +1,7 @@
 // ENTRY → main.css
 // The "super globals only" baseline: loaded on every page.
 // Reset + semantic element defaults + layout primitives. No components.
-@use "../_layers";
+@use "_layers";
 
 // @layer reset
 @use "base/reset";

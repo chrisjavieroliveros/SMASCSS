@@ -1,10 +1,10 @@
-// ENTRY → themes/midnight.css
-// A theme only redefines SEMANTIC tokens (in the `tokens` layer). Loaded after
-// tokens.css, it wins by source order; components adopt it automatically
-// because they read tokens through var(). No component CSS changes.
+// ENTRY → theme-midnight.css
+// A theme only redefines SEMANTIC variables (in the `variables` layer). Loaded
+// after variables.css, it wins by source order; components adopt it automatically
+// because they read variables through var(). No component CSS changes.
 @use "../_layers";
 
-@layer tokens {
+@layer variables {
   :root {
     color-scheme: dark;
     --ui-color-scheme: dark;

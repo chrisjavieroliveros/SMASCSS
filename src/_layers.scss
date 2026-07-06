@@ -2,4 +2,4 @@
 // @use'd first in every entry so precedence holds across separately-compiled files.
 // Anything OUTSIDE these layers (a host theme) always wins — that is the
 // "stays overridable" guarantee for WordPress / Elementor embedding.
-@layer reset, tokens, base, layout, components, page, overrides;
+@layer reset, variables, base, layout, components, page, overrides;
