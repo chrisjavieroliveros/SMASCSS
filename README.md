@@ -116,8 +116,9 @@ src/
     _textarea.scss
     _card.scss
 
-  components/                  // composed, project-specific blocks — partials only
-    _hero.scss                 //   e.g. .home-hero, assembled from primitives + layout
+  components/                  // composed, reusable blocks — partials only, @layer components
+    _index.scss                //   @forward every block (whole-library / SCSS consumers)
+    _hero.scss                 //   e.g. .hero, assembled from primitives + layout
 
   themes/                      // → themes/<name>.css  (separate, swappable at runtime)
     theme-midnight.scss        //   ENTRY
@@ -241,7 +242,7 @@ Layout primitives are the deliberate replacement for a utility layer (decision
 This is the heart of the system. Every primitive follows one recipe that
 delivers self-sufficiency, token upgrade, data-attribute variants, and layer
 placement simultaneously. Composed `components/` blocks assemble these primitives
-but follow the layer that matches their reuse (`@layer page` for page sections).
+in the same `@layer components`; page-specific tweaks to them live in the `page` layer.
 
 ### 8.1 Reference implementation
 
