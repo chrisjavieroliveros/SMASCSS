@@ -43,7 +43,9 @@
   body {
     // Base already sets background/color/font from the variables; we only add
     // a transition so the runtime theme swap animates smoothly.
-    transition: background 0.3s ease, color 0.3s ease;
+    transition:
+      background 0.3s ease,
+      color 0.3s ease;
   }
 
   // Sticky header
@@ -57,7 +59,11 @@
     gap: 1rem;
     flex-wrap: wrap;
     padding: var(--ui-space-4, 1rem) var(--ui-space-5, 1.5rem);
-    background: color-mix(in srgb, var(--ui-color-surface, #fff) 88%, transparent);
+    background: color-mix(
+      in srgb,
+      var(--ui-color-surface, #fff) 88%,
+      transparent
+    );
     backdrop-filter: blur(10px);
     border-bottom: 1px solid var(--ui-color-border, #d7d0c6);
   }
@@ -94,7 +100,8 @@
   .sg-wrap {
     max-width: 74rem;
     margin-inline: auto;
-    padding: var(--ui-space-6, 2rem) var(--ui-space-5, 1.5rem) var(--ui-space-7, 3rem);
+    padding: var(--ui-space-6, 2rem) var(--ui-space-5, 1.5rem)
+      var(--ui-space-7, 3rem);
   }
 
   // Cascade-layer diagram
