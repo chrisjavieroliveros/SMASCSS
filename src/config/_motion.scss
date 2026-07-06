@@ -1,8 +1,0 @@
-// ───────────────────────────────────────────────────────────────────────────
-// MOTION — transitions & timing.
-// Edit these to change how snappy or relaxed interactions feel.
-// Emitted as --ui-transition-fast.
-// ───────────────────────────────────────────────────────────────────────────
-$transition-tokens: (
-  fast: 160ms ease,
-);

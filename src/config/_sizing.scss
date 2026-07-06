@@ -1,9 +1,0 @@
-// ───────────────────────────────────────────────────────────────────────────
-// SIZING — layout widths.
-// `width` is the max content width the `.container` layout primitive uses.
-// Add more layout measures here (e.g. a narrow reading width) as you need them.
-// Emitted as --ui-container-width.
-// ───────────────────────────────────────────────────────────────────────────
-$container-tokens: (
-  width: 72rem,
-);
