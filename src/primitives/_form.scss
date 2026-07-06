@@ -6,7 +6,10 @@
 
   label:not([class]) {
     display: var(--ui-label-display, block);
-    margin-block-end: var(--ui-label-margin-block-end, var(--ui-space-2, 0.5rem));
+    margin-block-end: var(
+      --ui-label-margin-block-end,
+      var(--ui-space-2, 0.5rem)
+    );
     color: var(--ui-label-color, var(--ui-color-text, #111111));
     font-size: var(--ui-label-font-size, var(--ui-font-size-100, 0.875rem));
     font-weight: var(--ui-label-font-weight, var(--ui-font-weight-strong, 700));
@@ -16,7 +19,10 @@
   fieldset:not([class]) {
     min-inline-size: 0;
     margin-block-start: var(--ui-fieldset-margin-block-start, 0);
-    margin-block-end: var(--ui-fieldset-margin-block-end, var(--ui-space-5, 1.5rem));
+    margin-block-end: var(
+      --ui-fieldset-margin-block-end,
+      var(--ui-space-5, 1.5rem)
+    );
     padding: var(--ui-fieldset-padding, var(--ui-space-4, 1rem));
     border: var(--ui-fieldset-border-width, 1px) solid
       var(--ui-fieldset-border-color, var(--ui-color-border, #cccccc));
@@ -28,10 +34,16 @@
     color: var(--ui-legend-color, var(--ui-color-text, #111111));
     font-family: var(
       --ui-legend-font-family,
-      var(--ui-font-family-heading, var(--ui-font-family-base, "Segoe UI", sans-serif))
+      var(
+        --ui-font-family-heading,
+        var(--ui-font-family-base, "Segoe UI", sans-serif)
+      )
     );
     font-size: var(--ui-legend-font-size, var(--ui-font-size-100, 0.875rem));
-    font-weight: var(--ui-legend-font-weight, var(--ui-font-weight-strong, 700));
+    font-weight: var(
+      --ui-legend-font-weight,
+      var(--ui-font-weight-strong, 700)
+    );
   }
 
   // <button>, <input>, and <textarea> now have their own base files
@@ -53,7 +65,8 @@
 
   select:not([class]):focus {
     border-color: var(--ui-color-primary, currentColor);
-    box-shadow: 0 0 0 3px color-mix(in srgb, var(--ui-color-primary, #000) 18%, transparent);
+    box-shadow: 0 0 0 3px
+      color-mix(in srgb, var(--ui-color-primary, #000) 18%, transparent);
     outline: none;
   }
 }
