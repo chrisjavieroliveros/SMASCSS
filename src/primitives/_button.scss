@@ -1,8 +1,9 @@
-// base/button — the default look for every <button> and anything with .btn.
-// Plain base element styling: no variants, no sizes, no tones. The private
-// --_* vars stay as theming hooks so a page or component can retune one
-// property (e.g. `.hero .btn { --_radius: 999px }`) without a variant system.
-@layer base {
+// primitives/button — the default look for every <button> and anything with
+// .btn. Opt-in like the other primitives: a page @uses it only when it renders
+// buttons. Plain styling — no variants, no sizes, no tones. The private --_*
+// vars stay as theming hooks so a page or component can retune one property
+// (e.g. `.hero .btn { --_radius: 999px }`) without a variant system.
+@layer primitive {
   button,
   .btn {
     --_bg: var(--ui-color-primary, #c33329);

@@ -5,10 +5,10 @@
 > Elementor widget — with **zero** of the rest of the system loaded.
 
 **Where things live.** `base/` holds the *truly global* element defaults every page
-gets via `main.css` — reset, typography, media, and `button, .btn`. `primitives/`
-holds *opt-in* pieces a page pulls in only when it needs them: the non-universal
-element styles (`form`, `input, .input`, `textarea, .textarea`, `table`) plus the
-self-sufficient `.ui-card`. All of them share one dedicated **`@layer primitive`**
+gets via `main.css` — reset, `:root`, typography, and media. `primitives/`
+holds *opt-in* pieces a page pulls in only when it needs them: the element-scoped
+controls (`button, .btn`, `form`, `input, .input`, `textarea, .textarea`, `table`)
+plus the self-sufficient `.ui-card`. All of them share one dedicated **`@layer primitive`**
 (between `layout` and `component`), so the folder maps 1:1 to the layer. There is no
 `primitives/_index` — a page `@use`s each piece directly, so nothing unused compiles
 in. `components/` holds composed, reusable blocks (e.g. `.hero`, `@layer component`).
@@ -61,7 +61,7 @@ flip any of them and this doc updates.
 | 11 | Theming | **Separate theme stylesheets**, swapped at runtime. |
 | 12 | Entry discovery | **Auto-glob** — any non-`_` `.scss` compiles to a matching `.css`; folders are free to reorganize. |
 | D1 | Class prefix | *(default)* `.ui-` for classes, `--_*` for private vars, `--ui-*` for tokens. |
-| D2 | Component v1 catalog | *(default)* `button, .btn` ships globally from `base/`; `form`, `input`, `textarea`, `table`, `card` are opt-in `primitives/`. |
+| D2 | Component v1 catalog | *(default)* all opt-in `primitives/`: `button`, `form`, `input`, `textarea`, `table`, `card`. Nothing component-level ships in `main.css`. |
 | D3 | Variant vocabulary | *(default)* `data-variant` (shape) · `data-size` · `data-tone` (semantic color). |
 | D4 | Standalone drop-ins | *(default)* ship **layered**; add an unlayered build only for a host that clobbers a component. |
 
@@ -84,9 +84,9 @@ Layer purpose and why the order is what it is:
 |-------|-------|----------|
 | `variables` | `variables.css`, theme files | `:root { --ui-* }`. First, so it's the foundation everything else reads. Nothing else declares these properties, so its position is inert at render time — but a theme loaded *later* redefines them in the **same** layer and wins by source order, and components re-resolve automatically because they read variables through `var()`. |
 | `reset` | `main.css` | Normalize / reset. Near the bottom so element defaults override it. |
-| `base` | `main.css` | Global semantic element defaults (typography, media, `button, .btn`). Shipped everywhere. |
+| `base` | `main.css` | Global semantic element defaults (`:root`, typography, media). Shipped everywhere. |
 | `layout` | `main.css` | Layout primitives (stack, cluster, grid, container, center). |
-| `primitive` | `primitives/` | Everything in `primitives/`, unified in one layer: opt-in element styles (`form`, `input`, `textarea`, `table`) and the `.ui-card` component. A page `@use`s only what it renders. |
+| `primitive` | `primitives/` | Everything in `primitives/`, unified in one layer: opt-in element controls (`button, .btn`, `form`, `input`, `textarea`, `table`) and the `.ui-card` component. A page `@use`s only what it renders. |
 | `component` | `components/` | Composed, reusable blocks (`.hero`). Sits above `primitive` so a block can adjust a primitive it composes. |
 | `page` | page bundles | Page-specific styling and tweaks. Above `component`, so a page can adjust a primitive, block, or element with no `!important`. |
 | `override` | anywhere | Deliberate last-word escape hatch. |
@@ -117,12 +117,13 @@ src/
 
   base/                        // @layer reset + base — TRULY GLOBAL defaults (bundled into main.css)
     _index.scss                //   @forward every base partial (main.scss @uses this)
-    _reset.scss  _root.scss  _typography.scss  _media.scss  _button.scss   // _button → button,.btn
+    _reset.scss  _root.scss  _typography.scss  _media.scss
 
   layouts/                     // @layer layout — layout primitives (bundled into main.css)
     _container.scss  _stack.scss  _cluster.scss  _grid.scss  _center.scss  _index.scss
 
   primitives/                  // OPT-IN pieces, all @layer primitive — @use per page (no _index)
+    _button.scss               //   button, .btn
     _form.scss                 //   label / select / fieldset / legend
     _input.scss                //   input, .input
     _textarea.scss             //   textarea, .textarea
@@ -269,9 +270,9 @@ page-specific tweaks to either live in the `page` layer.
 ### 8.1 Reference implementation
 
 `.ui-card` is the canonical primitive — a self-sufficient surface with named
-slots. (The other primitives are element-scoped controls: `form`, `input`,
-`textarea`, `table`. `button, .btn` follows the same private-var recipe but ships
-globally from `base/` — see §7 — so it is not a `primitives/` file.)
+slots. (The other primitives are element-scoped controls: `button, .btn`,
+`form`, `input`, `textarea`, `table`. They follow the same private-var recipe,
+just with a bare element selector instead of a `.ui-<name>` class.)
 
 ```scss
 // src/primitives/_card.scss
@@ -391,9 +392,9 @@ uses, and any composed blocks it renders.
 // src/pages/home.scss   → home.css
 @use "../_layers";
 
-// Only the OPT-IN primitives this page renders. button/input are base element
-// styles (global via main.css), so a page never @uses them — it lists only what
-// isn't already global:
+// Only the OPT-IN primitives this page renders — nothing beyond reset/base/layout
+// is global, so the page lists every control it uses:
+@use "../primitives/button";
 @use "../primitives/card";
 
 // Composed blocks this page renders:
@@ -509,8 +510,8 @@ CSS changes; no rebuild.
 | Global variable | `--ui-<group>-<name>` | `--ui-color-primary`, `--ui-space-3` |
 | Palette ramp | `--color-<name>-<step>` | `--color-primary-500` |
 | Component private var | `--_<role>` | `--_bg`, `--_pad` |
-| Base element | bare selector `+ .<name>` | `button, .btn` |
-| Primitive class | `.ui-<name>` (+ `.ui-<name>__<slot>`) | `.ui-card`, `.ui-card__title` |
+| Element-scoped primitive | bare selector `+ .<name>` | `button, .btn`, `input, .input` |
+| Class primitive | `.ui-<name>` (+ `.ui-<name>__<slot>`) | `.ui-card`, `.ui-card__title` |
 | Composed block class | `.<block>` / `.<block>__<part>` | `.hero`, `.hero__actions` |
 | Variant / state | `data-<axis>="<value>"` | `data-variant="outline"` |
 | Layout primitive | `.<name>` (unprefixed) | `.stack`, `.grid` |

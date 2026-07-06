@@ -13,10 +13,10 @@ The full architecture spec is **[README.md](README.md)**.
 2. **Cascade order is canonical** in [`src/_layers.scss`](src/_layers.scss):
    `variables, reset, base, layout, primitive, component, page, override`. Every
    entry `@use "_layers";` first.
-3. **Folder maps 1:1 to layer.** `base/` = global element defaults (incl.
-   `button, .btn`); `primitives/` = opt-in `@layer primitive` (form, input,
-   textarea, table, `.ui-card`), no `_index`; `components/` = `@layer component`
-   blocks; pages `@use` only what they render.
+3. **Folder maps 1:1 to layer.** `base/` = global element defaults (reset,
+   `:root`, typography, media); `primitives/` = opt-in `@layer primitive`
+   (`button, .btn`, form, input, textarea, table, `.ui-card`), no `_index`;
+   `components/` = `@layer component` blocks; pages `@use` only what they render.
 4. **Variants only reassign `--_*` private vars** — never restate structural CSS.
    Each themeable property reads `--_x: var(--ui-token, #literal)`.
 5. **Keep README.md, AGENTS.md, and library.html in sync** with any structural

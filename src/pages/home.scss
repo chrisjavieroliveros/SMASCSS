@@ -3,8 +3,8 @@
 // and composed blocks this page renders, then any page-specific tweaks.
 @use "../_layers";
 
-// Primitives this page uses (button/input are base element styles now, global
-// via main.css — a page only @uses what's not already global):
+// Opt-in primitives this page renders:
+@use "../primitives/button";
 @use "../primitives/card";
 
 // Composed blocks this page renders:

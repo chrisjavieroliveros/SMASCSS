@@ -2,8 +2,8 @@
 // loads (and emits) through a single entry — mirrors layouts/_index.scss.
 //
 // Only the TRULY global elements live here (every page gets them). Non-universal
-// controls — form, input, textarea, table — moved to primitives/ as per-page
-// opt-ins. Button stays: it's common enough to ship globally.
+// controls — button, form, input, textarea, table — live in primitives/ as
+// per-page opt-ins, so a page @uses only what it renders.
 //
 // NOTE: _reset.scss emits into @layer reset; the rest emit into @layer base.
 // The global @layer order in _layers.scss keeps precedence correct regardless
@@ -12,4 +12,3 @@
 @forward "root"; // @layer base ↓
 @forward "typography";
 @forward "media";
-@forward "button";

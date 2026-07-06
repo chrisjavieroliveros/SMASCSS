@@ -57,16 +57,18 @@ WordPress block, or Elementor with zero of the rest of the system loaded.
 | Folder | Layer | What lives there | Loaded |
 |--------|-------|------------------|--------|
 | `variables/` | `variables` | `:root { --ui-* }` design tokens; entry → `variables.css` | globally, first |
-| `base/` | `reset` + `base` | reset, `:root`, typography, media, and `button, .btn` | globally (in `main.css`) |
+| `base/` | `reset` + `base` | reset, `:root`, typography, media | globally (in `main.css`) |
 | `layouts/` | `layout` | layout primitives: `container`, `stack`, `cluster`, `grid`, `center` | globally (in `main.css`) |
-| `primitives/` | `primitive` | **opt-in** pieces: `form`, `input`, `textarea`, `table`, `.ui-card` | per page (`@use` each) |
+| `primitives/` | `primitive` | **opt-in** pieces: `button, .btn`, `form`, `input`, `textarea`, `table`, `.ui-card` | per page (`@use` each) |
 | `components/` | `component` | composed reusable blocks: `.hero` | per page (`@use` each) |
 | `pages/` | `page` | one flat entry per page; page-specific tweaks | it *is* the page |
 | `themes/` | `variables` | semantic-var overrides; entry → `theme-<name>.css` | optional, swapped at runtime |
 
 Notes:
-- `button, .btn` is a **base element style** (global, in `base/`), *not* a
-  `primitives/` file. Pages never `@use` it.
+- Nothing component-level ships in `main.css`. Every control — including
+  `button, .btn` — is an **opt-in `primitives/` file**, so a page `@use`s each
+  one it renders (an element-scoped primitive just uses a bare selector instead
+  of a `.ui-<name>` class).
 - `primitives/` has **no `_index`** — a page pulls each piece directly, so
   nothing unused compiles in. `components/` likewise has no `_index`.
 - Entry vs partial: `name.scss` compiles to `name.css`; `_name.scss` never
