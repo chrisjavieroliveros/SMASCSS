@@ -89,7 +89,7 @@
   }
 
   // Sensible defaults for unclassed links.
-  a:not([class]) {
+  a {
     color: currentColor;
     text-decoration-skip-ink: auto;
   }

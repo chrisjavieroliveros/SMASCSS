@@ -1,20 +1,19 @@
 @layer base {
-  // Shared heading look — applies to bare heading ELEMENTS (a classed heading
-  // is left for higher layers to own, per the `:not([class])` convention) and
-  // to the `.heading-1`–`.heading-6` / `.display-1`–`.display-3` utility
-  // CLASSES, so any element can borrow a level (`<p class="heading-2">`) or a
-  // heading can be remapped (`<h1 class="heading-3">` → renders at the h3
-  // scale, class beats element).
+  // Shared heading look — applies to heading ELEMENTS unconditionally and to
+  // the `.heading-1`–`.heading-6` / `.display-1`–`.display-3` utility CLASSES,
+  // so any element can borrow a level (`<p class="heading-2">`) or a heading
+  // can be remapped (`<h1 class="heading-3">` → renders at the h3 scale, class
+  // beats element).
   //
   // Config is REQUIRED: every value below reads a --ui-* token from config.css
   // with no literal fallback. The per-element `--ui-heading-*` hooks stay as
   // optional override seams that fall back to the guaranteed config token.
-  h1:not([class]),
-  h2:not([class]),
-  h3:not([class]),
-  h4:not([class]),
-  h5:not([class]),
-  h6:not([class]),
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
   .heading-1,
   .heading-2,
   .heading-3,
@@ -37,27 +36,27 @@
 
   // Heading scale — element + class share one font-size per level, sourced from
   // the config font-size scale (--ui-font-size-h1 … -h6).
-  h1:not([class]),
+  h1,
   .heading-1 {
     font-size: var(--ui-h1-font-size, var(--ui-font-size-h1));
   }
-  h2:not([class]),
+  h2,
   .heading-2 {
     font-size: var(--ui-h2-font-size, var(--ui-font-size-h2));
   }
-  h3:not([class]),
+  h3,
   .heading-3 {
     font-size: var(--ui-h3-font-size, var(--ui-font-size-h3));
   }
-  h4:not([class]),
+  h4,
   .heading-4 {
     font-size: var(--ui-h4-font-size, var(--ui-font-size-h4));
   }
-  h5:not([class]),
+  h5,
   .heading-5 {
     font-size: var(--ui-h5-font-size, var(--ui-font-size-h5));
   }
-  h6:not([class]),
+  h6,
   .heading-6 {
     font-size: var(--ui-h6-font-size, var(--ui-font-size-h6));
   }
@@ -80,23 +79,23 @@
     font-size: var(--ui-display-3-font-size, var(--ui-font-size-display-3));
   }
 
-  p:not([class]) {
+  p {
     margin-block-start: var(--ui-paragraph-margin-block-start, 0);
     margin-block-end: var(--ui-paragraph-margin-block-end, var(--ui-space-4));
   }
 
-  ul:not([class]),
-  ol:not([class]) {
+  ul,
+  ol {
     margin-block-start: var(--ui-list-margin-block-start, 0);
     margin-block-end: var(--ui-list-margin-block-end, var(--ui-space-4));
     padding-inline-start: var(--ui-list-padding-inline-start, 1.25em);
   }
 
-  li:not([class]) + li:not([class]) {
+  li + li {
     margin-block-start: var(--ui-list-item-margin-block-start, var(--ui-space-2));
   }
 
-  blockquote:not([class]) {
+  blockquote {
     margin-block-start: var(--ui-blockquote-margin-block-start, 0);
     margin-block-end: var(--ui-blockquote-margin-block-end, var(--ui-space-5));
     padding-inline-start: var(
@@ -110,9 +109,9 @@
     font-style: var(--ui-blockquote-font-style, italic);
   }
 
-  code:not([class]),
-  kbd:not([class]),
-  samp:not([class]) {
+  code,
+  kbd,
+  samp {
     padding: var(--ui-code-padding-block, 0.15em)
       var(--ui-code-padding-inline, 0.3em);
     border-radius: var(--ui-code-radius, var(--ui-radius-sm));
@@ -122,7 +121,7 @@
     font-size: var(--ui-code-font-size, 0.95em);
   }
 
-  pre:not([class]) {
+  pre {
     margin-block-start: var(--ui-pre-margin-block-start, 0);
     margin-block-end: var(--ui-pre-margin-block-end, var(--ui-space-5));
     padding: var(--ui-pre-padding, var(--ui-space-4));
@@ -134,23 +133,23 @@
     color: var(--ui-pre-color, currentColor);
   }
 
-  pre:not([class]) code:not([class]) {
+  pre code {
     padding: 0;
     border-radius: 0;
     background: transparent;
   }
 
-  small:not([class]) {
+  small {
     font-size: var(--ui-small-font-size, var(--ui-font-size-100));
   }
 
-  mark:not([class]) {
+  mark {
     padding-inline: var(--ui-mark-padding-inline, 0.15em);
     background: var(--ui-mark-background, #fff3bf);
     color: var(--ui-mark-color, currentColor);
   }
 
-  hr:not([class]) {
+  hr {
     margin-block: var(--ui-hr-margin-block, var(--ui-space-6));
     border: 0;
     border-block-start: var(--ui-hr-border-width, var(--ui-border-width-1)) solid

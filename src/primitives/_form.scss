@@ -1,10 +1,10 @@
 @layer primitive {
-  form:not([class]) {
+  form {
     display: grid;
     gap: var(--ui-form-gap, var(--ui-space-4));
   }
 
-  label:not([class]) {
+  label {
     display: var(--ui-label-display, block);
     margin-block-end: var(--ui-label-margin-block-end, var(--ui-space-2));
     color: var(--ui-label-color, var(--ui-color-text));
@@ -13,7 +13,7 @@
     line-height: var(--ui-label-line-height, var(--ui-line-height-base));
   }
 
-  fieldset:not([class]) {
+  fieldset {
     min-inline-size: 0;
     margin-block-start: var(--ui-fieldset-margin-block-start, 0);
     margin-block-end: var(--ui-fieldset-margin-block-end, var(--ui-space-5));
@@ -23,7 +23,7 @@
     border-radius: var(--ui-fieldset-radius, var(--ui-radius-md));
   }
 
-  legend:not([class]) {
+  legend {
     padding-inline: var(--ui-legend-padding-inline, var(--ui-space-2));
     color: var(--ui-legend-color, var(--ui-color-text));
     font-family: var(
@@ -36,8 +36,8 @@
 
   // <button>, <input>, and <textarea> now have their own base files
   // (base/_button, base/_input, base/_textarea). <select> keeps the shared
-  // control look here, element-scoped via :not([class]).
-  select:not([class]) {
+  // control look here.
+  select {
     width: 100%;
     min-height: 3rem;
     padding: var(--ui-space-3) var(--ui-space-4);
@@ -51,7 +51,7 @@
       background var(--ui-transition-fast);
   }
 
-  select:not([class]):focus {
+  select:focus {
     border-color: var(--ui-color-primary);
     box-shadow: 0 0 0 3px
       color-mix(in srgb, var(--ui-color-primary) 18%, transparent);

@@ -17,7 +17,7 @@
     text-rendering: var(--ui-body-text-rendering, optimizeLegibility);
   }
 
-  a:not([class]) {
+  a {
     color: var(--ui-link-color, currentColor);
     text-decoration: var(--ui-link-decoration, underline);
     text-decoration-thickness: var(--ui-link-decoration-thickness, 0.08em);

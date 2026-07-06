@@ -1,5 +1,5 @@
 @layer primitive {
-  table:not([class]) {
+  table {
     width: var(--ui-table-width, 100%);
     margin-block-start: var(--ui-table-margin-block-start, 0);
     margin-block-end: var(--ui-table-margin-block-end, var(--ui-space-5));
@@ -8,7 +8,7 @@
     color: var(--ui-table-color, inherit);
   }
 
-  caption:not([class]) {
+  caption {
     margin-block-end: var(--ui-table-caption-margin-block-end, var(--ui-space-2));
     color: var(--ui-table-caption-color, var(--ui-color-text-muted));
     font-size: var(--ui-table-caption-font-size, var(--ui-font-size-100));
@@ -16,8 +16,8 @@
     text-align: left;
   }
 
-  th:not([class]),
-  td:not([class]) {
+  th,
+  td {
     padding: var(--ui-table-cell-padding-y, var(--ui-space-3))
       var(--ui-table-cell-padding-x, var(--ui-space-4));
     border-block-end: var(--ui-table-cell-border-width, var(--ui-border-width-1)) solid
@@ -26,12 +26,12 @@
     vertical-align: top;
   }
 
-  thead:not([class]) th:not([class]) {
+  thead th {
     background: var(--ui-table-head-background, var(--ui-color-surface-muted));
     color: var(--ui-table-head-color, var(--ui-color-text));
   }
 
-  tbody:not([class]) tr:not([class]):nth-child(even) {
+  tbody tr:nth-child(even) {
     background: var(--ui-table-striped-background, transparent);
   }
 }
