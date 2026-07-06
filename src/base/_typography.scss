@@ -1,10 +1,25 @@
 @layer base {
+  // Shared heading look — applies to bare heading ELEMENTS (a classed heading
+  // is left for higher layers to own, per the `:not([class])` convention) and
+  // to the `.heading-1`–`.heading-6` / `.display-1`–`.display-3` utility
+  // CLASSES, so any element can borrow a level (`<p class="heading-2">`) or a
+  // heading can be remapped (`<h1 class="heading-3">` → renders at the h3
+  // scale, class beats element).
   h1:not([class]),
   h2:not([class]),
   h3:not([class]),
   h4:not([class]),
   h5:not([class]),
-  h6:not([class]) {
+  h6:not([class]),
+  .heading-1,
+  .heading-2,
+  .heading-3,
+  .heading-4,
+  .heading-5,
+  .heading-6,
+  .display-1,
+  .display-2,
+  .display-3 {
     margin-block-start: var(--ui-heading-margin-block-start, 0);
     margin-block-end: var(
       --ui-heading-margin-block-end,
@@ -28,23 +43,47 @@
     );
   }
 
-  h1:not([class]) {
+  // Heading scale — element + class share one font-size per level.
+  h1:not([class]),
+  .heading-1 {
     font-size: var(--ui-h1-font-size, 2.5rem);
   }
-  h2:not([class]) {
+  h2:not([class]),
+  .heading-2 {
     font-size: var(--ui-h2-font-size, 2rem);
   }
-  h3:not([class]) {
+  h3:not([class]),
+  .heading-3 {
     font-size: var(--ui-h3-font-size, 1.5rem);
   }
-  h4:not([class]) {
+  h4:not([class]),
+  .heading-4 {
     font-size: var(--ui-h4-font-size, 1.5rem);
   }
-  h5:not([class]) {
+  h5:not([class]),
+  .heading-5 {
     font-size: var(--ui-h5-font-size, 1.125rem);
   }
-  h6:not([class]) {
+  h6:not([class]),
+  .heading-6 {
     font-size: var(--ui-h6-font-size, 1rem);
+  }
+
+  // Display scale — larger than h1, tighter leading, for hero-level headlines.
+  // Class-only (there is no `<display>` element); pair with any heading tag.
+  .display-1,
+  .display-2,
+  .display-3 {
+    line-height: var(--ui-display-line-height, 1.1);
+  }
+  .display-1 {
+    font-size: var(--ui-display-1-font-size, 4.5rem);
+  }
+  .display-2 {
+    font-size: var(--ui-display-2-font-size, 3.75rem);
+  }
+  .display-3 {
+    font-size: var(--ui-display-3-font-size, 3rem);
   }
 
   p:not([class]) {
