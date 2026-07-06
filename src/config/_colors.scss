@@ -1,12 +1,12 @@
 // ───────────────────────────────────────────────────────────────────────────
-// COLORS — your brand palette + the semantic roles built on top of it.
-// This is the file you edit most when rebranding. Two maps:
-//   1. $colors          — the raw palette ramps (the actual hex values).
-//   2. $semantic-colors — roles that POINT at the ramp (text, surface, primary…)
-// Change a brand? Edit the ramp hexes below; the semantic roles follow.
+// COLORS — your brand palette. This is the file you edit most when rebranding.
+// The map keys are emitted VERBATIM (case-preserved) as CSS custom properties,
+// so you use them directly:  var(--color-Primary),  var(--color-Secondary-500),
+// var(--color-Danger-Shade),  var(--color-Light-300).
+// Change a brand? Edit the hexes below and every component follows.
 // ───────────────────────────────────────────────────────────────────────────
 
-// Raw palette ramps — emitted as --color-<name>-<step>. Escape-hatch values.
+// Emitted as --color-<Name> (e.g. --color-Primary, --color-Primary-500).
 //
 // SOURCE OF TRUTH: the Integra Platform plugin color library
 // (wp-content/plugins/Integra Platform/includes/core/token-definitions.php,
@@ -122,36 +122,4 @@ $colors: (
   Dark-800: #2a2a2a,
   Dark-900: #1f1f1f,
   Dark-950: #141414
-);
-
-// Semantic tokens — emitted as --ui-color-<name>. These are what components read.
-// Each resolves to a raw Integra ramp value, so the whole system reads from one
-// palette. Rebrand by overriding these (or a theme), not by editing selectors.
-$semantic-colors: (
-  scheme: light,
-  text: var(--color-black),
-  text-muted: var(--color-dark-200),
-  background: var(--color-white),
-  surface: var(--color-white),
-  surface-muted: var(--color-light-50),
-  border: var(--color-light-300),
-  primary: var(--color-primary),
-  primary-strong: var(--color-primary-shade),
-  primary-contrast: var(--color-primary-contrast),
-  accent: var(--color-secondary),
-  // Semantic state tones (read by data-tone variants).
-  danger: var(--color-danger),
-  danger-strong: var(--color-danger-shade),
-  danger-contrast: var(--color-danger-contrast),
-  success: var(--color-success),
-  success-strong: var(--color-success-shade),
-  success-contrast: var(--color-success-contrast),
-  warning: var(--color-warning),
-  warning-strong: var(--color-warning-shade),
-  warning-contrast: var(--color-warning-contrast),
-  info: var(--color-info),
-  info-strong: var(--color-info-shade),
-  info-contrast: var(--color-info-contrast),
-  focus: color-mix(in srgb, var(--ui-color-primary) 35%, white),
-  shadow: rgb(0 0 0 / 0.12),
 );
