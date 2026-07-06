@@ -1,3 +1,9 @@
+// ───────────────────────────────────────────────────────────────────────────
+// EMIT — token emitter (Sass machinery, NOT config).
+// Turns the config value maps into CSS custom properties. This is a tool, not a
+// value you edit; it lives in abstracts/ (like the responsive mixins) and emits
+// no CSS of its own — config.scss calls these mixins to build config.css.
+// ───────────────────────────────────────────────────────────────────────────
 @use "sass:meta";
 @use "sass:string";
 

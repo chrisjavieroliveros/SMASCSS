@@ -19,7 +19,8 @@ The full architecture spec is **[README.md](README.md)**.
    `:root`, typography, media); `primitives/` = opt-in `@layer primitive`
    (`button, .btn`, form, input, textarea, table, `.ui-card`), no `_index`;
    `components/` = `@layer component` blocks; pages `@use` only what they render.
-   Exception: `abstracts/` is pure Sass tools (`responsive` mixins) — no layer,
+   Exception: `abstracts/` is pure Sass tools (`responsive` mixins + the `emit`
+   token emitter) — no layer,
    emits no CSS, `@use`'d only where a media query is needed.
 4. **Variants only reassign `--_*` private vars** — never restate structural CSS.
    Each themeable property reads `--_x: var(--ui-token)` (config is required, so

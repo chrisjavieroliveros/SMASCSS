@@ -65,7 +65,7 @@ alongside the piece.
 | `components/` | `component` | composed reusable blocks: `.hero` | per page (`@use` each) |
 | `pages/` | `page` | one flat entry per page; page-specific tweaks | it *is* the page |
 | `themes/` | `config` | semantic-token overrides; entry → `theme-<name>.css` | optional, swapped at runtime |
-| `abstracts/` | **none** | pure Sass tools — `responsive` mixins (`mobile-up` … `desktop-xl-down`, `responsive-prop`); **emit no CSS** | `@use`'d only where a media query is needed |
+| `abstracts/` | **none** | pure Sass tools — `responsive` mixins (`mobile-up` … `desktop-xl-down`, `responsive-prop`) + `emit` (the token emitter that builds `config.css`); **emit no CSS on their own** | `responsive` where a media query is needed; `emit` by `config.scss` |
 
 Notes:
 - Nothing component-level ships in `main.css`. Every control — including
@@ -113,8 +113,10 @@ variant → inline `style="--_bg: …"`.
   `@use "../components/<name>"` from pages that render it.
 - **Add a page** → `src/pages/<name>.scss`: `@use "../_layers";` then `@use` the
   primitives/components it needs; page tweaks in `@layer page`.
-- **Add a config token** → add to the map in `src/config/_*.scss`; it emits
-  automatically via `_emit.scss`. Reference as `var(--ui-…)` (config required; no
+- **Add a config token** → add to the right value map in `src/config/_*.scss`
+  (one file per category: `_colors`, `_typography`, `_spacing`, `_radius`,
+  `_borders`, `_shadows`, `_motion`, `_sizing`); it emits automatically via
+  `abstracts/_emit.scss`. Reference as `var(--ui-…)` (config required; no
   literal fallback).
 - **Add a theme** → `src/themes/theme-<name>.scss`: `@use "../_layers";` then
   `@layer config { :root { … } }` with only the semantic tokens that change.

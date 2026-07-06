@@ -1,9 +1,10 @@
 // ───────────────────────────────────────────────────────────────────────────
-// SIZING — layout widths.
-// `width` is the max content width the `.container` layout primitive uses.
-// Add more layout measures here (e.g. a narrow reading width) as you need them.
-// Emitted as --ui-container-width.
+// RADIUS — corner rounding.
+// Edit these to make the whole system more or less rounded.
+// Emitted as --ui-radius-sm / --ui-radius-md / --ui-radius-lg.
 // ───────────────────────────────────────────────────────────────────────────
-$container-tokens: (
-  width: 72rem,
+$radius-tokens: (
+  sm: 0.5rem,
+  md: 0.9rem,
+  lg: 1.5rem,
 );

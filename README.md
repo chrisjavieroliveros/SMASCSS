@@ -20,7 +20,7 @@ This is the contract: *what the system guarantees* and *how to author against
 it*. The `src/` tree is the implementation; [§12](#12-migration-map) records the
 migration from the original `configs/` + `library/` layout (now removed).
 
-**Lineage.** The taxonomy — `variables · base · layout · primitives · components ·
+**Lineage.** The taxonomy — `config · base · layout · primitives · components ·
 pages · themes` — is a deliberate blend: **SMACSS** (base / layout / module / theme
 buckets), **Atomic Design** (primitives = atoms, components = molecules), **Every
 Layout** (the `stack` / `cluster` / `center` / `grid` layout primitives), and
@@ -110,16 +110,18 @@ src/
 
   abstracts/                   // TOOLS — pure Sass (mixins/functions), emit NO CSS, not a layer
     _responsive.scss           //   device-named responsive mixins (mobile-up … desktop-xl-down) + responsive-prop
+    _emit.scss                 //   token emitter — turns config maps into --ui-* custom properties
 
   config/                      // → config.css   (loaded first, everywhere, REQUIRED; shippable alone)
-    config.scss                //   ENTRY: emits :root { --ui-* } inside @layer config
-    _emit.scss                 //   custom-property emitter
-    _colors.scss
-    _typography.scss
-    _spacing.scss
-    _shape.scss
-    _sizing.scss
-    _effects.scss
+    config.scss                //   ENTRY: assembles the maps + emits :root { --ui-* } inside @layer config
+    _colors.scss               //   brand palette + semantic color roles   ← the value files you EDIT
+    _typography.scss           //   fonts, sizes, weights, line-heights
+    _spacing.scss              //   the space scale
+    _radius.scss               //   corner rounding
+    _borders.scss              //   border widths
+    _shadows.scss              //   elevation
+    _motion.scss               //   transitions
+    _sizing.scss               //   container / layout widths
 
   base/                        // @layer reset + base — TRULY GLOBAL defaults (bundled into main.css)
     _index.scss                //   @forward every base partial (main.scss @uses this)
@@ -197,13 +199,15 @@ shipped entirely on its own. It is **required**: load it first, on every page.
 ```scss
 // src/config/config.scss
 @use "../_layers";                 // establishes @layer order
-@use "emit";
+@use "../abstracts/emit";          // the emitter is a Sass tool, kept out of config/
 @use "colors";
 @use "typography";
 @use "spacing";
-@use "shape";
+@use "radius";
+@use "borders";
+@use "shadows";
+@use "motion";
 @use "sizing";
-@use "effects";
 
 @layer config {
   :root {
@@ -213,8 +217,8 @@ shipped entirely on its own. It is **required**: load it first, on every page.
     @include emit.custom("color", colors.$semantic-colors);   // --ui-color-primary …
     @include emit.custom("font-size", typography.$font-size-tokens);
     @include emit.custom("space", spacing.$space-tokens);
-    @include emit.custom("radius", shape.$radius-tokens);
-    @include emit.custom("shadow", effects.$shadow-tokens);
+    @include emit.custom("radius", radius.$radius-tokens);
+    @include emit.custom("shadow", shadows.$shadow-tokens);
     // …every token map
   }
 }
@@ -503,7 +507,7 @@ CSS changes; no rebuild.
 | Today | Becomes | Note |
 |-------|---------|------|
 | `configs/tokens/*` | `src/config/*` | Wrap emission in `@layer config`. |
-| `configs/helpers/_custom-properties.scss` | `src/config/_emit.scss` | Renamed. |
+| `configs/helpers/_custom-properties.scss` | `src/abstracts/_emit.scss` | Renamed; lives in `abstracts/` — it's a Sass tool, not a config value. |
 | `configs/recipes/*` | **deleted** | Component defaults move *into* each component as `--_*` vars. Biggest change; it is what makes components portable. |
 | `configs/defaults/*` + `library/base/*` | `src/base/*` | Merges the two places base styling currently lives. |
 | `library/layout/*` | `src/layouts/*` | + new primitives (stack, cluster, grid, center). |
@@ -538,7 +542,7 @@ CSS changes; no rebuild.
 
 ### Add a config token
 1. Add to the relevant map in `src/config/_*.scss`.
-2. It emits automatically via `_emit.scss`. Reference it as `var(--ui-…)` — config
+2. It emits automatically via `abstracts/_emit.scss`. Reference it as `var(--ui-…)` — config
    is required, so no literal fallback (an optional override hook may chain to the
    token: `var(--ui-hook, var(--ui-…))`).
 

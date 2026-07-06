@@ -1,9 +1,10 @@
 // ───────────────────────────────────────────────────────────────────────────
-// SIZING — layout widths.
-// `width` is the max content width the `.container` layout primitive uses.
-// Add more layout measures here (e.g. a narrow reading width) as you need them.
-// Emitted as --ui-container-width.
+// SHADOWS — elevation.
+// Edit these to change depth / drop shadows. They reference the semantic
+// --ui-color-shadow token so shadows tint with your theme.
+// Emitted as --ui-shadow-1 / --ui-shadow-2.
 // ───────────────────────────────────────────────────────────────────────────
-$container-tokens: (
-  width: 72rem,
+$shadow-tokens: (
+  1: 0 18px 45px -28px var(--ui-color-shadow),
+  2: 0 28px 60px -32px rgb(19 29 38 / 0.24),
 );

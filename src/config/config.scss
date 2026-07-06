@@ -1,39 +1,60 @@
-// ENTRY → config.css
-// The design-system contract: every design value as a CSS custom property (a
-// "CSS variable"). REQUIRED — load this first, on every page. Consumers read
-// these tokens with NO literal fallback, so nothing renders correctly until
-// config is present. It is also the ONLY file an external host (Astro /
-// WordPress / Elementor) needs to adopt your brand.
+// ═══════════════════════════════════════════════════════════════════════════
+// CONFIG — your theme.  → compiles to config.css
+// ═══════════════════════════════════════════════════════════════════════════
+// This folder IS the theme. Every design value lives here as a Sass map in a
+// clearly-named file (_colors, _typography, _spacing, _radius, _borders,
+// _shadows, _motion, _sizing) — edit THOSE files to rebrand. You rarely touch
+// this entry: it just gathers the maps and emits them as CSS custom properties
+// (--ui-*) inside @layer config.
+//
+// REQUIRED — load config.css first, on every page. Consumers read these tokens
+// with NO literal fallback, so nothing renders correctly until config is
+// present. It is also the ONLY file an external host (Astro / WordPress /
+// Elementor) needs to adopt your brand.
+//
+// The emitter (emit.*) is Sass machinery, not a value you edit — it lives in
+// abstracts/_emit.scss.
 @use "sass:map";
 @use "../_layers";
-@use "emit";
+@use "../abstracts/emit";
+
+// ── The theme value maps — edit these files, not this one ──────────────────
 @use "colors";
 @use "typography";
 @use "spacing";
-@use "shape";
+@use "radius";
+@use "borders";
+@use "shadows";
+@use "motion";
 @use "sizing";
-@use "effects";
 
 @layer config {
   :root {
     color-scheme: map.get(colors.$semantic-colors, scheme);
 
-    // Raw palette ramps (--color-primary-500, --color-info-400, …)
+    // Colors — raw palette ramps (--color-primary-500, --color-info-400, …)
     @include emit.prefixed("color", colors.$colors);
-
-    // Semantic tokens (--ui-color-primary, --ui-color-surface, …)
+    // Colors — semantic roles (--ui-color-primary, --ui-color-surface, …)
     @include emit.custom("color", colors.$semantic-colors);
 
-    // Scale tokens
+    // Typography
     @include emit.custom("font-family", typography.$font-family-tokens);
     @include emit.custom("font-size", typography.$font-size-tokens);
     @include emit.custom("font-weight", typography.$font-weight-tokens);
     @include emit.custom("line-height", typography.$line-height-tokens);
+
+    // Spacing
     @include emit.custom("space", spacing.$space-tokens);
-    @include emit.custom("radius", shape.$radius-tokens);
-    @include emit.custom("border-width", shape.$border-width-tokens);
-    @include emit.custom("shadow", effects.$shadow-tokens);
+
+    // Radius + borders
+    @include emit.custom("radius", radius.$radius-tokens);
+    @include emit.custom("border-width", borders.$border-width-tokens);
+
+    // Shadows + motion
+    @include emit.custom("shadow", shadows.$shadow-tokens);
+    @include emit.custom("transition", motion.$transition-tokens);
+
+    // Sizing
     @include emit.custom("container", sizing.$container-tokens);
-    @include emit.custom("transition", effects.$transition-tokens);
   }
 }

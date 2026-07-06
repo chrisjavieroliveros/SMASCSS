@@ -1,9 +1,9 @@
 // ───────────────────────────────────────────────────────────────────────────
-// SIZING — layout widths.
-// `width` is the max content width the `.container` layout primitive uses.
-// Add more layout measures here (e.g. a narrow reading width) as you need them.
-// Emitted as --ui-container-width.
+// BORDERS — border thickness.
+// Edit these to change how heavy borders and dividers feel.
+// Emitted as --ui-border-width-1 / --ui-border-width-2.
 // ───────────────────────────────────────────────────────────────────────────
-$container-tokens: (
-  width: 72rem,
+$border-width-tokens: (
+  1: 1px,
+  2: 2px,
 );

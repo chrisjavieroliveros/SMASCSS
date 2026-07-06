@@ -1,3 +1,11 @@
+// ───────────────────────────────────────────────────────────────────────────
+// COLORS — your brand palette + the semantic roles built on top of it.
+// This is the file you edit most when rebranding. Two maps:
+//   1. $colors          — the raw palette ramps (the actual hex values).
+//   2. $semantic-colors — roles that POINT at the ramp (text, surface, primary…)
+// Change a brand? Edit the ramp hexes below; the semantic roles follow.
+// ───────────────────────────────────────────────────────────────────────────
+
 // Raw palette ramps — emitted as --color-<name>-<step>. Escape-hatch values.
 //
 // SOURCE OF TRUTH: the Integra Platform plugin color library

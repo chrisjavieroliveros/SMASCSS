@@ -1,3 +1,9 @@
+// ───────────────────────────────────────────────────────────────────────────
+// SPACING — the space scale.
+// One scale drives every margin, padding, and gap in the system. Edit the
+// steps to tighten or loosen the whole layout at once.
+// Emitted as --ui-space-1 … --ui-space-7.
+// ───────────────────────────────────────────────────────────────────────────
 $space-tokens: (
   1: 0.25rem,
   2: 0.5rem,
