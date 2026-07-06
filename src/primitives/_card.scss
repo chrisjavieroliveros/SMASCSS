@@ -1,9 +1,9 @@
 // primitives/card — surface container + slot helpers.
 @layer primitive {
   .ui-card {
-    --_bg: var(--ui-color-surface);
-    --_fg: var(--ui-color-text);
-    --_border: var(--ui-color-border);
+    --_bg: var(--color-White);
+    --_fg: var(--color-Black);
+    --_border: var(--color-Light-300);
     --_radius: var(--ui-radius-lg);
     --_pad: var(--ui-space-5);
     --_gap: var(--ui-space-4);
@@ -26,7 +26,7 @@
       --_shadow: none;
     }
     &[data-variant="muted"] {
-      --_bg: var(--ui-color-surface-muted);
+      --_bg: var(--color-Light-50);
     }
 
     &[data-pad="sm"] {
@@ -38,7 +38,7 @@
   }
 
   .ui-card__eyebrow {
-    color: var(--ui-color-accent);
+    color: var(--color-Secondary);
     font-size: var(--ui-font-size-100);
     font-weight: var(--ui-font-weight-strong);
     letter-spacing: 0.08em;
@@ -52,7 +52,7 @@
   }
 
   .ui-card__body {
-    color: var(--ui-color-text-muted);
+    color: var(--color-Dark-200);
   }
 
   .ui-card__actions {

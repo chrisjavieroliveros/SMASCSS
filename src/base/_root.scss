@@ -1,6 +1,6 @@
 @layer base {
   html {
-    color-scheme: var(--ui-html-color-scheme, var(--ui-color-scheme));
+    color-scheme: var(--ui-html-color-scheme, light);
     font-family: var(--ui-html-font-family, var(--ui-font-family-base));
     line-height: var(--ui-html-line-height, var(--ui-line-height-base));
     -webkit-text-size-adjust: 100%;
@@ -9,8 +9,8 @@
   body {
     margin: var(--ui-body-margin, 0);
     min-height: var(--ui-body-min-height, 100vh);
-    background: var(--ui-body-background, var(--ui-color-background));
-    color: var(--ui-body-color, var(--ui-color-text));
+    background: var(--ui-body-background, var(--color-White));
+    color: var(--ui-body-color, var(--color-Black));
     font-family: var(--ui-body-font-family, var(--ui-font-family-base));
     font-size: var(--ui-body-font-size, var(--ui-font-size-200));
     line-height: var(--ui-body-line-height, var(--ui-line-height-base));
@@ -30,7 +30,7 @@
 
   :focus-visible {
     outline: var(--ui-focus-outline-width, 2px) var(--ui-focus-outline-style, solid)
-      var(--ui-focus-outline-color, var(--ui-color-focus));
+      var(--ui-focus-outline-color, color-mix(in srgb, var(--color-Primary) 35%, white));
     outline-offset: var(--ui-focus-outline-offset, 2px);
   }
 }

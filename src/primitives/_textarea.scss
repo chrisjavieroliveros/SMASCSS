@@ -3,18 +3,18 @@
 @layer primitive {
   textarea,
   .textarea {
-    --_border: var(--ui-color-border);
-    --_focus-border: var(--ui-color-primary);
+    --_border: var(--color-Light-300);
+    --_focus-border: var(--color-Primary);
     --_focus-ring: 0 0 0 3px
-      color-mix(in srgb, var(--ui-color-primary) 22%, transparent);
+      color-mix(in srgb, var(--color-Primary) 22%, transparent);
 
     width: 100%;
     min-height: 8rem;
     padding: var(--ui-space-3) var(--ui-space-4);
     border: var(--ui-border-width-1) solid var(--_border);
     border-radius: var(--ui-radius-sm);
-    background: var(--ui-color-surface);
-    color: var(--ui-color-text);
+    background: var(--color-White);
+    color: var(--color-Black);
     font: inherit;
     resize: vertical;
     transition:
@@ -23,7 +23,7 @@
       background var(--ui-transition-fast);
 
     &::placeholder {
-      color: var(--ui-color-text-muted);
+      color: var(--color-Dark-200);
     }
 
     &:focus {
@@ -33,10 +33,10 @@
     }
 
     &[aria-invalid="true"] {
-      --_border: var(--ui-color-danger);
-      --_focus-border: var(--ui-color-danger);
+      --_border: var(--color-Danger);
+      --_focus-border: var(--color-Danger);
       --_focus-ring: 0 0 0 3px
-        color-mix(in srgb, var(--ui-color-danger) 22%, transparent);
+        color-mix(in srgb, var(--color-Danger) 22%, transparent);
     }
 
     &:disabled,

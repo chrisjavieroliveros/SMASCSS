@@ -25,7 +25,7 @@
   .display-3 {
     margin-block-start: var(--ui-heading-margin-block-start, 0);
     margin-block-end: var(--ui-heading-margin-block-end, var(--ui-space-4));
-    color: var(--ui-heading-color, var(--ui-color-text));
+    color: var(--ui-heading-color, var(--color-Black));
     font-family: var(
       --ui-heading-font-family,
       var(--ui-font-family-heading, var(--ui-font-family-base))
@@ -103,8 +103,8 @@
       var(--ui-space-4)
     );
     border-inline-start: var(--ui-blockquote-border-width, 3px) solid
-      var(--ui-blockquote-border-color, var(--ui-color-border));
-    color: var(--ui-blockquote-color, var(--ui-color-text-muted));
+      var(--ui-blockquote-border-color, var(--color-Light-300));
+    color: var(--ui-blockquote-color, var(--color-Dark-200));
     font-size: var(--ui-blockquote-font-size, var(--ui-font-size-300));
     font-style: var(--ui-blockquote-font-style, italic);
   }
@@ -115,7 +115,7 @@
     padding: var(--ui-code-padding-block, 0.15em)
       var(--ui-code-padding-inline, 0.3em);
     border-radius: var(--ui-code-radius, var(--ui-radius-sm));
-    background: var(--ui-code-background, var(--ui-color-surface-muted));
+    background: var(--ui-code-background, var(--color-Light-50));
     color: var(--ui-code-color, currentColor);
     font-family: var(--ui-code-font-family, monospace);
     font-size: var(--ui-code-font-size, 0.95em);
@@ -127,9 +127,9 @@
     padding: var(--ui-pre-padding, var(--ui-space-4));
     overflow-x: auto;
     border: var(--ui-pre-border-width, var(--ui-border-width-1)) solid
-      var(--ui-pre-border-color, var(--ui-color-border));
+      var(--ui-pre-border-color, var(--color-Light-300));
     border-radius: var(--ui-pre-radius, var(--ui-radius-md));
-    background: var(--ui-pre-background, var(--ui-color-surface));
+    background: var(--ui-pre-background, var(--color-White));
     color: var(--ui-pre-color, currentColor);
   }
 
@@ -153,6 +153,6 @@
     margin-block: var(--ui-hr-margin-block, var(--ui-space-6));
     border: 0;
     border-block-start: var(--ui-hr-border-width, var(--ui-border-width-1)) solid
-      var(--ui-hr-border-color, var(--ui-color-border));
+      var(--ui-hr-border-color, var(--color-Light-300));
   }
 }

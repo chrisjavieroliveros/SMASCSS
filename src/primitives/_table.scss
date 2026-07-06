@@ -13,7 +13,7 @@
       --ui-table-caption-margin-block-end,
       var(--ui-space-2)
     );
-    color: var(--ui-table-caption-color, var(--ui-color-text-muted));
+    color: var(--ui-table-caption-color, var(--color-Dark-200));
     font-size: var(--ui-table-caption-font-size, var(--ui-font-size-100));
     font-weight: var(
       --ui-table-caption-font-weight,
@@ -30,14 +30,14 @@
         --ui-table-cell-border-width,
         var(--ui-border-width-1)
       )
-      solid var(--ui-table-cell-border-color, var(--ui-color-border));
+      solid var(--ui-table-cell-border-color, var(--color-Light-300));
     text-align: left;
     vertical-align: top;
   }
 
   thead th {
-    background: var(--ui-table-head-background, var(--ui-color-surface-muted));
-    color: var(--ui-table-head-color, var(--ui-color-text));
+    background: var(--ui-table-head-background, var(--color-Light-50));
+    color: var(--ui-table-head-color, var(--color-Black));
   }
 
   tbody tr:nth-child(even) {

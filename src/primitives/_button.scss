@@ -9,9 +9,9 @@
 @layer primitive {
   button,
   .btn {
-    --_bg: var(--ui-color-primary);
-    --_fg: var(--ui-color-primary-contrast);
-    --_bg-hover: var(--ui-color-primary-strong);
+    --_bg: var(--color-Primary);
+    --_fg: var(--color-Primary-Contrast);
+    --_bg-hover: var(--color-Primary-Shade);
     --_radius: var(--ui-radius-sm);
 
     display: inline-flex;

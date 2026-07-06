@@ -5,7 +5,10 @@
 // clearly-named file (_colors, _typography, _spacing, _radius, _borders,
 // _shadows, _motion, _sizing) — edit THOSE files to rebrand. You rarely touch
 // this entry: it just gathers the maps and emits them as CSS custom properties
-// (--ui-*) inside @layer config.
+// inside @layer config.
+//
+// Colors are emitted from the palette as --color-<Name> (case-preserved, e.g.
+// --color-Primary, --color-Secondary-500); the rest emit as --ui-<group>-<name>.
 //
 // REQUIRED — load config.css first, on every page. Consumers read these tokens
 // with NO literal fallback, so nothing renders correctly until config is
@@ -14,7 +17,6 @@
 //
 // The emitter (emit.*) is Sass machinery, not a value you edit — it lives in
 // abstracts/_emit.scss.
-@use "sass:map";
 @use "../_layers";
 @use "../abstracts/emit";
 
@@ -30,12 +32,11 @@
 
 @layer config {
   :root {
-    color-scheme: map.get(colors.$semantic-colors, scheme);
+    color-scheme: light;
 
-    // Colors — raw palette ramps (--color-primary-500, --color-info-400, …)
-    @include emit.prefixed("color", colors.$colors);
-    // Colors — semantic roles (--ui-color-primary, --ui-color-surface, …)
-    @include emit.custom("color", colors.$semantic-colors);
+    // Colors — the palette, case-preserved (--color-White, --color-Primary,
+    // --color-Secondary-500, --color-Danger-Shade, …). Use these directly.
+    @include emit.prefixed("color", colors.$colors, false);
 
     // Typography
     @include emit.custom("font-family", typography.$font-family-tokens);
