@@ -58,13 +58,12 @@ alongside the piece.
 
 | Folder | Layer | What lives there | Loaded |
 |--------|-------|------------------|--------|
-| `config/` | `config` | `:root { --ui-* }` design tokens; entry → `config.css` | globally, first (REQUIRED) |
+| `config/` | `config` | `:root { --color-* / --ui-* }` design tokens (colors emit case-preserved as `--color-<Name>`, read directly); entry → `config.css` | globally, first (REQUIRED) |
 | `base/` | `reset` + `base` | reset, `:root`, typography, media | globally (in `main.css`) |
 | `layouts/` | `layout` | layout primitives: `container`, `stack`, `cluster`, `grid`, `center` | globally (in `main.css`) |
 | `primitives/` | `primitive` | **opt-in** pieces: `button, .btn`, `form`, `input`, `textarea`, `table`, `.ui-card` | per page (`@use` each) |
 | `components/` | `component` | composed reusable blocks: `.hero` | per page (`@use` each) |
 | `pages/` | `page` | one flat entry per page; page-specific tweaks | it *is* the page |
-| `themes/` | `config` | semantic-token overrides; entry → `theme-<name>.css` | optional, swapped at runtime |
 | `abstracts/` | **none** | pure Sass tools — `responsive` mixins (`mobile-up` … `desktop-xl-down`, `responsive-prop`) + `emit` (the token emitter that builds `config.css`); **emit no CSS on their own** | `responsive` where a media query is needed; `emit` by `config.scss` |
 
 Notes:
@@ -88,20 +87,20 @@ A private var reads the required config token, so a piece adopts the design syst
 // src/primitives/_card.scss
 @layer primitive {              // primitives → `primitive`; components → `component`
   .ui-card {
-    --_bg:     var(--ui-color-surface);   // private ← required config token (no literal fallback)
+    --_bg:     var(--color-White);        // private ← required config token (no literal fallback)
     --_radius: var(--ui-radius-lg);
 
     background: var(--_bg);      // every themeable property reads a --_* var
     border-radius: var(--_radius);
 
-    &[data-variant="muted"] { --_bg: var(--ui-color-surface-muted); }  // variants ONLY reassign --_*
+    &[data-variant="muted"] { --_bg: var(--color-Light-50); }  // variants ONLY reassign --_*
     &[data-pad="lg"]        { --_pad: var(--ui-space-6); }
   }
 }
 ```
 
-Override precedence, low → high: `--ui-*` config token / theme → `[data-*]`
-variant → inline `style="--_bg: …"`.
+Override precedence, low → high: config token (`--color-*` / `--ui-*`) →
+`[data-*]` variant → inline `style="--_bg: …"`.
 
 ---
 
@@ -118,8 +117,10 @@ variant → inline `style="--_bg: …"`.
   `_borders`, `_shadows`, `_motion`, `_sizing`); it emits automatically via
   `abstracts/_emit.scss`. Reference as `var(--ui-…)` (config required; no
   literal fallback).
-- **Add a theme** → `src/themes/theme-<name>.scss`: `@use "../_layers";` then
-  `@layer config { :root { … } }` with only the semantic tokens that change.
+- **Rebrand** → edit the hexes in `src/config/_colors.scss` (colors emit
+  case-preserved as `--color-<Name>`; every component follows because it reads
+  `var(--color-*)` directly). For a scoped/dark override, redeclare the
+  `--color-*` vars in a later `:root`/scope. No runtime theme stylesheets.
 - **Go responsive** → try intrinsic first (`--grid-min`, `min()`, `clamp()`).
   Only if that can't reflow: `@use "../abstracts/responsive" as *;` then
   `@include desktop-up { … }` / `mobile-down` / etc. Device-named, WordPress px
