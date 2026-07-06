@@ -1,7 +1,9 @@
-// ENTRY → variables.css
-// The design-system contract: every primitive value as a CSS custom property
-// (a "CSS variable"). Load this first, on every page. It is also the ONLY file
-// an external host (Astro / WordPress / Elementor) needs to adopt your brand.
+// ENTRY → config.css
+// The design-system contract: every design value as a CSS custom property (a
+// "CSS variable"). REQUIRED — load this first, on every page. Consumers read
+// these tokens with NO literal fallback, so nothing renders correctly until
+// config is present. It is also the ONLY file an external host (Astro /
+// WordPress / Elementor) needs to adopt your brand.
 @use "sass:map";
 @use "../_layers";
 @use "emit";
@@ -12,7 +14,7 @@
 @use "sizing";
 @use "effects";
 
-@layer variables {
+@layer config {
   :root {
     color-scheme: map.get(colors.$semantic-colors, scheme);
 

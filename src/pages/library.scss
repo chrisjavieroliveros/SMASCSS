@@ -4,14 +4,14 @@
 //
 // A page bundle is a manifest. It does three things and nothing more:
 //   1. Pull the canonical @layer order (so precedence holds across the
-//      separately-compiled variables.css / main.css / theme / this file).
+//      separately-compiled config.css / main.css / theme / this file).
 //   2. @use ONLY the primitives + composed blocks this page actually renders,
 //      so the page ships just its own components — no global component bloat.
 //   3. Author page-specific styling in @layer page (which sits ABOVE
 //      `components`, so a page can tweak a component with no !important).
 //
 // The GLOBAL stylesheets are linked separately in the HTML <head>:
-//     variables.css   → :root { --ui-* }         (the design-system contract)
+//     config.css      → :root { --ui-* }         (the design-system contract)
 //     main.css        → reset + base + layout     (the "super globals")
 //     theme-*.css      → optional variable overrides (swapped at runtime)
 // This bundle carries only what is unique to THIS page.
@@ -41,7 +41,7 @@
   }
 
   body {
-    // Base already sets background/color/font from the variables; we only add
+    // Base already sets background/color/font from config; we only add
     // a transition so the runtime theme swap animates smoothly.
     transition:
       background 0.3s ease,

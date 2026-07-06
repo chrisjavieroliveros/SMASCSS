@@ -8,6 +8,10 @@
     gap: var(--cluster-gap, var(--ui-space-3, 0.75rem));
   }
 
-  .cluster[data-justify="between"] { --cluster-justify: space-between; }
-  .cluster[data-justify="end"] { --cluster-justify: flex-end; }
+  .cluster[data-justify="between"] {
+    --cluster-justify: space-between;
+  }
+  .cluster[data-justify="end"] {
+    --cluster-justify: flex-end;
+  }
 }
