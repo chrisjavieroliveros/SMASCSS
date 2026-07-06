@@ -30,6 +30,9 @@
 // ── Composed blocks this page renders (molecules) ────────────────────────
 @use "../components/hero";
 
+// ── Tools: the responsive escape hatch (emits no CSS on its own) ──────────
+@use "../abstracts/responsive" as *;
+
 // ── Page-specific styling: the styleguide chrome ─────────────────────────
 // Everything below is unique to this page, so it lives in @layer page.
 @layer page {
@@ -127,11 +130,16 @@
   }
   .sg-section > h2 {
     font-family: var(--ui-font-family-heading);
-    font-size: 1.6rem;
+    font-size: 1.6rem; // mobile-first default
     letter-spacing: -0.02em;
     padding-bottom: 0.5rem;
     margin-bottom: 1.25rem;
     border-bottom: 2px solid var(--ui-color-border);
+
+    // Type scale can't reflow intrinsically — this is a legit breakpoint use.
+    @include desktop-up {
+      font-size: 2.15rem;
+    }
   }
   .sg-section > h2 small {
     font-weight: 500;

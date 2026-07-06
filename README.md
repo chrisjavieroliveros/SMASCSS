@@ -13,6 +13,8 @@ plus the self-sufficient `.ui-card`. All of them share one dedicated **`@layer p
 `primitives/_index` — a page `@use`s each piece directly, so nothing unused compiles
 in. `components/` holds composed, reusable blocks (e.g. `.hero`, `@layer component`).
 Page-specific *tweaks* live in the `page` layer, inside the page bundle that uses them.
+`abstracts/` is the odd one out — pure Sass *tools* (the `responsive` mixins) that
+emit no CSS and belong to no layer; a file `@use`s them only when it needs a media query.
 
 This is the contract: *what the system guarantees* and *how to author against
 it*. The `src/` tree is the implementation; [§12](#12-migration-map) records the
@@ -104,6 +106,9 @@ the host always keeps the final say unless it, too, opts into a layer.
 src/
   _layers.scss                 // @layer order — @use'd first in every entry
   main.scss                    // → main.css   ("super globals": reset + base + layout, no components)
+
+  abstracts/                   // TOOLS — pure Sass (mixins/functions), emit NO CSS, not a layer
+    _responsive.scss           //   device-named responsive mixins (mobile-up … desktop-xl-down) + responsive-prop
 
   variables/                   // → variables.css   (loaded first, everywhere; shippable alone)
     variables.scss             //   ENTRY: emits :root { --ui-* } inside @layer variables
@@ -256,6 +261,32 @@ Each partial wraps its rules in the correct layer, e.g.:
 
 Layout primitives are the deliberate replacement for a utility layer (decision
 #10). The starting set: `container`, `stack`, `cluster`, `grid`, `center`.
+
+**Responsiveness is intrinsic-first.** These primitives reflow *without* media
+queries — `.grid` uses `auto-fit` + `minmax(min(100%, var(--grid-min)), 1fr)`,
+`.container` uses `min()`, and type can `clamp()`. Reach for a breakpoint only
+when a layout genuinely can't reflow on its own (a nav that swaps, a stepped type
+scale). When you do, the tool is `abstracts/_responsive.scss` — pure Sass mixins
+that emit no CSS until used:
+
+```scss
+@use "../abstracts/responsive" as *;
+
+.hero__title {
+  font-size: 1.6rem;                        // mobile-first default
+  @include desktop-up { font-size: 2.15rem; }  // ≥ 1024px
+}
+.sidebar { @include desktop-down { display: none; } }  // < 1024px
+```
+
+The mixins are **device-named** and use WordPress-standard px breakpoints —
+deliberate, since the system embeds inside WordPress / Elementor:
+`mobile 600px · tablet 782px · desktop 1024px · desktop-lg 1200px · desktop-xl
+1440px`, each with an `-up` (min-width, mobile-first) and `-down` (max-width)
+form. There's also `responsive-prop($property, $prefix)` for tier-driven custom
+properties, and `reduced-motion` / `dark-mode` / `retina` query wrappers. This is
+a *tool*, not a layer: it lives outside the `@layer` cascade and is `@use`'d only
+where a media query is needed.
 
 ---
 
@@ -501,6 +532,14 @@ CSS changes; no rebuild.
 1. `src/themes/theme-<name>.scss` — `@use "../_layers";` then `@layer variables { :root { … } }`
    with only the semantic variables that change.
 
+### Go responsive (breakpoints)
+1. Try the intrinsic primitives first — `--grid-min`, `min()`, `clamp()` usually
+   remove the need for a media query entirely (§7).
+2. If you still need one: `@use "../abstracts/responsive" as *;` then wrap rules
+   in `@include desktop-up { … }` / `mobile-down` / etc. (device-named, mobile-first).
+3. Need a new breakpoint? Add a `$bp-<name>` var + its `-up`/`-down` mixins to
+   `abstracts/_responsive.scss`.
+
 ---
 
 ## 14. Conventions reference
@@ -515,6 +554,7 @@ CSS changes; no rebuild.
 | Composed block class | `.<block>` / `.<block>__<part>` | `.hero`, `.hero__actions` |
 | Variant / state | `data-<axis>="<value>"` | `data-variant="outline"` |
 | Layout primitive | `.<name>` (unprefixed) | `.stack`, `.grid` |
+| Responsive mixin | `<device>-up` / `<device>-down` | `@include desktop-up { … }` |
 | Cascade layers | `variables, reset, base, layout, primitive, component, page, override` | |
 
 ---

@@ -1,0 +1,152 @@
+/**
+ * RESPONSIVE MIXINS - WordPress Standard Breakpoints
+ * ====================================================
+ * Copied from the Integra Platform plugin (scss/abstracts/_responsive.scss) so
+ * the two systems share one responsive vocabulary. WordPress-standard px
+ * breakpoints are intentional here — this system is built to embed inside
+ * WordPress / Elementor, so matching the WP boundaries is a feature.
+ *
+ * Pure Sass: mixins only, ZERO CSS output on its own. `@use` it where needed:
+ *   @use "../abstracts/responsive" as *;   // then @include desktop-down { … }
+ *
+ * Breakpoints:
+ *   mobile:     600px  (WordPress mobile boundary)
+ *   tablet:     782px  (WordPress tablet boundary)
+ *   desktop:    1024px (WordPress desktop boundary)
+ *   desktop-lg: 1200px
+ *   desktop-xl: 1440px
+ *
+ * Usage:
+ *   @include mobile-up      { ... }   // 600px+
+ *   @include mobile-down    { ... }   // <600px
+ *   @include tablet-up      { ... }   // 782px+
+ *   @include tablet-down    { ... }   // <782px
+ *   @include desktop-up     { ... }   // 1024px+
+ *   @include desktop-down   { ... }   // <1024px
+ *   @include desktop-lg-up  { ... }   // 1200px+
+ *   @include desktop-lg-down{ ... }   // <1200px
+ *   @include desktop-xl-up  { ... }   // 1440px+
+ *   @include desktop-xl-down{ ... }   // <1440px
+ *
+ * Utility:
+ *   @include reduced-motion { ... }
+ *   @include dark-mode      { ... }
+ *   @include retina         { ... }
+ */
+
+// ── Breakpoint values ──────────────────────────────────────────────────────
+$bp-mobile: 600px;
+$bp-tablet: 782px;
+$bp-desktop: 1024px;
+$bp-desktop-lg: 1200px;
+$bp-desktop-xl: 1440px;
+
+// ── Semantic mixins ────────────────────────────────────────────────────────
+
+@mixin mobile-up {
+  @media (min-width: $bp-mobile) {
+    @content;
+  }
+}
+
+@mixin mobile-down {
+  @media (max-width: ($bp-mobile - 1px)) {
+    @content;
+  }
+}
+
+@mixin tablet-up {
+  @media (min-width: $bp-tablet) {
+    @content;
+  }
+}
+
+@mixin tablet-down {
+  @media (max-width: ($bp-tablet - 1px)) {
+    @content;
+  }
+}
+
+@mixin desktop-up {
+  @media (min-width: $bp-desktop) {
+    @content;
+  }
+}
+
+@mixin desktop-down {
+  @media (max-width: ($bp-desktop - 1px)) {
+    @content;
+  }
+}
+
+@mixin desktop-lg-up {
+  @media (min-width: $bp-desktop-lg) {
+    @content;
+  }
+}
+
+@mixin desktop-lg-down {
+  @media (max-width: ($bp-desktop-lg - 1px)) {
+    @content;
+  }
+}
+
+@mixin desktop-xl-up {
+  @media (min-width: $bp-desktop-xl) {
+    @content;
+  }
+}
+
+@mixin desktop-xl-down {
+  @media (max-width: ($bp-desktop-xl - 1px)) {
+    @content;
+  }
+}
+
+// ── Responsive property mixin ─────────────────────────────────────────────
+//
+// Applies a CSS property mobile-first using a CSS custom property prefix.
+// Tablet and desktop values fall back to the smaller tier when unset.
+//
+// Usage:
+//   @include responsive-prop(gap, --ui-gallery-gap);
+//
+// Emits:
+//   gap: var(--ui-gallery-gap-mobile);
+//   @media tablet-up  { gap: var(--ui-gallery-gap-tablet,  var(--ui-gallery-gap-mobile)); }
+//   @media desktop-up { gap: var(--ui-gallery-gap-desktop, var(--ui-gallery-gap-tablet, var(--ui-gallery-gap-mobile))); }
+
+@mixin responsive-prop($property, $prefix) {
+  #{$property}: var(#{$prefix}-mobile);
+
+  @include tablet-up {
+    #{$property}: var(#{$prefix}-tablet, var(#{$prefix}-mobile));
+  }
+
+  @include desktop-up {
+    #{$property}: var(
+      #{$prefix}-desktop,
+      var(#{$prefix}-tablet, var(#{$prefix}-mobile))
+    );
+  }
+}
+
+// ── Utility mixins ─────────────────────────────────────────────────────────
+
+@mixin reduced-motion {
+  @media (prefers-reduced-motion: reduce) {
+    @content;
+  }
+}
+
+@mixin dark-mode {
+  @media (prefers-color-scheme: dark) {
+    @content;
+  }
+}
+
+@mixin retina {
+  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    @content;
+  }
+}

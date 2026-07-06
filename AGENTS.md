@@ -63,6 +63,7 @@ WordPress block, or Elementor with zero of the rest of the system loaded.
 | `components/` | `component` | composed reusable blocks: `.hero` | per page (`@use` each) |
 | `pages/` | `page` | one flat entry per page; page-specific tweaks | it *is* the page |
 | `themes/` | `variables` | semantic-var overrides; entry → `theme-<name>.css` | optional, swapped at runtime |
+| `abstracts/` | **none** | pure Sass tools — `responsive` mixins (`mobile-up` … `desktop-xl-down`, `responsive-prop`); **emit no CSS** | `@use`'d only where a media query is needed |
 
 Notes:
 - Nothing component-level ships in `main.css`. Every control — including
@@ -113,6 +114,11 @@ Override precedence, low → high: baked `#literal` → `--ui-*` token / theme �
   automatically via `_emit.scss`. Reference as `var(--ui-…, fallback)`.
 - **Add a theme** → `src/themes/theme-<name>.scss`: `@use "../_layers";` then
   `@layer variables { :root { … } }` with only the semantic vars that change.
+- **Go responsive** → try intrinsic first (`--grid-min`, `min()`, `clamp()`).
+  Only if that can't reflow: `@use "../abstracts/responsive" as *;` then
+  `@include desktop-up { … }` / `mobile-down` / etc. Device-named, WordPress px
+  breakpoints (mobile 600 · tablet 782 · desktop 1024 · lg 1200 · xl 1440),
+  mobile-first (`-up` = min-width). Don't hardcode raw `@media (min-width: …)`.
 
 ---
 

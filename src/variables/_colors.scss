@@ -131,7 +131,6 @@ $semantic-colors: (
   primary-strong: var(--color-primary-shade),
   primary-contrast: var(--color-primary-contrast),
   accent: var(--color-secondary),
-
   // Semantic state tones (read by data-tone variants).
   danger: var(--color-danger),
   danger-strong: var(--color-danger-shade),
@@ -145,7 +144,6 @@ $semantic-colors: (
   info: var(--color-info),
   info-strong: var(--color-info-shade),
   info-contrast: var(--color-info-contrast),
-
   focus: color-mix(in srgb, var(--ui-color-primary) 35%, white),
   shadow: rgb(0 0 0 / 0.12),
 );
