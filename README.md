@@ -5,10 +5,10 @@
 > Elementor widget — with **zero** of the rest of the system loaded.
 
 **Two component tiers.** `primitives/` holds the portable, self-sufficient
-`.ui-*` atoms (button, input, textarea, card) — authored in `@layer components`,
-these are the "drop anywhere" set. `components/` holds composed, project-specific
-blocks assembled from primitives + layout (e.g. `.home-hero`) — authored in the
-layer that matches their reuse (`@layer page` for page-specific sections).
+`.ui-*` atoms (button, input, textarea, card) — the "drop anywhere" set.
+`components/` holds composed, reusable blocks assembled from primitives + layout
+(e.g. `.hero`). Both are authored in `@layer components`; page-specific *tweaks*
+to either live in the `page` layer, inside the page bundle that uses them.
 
 This is the contract: *what the system guarantees* and *how to author against
 it*. The `src/` tree is the implementation; [§12](#12-migration-map) records the
@@ -75,8 +75,8 @@ Layer purpose and why the order is what it is:
 | `tokens` | `tokens.css`, theme files | `:root { --ui-* }`. A theme loaded *later* redefines these in the **same** layer and wins by source order — no separate theme layer needed. Components re-resolve automatically because they read tokens through `var()`. |
 | `base` | `main.css` | Semantic element defaults (typography, forms, tables, media). |
 | `layout` | `main.css` | Layout primitives (stack, cluster, grid, container, center). |
-| `components` | `primitives/` | `.ui-*` primitives. Sits above base/layout so components win over generic element styling. |
-| `page` | page bundles, `components/` | Page-specific styling and composed blocks (`.home-hero`). Above `components`, so a page can adjust a primitive with no `!important`. |
+| `components` | `primitives/`, `components/` | `.ui-*` primitives and composed blocks (`.hero`). Sits above base/layout so components win over generic element styling. |
+| `page` | page bundles | Page-specific styling and tweaks. Above `components`, so a page can adjust a primitive or block with no `!important`. |
 | `overrides` | anywhere | Deliberate last-word escape hatch. |
 
 **The embedding guarantee:** any CSS *outside* all layers — a WordPress theme,

@@ -1,6 +1,6 @@
 // ENTRY → home.css
 // A page bundle is a manifest: pull the layer order, @use ONLY the primitives
-// this page renders, then its own page components. Nothing else ships.
+// and composed blocks this page renders, then any page-specific tweaks.
 @use "../_layers";
 
 // Primitives this page uses (and only these):
@@ -8,5 +8,13 @@
 @use "../primitives/card";
 @use "../primitives/input";
 
-// Page components:
+// Composed blocks this page renders:
 @use "../components/hero";
+
+// Page-specific tweaks live in the `page` layer (above `components`), so they
+// win with no !important — and ship only in home.css:
+@layer page {
+  .hero .ui-button {
+    --_radius: 999px; // pill buttons in the hero, home only
+  }
+}

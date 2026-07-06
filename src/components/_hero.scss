@@ -1,20 +1,16 @@
-// Page-only styles live in the `page` layer, so they can tweak a component
-// without !important (page sits above components in the cascade order).
-@layer page {
-  .home-hero {
+// components/hero — a reusable composed block: a vertical hero section built
+// from primitives + layout tokens. Lives in @layer components so a page can
+// tweak it from the `page` layer without !important.
+@layer components {
+  .hero {
     display: grid;
     gap: var(--ui-space-6, 2rem);
     padding-block: var(--ui-space-7, 3rem);
   }
 
-  .home-hero__actions {
+  .hero__actions {
     display: flex;
     flex-wrap: wrap;
     gap: var(--ui-space-3, 0.75rem);
-  }
-
-  // Example page-local component override: pill buttons in the hero only.
-  .home-hero .ui-button {
-    --_radius: 999px;
   }
 }

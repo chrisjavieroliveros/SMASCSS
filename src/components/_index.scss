@@ -1,0 +1,4 @@
+// Whole-library forward for composed blocks — for SCSS consumers who want
+// everything. Per-page bundles should @use the individual blocks they render
+// instead (e.g. @use "../components/hero") so only what's used compiles in.
+@forward "hero";
