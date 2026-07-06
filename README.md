@@ -61,7 +61,7 @@ flip any of them and this doc updates.
 | 11 | Theming | **Separate theme stylesheets**, swapped at runtime. |
 | 12 | Entry discovery | **Auto-glob** — any non-`_` `.scss` compiles to a matching `.css`; folders are free to reorganize. |
 | D1 | Class prefix | *(default)* `.ui-` for classes, `--_*` for private vars, `--ui-*` for tokens. |
-| D2 | Component v1 catalog | *(default)* `button`, `input`, `textarea`, `card`. |
+| D2 | Component v1 catalog | *(default)* `button, .btn` ships globally from `base/`; `form`, `input`, `textarea`, `table`, `card` are opt-in `primitives/`. |
 | D3 | Variant vocabulary | *(default)* `data-variant` (shape) · `data-size` · `data-tone` (semantic color). |
 | D4 | Standalone drop-ins | *(default)* ship **layered**; add an unlayered build only for a host that clobbers a component. |
 
@@ -130,8 +130,7 @@ src/
     _card.scss                 //   .ui-card
 
   components/                  // MOLECULES — composed, reusable blocks, partials only, @layer component
-    _index.scss                //   @forward every block (whole-library / SCSS consumers)
-    _hero.scss                 //   e.g. .hero, assembled from primitives + layout
+    _hero.scss                 //   e.g. .hero, assembled from primitives + layout (@use per page)
 
   pages/                       // one flat entry per page (manual composition, per-page)
     home.scss                  //   ENTRY → home.css: @use only the primitives/components it needs
@@ -264,77 +263,79 @@ Layout primitives are the deliberate replacement for a utility layer (decision
 This is the heart of the system. Every primitive follows one recipe that
 delivers self-sufficiency, token upgrade, data-attribute variants, and layer
 placement simultaneously. Composed `components/` blocks assemble these primitives
-in the same `@layer component`; page-specific tweaks to them live in the `page` layer.
+following the **same** recipe, differing only in their layer (`@layer component`);
+page-specific tweaks to either live in the `page` layer.
 
 ### 8.1 Reference implementation
 
-```scss
-// src/primitives/_button.scss
-@layer component {
-  .ui-button {
-    // Private vars: hard fallback ← global token. This chain is what makes the
-    // component render bare AND adopt the design system when it's present.
-    --_bg:       var(--ui-color-primary, #c33329);
-    --_fg:       var(--ui-color-primary-contrast, #fff);
-    --_bg-hover: var(--ui-color-primary-strong, #a52a2a);
-    --_pad:      var(--ui-space-3, .8rem) var(--ui-space-4, 1.1rem);
-    --_radius:   var(--ui-radius-sm, 8px);
-    --_border:   transparent;
+`.ui-card` is the canonical primitive — a self-sufficient surface with named
+slots. (The other primitives are element-scoped controls: `form`, `input`,
+`textarea`, `table`. `button, .btn` follows the same private-var recipe but ships
+globally from `base/` — see §7 — so it is not a `primitives/` file.)
 
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: var(--ui-space-2, .55rem);
+```scss
+// src/primitives/_card.scss
+@layer primitive {
+  .ui-card {
+    // Private vars: hard fallback ← global token. This chain is what makes the
+    // primitive render bare AND adopt the design system when it's present.
+    --_bg:     var(--ui-color-surface, #ffffff);
+    --_fg:     var(--ui-color-text, #111111);
+    --_border: var(--ui-color-border, #dddddd);
+    --_radius: var(--ui-radius-lg, 1.5rem);
+    --_pad:    var(--ui-space-5, 1.5rem);
+    --_gap:    var(--ui-space-4, 1rem);
+    --_shadow: var(--ui-shadow-1, none);
+
+    display: grid;
+    gap: var(--_gap);
     padding: var(--_pad);
     border: var(--ui-border-width-1, 1px) solid var(--_border);
     border-radius: var(--_radius);
     background: var(--_bg);
     color: var(--_fg);
-    font-weight: var(--ui-font-weight-strong, 700);
-    line-height: 1;
-    cursor: pointer;
-    text-decoration: none;
-    transition: background var(--ui-transition-fast, 160ms ease);
+    box-shadow: var(--_shadow);
 
-    &:hover { background: var(--_bg-hover); }
+    > * { margin: 0; }
 
     // Variants: data-attributes REASSIGN private vars, never restate properties.
-    &[data-variant="outline"] {
-      --_bg: transparent;
-      --_fg: var(--ui-color-primary, #c33329);
-      --_border: currentColor;
-    }
-    &[data-variant="ghost"] { --_bg: transparent; --_fg: currentColor; }
+    &[data-variant="flat"]  { --_shadow: none; }
+    &[data-variant="muted"] { --_bg: var(--ui-color-surface-muted, #f3f3f3); }
 
-    &[data-size="sm"] { --_pad: var(--ui-space-2, .5rem) var(--ui-space-3, .8rem); }
-    &[data-size="lg"] { --_pad: var(--ui-space-4, 1rem) var(--ui-space-5, 1.4rem); }
-
-    &[data-tone="danger"]  { --_bg: var(--ui-color-danger, #b91c1c);  --_bg-hover: var(--ui-color-danger-shade, #941616); }
-    &[data-tone="success"] { --_bg: var(--ui-color-success, #4caa55); }
-
-    &:disabled,
-    &[aria-disabled="true"] { opacity: .55; cursor: not-allowed; pointer-events: none; }
+    &[data-pad="sm"] { --_pad: var(--ui-space-4, 1rem); }
+    &[data-pad="lg"] { --_pad: var(--ui-space-6, 2rem); }
   }
+
+  // Named slots — self-contained, still token-driven.
+  .ui-card__eyebrow { color: var(--ui-color-accent, currentColor); text-transform: uppercase; }
+  .ui-card__title   { font-family: var(--ui-font-family-heading, sans-serif); }
+  .ui-card__body    { color: var(--ui-color-text-muted, #707070); }
+  .ui-card__actions { display: flex; flex-wrap: wrap; gap: var(--ui-space-2, .5rem); }
 }
 ```
 
 ```html
-<button class="ui-button" data-variant="outline" data-size="sm">Save</button>
-<button class="ui-button" data-tone="danger">Delete</button>
+<article class="ui-card" data-variant="muted" data-pad="lg">
+  <p class="ui-card__eyebrow">Plan</p>
+  <h3 class="ui-card__title">Pro</h3>
+  <p class="ui-card__body">Everything in the system, per page.</p>
+  <div class="ui-card__actions"><button class="btn">Choose</button></div>
+</article>
 ```
 
-### 8.2 The rules every component follows
+### 8.2 The rules every primitive follows
 
-1. **Wrap in `@layer component`.**
+1. **Wrap in `@layer primitive`** (a composed block in `components/` wraps in
+   `@layer component` instead — that is the only difference).
 2. **Every themeable property reads a private `--_*` var.** The `--_*` var
    defaults to a semantic token, which itself has a hard literal fallback:
-   `--_bg: var(--ui-color-primary, #c33329);`
+   `--_bg: var(--ui-color-surface, #ffffff);`
 3. **Variants only reassign `--_*` vars.** No variant restates layout/structure.
    This keeps variant CSS tiny and impossible to desync from the base.
-4. **Self-contained.** A component references only tokens and its own private
-   vars — never another component or a global recipe file.
+4. **Self-contained.** A primitive references only tokens and its own private
+   vars — never another primitive or a global recipe file.
 5. **Data-attribute API** (decision #7): `data-variant`, `data-size`,
-   `data-tone`. Booleans use presence (`[data-loading]`).
+   `data-tone`, `data-pad`. Booleans use presence (`[data-loading]`).
 
 ### 8.3 The four override levels (no specificity fights)
 
@@ -349,7 +350,7 @@ inline style="--_bg: …"      // one instance
 
 ## 9. Distribution
 
-Primitives ship as **source partials** (`primitives/_button.scss`). Whoever compiles
+Primitives ship as **source partials** (`primitives/_card.scss`). Whoever compiles
 `@use`s them directly:
 
 - Your pages: `@use "../primitives/card"` (see §10).
@@ -358,25 +359,25 @@ Primitives ship as **source partials** (`primitives/_button.scss`). Whoever comp
 
 `@use` is a source-time mechanism, so this covers every consumer that runs Sass.
 
-**A pre-built `.css` per component is an on-demand build, not a standing folder.**
+**A pre-built `.css` per primitive is an on-demand build, not a standing folder.**
 A host that only accepts a finished file (paste into Elementor, enqueue a plain
 stylesheet) needs a compiled artifact — but a partial isn't a compile target and
 lacks the `@layer` statement. When that need arises, add a one-off entry:
 
 ```scss
-// e.g. build/button.scss   → button.css   (create only when a host needs a file)
+// e.g. build/card.scss   → card.css   (create only when a host needs a file)
 @use "../src/_layers";
-@use "../src/primitives/button";
+@use "../src/primitives/card";
 ```
 
-Keep such entries out of `primitives/` — a partial `_button.scss` and an entry
-`button.scss` in the *same* folder make `@use "primitives/button"` an ambiguous import
+Keep such entries out of `primitives/` — a partial `_card.scss` and an entry
+`card.scss` in the *same* folder make `@use "primitives/card"` an ambiguous import
 that Sass rejects. Put them in a separate build/output location.
 
-**Layered by design (decision D4):** a compiled component carries `@layer
-components`, so a host theme can still override it. If a specific host clobbers a
-component, emit an unlayered build for *that* component rather than delayering
-everything.
+**Layered by design (decision D4):** a compiled primitive carries its `@layer`
+statement (`@layer primitive`), so a host theme can still override it. If a specific
+host clobbers a piece, emit an unlayered build for *that* piece rather than
+delayering everything.
 
 ---
 
@@ -390,8 +391,9 @@ uses, and any composed blocks it renders.
 // src/pages/home.scss   → home.css
 @use "../_layers";
 
-// Only the primitives this page renders:
-@use "../primitives/button";
+// Only the OPT-IN primitives this page renders. button/input are base element
+// styles (global via main.css), so a page never @uses them — it lists only what
+// isn't already global:
 @use "../primitives/card";
 
 // Composed blocks this page renders:
@@ -400,7 +402,7 @@ uses, and any composed blocks it renders.
 // Page-specific tweaks live in the `page` layer (above `component`) and ship
 // only in home.css:
 @layer page {
-  .hero .ui-button { --_radius: 999px; }   // pill buttons in the hero, home only
+  .hero .btn { --_radius: 999px; }   // pill buttons in the hero, home only
 }
 ```
 
@@ -473,17 +475,18 @@ CSS changes; no rebuild.
 ## 13. Playbooks
 
 ### Add a primitive
-1. `src/primitives/_<name>.scss` — a class component in `@layer component`, or an
-   opt-in element style in `@layer base` (like `form`/`input`/`table`).
+1. `src/primitives/_<name>.scss` — wrap in `@layer primitive` (every `primitives/`
+   file shares that one layer, whether it's a `.ui-<name>` class like `card` or an
+   element-scoped control like `form`/`input`/`table`).
 2. Use it in a page via `@use "../primitives/<name>";` — there's no `primitives/_index`;
    each page pulls exactly what it renders.
 3. Only if an external host needs a pre-built file: add a one-off entry (§9).
 
 ### Add a composed block
 1. `src/components/_<name>.scss` — assemble primitives + layout; wrap in `@layer component`.
-2. Add `@forward "<name>";` to `src/components/_index.scss`.
-3. Use it in a page via `@use "../components/<name>";`. Page-specific tweaks go in
-   that page's own `@layer page` block.
+2. Use it in a page via `@use "../components/<name>";`. Page-specific tweaks go in
+   that page's own `@layer page` block. (There's no `components/_index` — like
+   primitives, each page pulls the blocks it renders directly.)
 
 ### Add a page
 1. `src/pages/<name>.scss` — `@use "../_layers";` then `@use` the primitives/components it needs.
@@ -506,7 +509,8 @@ CSS changes; no rebuild.
 | Global variable | `--ui-<group>-<name>` | `--ui-color-primary`, `--ui-space-3` |
 | Palette ramp | `--color-<name>-<step>` | `--color-primary-500` |
 | Component private var | `--_<role>` | `--_bg`, `--_pad` |
-| Primitive class | `.ui-<name>` | `.ui-button` |
+| Base element | bare selector `+ .<name>` | `button, .btn` |
+| Primitive class | `.ui-<name>` (+ `.ui-<name>__<slot>`) | `.ui-card`, `.ui-card__title` |
 | Composed block class | `.<block>` / `.<block>__<part>` | `.hero`, `.hero__actions` |
 | Variant / state | `data-<axis>="<value>"` | `data-variant="outline"` |
 | Layout primitive | `.<name>` (unprefixed) | `.stack`, `.grid` |
