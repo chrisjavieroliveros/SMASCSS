@@ -7,11 +7,12 @@
 **Where things live.** `base/` holds the *truly global* element defaults every page
 gets via `main.css` — reset, typography, media, and `button, .btn`. `primitives/`
 holds *opt-in* pieces a page pulls in only when it needs them: the non-universal
-element styles (`form`, `input, .input`, `textarea, .textarea`, `table` — all still
-`@layer base`) plus the self-sufficient `.ui-card` (`@layer component`). There is no
+element styles (`form`, `input, .input`, `textarea, .textarea`, `table`) plus the
+self-sufficient `.ui-card`. All of them share one dedicated **`@layer primitive`**
+(between `layout` and `component`), so the folder maps 1:1 to the layer. There is no
 `primitives/_index` — a page `@use`s each piece directly, so nothing unused compiles
-in. `components/` holds composed, reusable blocks (e.g. `.hero`). Page-specific
-*tweaks* live in the `page` layer, inside the page bundle that uses them.
+in. `components/` holds composed, reusable blocks (e.g. `.hero`, `@layer component`).
+Page-specific *tweaks* live in the `page` layer, inside the page bundle that uses them.
 
 This is the contract: *what the system guarantees* and *how to author against
 it*. The `src/` tree is the implementation; [§12](#12-migration-map) records the
@@ -74,7 +75,7 @@ across separately-compiled stylesheets.
 
 ```scss
 // src/_layers.scss
-@layer variables, reset, base, layout, component, page, override;
+@layer variables, reset, base, layout, primitive, component, page, override;
 ```
 
 Layer purpose and why the order is what it is:
@@ -83,10 +84,11 @@ Layer purpose and why the order is what it is:
 |-------|-------|----------|
 | `variables` | `variables.css`, theme files | `:root { --ui-* }`. First, so it's the foundation everything else reads. Nothing else declares these properties, so its position is inert at render time — but a theme loaded *later* redefines them in the **same** layer and wins by source order, and components re-resolve automatically because they read variables through `var()`. |
 | `reset` | `main.css` | Normalize / reset. Near the bottom so element defaults override it. |
-| `base` | `main.css` + `primitives/` | Semantic element defaults. The *global* ones (typography, media, `button`) ship in `main.css`; the *opt-in* ones (`form`, `input`, `textarea`, `table`) are `primitives/` partials a page pulls in — still `@layer base`, just not loaded everywhere. |
+| `base` | `main.css` | Global semantic element defaults (typography, media, `button, .btn`). Shipped everywhere. |
 | `layout` | `main.css` | Layout primitives (stack, cluster, grid, container, center). |
-| `component` | `primitives/` (card), `components/` | `.ui-*` class components (`.ui-card`) and composed blocks (`.hero`). Sits above base/layout so components win over generic element styling. |
-| `page` | page bundles | Page-specific styling and tweaks. Above `component`, so a page can adjust a primitive or block with no `!important`. |
+| `primitive` | `primitives/` | Everything in `primitives/`, unified in one layer: opt-in element styles (`form`, `input`, `textarea`, `table`) and the `.ui-card` component. A page `@use`s only what it renders. |
+| `component` | `components/` | Composed, reusable blocks (`.hero`). Sits above `primitive` so a block can adjust a primitive it composes. |
+| `page` | page bundles | Page-specific styling and tweaks. Above `component`, so a page can adjust a primitive, block, or element with no `!important`. |
 | `override` | anywhere | Deliberate last-word escape hatch. |
 
 **The embedding guarantee:** any CSS *outside* all layers — a WordPress theme,
@@ -120,12 +122,12 @@ src/
   layouts/                     // @layer layout — layout primitives (bundled into main.css)
     _container.scss  _stack.scss  _cluster.scss  _grid.scss  _center.scss  _index.scss
 
-  primitives/                  // OPT-IN pieces — @use per page, never global (no _index; pull each directly)
-    _form.scss                 //   label / select / fieldset / legend   (@layer base)
-    _input.scss                //   input, .input                        (@layer base)
-    _textarea.scss             //   textarea, .textarea                  (@layer base)
-    _table.scss                //   table + cells                        (@layer base)
-    _card.scss                 //   .ui-card                             (@layer component)
+  primitives/                  // OPT-IN pieces, all @layer primitive — @use per page (no _index)
+    _form.scss                 //   label / select / fieldset / legend
+    _input.scss                //   input, .input
+    _textarea.scss             //   textarea, .textarea
+    _table.scss                //   table + cells
+    _card.scss                 //   .ui-card
 
   components/                  // MOLECULES — composed, reusable blocks, partials only, @layer component
     _index.scss                //   @forward every block (whole-library / SCSS consumers)
@@ -508,7 +510,7 @@ CSS changes; no rebuild.
 | Composed block class | `.<block>` / `.<block>__<part>` | `.hero`, `.hero__actions` |
 | Variant / state | `data-<axis>="<value>"` | `data-variant="outline"` |
 | Layout primitive | `.<name>` (unprefixed) | `.stack`, `.grid` |
-| Cascade layers | `variables, reset, base, layout, component, page, override` | |
+| Cascade layers | `variables, reset, base, layout, primitive, component, page, override` | |
 
 ---
 

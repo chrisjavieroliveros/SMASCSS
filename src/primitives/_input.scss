@@ -2,7 +2,7 @@
 // .input. Plain base element styling: no sizes, no variants. The element
 // selector is guarded to text-like types so checkboxes/radios/etc. are left
 // alone; the checkbox/radio accent is set separately below.
-@layer base {
+@layer primitive {
   input:where(
       [type="email"], [type="number"], [type="password"], [type="search"],
       [type="tel"], [type="text"], [type="url"], [type="date"],

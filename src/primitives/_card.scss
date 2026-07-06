@@ -1,5 +1,5 @@
 // primitives/card — surface container + slot helpers.
-@layer component {
+@layer primitive {
   .ui-card {
     --_bg: var(--ui-color-surface, #ffffff);
     --_fg: var(--ui-color-text, #111111);

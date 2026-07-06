@@ -1,4 +1,4 @@
-@layer base {
+@layer primitive {
   form:not([class]) {
     display: grid;
     gap: var(--ui-form-gap, var(--ui-space-4, 1rem));

@@ -1,4 +1,4 @@
-@layer base {
+@layer primitive {
   table:not([class]) {
     width: var(--ui-table-width, 100%);
     margin-block-start: var(--ui-table-margin-block-start, 0);

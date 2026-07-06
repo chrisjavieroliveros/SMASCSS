@@ -1,6 +1,6 @@
 // base/textarea — the default look for <textarea> and anything with .textarea.
 // Plain base element styling (mirrors base/input, plus vertical resize).
-@layer base {
+@layer primitive {
   textarea,
   .textarea {
     --_border: var(--ui-color-border, #cccccc);
