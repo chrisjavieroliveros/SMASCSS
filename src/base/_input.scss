@@ -1,32 +1,36 @@
-// primitives/textarea — multi-line control. Self-contained (mirrors .ui-input vars).
-@layer component {
-  .ui-textarea {
+// base/input — the default look for text-like <input>s and anything with
+// .input. Plain base element styling: no sizes, no variants. The element
+// selector is guarded to text-like types so checkboxes/radios/etc. are left
+// alone; the checkbox/radio accent is set separately below.
+@layer base {
+  input:where(
+      [type="email"], [type="number"], [type="password"], [type="search"],
+      [type="tel"], [type="text"], [type="url"], [type="date"],
+      [type="datetime-local"], [type="month"], [type="time"], [type="week"]
+    ),
+  .input {
     --_bg: var(--ui-color-surface, #ffffff);
     --_fg: var(--ui-color-text, #111111);
     --_border: var(--ui-color-border, #cccccc);
-    --_placeholder: var(--ui-color-text-muted, #707070);
-    --_radius: var(--ui-radius-sm, 8px);
-    --_pad: var(--ui-space-3, 0.8rem) var(--ui-space-4, 1rem);
-    --_min-h: 8rem;
     --_focus-border: var(--ui-color-primary, #c33329);
     --_focus-ring: 0 0 0 3px
       color-mix(in srgb, var(--ui-color-primary, #c33329) 22%, transparent);
 
     width: 100%;
-    min-height: var(--_min-h);
-    padding: var(--_pad);
+    min-height: 3rem;
+    padding: var(--ui-space-3, 0.8rem) var(--ui-space-4, 1rem);
     border: var(--ui-border-width-1, 1px) solid var(--_border);
-    border-radius: var(--_radius);
+    border-radius: var(--ui-radius-sm, 0.5rem);
     background: var(--_bg);
     color: var(--_fg);
-    resize: vertical;
+    font: inherit;
     transition:
       border-color var(--ui-transition-fast, 160ms ease),
       box-shadow var(--ui-transition-fast, 160ms ease),
       background var(--ui-transition-fast, 160ms ease);
 
     &::placeholder {
-      color: var(--_placeholder);
+      color: var(--ui-color-text-muted, #707070);
     }
 
     &:focus {
@@ -35,7 +39,7 @@
       outline: none;
     }
 
-    &[data-invalid],
+    // Native validity state — a11y, not a decorative variant.
     &[aria-invalid="true"] {
       --_border: var(--ui-color-danger, #b91c1c);
       --_focus-border: var(--ui-color-danger, #b91c1c);
@@ -48,5 +52,10 @@
       opacity: 0.6;
       cursor: not-allowed;
     }
+  }
+
+  // Checkbox / radio just adopt the brand accent.
+  input:where([type="checkbox"], [type="radio"]) {
+    accent-color: var(--ui-color-primary, #111111);
   }
 }

@@ -3,18 +3,17 @@
 // and composed blocks this page renders, then any page-specific tweaks.
 @use "../_layers";
 
-// Primitives this page uses (and only these):
-@use "../primitives/button";
+// Primitives this page uses (button/input are base element styles now, global
+// via main.css — a page only @uses what's not already global):
 @use "../primitives/card";
-@use "../primitives/input";
 
 // Composed blocks this page renders:
 @use "../components/hero";
 
-// Page-specific tweaks live in the `page` layer (above `components`), so they
-// win with no !important — and ship only in home.css:
+// Page-specific tweaks live in the `page` layer (above `base`), so they win
+// with no !important — and ship only in home.css:
 @layer page {
-  .hero .ui-button {
+  .hero .btn {
     --_radius: 999px; // pill buttons in the hero, home only
   }
 }

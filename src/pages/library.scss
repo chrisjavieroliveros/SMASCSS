@@ -19,9 +19,8 @@
 @use "../_layers";
 
 // ── Primitives this page renders (atoms) ─────────────────────────────────
-@use "../primitives/button";
-@use "../primitives/input";
-@use "../primitives/textarea";
+// (button/input/textarea are base element styles now — they arrive via
+//  main.css, so a page never @uses them; only card remains a primitive.)
 @use "../primitives/card";
 
 // ── Composed blocks this page renders (molecules) ────────────────────────
@@ -342,9 +341,9 @@
     font-size: 0.82rem;
   }
 
-  // Page-local component tweak — demonstrates the `page` layer beating
-  // `components` with no !important. Pill buttons inside the hero demo only.
-  .hero .ui-button {
+  // Page-local tweak — demonstrates the `page` layer beating `base` with no
+  // !important. Pill buttons inside the hero demo only.
+  .hero .btn {
     --_radius: 999px;
   }
 }

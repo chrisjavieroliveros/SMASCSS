@@ -1,0 +1,48 @@
+// base/button — the default look for every <button> and anything with .btn.
+// Plain base element styling: no variants, no sizes, no tones. The private
+// --_* vars stay as theming hooks so a page or component can retune one
+// property (e.g. `.hero .btn { --_radius: 999px }`) without a variant system.
+@layer base {
+  button,
+  .btn {
+    --_bg: var(--ui-color-primary, #c33329);
+    --_fg: var(--ui-color-primary-contrast, #ffffff);
+    --_bg-hover: var(--ui-color-primary-strong, #a52a2a);
+    --_radius: var(--ui-radius-sm, 0.5rem);
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--ui-space-2, 0.5rem);
+    min-height: 2.875rem;
+    padding: var(--ui-space-3, 0.75rem) var(--ui-space-4, 1rem);
+    border: var(--ui-border-width-1, 1px) solid transparent;
+    border-radius: var(--_radius);
+    background: var(--_bg);
+    color: var(--_fg);
+    font: inherit;
+    font-weight: var(--ui-font-weight-strong, 700);
+    line-height: 1;
+    text-decoration: none;
+    cursor: pointer;
+    transition:
+      background var(--ui-transition-fast, 160ms ease),
+      transform var(--ui-transition-fast, 160ms ease);
+
+    &:hover {
+      background: var(--_bg-hover);
+      transform: translateY(-1px);
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+
+    &:disabled,
+    &[aria-disabled="true"] {
+      opacity: 0.55;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+  }
+}

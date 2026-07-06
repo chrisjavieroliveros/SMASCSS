@@ -102,23 +102,20 @@
             class="sg-code"><span class="c">// src/pages/library.scss   →   library.css</span>
 <span class="a">@use</span> <span class="c">"../_layers"</span>;                <span class="c">// canonical @layer order</span>
 
-<span class="c">// atoms this page renders (and only these):</span>
-<span class="a">@use</span> <span class="c">"../primitives/button"</span>;
-<span class="a">@use</span> <span class="c">"../primitives/input"</span>;
-<span class="a">@use</span> <span class="c">"../primitives/textarea"</span>;
-<span class="a">@use</span> <span class="c">"../primitives/card"</span>;
+<span class="c">// only what's NOT already global — button/input/textarea are base</span>
+<span class="c">// element styles now (they arrive via main.css), so a page skips them:</span>
+<span class="a">@use</span> <span class="c">"../primitives/card"</span>;      <span class="c">// the one remaining primitive</span>
+<span class="a">@use</span> <span class="c">"../components/hero"</span>;      <span class="c">// composed block (molecule)</span>
 
-<span class="c">// molecules:</span>
-<span class="a">@use</span> <span class="c">"../components/hero"</span>;
-
-<span class="c">// page-specific chrome, above `components` so it can tweak them:</span>
-<span class="a">@layer</span> page { <span class="c">/* .sg-* styleguide layout, .hero .ui-button pill tweak, … */</span> }</pre>
+<span class="c">// page-specific chrome, above `base` so it can tweak elements:</span>
+<span class="a">@layer</span> page { <span class="c">/* .sg-* styleguide layout, .hero .btn pill tweak, … */</span> }</pre>
         </div>
       </div>
 
-      <p class="note" style="margin-top:1.25rem">That's the entire contract. The button below is a real
-        <code>.ui-button</code> served by <code>library.css</code> — no inline styles, no framework.
-        Toggle <b>◐ Light/Midnight</b> (top-right) to watch the theme swap by enabling a single stylesheet.
+      <p class="note" style="margin-top:1.25rem">That's the entire contract. The buttons below are real
+        <code>&lt;button&gt;</code>/<code>.btn</code> elements styled by <code>main.css</code> — no inline styles,
+        no framework. Toggle <b>◐ Light/Midnight</b> (top-right) to watch the theme swap by enabling a single
+        stylesheet.
       </p>
     </section>
 

@@ -1,0 +1,48 @@
+// base/textarea — the default look for <textarea> and anything with .textarea.
+// Plain base element styling (mirrors base/input, plus vertical resize).
+@layer base {
+  textarea,
+  .textarea {
+    --_border: var(--ui-color-border, #cccccc);
+    --_focus-border: var(--ui-color-primary, #c33329);
+    --_focus-ring: 0 0 0 3px
+      color-mix(in srgb, var(--ui-color-primary, #c33329) 22%, transparent);
+
+    width: 100%;
+    min-height: 8rem;
+    padding: var(--ui-space-3, 0.8rem) var(--ui-space-4, 1rem);
+    border: var(--ui-border-width-1, 1px) solid var(--_border);
+    border-radius: var(--ui-radius-sm, 0.5rem);
+    background: var(--ui-color-surface, #ffffff);
+    color: var(--ui-color-text, #111111);
+    font: inherit;
+    resize: vertical;
+    transition:
+      border-color var(--ui-transition-fast, 160ms ease),
+      box-shadow var(--ui-transition-fast, 160ms ease),
+      background var(--ui-transition-fast, 160ms ease);
+
+    &::placeholder {
+      color: var(--ui-color-text-muted, #707070);
+    }
+
+    &:focus {
+      border-color: var(--_focus-border);
+      box-shadow: var(--_focus-ring);
+      outline: none;
+    }
+
+    &[aria-invalid="true"] {
+      --_border: var(--ui-color-danger, #b91c1c);
+      --_focus-border: var(--ui-color-danger, #b91c1c);
+      --_focus-ring: 0 0 0 3px
+        color-mix(in srgb, var(--ui-color-danger, #b91c1c) 22%, transparent);
+    }
+
+    &:disabled,
+    &[aria-disabled="true"] {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+  }
+}

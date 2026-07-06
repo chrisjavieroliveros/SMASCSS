@@ -34,46 +34,10 @@
     font-weight: var(--ui-legend-font-weight, var(--ui-font-weight-strong, 700));
   }
 
-  // Unclassed form controls read semantic tokens directly (no recipe layer).
-  button:not([class]) {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: var(--ui-space-2, 0.5rem);
-    min-height: 2.75rem;
-    padding: var(--ui-space-3, 0.75rem) var(--ui-space-4, 1rem);
-    border: var(--ui-border-width-1, 1px) solid transparent;
-    border-radius: var(--ui-radius-sm, 0.5rem);
-    background: var(--ui-color-primary, #111111);
-    color: var(--ui-color-primary-contrast, #ffffff);
-    cursor: pointer;
-    font-weight: var(--ui-font-weight-strong, 700);
-    line-height: 1;
-    transition:
-      background var(--ui-transition-fast, 160ms ease),
-      transform var(--ui-transition-fast, 160ms ease);
-
-    &:hover {
-      background: var(--ui-color-primary-strong, var(--ui-color-primary, #111111));
-      transform: translateY(-1px);
-    }
-
-    &:active { transform: translateY(0); }
-
-    &:disabled {
-      opacity: 0.55;
-      cursor: not-allowed;
-      pointer-events: none;
-    }
-  }
-
-  input:not([class]):where(
-      [type="email"], [type="number"], [type="password"], [type="search"],
-      [type="tel"], [type="text"], [type="url"], [type="date"],
-      [type="datetime-local"], [type="month"], [type="time"], [type="week"]
-    ),
-  select:not([class]),
-  textarea:not([class]) {
+  // <button>, <input>, and <textarea> now have their own base files
+  // (base/_button, base/_input, base/_textarea). <select> keeps the shared
+  // control look here, element-scoped via :not([class]).
+  select:not([class]) {
     width: 100%;
     min-height: 3rem;
     padding: var(--ui-space-3, 0.8rem) var(--ui-space-4, 1rem);
@@ -87,29 +51,9 @@
       background var(--ui-transition-fast, 160ms ease);
   }
 
-  input:not([class])::placeholder,
-  textarea:not([class])::placeholder {
-    color: var(--ui-color-text-muted, #707070);
-  }
-
-  input:not([class]):where(
-      [type="email"], [type="number"], [type="password"], [type="search"],
-      [type="tel"], [type="text"], [type="url"], [type="date"],
-      [type="datetime-local"], [type="month"], [type="time"], [type="week"]
-    ):focus,
-  select:not([class]):focus,
-  textarea:not([class]):focus {
+  select:not([class]):focus {
     border-color: var(--ui-color-primary, currentColor);
     box-shadow: 0 0 0 3px color-mix(in srgb, var(--ui-color-primary, #000) 18%, transparent);
     outline: none;
-  }
-
-  textarea:not([class]) {
-    min-height: 8rem;
-    resize: vertical;
-  }
-
-  input:not([class]):where([type="checkbox"], [type="radio"]) {
-    accent-color: var(--ui-color-primary, #111111);
   }
 }
