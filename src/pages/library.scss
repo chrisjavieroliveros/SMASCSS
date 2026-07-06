@@ -18,9 +18,13 @@
 // ─────────────────────────────────────────────────────────────────────────
 @use "../_layers";
 
-// ── Primitives this page renders (atoms) ─────────────────────────────────
-// (button/input/textarea are base element styles now — they arrive via
-//  main.css, so a page never @uses them; only card remains a primitive.)
+// ── Primitives this page renders ─────────────────────────────────────────
+// button lives in base/ (global via main.css), so it isn't listed here. The
+// non-universal controls are opt-in — this page demos labels, inputs, and
+// textareas, so it pulls exactly those (plus card).
+@use "../primitives/form"; // label / select / fieldset
+@use "../primitives/input";
+@use "../primitives/textarea";
 @use "../primitives/card";
 
 // ── Composed blocks this page renders (molecules) ────────────────────────

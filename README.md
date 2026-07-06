@@ -4,11 +4,14 @@
 > portable enough to drop into an Astro component, a WordPress block, or an
 > Elementor widget — with **zero** of the rest of the system loaded.
 
-**Two component tiers.** `primitives/` holds the portable, self-sufficient
-`.ui-*` atoms (button, input, textarea, card) — the "drop anywhere" set.
-`components/` holds composed, reusable blocks assembled from primitives + layout
-(e.g. `.hero`). Both are authored in `@layer component`; page-specific *tweaks*
-to either live in the `page` layer, inside the page bundle that uses them.
+**Where things live.** `base/` holds the *truly global* element defaults every page
+gets via `main.css` — reset, typography, media, and `button, .btn`. `primitives/`
+holds *opt-in* pieces a page pulls in only when it needs them: the non-universal
+element styles (`form`, `input, .input`, `textarea, .textarea`, `table` — all still
+`@layer base`) plus the self-sufficient `.ui-card` (`@layer component`). There is no
+`primitives/_index` — a page `@use`s each piece directly, so nothing unused compiles
+in. `components/` holds composed, reusable blocks (e.g. `.hero`). Page-specific
+*tweaks* live in the `page` layer, inside the page bundle that uses them.
 
 This is the contract: *what the system guarantees* and *how to author against
 it*. The `src/` tree is the implementation; [§12](#12-migration-map) records the
@@ -80,9 +83,9 @@ Layer purpose and why the order is what it is:
 |-------|-------|----------|
 | `variables` | `variables.css`, theme files | `:root { --ui-* }`. First, so it's the foundation everything else reads. Nothing else declares these properties, so its position is inert at render time — but a theme loaded *later* redefines them in the **same** layer and wins by source order, and components re-resolve automatically because they read variables through `var()`. |
 | `reset` | `main.css` | Normalize / reset. Near the bottom so element defaults override it. |
-| `base` | `main.css` | Semantic element defaults (typography, forms, tables, media). |
+| `base` | `main.css` + `primitives/` | Semantic element defaults. The *global* ones (typography, media, `button`) ship in `main.css`; the *opt-in* ones (`form`, `input`, `textarea`, `table`) are `primitives/` partials a page pulls in — still `@layer base`, just not loaded everywhere. |
 | `layout` | `main.css` | Layout primitives (stack, cluster, grid, container, center). |
-| `component` | `primitives/`, `components/` | `.ui-*` primitives and composed blocks (`.hero`). Sits above base/layout so components win over generic element styling. |
+| `component` | `primitives/` (card), `components/` | `.ui-*` class components (`.ui-card`) and composed blocks (`.hero`). Sits above base/layout so components win over generic element styling. |
 | `page` | page bundles | Page-specific styling and tweaks. Above `component`, so a page can adjust a primitive or block with no `!important`. |
 | `override` | anywhere | Deliberate last-word escape hatch. |
 
@@ -110,19 +113,19 @@ src/
     _sizing.scss
     _effects.scss
 
-  base/                        // @layer reset + base — bare element defaults (bundled into main.css)
+  base/                        // @layer reset + base — TRULY GLOBAL defaults (bundled into main.css)
     _index.scss                //   @forward every base partial (main.scss @uses this)
-    _reset.scss  _root.scss  _typography.scss  _media.scss  _form.scss  _table.scss
+    _reset.scss  _root.scss  _typography.scss  _media.scss  _button.scss   // _button → button,.btn
 
   layouts/                     // @layer layout — layout primitives (bundled into main.css)
     _container.scss  _stack.scss  _cluster.scss  _grid.scss  _center.scss  _index.scss
 
-  primitives/                  // ATOMS — the portable library, partials only, @layer component
-    _index.scss                //   @forward every primitive (whole-library / SCSS consumers)
-    _button.scss               //   primitives are @use'd directly by whoever compiles
-    _input.scss
-    _textarea.scss
-    _card.scss
+  primitives/                  // OPT-IN pieces — @use per page, never global (no _index; pull each directly)
+    _form.scss                 //   label / select / fieldset / legend   (@layer base)
+    _input.scss                //   input, .input                        (@layer base)
+    _textarea.scss             //   textarea, .textarea                  (@layer base)
+    _table.scss                //   table + cells                        (@layer base)
+    _card.scss                 //   .ui-card                             (@layer component)
 
   components/                  // MOLECULES — composed, reusable blocks, partials only, @layer component
     _index.scss                //   @forward every block (whole-library / SCSS consumers)
@@ -347,9 +350,9 @@ inline style="--_bg: …"      // one instance
 Primitives ship as **source partials** (`primitives/_button.scss`). Whoever compiles
 `@use`s them directly:
 
-- Your pages: `@use "../primitives/button"` (see §10).
-- Astro / Vite / `@wordpress/scripts`: `@use "primitives/button"`, or `@use "primitives/index"`
-  for the whole library, and let the bundler tree-shake.
+- Your pages: `@use "../primitives/card"` (see §10).
+- Astro / Vite / `@wordpress/scripts`: `@use "primitives/card"` (and any other pieces
+  the component needs). There is no whole-library index — pull each primitive directly.
 
 `@use` is a source-time mechanism, so this covers every consumer that runs Sass.
 
@@ -468,10 +471,11 @@ CSS changes; no rebuild.
 ## 13. Playbooks
 
 ### Add a primitive
-1. `src/primitives/_<name>.scss` — author to the §8 pattern.
-2. Add `@forward "<name>";` to `src/primitives/_index.scss`.
-3. Use it in a page via `@use "../primitives/<name>";`.
-4. Only if an external host needs a pre-built file: add a one-off entry (§9).
+1. `src/primitives/_<name>.scss` — a class component in `@layer component`, or an
+   opt-in element style in `@layer base` (like `form`/`input`/`table`).
+2. Use it in a page via `@use "../primitives/<name>";` — there's no `primitives/_index`;
+   each page pulls exactly what it renders.
+3. Only if an external host needs a pre-built file: add a one-off entry (§9).
 
 ### Add a composed block
 1. `src/components/_<name>.scss` — assemble primitives + layout; wrap in `@layer component`.
