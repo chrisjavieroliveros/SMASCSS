@@ -117,7 +117,7 @@ src/
     _card.scss
 
   components/                  // composed, project-specific blocks — partials only
-    _home-hero.scss            //   e.g. .home-hero, assembled from primitives + layout
+    _hero.scss                 //   e.g. .home-hero, assembled from primitives + layout
 
   themes/                      // → themes/<name>.css  (separate, swappable at runtime)
     theme-midnight.scss        //   ENTRY
@@ -372,11 +372,11 @@ uses, and any composed blocks it renders.
 @use "../primitives/card";
 
 // Composed blocks, in the `page` layer so they can tweak primitives:
-@use "../components/home-hero";   // _home-hero.scss
+@use "../components/hero";   // _hero.scss
 ```
 
 ```scss
-// src/components/_home-hero.scss
+// src/components/_hero.scss
 @layer page {
   .home-hero { display: grid; gap: var(--ui-space-6, 2rem); }
   .home-hero .ui-button { --_radius: 999px; }   // page-local primitive tweak
