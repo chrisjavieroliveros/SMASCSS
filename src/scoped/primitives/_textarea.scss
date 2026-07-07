@@ -1,0 +1,47 @@
+// scoped/primitives/textarea — the default look for <textarea> and anything
+// with .textarea. Plain styling (mirrors the input primitive, plus vertical
+// resize).
+textarea,
+.textarea {
+  --_border: var(--color-Light-300);
+  --_focus-border: var(--color-Primary);
+  --_focus-ring: 0 0 0 3px
+    color-mix(in srgb, var(--color-Primary) 22%, transparent);
+
+  width: 100%;
+  min-height: 8rem;
+  padding: var(--ui-space-3) var(--ui-space-4);
+  border: 1px solid var(--_border);
+  border-radius: var(--ui-radius-sm);
+  background: var(--color-White);
+  color: var(--color-Black);
+  font: inherit;
+  resize: vertical;
+  transition:
+    border-color var(--ui-transition-fast),
+    box-shadow var(--ui-transition-fast),
+    background var(--ui-transition-fast);
+
+  &::placeholder {
+    color: var(--color-Dark-200);
+  }
+
+  &:focus {
+    border-color: var(--_focus-border);
+    box-shadow: var(--_focus-ring);
+    outline: none;
+  }
+
+  &[aria-invalid="true"] {
+    --_border: var(--color-Danger);
+    --_focus-border: var(--color-Danger);
+    --_focus-ring: 0 0 0 3px
+      color-mix(in srgb, var(--color-Danger) 22%, transparent);
+  }
+
+  &:disabled,
+  &[aria-disabled="true"] {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}

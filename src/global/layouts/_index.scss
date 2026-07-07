@@ -1,0 +1,11 @@
+// =============================================================================
+// layouts — one entry for every layout partial. global/_index.scss @forwards
+// this, so the whole layout tier loads through a single import. Add new layout
+// partials here.
+// =============================================================================
+
+@forward "container";
+@forward "stack";
+@forward "cluster";
+@forward "grid";
+@forward "center";

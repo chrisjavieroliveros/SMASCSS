@@ -1,0 +1,62 @@
+// scoped/primitives/card — surface container + slot helpers.
+.ui-card {
+  --_bg: var(--color-White);
+  --_fg: var(--color-Black);
+  --_border: var(--color-Light-300);
+  --_radius: var(--ui-radius-lg);
+  --_pad: var(--ui-space-5);
+  --_gap: var(--ui-space-4);
+  --_shadow: var(--ui-shadow-1);
+
+  display: grid;
+  gap: var(--_gap);
+  padding: var(--_pad);
+  border: 1px solid var(--_border);
+  border-radius: var(--_radius);
+  background: var(--_bg);
+  color: var(--_fg);
+  box-shadow: var(--_shadow);
+
+  > * {
+    margin: 0;
+  }
+
+  &[data-variant="flat"] {
+    --_shadow: none;
+  }
+  &[data-variant="muted"] {
+    --_bg: var(--color-Light-50);
+  }
+
+  &[data-pad="sm"] {
+    --_pad: var(--ui-space-4);
+  }
+  &[data-pad="lg"] {
+    --_pad: var(--ui-space-6);
+  }
+}
+
+.ui-card__eyebrow {
+  color: var(--color-Secondary);
+  font-size: var(--ui-font-size-100);
+  font-weight: var(--ui-font-weight-strong);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.ui-card__title {
+  font-family: var(--ui-font-family-heading, var(--ui-font-family-base));
+  font-size: var(--ui-font-size-300);
+  line-height: var(--ui-line-height-tight);
+}
+
+.ui-card__body {
+  color: var(--color-Dark-200);
+}
+
+.ui-card__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ui-space-2);
+  align-items: center;
+}

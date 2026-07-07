@@ -1,0 +1,38 @@
+// =============================================================================
+// sizing scale — the single source of truth for spacing/sizing steps.
+//
+// Two ways to read it:
+//   • Sass map, for build-time loops (e.g. the margin/padding helpers):
+//       @use "../../abstracts/sizing" as *;   // then read $space
+//   • CSS custom properties, for use in any rule:
+//       gap: var(--ui-space-4);               // 1rem
+//
+// The :root block below is generated from $space, so the two never drift. Merely
+// @use'ing this module emits the tokens once (Sass dedupes across @use'rs).
+//
+// Steps 1–7 grow monotonically from hairline to generous; step 0 (none) is
+// available to the helpers as `.m-0` / `.p-0`.
+// =============================================================================
+
+$space: (
+  1: 0.25rem,
+  // 4px
+  2: 0.5rem,
+  // 8px
+  3: 0.75rem,
+  // 12px
+  4: 1rem,
+  // 16px
+  5: 1.5rem,
+  // 24px
+  6: 2rem,
+  // 32px
+  7: 3rem, // 48px
+);
+
+// Emit every step as a CSS custom property: --ui-space-1 … --ui-space-7.
+:root {
+  @each $step, $value in $space {
+    --ui-space-#{$step}: #{$value};
+  }
+}

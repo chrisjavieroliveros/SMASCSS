@@ -1,0 +1,16 @@
+// =============================================================================
+// global — the styles that ship site-wide. main.scss @uses this one entry, so
+// the whole global stylesheet loads through it, in cascade (= source) order:
+//
+//   base     → design tokens + resets + element defaults (lowest priority)
+//   layouts  → structural wrappers (.container, .stack, .cluster …)
+//   helpers  → utility classes (last, so they win over base + layout)
+//
+// Scoped, per-page styles (scoped/primitives, scoped/components, scoped/pages)
+// are NOT here — each page bundle @uses only what it renders. Sass tooling
+// (breakpoints, sizing) lives in abstracts/.
+// =============================================================================
+
+@forward "base";
+@forward "layouts";
+@forward "helpers";

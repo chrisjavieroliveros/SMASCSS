@@ -1,0 +1,48 @@
+// =============================================================================
+// padding helpers — utility classes for padding, from the shared spacing scale.
+//
+// Naming:  p<side>-<step>          e.g.  .pt-4  .px-2  .p-0
+//   side:  (none) = all sides · t = top · r = right · b = bottom · l = left
+//          x = left + right     ·   y = top + bottom
+//   step:  0 (none) + 1–7 on the spacing scale.
+//
+// Marked !important: a utility class is a deliberate override, so it should
+// always beat a scoped block's own padding.
+// =============================================================================
+
+@use "../../abstracts/sizing" as *;
+
+// Step 0 (none) — not in $space, so declared explicitly.
+.p-0 { padding: 0 !important; }
+.pt-0 { padding-top: 0 !important; }
+.pr-0 { padding-right: 0 !important; }
+.pb-0 { padding-bottom: 0 !important; }
+.pl-0 { padding-left: 0 !important; }
+.px-0 { padding-right: 0 !important; padding-left: 0 !important; }
+.py-0 { padding-top: 0 !important; padding-bottom: 0 !important; }
+
+@each $step, $value in $space {
+  .p-#{$step} {
+    padding: $value !important;
+  }
+  .pt-#{$step} {
+    padding-top: $value !important;
+  }
+  .pr-#{$step} {
+    padding-right: $value !important;
+  }
+  .pb-#{$step} {
+    padding-bottom: $value !important;
+  }
+  .pl-#{$step} {
+    padding-left: $value !important;
+  }
+  .px-#{$step} {
+    padding-right: $value !important;
+    padding-left: $value !important;
+  }
+  .py-#{$step} {
+    padding-top: $value !important;
+    padding-bottom: $value !important;
+  }
+}

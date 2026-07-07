@@ -1,0 +1,20 @@
+// =============================================================================
+// base — one entry for every base partial. global/_index.scss @forwards this,
+// so the whole base tier loads through a single import, in source (= cascade)
+// order: reset first (lowest priority), then the design-token :root blocks,
+// then the element defaults that consume them. Add new base partials here.
+// =============================================================================
+
+@forward "reset";
+
+// Design tokens (inline :root blocks — the theme). Sizing/spacing lives in
+// abstracts/sizing (a Sass map the helpers also read); everything else is here.
+@forward "colors";
+@forward "radius";
+@forward "shadows";
+@forward "transitions";
+
+// Element defaults that read the tokens above.
+@forward "root";
+@forward "typography";
+@forward "media";

@@ -1,0 +1,15 @@
+// =============================================================================
+// shadows — elevation. Edit these to change depth / drop shadows. Emitted inline
+// as --ui-shadow-1 / --ui-shadow-2.
+// =============================================================================
+
+$shadows: (
+  1: 0 18px 45px -28px rgb(0 0 0 / 0.12),
+  2: 0 28px 60px -32px rgb(19 29 38 / 0.24),
+);
+
+:root {
+  @each $name, $value in $shadows {
+    --ui-shadow-#{$name}: #{$value};
+  }
+}

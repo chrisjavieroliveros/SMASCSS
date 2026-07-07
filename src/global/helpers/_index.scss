@@ -1,0 +1,7 @@
+// =============================================================================
+// helpers — one entry for every utility partial. global/_index.scss @forwards
+// this LAST, so utilities win over base + layout styles. Add new helpers here.
+// =============================================================================
+
+@forward "margin";
+@forward "padding";

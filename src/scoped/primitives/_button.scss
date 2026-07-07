@@ -1,0 +1,50 @@
+// scoped/primitives/button — the default look for every <button> and anything
+// with .btn. Opt-in: a page @uses it only when it renders buttons. Plain
+// styling — no variants, no sizes, no tones. The private --_* vars stay as
+// theming hooks so a page or component can retune one property
+// (e.g. `.hero .btn { --_radius: 999px }`) without a variant system.
+//
+// variables ship in main.css: the --_* hooks read the --ui-* / --color-* tokens
+// directly. Structural constants (min-height, line-height:1) stay literal.
+button,
+.btn {
+  --_bg: var(--color-Primary);
+  --_fg: var(--color-Primary-Contrast);
+  --_bg-hover: var(--color-Primary-Shade);
+  --_radius: var(--ui-radius-sm);
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--ui-space-2);
+  min-height: 2.875rem;
+  padding: var(--ui-space-3) var(--ui-space-4);
+  border: 1px solid transparent;
+  border-radius: var(--_radius);
+  background: var(--_bg);
+  color: var(--_fg);
+  font: inherit;
+  font-weight: var(--ui-font-weight-strong);
+  line-height: 1;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    background var(--ui-transition-fast),
+    transform var(--ui-transition-fast);
+
+  &:hover {
+    background: var(--_bg-hover);
+    transform: translateY(-1px);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+
+  &:disabled,
+  &[aria-disabled="true"] {
+    opacity: 0.55;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+}

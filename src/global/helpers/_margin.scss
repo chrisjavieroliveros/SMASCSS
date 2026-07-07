@@ -1,0 +1,73 @@
+// =============================================================================
+// margin helpers — utility classes for margin, from the shared spacing scale.
+//
+// Naming:  m<side>-<step>          e.g.  .mt-4  .mx-2  .m-0  .mx-auto
+//   side:  (none) = all sides · t = top · r = right · b = bottom · l = left
+//          x = left + right     ·   y = top + bottom
+//   step:  0 (none) + 1–7 on the spacing scale, plus `auto`.
+//
+// Marked !important: a utility class is a deliberate override, so it should
+// always beat a scoped block's own margin.
+// =============================================================================
+
+@use "../../abstracts/sizing" as *;
+
+// Step 0 (none) — not in $space, so declared explicitly.
+.m-0 { margin: 0 !important; }
+.mt-0 { margin-top: 0 !important; }
+.mr-0 { margin-right: 0 !important; }
+.mb-0 { margin-bottom: 0 !important; }
+.ml-0 { margin-left: 0 !important; }
+.mx-0 { margin-right: 0 !important; margin-left: 0 !important; }
+.my-0 { margin-top: 0 !important; margin-bottom: 0 !important; }
+
+@each $step, $value in $space {
+  .m-#{$step} {
+    margin: $value !important;
+  }
+  .mt-#{$step} {
+    margin-top: $value !important;
+  }
+  .mr-#{$step} {
+    margin-right: $value !important;
+  }
+  .mb-#{$step} {
+    margin-bottom: $value !important;
+  }
+  .ml-#{$step} {
+    margin-left: $value !important;
+  }
+  .mx-#{$step} {
+    margin-right: $value !important;
+    margin-left: $value !important;
+  }
+  .my-#{$step} {
+    margin-top: $value !important;
+    margin-bottom: $value !important;
+  }
+}
+
+// Auto margins (centering / pushing in flex layouts).
+.m-auto {
+  margin: auto !important;
+}
+.mx-auto {
+  margin-right: auto !important;
+  margin-left: auto !important;
+}
+.my-auto {
+  margin-top: auto !important;
+  margin-bottom: auto !important;
+}
+.mt-auto {
+  margin-top: auto !important;
+}
+.mr-auto {
+  margin-right: auto !important;
+}
+.mb-auto {
+  margin-bottom: auto !important;
+}
+.ml-auto {
+  margin-left: auto !important;
+}

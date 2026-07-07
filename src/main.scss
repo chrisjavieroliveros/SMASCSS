@@ -1,10 +1,18 @@
-// ENTRY → main.css
-// The "super globals only" baseline: loaded on every page.
-// Reset + semantic element defaults + layout primitives. No components.
-@use "_layers";
+// =============================================================================
+// main.scss — the single entry point for the global stylesheet.  → main.css
+//
+// The "super globals" baseline, loaded on every page: design tokens + reset +
+// element defaults (base) → layout primitives → utility helpers, in cascade
+// order. No scoped primitives or components — those load through each page
+// bundle in scoped/pages/.
+//
+// (abstracts/breakpoints is a mixin-only helper — no CSS of its own — so it's
+// @use'd directly by the partials that need it, not listed here. abstracts/
+// sizing IS @use'd here so its --ui-space-* tokens ship in main.css.)
+// =============================================================================
 
-// @layer reset + base
-@use "base/index" as base;
+// Spacing tokens (--ui-space-*) — the scale the whole system reads.
+@use "abstracts/sizing";
 
-// @layer layout
-@use "layouts/index" as layouts;
+// Global stylesheet — base → layouts → helpers. See global/_index.scss.
+@use "global";

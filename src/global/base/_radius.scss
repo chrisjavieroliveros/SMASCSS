@@ -1,0 +1,16 @@
+// =============================================================================
+// radius — corner rounding, in px. Edit these to make the whole system more or
+// less rounded. Emitted inline as --ui-radius-sm / -md / -lg.
+// =============================================================================
+
+$radius: (
+  sm: 8px,
+  md: 14px,
+  lg: 24px,
+);
+
+:root {
+  @each $name, $value in $radius {
+    --ui-radius-#{$name}: #{$value};
+  }
+}

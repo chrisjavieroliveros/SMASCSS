@@ -1,0 +1,36 @@
+// =============================================================================
+// transitions — durations + reusable easing curves. Edit these to change how
+// snappy or relaxed interactions feel. Emitted inline as:
+//   --ui-transition-fast              (duration + timing shorthand)
+//   --ui-ease-power1 … --ui-ease-power4   (reusable timing functions)
+//
+// The `power1–4` curves are cubic-bezier approximations of GSAP's Power eases
+// (https://gsap.com/docs/v3/Eases/) — the classic Quad → Cubic → Quart → Quint
+// "ease-out" ramp, progressively snappier at the start and softer at the end.
+// Use them anywhere a timing function is needed:
+//   transition: transform 200ms var(--ui-ease-power2);
+// =============================================================================
+
+$transitions: (
+  fast: 160ms ease,
+);
+
+// GSAP Power eases → cubic-bezier (ease-out flavour, the most reusable for UI).
+$eases: (
+  power1: cubic-bezier(0.25, 0.46, 0.45, 0.94),
+  // Quad
+  power2: cubic-bezier(0.215, 0.61, 0.355, 1),
+  // Cubic
+  power3: cubic-bezier(0.165, 0.84, 0.44, 1),
+  // Quart
+  power4: cubic-bezier(0.23, 1, 0.32, 1), // Quint
+);
+
+:root {
+  @each $name, $value in $transitions {
+    --ui-transition-#{$name}: #{$value};
+  }
+  @each $name, $value in $eases {
+    --ui-ease-#{$name}: #{$value};
+  }
+}

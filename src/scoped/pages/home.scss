@@ -1,0 +1,17 @@
+// ENTRY → home.css
+// A page bundle is a manifest: @use ONLY the primitives and composed blocks
+// this page renders, then any page-specific tweaks. main.css (loaded alongside
+// in the <head>) carries the tokens + globals; this bundle carries only what is
+// unique to THIS page, so page rules win by source/link order — no !important.
+
+// Opt-in primitives this page renders:
+@use "../primitives/button";
+@use "../primitives/card";
+
+// Composed blocks this page renders:
+@use "../components/hero";
+
+// Page-specific tweaks — ship only in home.css:
+.hero .btn {
+  --_radius: 999px; // pill buttons in the hero, home only
+}

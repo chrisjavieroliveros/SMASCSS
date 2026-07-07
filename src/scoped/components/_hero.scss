@@ -1,0 +1,15 @@
+// scoped/components/hero — a reusable composed block: a vertical hero section
+// built from primitives + layout tokens. A page @uses it only when it renders
+// a hero, and can tweak it from its own bundle (source order wins, no
+// !important needed).
+.hero {
+  display: grid;
+  gap: var(--ui-space-6);
+  padding-block: var(--ui-space-7);
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ui-space-3);
+}
