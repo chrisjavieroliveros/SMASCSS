@@ -8,13 +8,14 @@
 
   <!-- ══════════════════════════════════════════════════════════════════════
        HOW A PAGE CONSUMES THE SYSTEM — this is the whole point of this file.
-       Nothing is inlined. Every page links the same cached globals, then its
-       own page bundle. This exact <head> is the runtime load order (§5).
-         1. variables.css  → :root { --color-* / --ui-* }  the contract (REQUIRED)
-         2. main.css       → reset + base + layout          the "super globals"
-         3. <page>.css      → only THIS page's primitives + components + chrome
+       Nothing is inlined. Every page links the same cached global stylesheet,
+       then its own page bundle. This exact <head> is the runtime load order.
+         1. main.css   → tokens (:root --color-* / --ui-*) + reset + base
+                         + layout + helpers   the "super globals" (REQUIRED)
+         2. <page>.css → only THIS page's primitives + components + chrome
+       Order matters: main.css links first, the page bundle after, so page
+       rules win by source order — no !important, no cascade layers.
   ═══════════════════════════════════════════════════════════════════════════ -->
-  <link rel="stylesheet" href="assets/css/variables.min.css" />
   <link rel="stylesheet" href="assets/css/main.min.css" />
   <link rel="stylesheet" href="assets/css/library.min.css" />
 </head>
@@ -30,24 +31,22 @@
     <section class="sg-section" id="overview" style="margin-top:var(--ui-space-6,2rem)">
       <h2>Overview <small>this page is the worked example</small></h2>
       <p class="note" style="max-width:72ch">
-        This file loads nothing inline. It links the compiled <code>variables.css</code>,
-        <code>main.css</code>, and its own <code>library.css</code> bundle exactly as any Astro page,
-        WordPress template, or plain HTML page would. Components read private <code>--_*</code> vars
-        that read the required <b>tokens</b> (the palette + scales) from <code>variables.css</code> — it must be loaded
-        (there's no bare fallback for design values). Cascade layers keep the whole thing overridable
-        by any host.
+        This file loads nothing inline. It links the compiled <code>main.css</code> and its own
+        <code>library.css</code> bundle exactly as any Astro page, WordPress template, or plain HTML
+        page would. Components read private <code>--_*</code> vars that read the <b>tokens</b> (the
+        palette + scales) shipped in <code>main.css</code> — it must be loaded (there's no bare
+        fallback for design values). The two tiers below load in source order, so each wins over the
+        one before it.
       </p>
       <div class="sg-layers">
-        <span class="lyr">@layer</span>
-        <span class="lyr"><b>variables</b></span><span class="arw">→</span>
-        <span class="lyr"><b>reset</b></span><span class="arw">→</span>
-        <span class="lyr"><b>base</b></span><span class="arw">→</span>
-        <span class="lyr"><b>layout</b></span><span class="arw">→</span>
-        <span class="lyr"><b>primitive</b></span><span class="arw">→</span>
-        <span class="lyr"><b>component</b></span><span class="arw">→</span>
-        <span class="lyr"><b>page</b></span><span class="arw">→</span>
-        <span class="lyr"><b>override</b></span>
-        <span class="arw">→ (host CSS, unlayered, always wins)</span>
+        <span class="lyr"><b>main.css</b> — global</span><span class="arw">→</span>
+        <span class="lyr">base <span style="opacity:.6">(tokens + reset + elements)</span></span><span
+          class="arw">→</span>
+        <span class="lyr">layouts</span><span class="arw">→</span>
+        <span class="lyr">helpers</span><span class="arw">→</span>
+        <span class="lyr"><b>&lt;page&gt;.css</b> — scoped</span><span class="arw">→</span>
+        <span class="lyr">primitives · components · page chrome</span>
+        <span class="arw">→ (host CSS always wins)</span>
       </div>
       <nav class="sg-nav">
         <a href="#consumption">How it's built</a>
@@ -73,29 +72,26 @@
 
       <div class="sg-block">
         <h3>1 · The <code>&lt;head&gt;</code> — runtime load order</h3>
-        <p class="note">The first three are identical on every page and cache once. Only the last is unique
-          per page and carries just that page's components.</p>
+        <p class="note">The first is identical on every page and caches once. Only the second is unique
+          per page and carries just that page's components. main.css links first so the page bundle,
+          linked after, wins by source order.</p>
         <div class="sg-codeblock">
           <pre
-            class="sg-code"><span class="c">&lt;!-- globals: cached once, shared by every page --&gt;</span>
-<span class="t">&lt;link</span> <span class="a">rel</span>=<span class="c">"stylesheet"</span> <span class="a">href</span>=<span class="c">"assets/css/variables.min.css"</span><span class="t">&gt;</span>   <span class="c">1 · :root { --color-* / --ui-* }</span>
-<span class="t">&lt;link</span> <span class="a">rel</span>=<span class="c">"stylesheet"</span> <span class="a">href</span>=<span class="c">"assets/css/main.min.css"</span><span class="t">&gt;</span>        <span class="c">2 · reset + base + layout</span>
+            class="sg-code"><span class="c">&lt;!-- global: tokens + reset + base + layout + helpers, cached once --&gt;</span>
+<span class="t">&lt;link</span> <span class="a">rel</span>=<span class="c">"stylesheet"</span> <span class="a">href</span>=<span class="c">"assets/css/main.min.css"</span><span class="t">&gt;</span>        <span class="c">1 · the super globals</span>
 <span class="c">&lt;!-- this page's bundle: primitives + components + page chrome --&gt;</span>
-<span class="t">&lt;link</span> <span class="a">rel</span>=<span class="c">"stylesheet"</span> <span class="a">href</span>=<span class="c">"assets/css/library.min.css"</span><span class="t">&gt;</span>     <span class="c">3 · THIS page only</span></pre>
+<span class="t">&lt;link</span> <span class="a">rel</span>=<span class="c">"stylesheet"</span> <span class="a">href</span>=<span class="c">"assets/css/library.min.css"</span><span class="t">&gt;</span>     <span class="c">2 · THIS page only</span></pre>
         </div>
       </div>
 
       <div class="sg-block">
-        <h3>2 · The page bundle — <code>src/pages/library.scss</code></h3>
-        <p class="note">A manifest. It declares the layer order, <code>@use</code>s only what this page
-          renders, and keeps page-specific styling in <code>@layer page</code>.</p>
+        <h3>2 · The page bundle — <code>src/scoped/pages/library.scss</code></h3>
+        <p class="note">A manifest. It <code>@use</code>s only what this page renders, then authors
+          page-specific styling below (no cascade layers — it wins by source/link order).</p>
         <div class="sg-codeblock">
-          <pre
-            class="sg-code"><span class="c">// src/pages/library.scss   →   library.css</span>
-<span class="a">@use</span> <span class="c">"../_layers"</span>;                  <span class="c">// canonical @layer order</span>
-
-<span class="c">// opt-in primitives this page renders (nothing but reset/base/layout</span>
-<span class="c">// is global, so the page lists every control it uses):</span>
+          <pre class="sg-code"><span class="c">// src/scoped/pages/library.scss   →   library.css</span>
+<span class="c">// opt-in primitives this page renders (main.css is the only</span>
+<span class="c">// global, so the page lists every control it uses):</span>
 <span class="a">@use</span> <span class="c">"../primitives/button"</span>;      <span class="c">// button, .btn</span>
 <span class="a">@use</span> <span class="c">"../primitives/form"</span>;        <span class="c">// label / select / fieldset</span>
 <span class="a">@use</span> <span class="c">"../primitives/input"</span>;
@@ -104,10 +100,10 @@
 <span class="a">@use</span> <span class="c">"../components/hero"</span>;        <span class="c">// composed block (molecule)</span>
 
 <span class="c">// tools: the responsive escape hatch (emits no CSS on its own):</span>
-<span class="a">@use</span> <span class="c">"../abstracts/responsive"</span> <span class="a">as</span> *;
+<span class="a">@use</span> <span class="c">"../../abstracts/breakpoints"</span> <span class="a">as</span> *;
 
-<span class="c">// page-specific chrome, above `component` so it can tweak anything:</span>
-<span class="a">@layer</span> page { <span class="c">/* .sg-* layout, .hero .btn pill, desktop-up type scale, … */</span> }</pre>
+<span class="c">// page-specific chrome — plain rules, no !important needed:</span>
+<span class="a">.sg-*</span> { <span class="c">/* layout, .hero .btn pill, desktop-up type scale, … */</span> }</pre>
         </div>
       </div>
 
@@ -121,8 +117,8 @@
     <section class="sg-section" id="variables">
       <h2>Variables <small>--color-* · your brand palette</small></h2>
       <p class="note">The palette components read directly, e.g. <code>var(--color-Primary)</code>. Rebrand by
-        editing <code>variables/_colors.scss</code> — no selector touches. Swatches below are live, read from the
-        linked <code>variables.css</code>.</p>
+        editing <code>global/base/_colors.scss</code> — no selector touches. Swatches below are live, read from the
+        linked <code>main.css</code>.</p>
       <div class="sg-swatches" id="paletteSwatches"></div>
 
       <div class="sg-block">
@@ -178,13 +174,14 @@
     <section class="sg-section" id="ramps">
       <h2>Palette ramps <small>--color-*-50 → 950 · raw escape-hatch values</small></h2>
       <p class="note">Full tonal ramps. Use any step directly, e.g. <code>var(--color-Primary-600)</code> or
-        <code>var(--color-Secondary-200)</code>.</p>
+        <code>var(--color-Secondary-200)</code>.
+      </p>
       <div id="rampHost"></div>
     </section>
 
     <!-- ─── BASE ELEMENTS ───────────────────────────────────────────────── -->
     <section class="sg-section" id="base">
-      <h2>Base elements <small>main.css · bare HTML, styled by the base layer</small></h2>
+      <h2>Base elements <small>main.css · bare HTML, styled by base</h2>
       <p class="note">No classes. This is what raw markup looks like after reset + base defaults — the "super
         globals" every page loads.</p>
       <div class="sg-demo">
@@ -257,10 +254,11 @@
 
     <!-- ─── BUTTON ──────────────────────────────────────────────────────── -->
     <section class="sg-section" id="buttons">
-      <h2>Button <small>button, .btn · @layer primitive</small></h2>
+      <h2>Button <small>button, .btn · scoped primitive</small></h2>
       <p class="note">A plain, opt-in primitive: every <code>&lt;button&gt;</code> and anything with
         <code>.btn</code> (e.g. a link) gets the default look once the page <code>@use</code>s it. No variants —
-        restyle a single instance by reassigning a private <code>--_*</code> var.</p>
+        restyle a single instance by reassigning a private <code>--_*</code> var.
+      </p>
 
       <div class="sg-block">
         <h3>Default</h3>
@@ -270,7 +268,8 @@
             <a class="btn" href="#buttons">Link as .btn</a>
             <button disabled>Disabled</button>
           </div>
-          <pre class="sg-code"><span class="t">&lt;button&gt;</span>Native button<span class="t">&lt;/button&gt;</span>
+          <pre
+            class="sg-code"><span class="t">&lt;button&gt;</span>Native button<span class="t">&lt;/button&gt;</span>
 <span class="t">&lt;a</span> <span class="a">class</span>=<span class="c">"btn"</span> <span class="a">href</span>=<span class="c">"#"</span><span class="t">&gt;</span>Link as .btn<span class="t">&lt;/a&gt;</span>
 <span class="t">&lt;button</span> <span class="a">disabled</span><span class="t">&gt;</span>Disabled<span class="t">&lt;/button&gt;</span></pre>
         </div>
@@ -283,7 +282,8 @@
             <button style="--_radius:999px">Pill (--_radius)</button>
             <button style="--_bg:var(--color-Secondary)">Accent (--_bg)</button>
           </div>
-          <pre class="sg-code"><span class="t">&lt;button</span> <span class="a">style</span>=<span class="c">"--_radius:999px"</span><span class="t">&gt;</span>Pill<span class="t">&lt;/button&gt;</span>
+          <pre
+            class="sg-code"><span class="t">&lt;button</span> <span class="a">style</span>=<span class="c">"--_radius:999px"</span><span class="t">&gt;</span>Pill<span class="t">&lt;/button&gt;</span>
 <span class="t">&lt;button</span> <span class="a">style</span>=<span class="c">"--_bg:var(--color-Secondary)"</span><span class="t">&gt;</span>Accent<span class="t">&lt;/button&gt;</span></pre>
         </div>
       </div>
@@ -291,7 +291,7 @@
 
     <!-- ─── INPUT ───────────────────────────────────────────────────────── -->
     <section class="sg-section" id="inputs">
-      <h2>Input <small>input, .input · @layer primitive</small></h2>
+      <h2>Input <small>input, .input · scoped primitive</small></h2>
       <p class="note">Text-like inputs and anything with <code>.input</code> get the default look. Labels use the
         plain <code>&lt;label&gt;</code> base style — no field wrapper needed.</p>
       <div class="sg-demo">
@@ -307,7 +307,8 @@
           <input class="input" placeholder=".input on a bare element" />
           <input type="text" disabled value="Disabled" />
         </div>
-        <pre class="sg-code"><span class="t">&lt;label</span> <span class="a">for</span>=<span class="c">"email"</span><span class="t">&gt;</span>Email<span class="t">&lt;/label&gt;</span>
+        <pre
+          class="sg-code"><span class="t">&lt;label</span> <span class="a">for</span>=<span class="c">"email"</span><span class="t">&gt;</span>Email<span class="t">&lt;/label&gt;</span>
 <span class="t">&lt;input</span> <span class="a">id</span>=<span class="c">"email"</span> <span class="a">type</span>=<span class="c">"email"</span><span class="t">&gt;</span>
 <span class="t">&lt;input</span> <span class="a">class</span>=<span class="c">"input"</span> <span class="a">aria-invalid</span>=<span class="c">"true"</span><span class="t">&gt;</span></pre>
       </div>
@@ -315,7 +316,7 @@
 
     <!-- ─── TEXTAREA ────────────────────────────────────────────────────── -->
     <section class="sg-section" id="textarea">
-      <h2>Textarea <small>textarea, .textarea · @layer primitive</small></h2>
+      <h2>Textarea <small>textarea, .textarea · scoped primitive</small></h2>
       <div class="sg-demo">
         <div class="sg-stage" data-col style="max-width:32rem">
           <textarea placeholder="Write a message…"></textarea>
@@ -351,8 +352,8 @@
     <section class="sg-section" id="hero">
       <h2>Hero <small>.hero · composed block (molecule) from components/</small></h2>
       <p class="note">A molecule assembled from primitives + layout. Note the buttons are pills — that's the
-        page-local <code>.hero .btn { --_radius }</code> tweak in <code>library.scss</code>'s
-        <code>@layer page</code>, overriding the button primitive with no <code>!important</code>.
+        page-local <code>.hero .btn { --_radius }</code> tweak in <code>library.scss</code>,
+        overriding the button primitive with no <code>!important</code>.
       </p>
       <div class="sg-demo">
         <div class="sg-stage" data-col>
@@ -375,32 +376,32 @@
     <!-- ─── ANATOMY ─────────────────────────────────────────────────────── -->
     <section class="sg-section" id="anatomy">
       <h2>Anatomy <small>the private-var chain that makes it portable</small></h2>
-      <p class="note">Every themeable property flows through one chain: private var ← required variables token.
-        Reassign one var to restyle — inline or in a page layer — with no selector duplication
-        and no <code>!important</code>. <code>variables.css</code> must be loaded; there's no baked literal
+      <p class="note">Every themeable property flows through one chain: private var ← required token.
+        Reassign one var to restyle — inline or in a page bundle — with no selector duplication
+        and no <code>!important</code>. <code>main.css</code> must be loaded; there's no baked literal
         fallback for design values.
       </p>
       <div class="sg-demo">
-        <pre class="sg-code"><span class="c">/* private var  ←  required variables token */</span>
+        <pre class="sg-code"><span class="c">/* private var  ←  required token (from main.css) */</span>
 <span class="a">button</span>, <span class="a">.btn</span> {
-  <span class="t">--_bg</span>: <span class="a">var</span>(<span class="t">--color-Primary</span>);                  <span class="c">/* ① reads variables */</span>
+  <span class="t">--_bg</span>: <span class="a">var</span>(<span class="t">--color-Primary</span>);                  <span class="c">/* ① reads tokens */</span>
   background: <span class="a">var</span>(<span class="t">--_bg</span>);                       <span class="c">/* ② adopts tokens */</span>
 }
-<span class="a">.hero</span> <span class="a">.btn</span> {                              <span class="c">/* @layer page */</span>
+<span class="a">.hero</span> <span class="a">.btn</span> {                              <span class="c">/* page bundle */</span>
   <span class="t">--_radius</span>: <span class="c">999px</span>;                        <span class="c">/* ③ one var, no new rule */</span>
 }</pre>
       </div>
     </section>
 
     <footer class="sg-foot">
-      This page links <code>variables.css</code> + <code>main.css</code> + <code>library.css</code> (its own
-      bundle from <code>src/pages/library.scss</code>), plus the optional midnight theme. Recompile
+      This page links <code>main.css</code> + <code>library.css</code> (its own
+      bundle from <code>src/scoped/pages/library.scss</code>). Recompile
       <code>src/</code> to refresh — the CSS is never inlined here.
     </footer>
   </div>
 
   <script>
-    // ── Live-read the palette from the linked variables.css → swatches.
+    // ── Live-read the palette from the linked main.css → swatches.
     const PALETTE = [
       'White', 'Black', 'Primary', 'Primary-Shade', 'Primary-Contrast',
       'Secondary', 'Light-50', 'Light-300', 'Dark-200',
